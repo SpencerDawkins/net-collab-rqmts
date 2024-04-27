@@ -13,8 +13,8 @@ This is the working area for the individual Internet-Draft, "TODO - Your title".
 See the
 [guidelines for contributions](https://github.com/SpencerDawkins/net-collab-rqmts/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
+Contributions can be made by creating and commenting on issues and pull requests.
+The GitHub interface supports creating issues and pull requests using the Edit (✏) button.
 
 
 ## Command Line Usage
@@ -27,4 +27,3 @@ $ make
 
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
-
