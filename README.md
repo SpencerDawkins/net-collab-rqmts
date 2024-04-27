@@ -1,6 +1,6 @@
 # TODO - Your title
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "Requirements for Network Collaboration Signaling".
 
 * [Editor's Copy](https://SpencerDawkins.github.io/net-collab-rqmts/#go.draft-kwbdgrr-tsvwg-net-collab-rqmts.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-kwbdgrr-tsvwg-net-collab-rqmts)
