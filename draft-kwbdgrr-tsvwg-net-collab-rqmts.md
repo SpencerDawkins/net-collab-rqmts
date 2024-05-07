@@ -206,7 +206,7 @@ As such, application- and protocol-specific signaling channels are suboptimal.
 ## Metadata Scope {#metadata-scope}
 
 An operational challenge for sharing resource-quota like metadata (e.g., maximum bitrate) is that the network is generally not entitled to allocate quota per-application, per-flow, per-stream, etc. that delivered as part of an Internet connectivity service.  However, the network has a visibility about the overall network attachment (e.g. inbound/outbound bandwidth discussed in {{!I-D.ietf-opsawg-teas-attachment-circuit}}).
-As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow. 
+As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.
 
 Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.
 
@@ -230,7 +230,7 @@ Transports like QUIC also fully encrypt the entire stream and therefore no media
 The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
 Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
 
-Some of the metadata like the size of a burst of packets, sequence number and timestamp are information that can be plainly observed or inferred by an entity on path. 
+Some of the metadata like the size of a burst of packets, sequence number and timestamp are information that can be plainly observed or inferred by an entity on path.
 These and all other metadata sent from server to the wireless router are vulnerable to modification on path.
 All metadata should therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path. Additionally, mechanisms should be in place to detect any instances of relay attacks.
 
@@ -363,7 +363,7 @@ By signaling the relative importance of flows to a network element, the network 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
 
-However, prioritizing between flows is error-prone because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign. 
+However, prioritizing between flows is error-prone because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
 
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
