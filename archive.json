@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-07T01:07:36.546003+00:00",
+  "timestamp": "2024-05-09T01:07:27.204239+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -49,7 +49,150 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOL0HpzM6IFFGu",
+      "title": "Comment on \"Priority within a Flow (Intra-Flow)\"",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/3",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case. Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.\r\n\r\nComment> The above text is not clear to me. How will the signaling mechanism between a receiving host and its network prevent a misbehaving remote peer from marking every packet of a flow as import ? \r\n\r\nThe signalling requirement to detect and block such a misuse is not discussed in this section.",
+      "createdAt": "2024-05-07T11:35:01Z",
+      "updatedAt": "2024-05-08T07:06:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Worse, the text in the I-D is discussing *inter* flow priority.  That is, priority between flows, where every flow says \"I am important\".  But we have agreed to constrain the I-D to discuss only priority of packets within a single flow (that is, within a 5-tuple).  So, *intra* flow priority.\r\n\r\nThe value of signaling from client to the ISP's router is in getting agreement to honor the intra-flow priority values, and getting agreement how they are signaled from server-to-client -- can they be signaled with UDP Options?  Can they be signaled with DSCP?  Can they be signaled with QUIC Connection IDs?  Can they be signaled with RTP/SRTP SSRC?  The ISP router knows what it supports, the client (from discussions with the server) knows what the server supports.  They can find a mutually-agreed-upon signaling mechanism.",
+          "createdAt": "2024-05-07T21:34:39Z",
+          "updatedAt": "2024-05-07T21:34:39Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes, I updated the metadata scope section in the pull request to clarify that inter flow priority is out of scope by adding the following text: \r\n\r\nThe metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows. ",
+          "createdAt": "2024-05-08T07:06:51Z",
+          "updatedAt": "2024-05-08T07:06:51Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOL0HpzM6IFGIc",
+      "title": "Comment on \"Priority between Flows\"",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/4",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I don't agree with the text in this section. The scope of this draft is to discuss the use cases and requirements for prioritizing of packets within a flow and not between flows. Prioritizing between flows is error-prone because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign. \r\n",
+      "createdAt": "2024-05-07T11:37:17Z",
+      "updatedAt": "2024-05-07T11:37:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOL0HpzM6IFH3T",
+      "title": "Relative Priority of Media Frames",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/5",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The sections 5.1.2 and 5.1.4 are repeating the text, remove one of these sections. ",
+      "createdAt": "2024-05-07T11:41:10Z",
+      "updatedAt": "2024-05-07T11:41:10Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOL0HpzM6IFJsT",
+      "title": "Burst Indication",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/6",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.\r\n\r\nComment> The requirement seems specific to 3GPP, can you add a reference to the document ?",
+      "createdAt": "2024-05-07T11:45:25Z",
+      "updatedAt": "2024-05-07T22:08:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Supposedly 3gpp got the idea from 802.11ba, according to https://ieeexplore.ieee.org/document/9686039.  So should cite both 3gpp spec as well as 802.11ba, https://standards.ieee.org/ieee/802.11ba/6896/",
+          "createdAt": "2024-05-07T22:08:18Z",
+          "updatedAt": "2024-05-07T22:08:18Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOL0HpzM6IFLwU",
+      "title": "Abuse and Constraints ",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/7",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Abuse and Constraints {#abuse}\r\n\r\nIt is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.\r\n\r\nSuch a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves.\r\n\r\nComment> The network cannot identify whether the prioritized flow is legitimate or malicious. It has no info to detect malicious flows, if several flows mark themselves as important. I don't think prioritizing a flow over others is in the scope of this draft.",
+      "createdAt": "2024-05-07T11:49:59Z",
+      "updatedAt": "2024-05-07T22:09:23Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The text quoted from the I-D (\"It is important that not every flow be prioritized\") is referring to *inter* flow priority, which is out of scope for the I-D.  Remove.",
+          "createdAt": "2024-05-07T22:09:21Z",
+          "updatedAt": "2024-05-07T22:09:21Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOL0HpzM6IFO4o",
+      "title": "Highlight the requirements ",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/8",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It will be helpful to highlight the requirements associated with each use case, for instance, see https://datatracker.ietf.org/doc/rfc7478/",
+      "createdAt": "2024-05-07T11:55:25Z",
+      "updatedAt": "2024-05-07T14:28:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In use cases, will it make sense to follow the below format to make it clear?\n\nUse case:\nProblem: \nSolution How signaling helps/solves:\n",
+          "createdAt": "2024-05-07T13:14:23Z",
+          "updatedAt": "2024-05-07T13:14:23Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In use cases, will it make sense to follow the below format to make it clear?\r\n> \r\n> Use case: Problem: Solution How signaling helps/solves:\r\n\r\nUse cases and requirements format should suffice, see RFC7478.",
+          "createdAt": "2024-05-07T14:28:51Z",
+          "updatedAt": "2024-05-07T14:28:51Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -80,6 +223,72 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOL0HpzM5uu65i",
+      "title": "Address some comments discussed during meeting",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/2",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-07T09:08:11Z",
+      "updatedAt": "2024-05-07T09:12:23Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "tireddy2-patch-1",
+      "headRefOid": "0be002ef86066b01c7dd32d82cf24fe33057cc52",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOL0HpzM5u0Okh",
+      "title": "add initial set of REQ- requirements",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/9",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-07T23:04:34Z",
+      "updatedAt": "2024-05-08T05:40:34Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "add_req",
+      "headRefOid": "c3367eb0d621b0b6d9ca08446be3cdc55a1458d9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM553yio",
+          "commit": {
+            "abbreviatedOid": "c3367eb"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Yes, I like the proposed format for requirements.",
+          "createdAt": "2024-05-08T05:40:34Z",
+          "updatedAt": "2024-05-08T05:40:34Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
