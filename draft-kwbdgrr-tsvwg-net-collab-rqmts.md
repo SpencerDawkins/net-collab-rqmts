@@ -43,6 +43,16 @@ author:
     name: Spencer Dawkins
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
+ -
+    ins: D. Wing
+    name: Dan Wing
+    organization: Cloud Software Group Holdings, Inc.
+    email: danwing@gmail.com
+ -
+    ins: S. Rajagopalan
+    name: Sridharan Rajagopalan
+    organization: Cloud Software Group Holdings, Inc.
+    email: Sridharan.girish@gmail.com
 
 normative:
 
@@ -91,23 +101,23 @@ For example, live media or AI generated content can have significant dynamic var
 Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~
-                    |
-      3GPP/mobile network
-+-------------------|----------------------+
-|+----+             |   +-----+    +-----+ |
-||host+------------(B)--+radio+----+ UPF | |
-|+----+             |   +-----+    +--+--+ |
-+-------------------|-----------------|----+
-                    |                 |
-      Wireless home/ISP network       |
-+-------------------|-----------+     |    |          |
-|+----+    +------+ |  +------+ | +---+--+ | +------+ | +------+
-||host+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
-|+----+    +------+ |  +------+ | +------+ | +------+ | +------+
-+-------------------|-----------+          |          |
-                    |                      |          |
-                    |                      | Transit  |  Content
- User device/Network|    MNO/ISP Network   | Network  |  Network
+                      |
+           3GPP/mobile network
++---------------------|----------------------+
+|+------+             |   +-----+    +-----+ |
+||client+-----------(B)--+radio +----+ UPF | |
+|+------+             |   +-----+    +--+--+ |
++---------------------|-----------------|----+
+                      |                 |
+        Wireless home/ISP network       |
++---------------------|-----------+     |    |          |
+|+------+    +------+ |  +------+ | +---+--+ | +------+ | +------+
+||client+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
+|+------+    +------+ |  +------+ | +------+ | +------+ | +------+
++---------------------|-----------+          |          |
+                      |                      |          |
+                      |                      | Transit  |  Content
+ User device/Network  |    MNO/ISP Network   | Network  |  Network
 
 ~~~~~~~~
 {: #Figure-e2e title=”E2E Media transport overview”}
@@ -157,51 +167,46 @@ Audio is more critical than video for almost all applications, but its importanc
 
 Examples: Super bowl, On-Demand Streaming
 
-REQ-??: ??
+REQ-MEDIA: Streaming video contains the occasional key frame ("i-frame") containing a full video frame. These are necessary to rebuild receiver state after loss of delta frames.  The key frames are therefore more critical to deliver to the receiver than delta frames. Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.  Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision. Client to network signaling is required to signal the relative importance.
 
 ## Interactive Media {#uc-interactive}
 
-Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive.
-They may include digital models of the real world, multimedia content and interactive engagement.
+Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
+They may include digital models of the real world, multimedia content, virtualized desktop/apps and interactive engagement.
 
-Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR).
+Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR), Citrix Virtual Apps and Desktops.
 
-REQ-INTERACTIVE: ?? (not sure what to say regarding interactive requirement)
+REQ-INTERACTIVE: The importance within interactive traffic flow depends on the type of application and the user activity. Requirements for different interactive media is listed below:
+
+1. VoIP: The flow needs low jitter and low delay. However, the network can only provide a limited amount of low jitter/low delay to each host, maybe as few as one. This requires signaling feedback indicating that low jitter and low delay flows are already subscribed to other hosts. In response, the user and the application will likely continue, occasionally re-attempting to get the desired quality of service from the network. Many VoIP applications also support sharing the presenter's screen, file, video, or pictures.  During this sharing the presenter's video is less important but the screen or picture is more important. This change of importance can be conveyed by signaling from the client to the network element(s).
+
+2. Gaming/Extended Reality: Gaming (video in both directions, audio in both directions, input devices from client to server) and interactive audio/video (VoIP, video conference) involves important traffic in both directions -- thus is a slightly more complicated use-case than the previous example. From server to client perspective, screen update is the most important traffic, followed by haptic feedback (in extended reality use cases) and audio (in contrast to VoIP). Further within the screen updates, when the user enters a new arena, the critical glyphs that form the arena is more important than the smoothening glyphs that sharpen detailed textures (during a reactive event, the smoothening glyphs can be dropped). Similarly, audio from user interaction takes preferences over in-game sound activity (during a reactive event, in-game sound can be given least preference). From client to server perspective, user inputs (keystrokes or user movement) takes maximum priority, followed by user audio. Additionally, most Internet service providers constrain upstream bandwidth so proper packet treatment is critical in the upstream direction.
+
+3. Mixed Traffic: Signal flow will vary depending on the nature of the packet. With variety of traffic going through the session, some packets can contain interactive traffic while the others contain bulk transfer. There can be combination of reliable and unreliable traffic within the same session through multiple streams. Client-to-network signaling plays a vital role in effectively forwarding mixed traffic for better user interactivity and network performance.
 
 ## User preferences {#uc-preferences}
 
 A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
+
 Determination of such preferences is outside of the scope of this document.
 
 REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
 
-## Mixed Traffic {#uc-mixed}
+## Honoring of Metadata for servers behind a gateway
 
-Desktop virtualization is an example where a server can host multiple connections with varying types of traffic to a remote desktop.
-In some cases, the signaling (like DSCP) from the servers are ignored by the ISP.
+In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic to it. These servers are often in a database, exposed to the internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the ISPs.
 
-In a remote desktop, a streaming video application may be playing in the background while the user is editing a document.
-The user’s keystrokes and those glyphs may need priority over the video in such cases.
-
-Determination of such preferences is up to the user or application(s) and out of scope of this document.
-However, it illustrates the need for explicit signaling of preferences to the network.
-
-REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
+REQ-CLIENT-DECIDES: Client-to-network signal indicating ISP to honor the signaling data of a particular flow enables the servers, that are not even directly visible to the ISPs, to benefit from signaling. This enables client(user)-driven processing of metadata and client driven authorization of the IP addresses apart from the ISPs' list of recognized IP addresses.
 
 # Operational Considerations {#operational}
 
-Networks manage traffic using traffic policing and shaping.
-This includes discarding, reducing the priority beyond a specified bandwidth and delaying to meet a bandwidth limit among others.
-The entire set of operations to manage traffic is beyond the scope of this document.
-This section focuses on operational constraints that impact  server – network, and host – network modes of sending metadata.
+Networks manage traffic using traffic policing and shaping. This includes discarding, reducing the priority beyond a specified bandwidth and delaying to meet a bandwidth limit among others. The entire set of operations to manage traffic is beyond the scope of this document. This section focuses on operational constraints that impact server – network, and host – network modes of sending metadata.
 
 
 ## Policy Enforcement {#policy}
 
-Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
-However, that metadata may have a dependency on the service offering that is subscribed by a user.
-Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes.
+Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user. Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes.
 
 REQ-??: ??
 
