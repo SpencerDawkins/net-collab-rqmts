@@ -47,11 +47,13 @@ author:
     ins: D. Wing
     name: Dan Wing
     organization: Cloud Software Group Holdings, Inc.
+    abbrev: Cloud Software Group
     email: danwing@gmail.com
  -
     ins: S. Rajagopalan
     name: Sridharan Rajagopalan
     organization: Cloud Software Group Holdings, Inc.
+    abbrev: Cloud Software Group
     email: Sridharan.girish@gmail.com
 
 normative:
@@ -162,12 +164,28 @@ Streaming video contains the occasional key frame ("I-frame") containing a full 
 These are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
 
-Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.
-Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision.
+Streaming video also contains audio frames which can be encoded
+separately and thus can be signaled separately (requirement:
+REQ-MEDIA-KEYFRAME).
 
-Examples: Super bowl, On-Demand Streaming
+Audio is more critical than video for almost all applications, but its
+importance (relative to other packets in the flow) is still an
+application decision (requirements: REQ-MEDIA-AV-SEPARATE,
+REQ-MEDIA-CLIENT-DECIDES).
 
-REQ-MEDIA: Streaming video contains the occasional key frame ("i-frame") containing a full video frame. These are necessary to rebuild receiver state after loss of delta frames.  The key frames are therefore more critical to deliver to the receiver than delta frames. Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.  Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision. Client to network signaling is required to signal the relative importance.
+Especially with media over QUIC, the server or proxy sends the same
+stream to all receivers, including the same metadata.  Thus, when a
+client needs different prioritization (e.g., video over audio), this
+is only achievable by signaling that priority inversion from the
+client to the ISP router (requirement: REQ-CLIENT-DECIDES).
+
+Examples: live broadcast, on-demand video streaming
+
+REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
+full frames can be indicated to the network.
+
+REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
+
 
 ## Interactive Media {#uc-interactive}
 
