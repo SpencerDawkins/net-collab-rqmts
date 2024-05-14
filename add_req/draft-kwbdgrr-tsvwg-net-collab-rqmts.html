@@ -8,6 +8,8 @@
 <meta content="John Kaippallimalil" name="author">
 <meta content="Sri Gundavelli" name="author">
 <meta content="Spencer Dawkins" name="author">
+<meta content="Dan Wing" name="author">
+<meta content="Sridharan Rajagopalan" name="author">
 <meta content="
        Wireless networks like cellular or Wi-Fi experience significant but transient variations in link capacity, have bandwidth or other policy constraints that affect user experience.
 Server-to-network and host-to-network signaling can improve the user experience by informing the network about the relative importance of media frames or streams without having to disclose the content of the packets.
@@ -1039,7 +1041,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 8 November 2024</td>
+<td class="center">Expires 15 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1054,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-07" class="published">7 May 2024</time>
+<time datetime="2024-05-14" class="published">14 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-08">8 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-15">15 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1071,6 +1073,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="author">
       <div class="author-name">S. Dawkins</div>
 <div class="org">Tencent America LLC</div>
+</div>
+<div class="author">
+      <div class="author-name">D. Wing</div>
+<div class="org">Cloud Software Group Holdings, Inc.</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Rajagopalan</div>
+<div class="org">Cloud Software Group Holdings, Inc.</div>
 </div>
 </dd>
 </dl>
@@ -1115,7 +1125,7 @@ The differentiated service may be provided a the network (e.g., packet discard p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1168,7 +1178,7 @@ The differentiated service may be provided a the network (e.g., packet discard p
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-user-preferences" class="internal xref">User preferences</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-mixed-traffic" class="internal xref">Mixed Traffic</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-honoring-of-metadata-for-se" class="internal xref">Honoring of Metadata for servers behind a gateway</a></p>
 </li>
             </ul>
 </li>
@@ -1306,23 +1316,23 @@ Information in unencrypted media packets and headers that wireless networks have
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-1-5.1">
 <pre>
-                    |
-      3GPP/mobile network
-+-------------------|----------------------+
-|+----+             |   +-----+    +-----+ |
-||host+------------(B)--+radio+----+ UPF | |
-|+----+             |   +-----+    +--+--+ |
-+-------------------|-----------------|----+
-                    |                 |
-      Wireless home/ISP network       |
-+-------------------|-----------+     |    |          |
-|+----+    +------+ |  +------+ | +---+--+ | +------+ | +------+
-||host+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
-|+----+    +------+ |  +------+ | +------+ | +------+ | +------+
-+-------------------|-----------+          |          |
-                    |                      |          |
-                    |                      | Transit  |  Content
- User device/Network|    MNO/ISP Network   | Network  |  Network
+                      |
+           3GPP/mobile network
++---------------------|----------------------+
+|+------+             |   +-----+    +-----+ |
+||client+-----------(B)--+radio +----+ UPF | |
+|+------+             |   +-----+    +--+--+ |
++---------------------|-----------------|----+
+                      |                 |
+        Wireless home/ISP network       |
++---------------------|-----------+     |    |          |
+|+------+    +------+ |  +------+ | +---+--+ | +------+ | +------+
+||client+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
+|+------+    +------+ |  +------+ | +------+ | +------+ | +------+
++---------------------|-----------+          |          |
+                      |                      |          |
+                      |                      | Transit  |  Content
+ User device/Network  |    MNO/ISP Network   | Network  |  Network
 
 </pre>
 </div>
@@ -1397,7 +1407,7 @@ The key frames are therefore more critical to deliver to the receiver than delta
 <p id="section-3.1-2">Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.
 Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Examples: Super bowl, On-Demand Streaming<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1-4">REQ-??: ??<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">REQ-MEDIA: Streaming video contains the occasional key frame ("i-frame") containing a full video frame. These are necessary to rebuild receiver state after loss of delta frames.  The key frames are therefore more critical to deliver to the receiver than delta frames. Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.  Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision. Client to network signaling is required to signal the relative importance.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uc-interactive">
@@ -1405,10 +1415,21 @@ Audio is more critical than video for almost all applications, but its importanc
         <h3 id="name-interactive-media">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-interactive-media" class="section-name selfRef">Interactive Media</a>
         </h3>
-<p id="section-3.2-1">Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive.
-They may include digital models of the real world, multimedia content and interactive engagement.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">REQ-INTERACTIVE: ?? (not sure what to say regarding interactive requirement)<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
+They may include digital models of the real world, multimedia content, virtualized desktop/apps and interactive engagement.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR), Citrix Virtual Apps and Desktops.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">REQ-INTERACTIVE: The importance within interactive traffic flow depends on the type of application and the user activity. Requirements for different interactive media is listed below:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.2-4">
+<li id="section-3.2-4.1">
+            <p id="section-3.2-4.1.1">VoIP: The flow needs low jitter and low delay. However, the network can only provide a limited amount of low jitter/low delay to each host, maybe as few as one. This requires signaling feedback indicating that low jitter and low delay flows are already subscribed to other hosts. In response, the user and the application will likely continue, occasionally re-attempting to get the desired quality of service from the network. Many VoIP applications also support sharing the presenter's screen, file, video, or pictures.  During this sharing the presenter's video is less important but the screen or picture is more important. This change of importance can be conveyed by signaling from the client to the network element(s).<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.2-4.2">
+            <p id="section-3.2-4.2.1">Gaming/Extended Reality: Gaming (video in both directions, audio in both directions, input devices from client to server) and interactive audio/video (VoIP, video conference) involves important traffic in both directions -- thus is a slightly more complicated use-case than the previous example. From server to client perspective, screen update is the most important traffic, followed by haptic feedback (in extended reality use cases) and audio (in contrast to VoIP). Further within the screen updates, when the user enters a new arena, the critical glyphs that form the arena is more important than the smoothening glyphs that sharpen detailed textures (during a reactive event, the smoothening glyphs can be dropped). Similarly, audio from user interaction takes preferences over in-game sound activity (during a reactive event, in-game sound can be given least preference). From client to server perspective, user inputs (keystrokes or user movement) takes maximum priority, followed by user audio. Additionally, most Internet service providers constrain upstream bandwidth so proper packet treatment is critical in the upstream direction.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.2-4.3">
+            <p id="section-3.2-4.3.1">Mixed Traffic: Signal flow will vary depending on the nature of the packet. With variety of traffic going through the session, some packets can contain interactive traffic while the others contain bulk transfer. There can be combination of reliable and unreliable traffic within the same session through multiple streams. Client-to-network signaling plays a vital role in effectively forwarding mixed traffic for better user interactivity and network performance.<a href="#section-3.2-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
 </section>
 </div>
 <div id="uc-preferences">
@@ -1417,23 +1438,18 @@ They may include digital models of the real world, multimedia content and intera
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-user-preferences" class="section-name selfRef">User preferences</a>
         </h3>
 <p id="section-3.3-1">A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
-For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
-Determination of such preferences is outside of the scope of this document.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Determination of such preferences is outside of the scope of this document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="uc-mixed">
+<div id="honoring-of-metadata-for-servers-behind-a-gateway">
 <section id="section-3.4">
-        <h3 id="name-mixed-traffic">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-mixed-traffic" class="section-name selfRef">Mixed Traffic</a>
+        <h3 id="name-honoring-of-metadata-for-se">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-honoring-of-metadata-for-se" class="section-name selfRef">Honoring of Metadata for servers behind a gateway</a>
         </h3>
-<p id="section-3.4-1">Desktop virtualization is an example where a server can host multiple connections with varying types of traffic to a remote desktop.
-In some cases, the signaling (like DSCP) from the servers are ignored by the ISP.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">In a remote desktop, a streaming video application may be playing in the background while the user is editing a document.
-The user’s keystrokes and those glyphs may need priority over the video in such cases.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">Determination of such preferences is up to the user or application(s) and out of scope of this document.
-However, it illustrates the need for explicit signaling of preferences to the network.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.4-4">REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic to it. These servers are often in a database, exposed to the internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the ISPs.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">REQ-CLIENT-DECIDES: Client-to-network signal indicating ISP to honor the signaling data of a particular flow enables the servers, that are not even directly visible to the ISPs, to benefit from signaling. This enables client(user)-driven processing of metadata and client driven authorization of the IP addresses apart from the ISPs' list of recognized IP addresses.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1443,18 +1459,13 @@ However, it illustrates the need for explicit signaling of preferences to the ne
       <h2 id="name-operational-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-4-1">Networks manage traffic using traffic policing and shaping.
-This includes discarding, reducing the priority beyond a specified bandwidth and delaying to meet a bandwidth limit among others.
-The entire set of operations to manage traffic is beyond the scope of this document.
-This section focuses on operational constraints that impact  server – network, and host – network modes of sending metadata.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Networks manage traffic using traffic policing and shaping. This includes discarding, reducing the priority beyond a specified bandwidth and delaying to meet a bandwidth limit among others. The entire set of operations to manage traffic is beyond the scope of this document. This section focuses on operational constraints that impact server – network, and host – network modes of sending metadata.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="policy">
 <section id="section-4.1">
         <h3 id="name-policy-enforcement">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-policy-enforcement" class="section-name selfRef">Policy Enforcement</a>
         </h3>
-<p id="section-4.1-1">Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
-However, that metadata may have a dependency on the service offering that is subscribed by a user.
-Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user. Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">REQ-??: ??<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1784,7 +1795,7 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-teas-attachment-circuit">[I-D.ietf-opsawg-teas-attachment-circuit]</dt>
         <dd>
-<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-11</span>, <time datetime="2024-04-19" class="refDate">19 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-11">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-12</span>, <time datetime="2024-05-14" class="refDate">14 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1874,6 +1885,22 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <div class="email">
 <span>Email:</span>
 <a href="mailto:spencerdawkins.ietf@gmail.com" class="email">spencerdawkins.ietf@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Dan Wing</span></div>
+<div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:danwing@gmail.com" class="email">danwing@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sridharan Rajagopalan</span></div>
+<div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:Sridharan.girish@gmail.com" class="email">Sridharan.girish@gmail.com</a>
 </div>
 </address>
 </section>
