@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-12T01:13:32.973370+00:00",
+  "timestamp": "2024-05-14T01:08:17.738150+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -191,6 +191,38 @@
           "updatedAt": "2024-05-07T14:28:51Z"
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOL0HpzM6IrIzO",
+      "title": "Intro updates on justification, diagram, etc",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/10",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Add justification for network's need for additional metadata.\r\n- Per-flow and per-stream aspects, but remove inter-flow (align with updates in related issue)\r\n- Handling priority per flow within a single user (i.e., a single user may have a connectivity session that is policed (e.g., not to exceed X Mbps). Within the connectivity session, there may be multiple flows, one of which may be a high bandwidth consumer and target for traffic shaping. In this context, the user may have a preference on which flow to prioritize or get information on how the flow is being shaped (e.g., bandwidth limit).\r\n- Add new figure for the above.\r\n- Update Figure 1: host -> client, host -> server (and throughout the section)",
+      "createdAt": "2024-05-13T14:28:28Z",
+      "updatedAt": "2024-05-13T14:28:28Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOL0HpzM6IrPoH",
+      "title": "Chapter 5 On path metadata requirements",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/11",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In chapter 5:\r\n- what is necessary for the client (as a stakeholder) to communicate to the network, server in relation to metadata exchange\r\n- in the above, address the point that an opaque channel without client's acceptance will raise privacy \r\n- privacy considerations for extensible metadata? \r\n\r\nIn chapter 5.1 and 5.2\r\n- merge into one set of requirements that consider rationale, and what is needed  (i.e., why importance, delay tolerance, burst size/end)\r\n- state that the above requirements may apply to multiple streams in a transport flow, or to frames of a media stream within a flow (but not both)\r\n\r\nAlign with any updates in related issue.\r\n",
+      "createdAt": "2024-05-13T14:40:59Z",
+      "updatedAt": "2024-05-13T14:40:59Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
