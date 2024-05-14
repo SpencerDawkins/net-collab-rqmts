@@ -5,12 +5,12 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                             S. Gundavelli
-Expires: 8 November 2024                                           Cisco
+Expires: 15 November 2024                                          Cisco
                                                               S. Dawkins
                                                      Tencent America LLC
                                                                 T. Reddy
                                                                    Nokia
-                                                              7 May 2024
+                                                             14 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2024.
+   This Internet-Draft will expire on 15 November 2024.
 
 Copyright Notice
 
@@ -370,14 +370,18 @@ Table of Contents
    disclosed to the network, and no information about the user of the
    content is disclosed to the network or server.
 
-   Some of the metadata like the size of a burst of packets, sequence
-   number and timestamp are information that can be plainly observed or
-   inferred by an entity on path.  These and all other metadata sent
-   from server to the wireless router are vulnerable to modification on
-   path.  All metadata should therefore have secure integrity protection
-   (e.g., a secure message digest) to detect any modification or
-   tampering on path.  Additionally, mechanisms should be in place to
-   detect any instances of relay attacks.
+   Some metadata, such as the size of a burst of packets, sequence
+   number, and timestamp, can be readily observed or inferred by
+   entities along the network path.  However, it's essential to
+   recognize that while sequence numbers and timestamps are typically
+   visible in clear-text protocols like TCP, RTP, or SRTP, they may not
+   be directly observable in encrypted protocols such as QUIC.  All
+   metadata sent from the server to the wireless router, including these
+   elements and others, are vulnerable to modification while in transit.
+   All metadata should therefore have secure integrity protection (e.g.,
+   a secure message digest) to detect any modification or tampering on
+   path.  Additionally, mechanisms should be in place to detect any
+   instances of relay attacks.
 
 4.6.  Scalability
 
@@ -594,9 +598,9 @@ Table of Contents
    This eventually causes all flows to be marked as important, or --
    more likely -- such priority markings to be ignored.
 
-   However, prioritizing between flows is error-prone because the host
-   can have both malicious and legitimate applications, and the remote
-   peers can also be malicious and benign.
+   However, prioritizing between flows is presents challenges because
+   the host can have both malicious and legitimate applications, and the
+   remote peers can also be malicious and benign.
 
 5.2.2.  Priority within a Flow (Intra-Flow)
 
@@ -683,8 +687,8 @@ Normative References
               and B. Wu, "YANG Data Models for Bearers and 'Attachment
               Circuits'-as-a-Service (ACaaS)", Work in Progress,
               Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-
-              11, 19 April 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-opsawg-teas-attachment-circuit-11>.
+              12, 14 May 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-teas-attachment-circuit-12>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

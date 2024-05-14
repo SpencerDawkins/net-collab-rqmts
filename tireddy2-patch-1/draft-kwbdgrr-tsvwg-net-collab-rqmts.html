@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 8 November 2024</td>
+<td class="center">Expires 15 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-07" class="published">7 May 2024</time>
+<time datetime="2024-05-14" class="published">14 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-08">8 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-15">15 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ The differentiated service may be provided at the network (e.g., packet discard 
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1494,9 +1494,11 @@ This may be possible in transports like QUIC which allows flexibility in schedul
 Transports like QUIC also fully encrypt the entire stream and therefore no media headers are observable on path either.
 The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
 Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">Some of the metadata like the size of a burst of packets, sequence number and timestamp are information that can be plainly observed or inferred by an entity on path.
-These and all other metadata sent from server to the wireless router are vulnerable to modification on path.
-All metadata should therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path. Additionally, mechanisms should be in place to detect any instances of relay attacks.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">Some metadata, such as the size of a burst of packets, sequence number, and timestamp, can be readily observed or inferred by entities
+along the network path. However, it's essential to recognize that while sequence numbers and timestamps are typically visible in clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent from the
+server to the wireless router, including these elements and others, are vulnerable to modification while in transit. All metadata should
+therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path. Additionally,
+mechanisms should be in place to detect any instances of relay attacks.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scalability">
@@ -1654,7 +1656,7 @@ For example, a host downloading a software update is generally considered less i
 By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-3">However, prioritizing between flows is error-prone because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-3">However, prioritizing between flows is presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="intra-flow-priority">
@@ -1731,7 +1733,7 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-teas-attachment-circuit">[I-D.ietf-opsawg-teas-attachment-circuit]</dt>
         <dd>
-<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-11</span>, <time datetime="2024-04-19" class="refDate">19 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-11">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-12</span>, <time datetime="2024-05-14" class="refDate">14 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
