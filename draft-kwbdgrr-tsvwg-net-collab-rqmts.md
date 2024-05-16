@@ -165,7 +165,7 @@ These are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
 
 Streaming video also contains audio frames which can be encoded
-separately and thus can be signaled separately (requirement:
+separately and, thus, can be signaled separately (requirement:
 REQ-MEDIA-KEYFRAME).
 
 Audio is more critical than video for almost all applications, but its
