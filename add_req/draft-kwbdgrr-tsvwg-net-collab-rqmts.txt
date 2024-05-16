@@ -268,7 +268,7 @@ Table of Contents
    delay sensitive.  It also includes mixed traffic where both bulk and
    interactive data are exchanged within the same flow.  They may
    include digital models of the real world, multimedia content,
-   virtualized desktop/apps and interactive engagement.
+   virtualized desktop/apps, and interactive engagement.
 
    Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming,
    eXtended Reality (XR), Citrix Virtual Apps and Desktops.
