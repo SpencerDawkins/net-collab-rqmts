@@ -270,8 +270,8 @@ Table of Contents
    include digital models of the real world, multimedia content,
    virtualized desktop/apps, and interactive engagement.
 
-   Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming,
-   eXtended Reality (XR), Citrix Virtual Apps and Desktops.
+   Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
+   eXtended Reality (XR), Virtual Apps and Desktops.
 
    REQ-INTERACTIVE: The importance within interactive traffic flow
    depends on the type of application and the user activity.
