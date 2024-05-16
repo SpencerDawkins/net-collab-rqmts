@@ -202,7 +202,7 @@ REQ-INTERACTIVE: The importance within interactive traffic flow depends on the t
 
 3. Mixed Traffic: Signal flow will vary depending on the nature of the packet. With variety of traffic going through the session, some packets can contain interactive traffic while the others contain bulk transfer. There can be combination of reliable and unreliable traffic within the same session through multiple streams. Client-to-network signaling plays a vital role in effectively forwarding mixed traffic for better user interactivity and network performance.
 
-## User preferences {#uc-preferences}
+## User Preferences {#uc-preferences}
 
 A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
