@@ -86,7 +86,7 @@ Table of Contents
    3.  Use cases
      3.1.  Media Streaming
      3.2.  Interactive Media
-     3.3.  User preferences
+     3.3.  User Preferences
      3.4.  Honoring of Metadata for servers behind a gateway
    4.  Operational Considerations
      4.1.  Policy Enforcement
@@ -319,7 +319,7 @@ Table of Contents
        effectively forwarding mixed traffic for better user
        interactivity and network performance.
 
-3.3.  User preferences
+3.3.  User Preferences
 
    A game or VoIP application may want to signal different metadata for
    the same type of packet in each direction.  For example, for a game,
