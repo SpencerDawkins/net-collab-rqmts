@@ -43,6 +43,13 @@ author:
     name: Spencer Dawkins
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
+ -
+    fullname: Mohamed Boucadair
+    organization: Orange
+    city: Rennes
+    code: 35000
+    country: France
+    email: mohamed.boucadair@orange.com
 
 normative:
 
