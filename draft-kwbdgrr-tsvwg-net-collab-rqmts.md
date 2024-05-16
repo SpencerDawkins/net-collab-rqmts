@@ -168,7 +168,7 @@ Streaming video also contains audio frames which can be encoded
 separately and, thus, can be signaled separately (requirement:
 REQ-MEDIA-KEYFRAME).
 
-Audio is more critical than video for almost all applications, but its
+Audio is more critical than video for many applications, but its
 importance (relative to other packets in the flow) is still an
 application decision (requirements: REQ-MEDIA-AV-SEPARATE,
 REQ-MEDIA-CLIENT-DECIDES).
