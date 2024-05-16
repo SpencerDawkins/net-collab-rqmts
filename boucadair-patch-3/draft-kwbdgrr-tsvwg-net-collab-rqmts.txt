@@ -8,6 +8,8 @@ Intended status: Informational                             S. Gundavelli
 Expires: 17 November 2024                                          Cisco
                                                               S. Dawkins
                                                      Tencent America LLC
+                                                            M. Boucadair
+                                                                  Orange
                                                              16 May 2024
 
 
@@ -792,3 +794,10 @@ Authors' Addresses
    Spencer Dawkins
    Tencent America LLC
    Email: spencerdawkins.ietf@gmail.com
+
+
+   Mohamed Boucadair
+   Orange
+   35000 Rennes
+   France
+   Email: mohamed.boucadair@orange.com
