@@ -138,7 +138,7 @@ Traffic shaping:
 : Refers in this document to QoS management at the wireless/access router to delay or discard packets of lower priority to achieve bounded latency and high throughput.
 
 User Plane Function (UPF):
-: Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{3gpp}}.
+: Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
 : For a definitive description of 3GPP network architectures, the reader should refer to {{TR.23.501-3GPP}}.
 
 ~~~
@@ -159,7 +159,7 @@ User Plane          ╱     │           │         ╲
                 │UE ├──┤(R)AN├─────┤ UPF ├────┤ UPF ├────( DN  )
                 └───┘  └─────┘     └─────┘    └─────┘     `───'
 ~~~
-{: #3gpp title="5GS Architecture" artwork-align="center"}
+{: #Figure-3gpp title="5GS Architecture" artwork-align="center"}
 
 # Use cases {#uc}
 
