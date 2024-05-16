@@ -194,7 +194,7 @@ They may include digital models of the real world, multimedia content, virtualiz
 
 Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR), Citrix Virtual Apps and Desktops.
 
-REQ-INTERACTIVE: The importance within interactive traffic flow depends on the type of application and the user activity. Requirements for different interactive media is listed below:
+REQ-INTERACTIVE: The importance within interactive traffic flow depends on the type of application and the user activity. Requirements for different interactive media are listed below:
 
 1. VoIP: The flow needs low jitter and low delay. However, the network can only provide a limited amount of low jitter/low delay to each host, maybe as few as one. This requires signaling feedback indicating that low jitter and low delay flows are already subscribed to other hosts. In response, the user and the application will likely continue, occasionally re-attempting to get the desired quality of service from the network. Many VoIP applications also support sharing the presenter's screen, file, video, or pictures.  During this sharing the presenter's video is less important but the screen or picture is more important. This change of importance can be conveyed by signaling from the client to the network element(s).
 
