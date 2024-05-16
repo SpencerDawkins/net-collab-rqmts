@@ -285,10 +285,10 @@ Table of Contents
    Traffic policing and shaping are enforced in ingress/egress network
    points for various reasons (protect the network against attacks,
    ensure conformance with a trafic profile, etc.).  Out-of-profile
-   trafic may be discarded, or assigned another class (e.g., using Lower
-   Effort Per-Domain Behavior (LE PDB) [RFC3662]), or delayed to meet a
-   bandwidth limit among others.  The exact behavior is policy-based and
-   deployment-specific.
+   trafic may be discarded or assigned another class (e.g., using Lower
+   Effort Per-Domain Behavior (LE PDB) [RFC3662]) a bandwidth limit
+   among others.  The exact behavior is policy-based and deployment-
+   specific.
 
    The entire set of operations to manage traffic is beyond the scope of
    this document.  This section focuses on operational constraints that
