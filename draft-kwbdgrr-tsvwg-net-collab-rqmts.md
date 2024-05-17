@@ -365,7 +365,7 @@ By signaling the relative importance of flows to a network element, the network 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
 
-However, prioritizing between flows is presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
+However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
 
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
