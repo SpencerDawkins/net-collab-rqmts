@@ -5,12 +5,12 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                             S. Gundavelli
-Expires: 15 November 2024                                          Cisco
+Expires: 18 November 2024                                          Cisco
                                                               S. Dawkins
                                                      Tencent America LLC
                                                                 T. Reddy
                                                                    Nokia
-                                                             14 May 2024
+                                                             17 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2024.
+   This Internet-Draft will expire on 18 November 2024.
 
 Copyright Notice
 
@@ -598,8 +598,8 @@ Table of Contents
    This eventually causes all flows to be marked as important, or --
    more likely -- such priority markings to be ignored.
 
-   However, prioritizing between flows is presents challenges because
-   the host can have both malicious and legitimate applications, and the
+   However, prioritizing between flows presents challenges because the
+   host can have both malicious and legitimate applications, and the
    remote peers can also be malicious and benign.
 
 5.2.2.  Priority within a Flow (Intra-Flow)
