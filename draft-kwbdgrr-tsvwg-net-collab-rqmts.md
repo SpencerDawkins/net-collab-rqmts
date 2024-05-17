@@ -230,7 +230,7 @@ Transports like QUIC also fully encrypt the entire stream and therefore no media
 The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
 Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
 
-Some metadata, such as the size of a burst of packets, sequence number, and timestamp, can be readily observed or inferred by entities
+Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
 along the network path. However, it's essential to recognize that while sequence numbers and timestamps are typically visible in clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent from the
 server to the wireless router, including these elements and others, are vulnerable to modification while in transit. All metadata should
 therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path. Additionally,
