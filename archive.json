@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-16T01:08:44.060576+00:00",
+  "timestamp": "2024-05-19T01:13:15.729392+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case. Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.\r\n\r\nComment> The above text is not clear to me. How will the signaling mechanism between a receiving host and its network prevent a misbehaving remote peer from marking every packet of a flow as import ? \r\n\r\nThe signalling requirement to detect and block such a misuse is not discussed in this section.",
       "createdAt": "2024-05-07T11:35:01Z",
-      "updatedAt": "2024-05-08T07:06:52Z",
+      "updatedAt": "2024-05-16T18:21:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -78,6 +78,13 @@
           "body": "Yes, I updated the metadata scope section in the pull request to clarify that inter flow priority is out of scope by adding the following text: \r\n\r\nThe metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows. ",
           "createdAt": "2024-05-08T07:06:51Z",
           "updatedAt": "2024-05-08T07:06:51Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Worse, the text in the I-D is discussing _inter_ flow priority. That is, priority between flows, where every flow says \"I am important\".\r\n\r\nWe need to put in bold that the focus is intra-flow or flows of the same user. I updated the abstract to have the warning early in the document. Otherwise, we will be opening lot of noise.",
+          "createdAt": "2024-05-16T18:21:06Z",
+          "updatedAt": "2024-05-16T18:21:06Z"
         }
       ]
     },
@@ -173,7 +180,7 @@
       "labels": [],
       "body": "It will be helpful to highlight the requirements associated with each use case, for instance, see https://datatracker.ietf.org/doc/rfc7478/",
       "createdAt": "2024-05-07T11:55:25Z",
-      "updatedAt": "2024-05-07T14:28:52Z",
+      "updatedAt": "2024-05-17T13:27:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -189,6 +196,13 @@
           "body": "> In use cases, will it make sense to follow the below format to make it clear?\r\n> \r\n> Use case: Problem: Solution How signaling helps/solves:\r\n\r\nUse cases and requirements format should suffice, see RFC7478.",
           "createdAt": "2024-05-07T14:28:51Z",
           "updatedAt": "2024-05-07T14:28:51Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I took a shot at coming up with requirements for Media traffic type (Interactive and Streaming) to state the intent, requirement and the use case to focus on the need more than the way to solve it. Kind of kept the language generic without specifying whether it is a client to network or server to network so that this is applicable in P2P cases too. Please share your comments on the format. I put together the content from both signaling and hdr-wireless doc. Once we get the format fixed, I can expand it to other sections as well.\r\n\r\n[RequirementsFormat.md](https://github.com/SpencerDawkins/net-collab-rqmts/files/15349795/RequirementsFormat.md)\r\n\r\n\r\n",
+          "createdAt": "2024-05-17T13:27:51Z",
+          "updatedAt": "2024-05-17T13:27:51Z"
         }
       ]
     },
@@ -268,19 +282,65 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-07T09:08:11Z",
-      "updatedAt": "2024-05-14T14:57:08Z",
+      "updatedAt": "2024-05-17T17:30:50Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "tireddy2-patch-1",
-      "headRefOid": "a1cdbb6292f4694f86b4c43dad7ea390f98bee1c",
+      "headRefOid": "94c9767a657b5bdbf54a78019a5223f752c04de3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM564Owl",
+          "commit": {
+            "abbreviatedOid": "a1cdbb6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some minor edits",
+          "createdAt": "2024-05-16T18:14:58Z",
+          "updatedAt": "2024-05-16T18:19:11Z",
+          "comments": [
+            {
+              "originalPosition": 201,
+              "body": "```suggestion\r\nHowever, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.\r\n```",
+              "createdAt": "2024-05-16T18:14:58Z",
+              "updatedAt": "2024-05-16T18:19:11Z"
+            },
+            {
+              "originalPosition": 119,
+              "body": "```suggestion\r\nSome metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities\r\n```",
+              "createdAt": "2024-05-16T18:18:12Z",
+              "updatedAt": "2024-05-16T18:19:11Z"
+            },
+            {
+              "originalPosition": 120,
+              "body": "```suggestion\r\nalong the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent from the\r\n```",
+              "createdAt": "2024-05-16T18:18:36Z",
+              "updatedAt": "2024-05-16T18:19:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57BtCW",
+          "commit": {
+            "abbreviatedOid": "94c9767"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-17T17:30:50Z",
+          "updatedAt": "2024-05-17T17:30:50Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 9,
@@ -294,13 +354,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-07T23:04:34Z",
-      "updatedAt": "2024-05-14T22:15:18Z",
+      "updatedAt": "2024-05-17T17:29:47Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "add_req",
-      "headRefOid": "54e9f01fb9c72c259aefc24fc2c4bf180cd1136e",
+      "headRefOid": "8120031bd569852f2d4d8600420b39a909475464",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -318,6 +378,267 @@
           "body": "Yes, I like the proposed format for requirements.",
           "createdAt": "2024-05-08T05:40:34Z",
           "updatedAt": "2024-05-08T05:40:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM564FNF",
+          "commit": {
+            "abbreviatedOid": "54e9f01"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some quick comments",
+          "createdAt": "2024-05-16T18:06:09Z",
+          "updatedAt": "2024-05-16T18:14:05Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "```suggestion\r\nREQ-INTERACTIVE: The importance within interactive traffic flow depends on the type of application and the user activity. Requirements for different interactive media are listed below:\r\n```",
+              "createdAt": "2024-05-16T18:06:10Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 67,
+              "body": "```suggestion\r\nseparately and, thus, can be signaled separately (requirement:\r\n```",
+              "createdAt": "2024-05-16T18:06:46Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 70,
+              "body": "I would reword this as this is not inclusive. Video or signals are important for persons with inabilities. Refer to Total Conversation concept. ",
+              "createdAt": "2024-05-16T18:08:47Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\r\nAudio is more critical than video for many applications, but its\r\n```",
+              "createdAt": "2024-05-16T18:09:00Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "Does this assume the host is always directly connected to the ISP network?",
+              "createdAt": "2024-05-16T18:10:50Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 95,
+              "body": "```suggestion\r\nThey may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.\r\n```",
+              "createdAt": "2024-05-16T18:11:16Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 98,
+              "body": "```suggestion\r\nExamples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR), Virtual Apps and Desktops.\r\n```\r\n\r\nNo need to mention a product name :-)",
+              "createdAt": "2024-05-16T18:12:02Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            },
+            {
+              "originalPosition": 108,
+              "body": "```suggestion\r\n## User Preferences {#uc-preferences}\r\n```",
+              "createdAt": "2024-05-16T18:12:43Z",
+              "updatedAt": "2024-05-16T18:14:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM566QRG",
+          "commit": {
+            "abbreviatedOid": "54e9f01"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-16T23:41:42Z",
+          "updatedAt": "2024-05-16T23:41:42Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "No, it assumes the client can tell the ISP router the priority of the incoming flow as the client wants.  The client could be behind a NAT.",
+              "createdAt": "2024-05-16T23:41:42Z",
+              "updatedAt": "2024-05-16T23:41:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM566RAQ",
+          "commit": {
+            "abbreviatedOid": "54e9f01"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-16T23:44:11Z",
+          "updatedAt": "2024-05-16T23:44:11Z",
+          "comments": [
+            {
+              "originalPosition": 70,
+              "body": "new wording is 'many applications', and many (most) people can hear.  We are well above 80/20 threshold of the common case that audio is more critical than video, most of the time.  The ability of the receiver to change the priority by communicating to the ISP -- without cooperation of the sender -- is a requirement and gives a hearing-impaired user the ability to adjust video above audio.",
+              "createdAt": "2024-05-16T23:44:11Z",
+              "updatedAt": "2024-05-16T23:44:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM567Su2",
+          "commit": {
+            "abbreviatedOid": "54e9f01"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-17T05:24:59Z",
+          "updatedAt": "2024-05-17T05:24:59Z",
+          "comments": [
+            {
+              "originalPosition": 70,
+              "body": "Agreed, especially the last part of your reply.",
+              "createdAt": "2024-05-17T05:24:59Z",
+              "updatedAt": "2024-05-17T05:24:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM567TSf",
+          "commit": {
+            "abbreviatedOid": "54e9f01"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-17T05:27:37Z",
+          "updatedAt": "2024-05-17T05:27:37Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "I would zoom into that part to avoid confusion.  We can reason about \"upstream router (home router, ISP router, etc.)\" to cover both direct and indirect cases",
+              "createdAt": "2024-05-17T05:27:37Z",
+              "updatedAt": "2024-05-17T05:27:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57BspY",
+          "commit": {
+            "abbreviatedOid": "8120031"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-17T17:29:47Z",
+          "updatedAt": "2024-05-17T17:29:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOL0HpzM5vs0fl",
+      "title": "Updates to the abstract",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/12",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-16T18:03:49Z",
+      "updatedAt": "2024-05-16T18:23:27Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-1",
+      "headRefOid": "66a274e39746065f2909155e815f2c75c4a35620",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM564OiU",
+          "commit": {
+            "abbreviatedOid": "8c5b023"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-16T18:14:50Z",
+          "updatedAt": "2024-05-16T18:14:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOL0HpzM5vtChP",
+      "title": "Definitions Update",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/13",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-16T18:36:03Z",
+      "updatedAt": "2024-05-16T18:41:06Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-2",
+      "headRefOid": "a3984958c966ed5f0cc896b3c067cfebcd89f2b4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOL0HpzM5vtJT7",
+      "title": "updates to the ops cons",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/14",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-16T18:54:10Z",
+      "updatedAt": "2024-05-16T19:02:29Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-3",
+      "headRefOid": "5793d7cc13c1d727d287fbcd9d43e7e0e270b4fe",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM564lZk",
+          "commit": {
+            "abbreviatedOid": "447ff1d"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-16T18:59:09Z",
+          "updatedAt": "2024-05-16T18:59:09Z",
           "comments": []
         }
       ]
