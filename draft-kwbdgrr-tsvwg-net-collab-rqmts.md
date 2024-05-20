@@ -115,7 +115,8 @@ Information in unencrypted media packets and headers that wireless networks have
 {: #Figure-e2e title=”E2E Media transport overview”}
 
 {{Figure-e2e}} shows where such bandwidth and performance constraints usually exist with a “B” (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
-When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and thus lead to suboptimal perceived experience.  In this document, this is termed 'reactive policy'.
+When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and thus lead to suboptimal perceived experience.
+In this document, this is termed 'reactive policy'.
 
 A connection represents the communication link between user (client) and network (router) while a connection session represents the QoS and policy applied to flows within that connection.
 A connection session maybe established using control plane signaling between the client and the network (access) router and is out of this document.
@@ -124,7 +125,6 @@ The requirements in {{metadata-req}} apply to streams or data units like frames 
 {{Figure-conn-flow}} shows a high level view of connection sessions, flows and QoS/policy proposed in {{metadata-req}} is applied.
 
 ~~~~~~~~
-                                                      
 +----------+          +-----------------+                              
 |+----+    |          | +-------------+ |          
 || A1 |--+ |          | | QoS, Policy | |          
