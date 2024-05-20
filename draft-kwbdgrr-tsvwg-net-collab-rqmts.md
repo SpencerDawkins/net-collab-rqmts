@@ -119,7 +119,7 @@ When a bottleneck exists temporarily, the network has no choice but to discard o
 In this document, this is termed 'reactive policy'.
 
 A connection represents the communication link between user (client) and network (router) while a connection session represents the QoS and policy applied to flows within that connection.
-A connection session maybe established using control plane signaling between the client and the network (access) router and is out of this document.
+A connection session maybe established using control plane signaling between the client and the network (access) router and is out of scope of this document.
 Transport flows in a connection session may consist of multiple streams such as video or audio.
 The requirements in {{metadata-req}} apply to streams or data units like frames within a flow, but not between flows.
 {{Figure-conn-flow}} shows a high level view of connection sessions, flows and QoS/policy proposed in {{metadata-req}} is applied.
