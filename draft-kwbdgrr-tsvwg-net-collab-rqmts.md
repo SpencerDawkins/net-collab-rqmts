@@ -231,10 +231,12 @@ The security aspects of the media payload/ transport are not in the scope of the
 Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
-along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent from the
-server to the wireless router, including these elements and others, are vulnerable to modification while in transit. All metadata should
-therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path. Additionally,
-mechanisms should be in place to detect any instances of relay attacks.
+along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in
+clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent
+from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
+on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
+completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
+as unimportant, but such changes are detectable by the receiver.
 
 ## Scalability {#scalability}
 
