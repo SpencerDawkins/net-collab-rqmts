@@ -232,7 +232,7 @@ Privacy considerations for the metadata itself should ensure that no additional 
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
 along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in
-clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable in encrypted protocols such as QUIC. All metadata sent
+the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent
 from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
 on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
