@@ -236,7 +236,9 @@ clear-text protocols like TCP, RTP, or SRTP, they may not be directly observable
 from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
 on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
-as unimportant, but such changes are detectable by the receiver.
+as unimportant, but such changes are detectable by the receiver. The privacy implications of revealing metadata to network elements need to
+be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
+entities to infer sensitive information about the data being transmitted.
 
 ## Scalability {#scalability}
 
