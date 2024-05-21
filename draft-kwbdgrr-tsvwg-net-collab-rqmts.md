@@ -44,6 +44,13 @@ author:
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
  -
+    fullname: Mohamed Boucadair
+    organization: Orange
+    city: Rennes
+    code: 35000
+    country: France
+    email: mohamed.boucadair@orange.com
+ -
     fullname: Tirumaleswar Reddy
     organization: Nokia
     city: Bangalore
@@ -142,7 +149,7 @@ Reactive Management:
 Traffic shaping in this document refers to QoS management at the wireless/access router to delay or discard packets (or groups of packets) of lower priority to achieve bounded latency and high throughput.
 
 
-# Use cases {#uc}
+# Use Cases {#uc}
 
 ## Media Streaming {#uc-streaming}
 
@@ -162,7 +169,7 @@ They may include digital models of the real world, multimedia content and intera
 
 Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR).
 
-## User preferences {#uc-preferences}
+## User Preferences {#uc-preferences}
 
 A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
@@ -181,8 +188,8 @@ However, it illustrates the need for explicit signaling of preferences to the ne
 
 # Operational Considerations {#operational}
 
-Networks manage traffic using traffic policing and shaping.
-This includes discarding, reducing the priority beyond a specified bandwidth and delaying to meet a bandwidth limit among others.
+Traffic policing and shaping are enforced in ingress/egress network points for various reasons (protect the network against attacks, ensure conformance with a trafic profile, etc.). Out-of-profile trafic may be discarded or assigned another class (e.g., using Lower Effort Per-Domain Behavior (LE PDB) {{?RFC3662}}) a bandwidth limit among others. The exact behavior is policy-based and deployment-specific.
+
 The entire set of operations to manage traffic is beyond the scope of this document.
 This section focuses on operational constraints that impact  server – network, and host – network modes of sending metadata.
 
@@ -191,33 +198,33 @@ This section focuses on operational constraints that impact  server – network,
 
 Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
 However, that metadata may have a dependency on the service offering that is subscribed by a user.
-Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.
 
+Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.
 
 ## Redundant Functions and Classification Complications {#classification}
 
-If distinct communication channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
+If distinct channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
+
 Likewise, the network will require to implement redundant functions; for each signaling interface.
 
-As such, application- and protocol-specific signaling channels are suboptimal.
+*As such, application- and protocol-specific signaling channels are suboptimal.*
 
 
 ## Metadata Scope {#metadata-scope}
 
 An operational challenge for sharing resource-quota like metadata (e.g., maximum bitrate) is that the network is generally not entitled to allocate quota per-application, per-flow, per-stream, etc. that delivered as part of an Internet connectivity service.  However, the network has a visibility about the overall network attachment (e.g. inbound/outbound bandwidth discussed in {{!I-D.ietf-opsawg-teas-attachment-circuit}}).
+
 As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.
 
 Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.
 
-It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with GBR (Guaranteed Bit Rate) for specific flows are provided.
+It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
-
-## Application interference {#app-interference}
+## Application Interference {#app-interference}
 
 Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.
 
-This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. This is also challenging for mobile networks, especially in scenarios where multiple devices may be tethered to the same mobile device for internet access. Each tethered device may be running its own video application.
-
+This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
 ## Privacy Considerations {#privacy}
 
