@@ -125,9 +125,9 @@ The requirements in {{metadata-req}} apply to streams or data units like frames 
 {{Figure-conn-flow}} shows a high level view of connection sessions, flows and QoS/policy proposed in {{metadata-req}} is applied.
 
 ~~~~~~~~
-+----------+          +-----------------+                              
-|+----+    |          | +-------------+ |          
-|| A1 |--+ |          | | QoS, Policy | |          
++----------+          +-----------------+
+|+----+    |          | +-------------+ |
+|| A1 |--+ |          | | QoS, Policy | |
 |+-+--+A2| |          | +---+-----+---+ |          +------+
 |  |+-+--+ |          |     |     |     |          |srv-A2|
 |  |  |    |  conn/session  V     |     |          +--+---+
@@ -143,7 +143,6 @@ The requirements in {{metadata-req}} apply to streams or data units like frames 
 |+----+  ****************************** |
 +----------+          +-----------------+
   Client-2                  Router
-
 ~~~~~~~~
 {: #Figure-conn-flow title=”E2E transport flows and connection session”}
 
