@@ -43,18 +43,17 @@ author:
     name: Spencer Dawkins
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
+ -
+    fullname: Tirumaleswar Reddy
+    organization: Nokia
+    city: Bangalore
+    region: Karnataka
+    country: India
+    email: "kondtir@gmail.com"
 
 normative:
 
 informative:
-
-  TR.23.501-3GPP:
-    title:  "3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"
-    date: March 2023
-
-  TR.23.700-60-3GPP:
-    title:  "Study on XR (Extended Reality) and media services (Release 18)"
-    date: August 2022
 
 --- abstract
 
@@ -80,10 +79,9 @@ Users who are serviced via these networks use various hosts which run various ap
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the user can help to manage the use of available bandwidth better.
 
-Applications like interactive media on the other hand can demand both high throughput and low latency, and in some cases carry different media streams in a single transport connection (e.g., WebRTC).
+Applications like interactive media on the other hand can demand both high throughput and low latency, and in some cases carry different media streams (e.g., audio, video) in a single transport connection (e.g., WebRTC).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
-With RTP, the type of media could be examined and used as an implicit signal for relative priority.
-However, a full encrypted transport such as QUIC does not expose any media header information that networks on path can use.
+With RTP, the type of media could be examined and used as an implicit signal for relative priority. However, {{!RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and CSRCs. Further, a full encrypted transport such as QUIC does not expose any media header information that networks on path can use.
 
 Traffic patterns in some emerging applications can vary significantly during the session.
 For example, live media or AI generated content can have significant dynamic variations and potentially aperiodic frames.
@@ -135,7 +133,8 @@ WLAN:
 : Wireless Local Area Network
 
 Intentional Management:
-: network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
+: network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)
+assurances.
 
 Reactive Management:
 : network reactions to congestion events, with very short to very long durations (e.g., varying wireless and mobile air interface conditions).
@@ -192,12 +191,12 @@ This section focuses on operational constraints that impact  server – network,
 
 Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
 However, that metadata may have a dependency on the service offering that is subscribed by a user.
-Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes.
+Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.
 
 
 ## Redundant Functions and Classification Complications {#classification}
 
-If distinct channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
+If distinct communication channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
 Likewise, the network will require to implement redundant functions; for each signaling interface.
 
 As such, application- and protocol-specific signaling channels are suboptimal.
@@ -208,67 +207,58 @@ As such, application- and protocol-specific signaling channels are suboptimal.
 An operational challenge for sharing resource-quota like metadata (e.g., maximum bitrate) is that the network is generally not entitled to allocate quota per-application, per-flow, per-stream, etc. that delivered as part of an Internet connectivity service.  However, the network has a visibility about the overall network attachment (e.g. inbound/outbound bandwidth discussed in {{!I-D.ietf-opsawg-teas-attachment-circuit}}).
 As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.
 
-It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with GBR (Guaranteed Bit Rate) for specific flows is provided.
+Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.
+
+It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with GBR (Guaranteed Bit Rate) for specific flows are provided.
 
 
 ## Application interference {#app-interference}
 
 Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.
 
-This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application.
+This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. This is also challenging for mobile networks, especially in scenarios where multiple devices may be tethered to the same mobile device for internet access. Each tethered device may be running its own video application.
 
 
 ## Privacy Considerations {#privacy}
 
-Encrypted media payloads along with temporary IP addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
+Encrypted media payloads along with temporary IPv6 addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
 It should however be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.
 To avoid this kind of frequency analysis, media sent by the server would need to be scheduled or multiplexed differently to each user/recipient.
 This may be possible in transports like QUIC which allows flexibility in scheduling each stream.
 Transports like QUIC also fully encrypt the entire stream and therefore no media headers are observable on path either.
 The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
-Privacy considerations for the metadata itself should ensure that no additional information about either the content or the user of the content is revealed.
+Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
 
-Some of the metadata like the size of a burst of packets, sequence number and timestamp are information that can be plainly observed or inferred by an entity on path.
-These and all other metadata sent from server to the wireless router are vulnerable to modification on path.
-All metadata should therefore have secure integrity protection (e.g., a secure message digest) to detect any modification or tampering on path.
-
-
-## Key Establishment {#key-establishment}
-
-Various proposals have suggested establishing a key to validate per-packet metadata or to decrypt per-packet metadata.
-However, most proposals have not specified how this key would be established.
-A signaling protocol from the receiving host to its ISP could establish such a key.
-The host can then convey the key to the sending host to use to integrity protect or encrypt the per-packet metadata.
-
-Note: The CPU overhead of validating or decrypting such per-packet metadata needs to be carefully considered (and further assessed via experiments) by the signaling protocol proposing such keying.
-Also, the required operational setup should be documented.
-
+Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
+along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in
+the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent
+from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
+on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
+completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
+as unimportant, but such changes are detectable by the receiver. The privacy implications of revealing metadata to network elements need to
+be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
+entities to infer sensitive information about the data being transmitted.
 
 ## Scalability {#scalability}
 
 There may be a large number of media flows handled by the server and wireless/access router.
 
 Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increase.
-The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
-
+The metadata and other state information that a wireless router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
 
 ## Session Continuity {#continuity}
 
-The general trend in wireless networks is to distribute the wireless router closer to the user.
-This can help with low link latency but can result in more handovers from one router to another as the user moves.
-The number of handovers also increase as a user moves faster or the media session lasts longer.
+The general trend in wireless networks is to deploy the wireless router closer to the user.
+This can help with low link latency but can result in more frequent handovers as the user moves between routers.
+The frequency of handovers increases when a user moves faster or when the media session lasts longer.
 
-There should no additional delay incurred during handover in configuring/setting up the metadata of a media session in progress.
-
+During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.
 
 ## Abuse and Constraints {#abuse}
 
-It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling.
-It is a requirement that mechanisms exist to prevent this occurrence.
+It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.
 
-Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves.
-The mechanism might be more complex where authentication and authorization is performed by an enterprise network which, itself, decides which flows are important based on its policy and only the enterprise network communicates flow priorities to the ISP network.  The enterprise might prioritize certain users (e.g., IT staff), certain equipment (audio/video equipment in a conference room), or whatever its policies it might want.
-
+Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.
 
 # On-path Metadata Requirements {#metadata-req}
 
@@ -280,17 +270,7 @@ Leveraging previous experience ({{?RFC9049}}), the metadata signals does not nee
 
 The metadata connections may be between server and network (in either direction) or between host and network (in either direction).
 
-Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{host-network}})
-
-
-## Server-Network Metadata {#server-network}
-
-In many scenarios that require low latency media delivery, the server and wireless router have established relationships and contractual agreements to optimize the delivery of media flows.
-For example, the Content Provider (CP) and Mobile Network Operator (MNO) may have a limited domain ({{?RFC8799}}) that manages trust and configures policies related to the delivery of content.
-The server and wireless router (3GPP UPF) are located in networks operated by CP and MNO respectively.
-The transit (IP) network in between is either a trusted network that is managed and operated by the CP/MNO, or the CP/MNO use security gateways at the boundaries of their network to encrypt all traffic flowing between them.
-Thus, the requirements in this section are not expected to satisfy sending metadata between arbitrary servers and wireless routers located across a wide area network.
-
+Some use cases benefit from client involvement ({{host-network}}).
 
 ### Identification of Media Frames {#frame-id}
 
@@ -340,7 +320,7 @@ The application should provide a means to identify one encrypted media stream fr
 
 ### Relative Priority of Media Streams {#stream-priority}
 
-Relative importance of a media stream  is the priority level of one media stream over another stream in the transport connection.
+Relative importance of a media stream is the priority level of one media stream over another stream in the transport connection.
 The application server determines the importance based on the media encoded in the stream.
 Importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
 
@@ -374,7 +354,7 @@ The wireless router should be aware of any loss of packets belonging to a media 
 For example, the loss of a packet that is a start or end of a media frame can cause confusion in estimating media frame boundaries.
 However, the wireless router does not re-order packets arriving out of order at the wireless router as this will increase latency experienced by the flow.
 
-The server should provide a sequence number that identifies the sequence of packets for a transport connection carrying the media flows.
+To facilitate proper handling of packets by the wireless router, the host/server can provide metadata such as a sequence number that identifies the sequence of packets for a transport connection carrying the media flows.
 
 
 ## Host-Network Metadata {#host-network}
@@ -388,6 +368,8 @@ By signaling the relative importance of flows to a network element, the network 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
 
+However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
+
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
 
@@ -395,8 +377,8 @@ Interactive Audio/Video has long been using {{?RFC3550}} which runs over UDP.  A
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{!I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
 Other applications such as gaming and remote desktop also benefit from differentiating their packets to the network.
 
-Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop).
-Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets.
+Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, CDN).
+Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.
 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.
@@ -414,7 +396,7 @@ None.
 
 # Security Considerations {#sec-cons}
 
-Security aspects for the metadata are discussed in {{privacy}} and {{key-establishment}}.
+Security aspects for the metadata are discussed in {{privacy}}.
 The principles outlined in {{?RFC8558}}, {{?RFC9049}} and {{?RFC9419}} contain security considerations and are referenced in {{metadata-req}}.
 
 This document has no other security considerations.
