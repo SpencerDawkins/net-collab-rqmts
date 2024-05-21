@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-19T01:13:15.729392+00:00",
+  "timestamp": "2024-05-21T01:08:40.494022+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -214,11 +214,13 @@
       "state": "OPEN",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "John-Kaippallimalil"
+      ],
       "labels": [],
       "body": "- Add justification for network's need for additional metadata.\r\n- Per-flow and per-stream aspects, but remove inter-flow (align with updates in related issue)\r\n- Handling priority per flow within a single user (i.e., a single user may have a connectivity session that is policed (e.g., not to exceed X Mbps). Within the connectivity session, there may be multiple flows, one of which may be a high bandwidth consumer and target for traffic shaping. In this context, the user may have a preference on which flow to prioritize or get information on how the flow is being shaped (e.g., bandwidth limit).\r\n- Add new figure for the above.\r\n- Update Figure 1: host -> client, host -> server (and throughout the section)",
       "createdAt": "2024-05-13T14:28:28Z",
-      "updatedAt": "2024-05-13T14:28:28Z",
+      "updatedAt": "2024-05-20T02:46:34Z",
       "closedAt": null,
       "comments": []
     },
@@ -282,13 +284,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-07T09:08:11Z",
-      "updatedAt": "2024-05-17T17:30:50Z",
+      "updatedAt": "2024-05-20T16:42:26Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "tireddy2-patch-1",
-      "headRefOid": "94c9767a657b5bdbf54a78019a5223f752c04de3",
+      "headRefOid": "f149cb86274ea635849b47d309ec5157d5e479fc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -549,7 +551,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-16T18:03:49Z",
-      "updatedAt": "2024-05-16T18:23:27Z",
+      "updatedAt": "2024-05-20T20:46:50Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
@@ -560,7 +562,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the abstract, can we include the fact that this signaling (client to network/ISP) could also enable the honoring of explicit signals from servers behind the proxy without ISP--Server contract? It'll be appealing to both small scale companies (and ones who operate behind data centers like Citrix) as well as net neutrality cause :) ",
+          "createdAt": "2024-05-20T19:29:55Z",
+          "updatedAt": "2024-05-20T19:30:20Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In the abstract, can we include the fact that this signaling (client to network/ISP) could also enable the honoring of explicit signals from servers behind the proxy without ISP--Server contract? It'll be appealing to both small scale companies (and ones who operate behind data centers like Citrix) as well as net neutrality cause :)\r\n\r\nI suggest something like this to abstract,\r\n\r\n  \"The client signaling the network ensures the client is aware of the network's treatment of incoming packets.\"\r\n\r\n(I fear mentioning network neutrality in the document itself.)",
+          "createdAt": "2024-05-20T20:46:49Z",
+          "updatedAt": "2024-05-20T20:46:49Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOL0HpzM564OiU",
@@ -640,6 +657,93 @@
           "createdAt": "2024-05-16T18:59:09Z",
           "updatedAt": "2024-05-16T18:59:09Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOL0HpzM5v6EdU",
+      "title": "Update draft-kwbdgrr-tsvwg-net-collab-rqmts.md",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/15",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates in Introduction section to address Issue: \"Intro updates on justification, diagram, etc\" #10",
+      "createdAt": "2024-05-20T03:52:34Z",
+      "updatedAt": "2024-05-21T00:54:28Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "jk-intro-updates",
+      "headRefOid": "4546ccc5e2e59e74ebfe61f5b9ec9cf2c5fa3cb3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57MZOU",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-20T19:10:39Z",
+          "updatedAt": "2024-05-20T19:10:39Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "```suggestion\r\nA connection session maybe established using control plane signaling between the client and the network (access) router and is out of scope of this document.\r\n```",
+              "createdAt": "2024-05-20T19:10:39Z",
+              "updatedAt": "2024-05-20T19:10:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57Mcgb",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-20T19:17:45Z",
+          "updatedAt": "2024-05-20T19:20:13Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "Are we limiting the scope of the document to media or including other types of traffic as well to extend the requirements for explicit signaling?",
+              "createdAt": "2024-05-20T19:17:45Z",
+              "updatedAt": "2024-05-20T19:20:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57OAwy",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T00:54:28Z",
+          "updatedAt": "2024-05-21T00:54:28Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": " Interactive media is already described in the draft (req in section 5.1)\r\nThe others include: (a) a limited bandwidth due to large number of users, and a need to prioritize one flow over another (section 5.2 ?), (b) information from the network on, e.g., max bandwidth to allow better rate control.\r\nIf we document (b) then we should also refer to sconepro so that it is clear.\r\nThe model described in lines 150 - 152 is independent of these requirements pers se.\r\nDo you think we need additional text about all this in the intro section?",
+              "createdAt": "2024-05-21T00:54:28Z",
+              "updatedAt": "2024-05-21T00:54:29Z"
+            }
+          ]
         }
       ]
     }
