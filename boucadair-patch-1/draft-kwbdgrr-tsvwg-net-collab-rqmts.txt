@@ -5,10 +5,10 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                             S. Gundavelli
-Expires: 17 November 2024                                          Cisco
+Expires: 22 November 2024                                          Cisco
                                                               S. Dawkins
                                                      Tencent America LLC
-                                                             16 May 2024
+                                                             21 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -22,10 +22,12 @@ Abstract
    (e.g., host-to-network and server-to-network) can improve the user
    experience by informing the network about the the nature and relative
    importance of frames or streams without having to disclose the
-   content of the packets.  For host-to-network, collaboration can be
-   put in place without requiring revealing the identity of the remote
-   server.  This collaboration allows for differentiated services at the
-   network (e.g., packet discard preference), the sender (e.g., adaptive
+   content of the packets.  Moreover, the collaborative signalling may
+   be enabled so that the client is aware of the network's treatment of
+   incoming packets.  For host-to-network, collaboration can be put in
+   place without requiring revealing the identity of the remote server.
+   This collaboration allows for differentiated services at the network
+   (e.g., packet discard preference), the sender (e.g., adaptive
    transmission), or through cooperation of server / host and the
    network.
 
@@ -63,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2024.
+   This Internet-Draft will expire on 22 November 2024.
 
 Copyright Notice
 
