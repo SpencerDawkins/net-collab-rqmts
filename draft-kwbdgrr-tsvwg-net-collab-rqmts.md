@@ -57,11 +57,10 @@ informative:
 
 --- abstract
 
-Wireless networks like cellular or Wi-Fi experience significant but transient variations in link capacity, have bandwidth or other policy constraints that affect user experience.
-Server-to-network and host-to-network signaling can improve the user experience by informing the network about the relative importance of media frames or streams without having to disclose the content of the packets.
-The differentiated service may be provided at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission) or through cooperation of server / host and the network.
+Wireless networks like cellular or Wi-Fi experience significant but transient variations in link capacity, have policy constraints (e.g., bandwidth) that affect user experience.
+Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of frames or streams without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that the client is aware of the network's treatment of incoming packets. For host-to-network, collaboration can be put in place without requiring revealing the identity of the remote server. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
-This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa) communication.
+This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
 
 --- middle
 
