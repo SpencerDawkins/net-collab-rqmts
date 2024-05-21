@@ -44,7 +44,6 @@ author:
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
  -
-
     ins: D. Wing
     name: Dan Wing
     organization: Cloud Software Group Holdings, Inc.
@@ -56,7 +55,7 @@ author:
     organization: Cloud Software Group Holdings, Inc.
     abbrev: Cloud Software Group
     email: Sridharan.girish@gmail.com
-
+ -
     fullname: Mohamed Boucadair
     organization: Orange
     city: Rennes
@@ -217,7 +216,7 @@ They may include digital models of the real world, multimedia content, virtualiz
 
 Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR), Virtual Apps and Desktops.
 
-REQ-INTERACTIVE: The receiver indicates an incoming flow is interactive, and requests the network to honor the incoming flow's 
+REQ-INTERACTIVE: The receiver indicates an incoming flow is interactive, and requests the network to honor the incoming flow's
 per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 ## User Preferences {#uc-preferences}
