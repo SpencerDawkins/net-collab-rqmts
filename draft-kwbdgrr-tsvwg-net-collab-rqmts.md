@@ -130,24 +130,40 @@ The rapid variation of wireless link capacity and/or bandwidth limitations in ne
 
 ## Definitions
 
-ISP:
-: Internet Service Provider
-
-UPF:
-: User Plane Function (3GPP); first router in the 5G network that provides session/connectivity service to a host (user).
-
-WLAN:
-: Wireless Local Area Network
+The document makes use of the following terms:
 
 Intentional Management:
-: network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)
-assurances.
+: Network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
 
 Reactive Management:
-: network reactions to congestion events, with very short to very long durations (e.g., varying wireless and mobile air interface conditions).
+: Network reactions to congestion events or protection polices under attacks, with very short to very long durations (e.g., varying wireless and mobile air interface conditions).
 
-Traffic shaping in this document refers to QoS management at the wireless/access router to delay or discard packets (or groups of packets) of lower priority to achieve bounded latency and high throughput.
+Traffic shaping:
+: Refers in this document to QoS management at the wireless/access router to delay or discard packets of lower priority to achieve bounded latency and high throughput.
 
+User Plane Function (UPF):
+: Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
+: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501.
+
+~~~
+  ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
+  │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
+  └──┬──┘  └──┬──┘  └──┬──┘    └──┬──┘  └──┬──┘  └──┬──┘
+Nnssf│    Nnef│    Nnrf│      Npcf│    Nudm│        │Naf
+  ───┴────────┴──┬─────┴──┬───────┴───┬────┴────────┴────
+            Nausf│    Namf│       Nsmf│
+              ┌──┴──┐  ┌──┴──┐     ┌──┴──────┐
+              │AUSR │  │ AMF │     │   SMF   │
+              └─────┘  └──┬──┘     └──┬──────┘
+                       ╱  │           │      ╲
+Control Plane      N1 ╱   │N2         │N4     ╲N4
+════════════════════════════════════════════════════════════
+User Plane          ╱     │           │         ╲
+                ┌───┐  ┌──┴──┐  N3 ┌──┴──┐ N9 ┌─────┐ N6  .───.
+                │UE ├──┤(R)AN├─────┤ UPF ├────┤ UPF ├────( DN  )
+                └───┘  └─────┘     └─────┘    └─────┘     `───'
+~~~
+{: #Figure-3gpp title="5GS Architecture" artwork-align="center"}
 
 # Use Cases {#uc}
 
