@@ -184,10 +184,6 @@ In summary, the rapid variation of wireless link capacity and/or bandwidth limit
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
 
 
-# Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
 ## Definitions
 
 The document makes use of the following terms:
