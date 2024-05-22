@@ -290,9 +290,9 @@ This section focuses on operational constraints that impact  server – network,
 Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
 However, that metadata may have a dependency on the service offering that is subscribed by a user.
 
-Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.
+Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).
 
-There is no requirement associated with this use-case.
+Requirement:  REQ-METADATA-ACCURACY.
 
 ## Redundant Functions and Classification Complications {#classification}
 
@@ -300,9 +300,9 @@ If distinct channels are used to share the metadata between a host and a network
 
 Likewise, the network will require to implement redundant functions; for each signaling interface.
 
-*As such, application- and protocol-specific signaling channels are suboptimal.*
+*As such, application- and protocol-specific signaling channels are suboptimal.* (REQ-SINGLE-CHANNEL)
 
-There is no requirement associated with this use-case.
+Requirement:  REQ-SINGLE-CHANNEL is preferred.
 
 ## Metadata Scope {#metadata-scope}
 
@@ -314,7 +314,7 @@ Most importantly, the metadata can be used by the network to prioritize traffic 
 
 It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
-There is no requirement associated with this use-case.
+Requirement:  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
 
 ## Application Interference {#app-interference}
 
@@ -322,7 +322,7 @@ Applications that have access to a resource-quota information may adopt an aggre
 
 This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
-There is no requirement associated with this use-case.
+Requirement:  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered.
 
 ## Privacy Considerations {#privacy}
 
@@ -351,9 +351,9 @@ Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no additional i
 
 There may be a large number of media flows handled by the server and wireless/access router.
 
-Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increase.
+Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases.
 
-The metadata and other state information that a wireless router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
+The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
 
 Requirement:  REQ-ISP-SCALE: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
 
