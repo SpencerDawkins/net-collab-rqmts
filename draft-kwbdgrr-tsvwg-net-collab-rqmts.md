@@ -44,6 +44,18 @@ author:
     organization: Tencent America LLC
     email: spencerdawkins.ietf@gmail.com
  -
+    ins: D. Wing
+    name: Dan Wing
+    organization: Cloud Software Group Holdings, Inc.
+    abbrev: Cloud Software Group
+    email: danwing@gmail.com
+ -
+    ins: S. Rajagopalan
+    name: Sridharan Rajagopalan
+    organization: Cloud Software Group Holdings, Inc.
+    abbrev: Cloud Software Group
+    email: Sridharan.girish@gmail.com
+ -
     fullname: Mohamed Boucadair
     organization: Orange
     city: Rennes
@@ -57,6 +69,7 @@ author:
     region: Karnataka
     country: India
     email: "kondtir@gmail.com"
+
 
 normative:
 
@@ -95,23 +108,23 @@ For example, live media or AI generated content can have significant dynamic var
 Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~
-                    |
-      3GPP/mobile network
-+-------------------|----------------------+
-|+----+             |   +-----+    +-----+ |
-||host+------------(B)--+radio+----+ UPF | |
-|+----+             |   +-----+    +--+--+ |
-+-------------------|-----------------|----+
-                    |                 |
-      Wireless home/ISP network       |
-+-------------------|-----------+     |    |          |
-|+----+    +------+ |  +------+ | +---+--+ | +------+ | +------+
-||host+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
-|+----+    +------+ |  +------+ | +------+ | +------+ | +------+
-+-------------------|-----------+          |          |
-                    |                      |          |
-                    |                      | Transit  |  Content
- User device/Network|    MNO/ISP Network   | Network  |  Network
+                      |
+           3GPP/mobile network
++---------------------|----------------------+
+|+------+             |   +-----+    +-----+ |
+||client+-----------(B)--+radio +----+ UPF | |
+|+------+             |   +-----+    +--+--+ |
++---------------------|-----------------|----+
+                      |                 |
+        Wireless home/ISP network       |
++---------------------|-----------+     |    |          |
+|+------+    +------+ |  +------+ | +---+--+ | +------+ | +------+
+||client+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
+|+------+    +------+ |  +------+ | +------+ | +------+ | +------+
++---------------------|-----------+          |          |
+                      |                      |          |
+                      |                      | Transit  |  Content
+ User device/Network  |    MNO/ISP Network   | Network  |  Network
 
 ~~~~~~~~
 {: #Figure-e2e title=”E2E Media transport overview”}
@@ -173,34 +186,53 @@ Streaming video contains the occasional key frame ("I-frame") containing a full 
 These are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
 
-Streaming video also contains audio frames which can be encoded separately and thus can be signaled separately.
-Audio is more critical than video for almost all applications, but its importance (relative to other packets in the flow) is still an application decision.
+Streaming video also contains audio frames which can be encoded
+separately and, thus, can be signaled separately (requirement:
+REQ-MEDIA-KEYFRAME).
 
-Examples: Super bowl, On-Demand Streaming
+Audio is more critical than video for many applications, but its
+importance (relative to other packets in the flow) is still an
+application decision (requirements: REQ-MEDIA-AV-SEPARATE,
+REQ-MEDIA-CLIENT-DECIDES).
+
+Especially with media over QUIC, the server or proxy sends the same
+stream to all receivers, including the same metadata.  Thus, when a
+client needs different prioritization (e.g., video over audio), this
+is only achievable by signaling that priority inversion from the
+client to the ISP router (requirement: REQ-CLIENT-DECIDES).
+
+Examples: live broadcast, on-demand video streaming
+
+REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
+full frames can be indicated to the network.
+
+REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
+
 
 ## Interactive Media {#uc-interactive}
 
-Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive.
-They may include digital models of the real world, multimedia content and interactive engagement.
+Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
+They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.
 
-Examples: VoIP (peer-to-peer (P2P), group conferencing), gaming, eXtended Reality (XR).
+Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR), Virtual Apps and Desktops.
+
+REQ-INTERACTIVE: The receiver indicates an incoming flow is interactive, and requests the network to honor the incoming flow's
+per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 ## User Preferences {#uc-preferences}
 
 A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
+
 Determination of such preferences is outside of the scope of this document.
 
-## Mixed Traffic {#uc-mixed}
+Requirements:  REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
 
-Desktop virtualization is an example where a server can host multiple connections with varying types of traffic to a remote desktop.
-In some cases, the signaling (like DSCP) from the servers are ignored by the ISP.
+## Honoring of Metadata for Servers Behind a Gateway
 
-In a remote desktop, a streaming video application may be playing in the background while the user is editing a document.
-The user’s keystrokes and those glyphs may need priority over the video in such cases.
+In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic to it. These servers are often in a database, exposed to the internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the ISPs.
 
-Determination of such preferences is up to the user or application(s) and out of scope of this document.
-However, it illustrates the need for explicit signaling of preferences to the network.
+Requirements:  REQ-CLIENT-DECIDES as defined previously.
 
 # Operational Considerations {#operational}
 
@@ -209,13 +241,14 @@ Traffic policing and shaping are enforced in ingress/egress network points for v
 The entire set of operations to manage traffic is beyond the scope of this document.
 This section focuses on operational constraints that impact  server – network, and host – network modes of sending metadata.
 
-
 ## Policy Enforcement {#policy}
 
 Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
 However, that metadata may have a dependency on the service offering that is subscribed by a user.
 
 Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.
+
+There is no requirement associated with this use-case.
 
 ## Redundant Functions and Classification Complications {#classification}
 
@@ -225,6 +258,7 @@ Likewise, the network will require to implement redundant functions; for each si
 
 *As such, application- and protocol-specific signaling channels are suboptimal.*
 
+There is no requirement associated with this use-case.
 
 ## Metadata Scope {#metadata-scope}
 
@@ -236,11 +270,15 @@ Most importantly, the metadata can be used by the network to prioritize traffic 
 
 It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
+There is no requirement associated with this use-case.
+
 ## Application Interference {#app-interference}
 
 Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.
 
 This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
+
+There is no requirement associated with this use-case.
 
 ## Privacy Considerations {#privacy}
 
@@ -250,6 +288,7 @@ To avoid this kind of frequency analysis, media sent by the server would need to
 This may be possible in transports like QUIC which allows flexibility in scheduling each stream.
 Transports like QUIC also fully encrypt the entire stream and therefore no media headers are observable on path either.
 The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
+
 Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
@@ -262,12 +301,17 @@ as unimportant, but such changes are detectable by the receiver. The privacy imp
 be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
 entities to infer sensitive information about the data being transmitted.
 
+Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no additional information about the IP packet.
+
 ## Scalability {#scalability}
 
 There may be a large number of media flows handled by the server and wireless/access router.
 
 Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increase.
+
 The metadata and other state information that a wireless router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
+
+Requirement:  REQ-ISP-SCALE: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
 
 ## Session Continuity {#continuity}
 
@@ -277,11 +321,16 @@ The frequency of handovers increases when a user moves faster or when the media 
 
 During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.
 
+Requirement: REQ-CONTINUITY: Handover from one radio or router to another should continue to provide same service level.
+
+
 ## Abuse and Constraints {#abuse}
 
 It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.
 
 Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.
+
+Requirement: REQ-??: *need text here*
 
 # On-path Metadata Requirements {#metadata-req}
 
@@ -293,9 +342,11 @@ Leveraging previous experience ({{?RFC9049}}), the metadata signals does not nee
 
 The metadata connections may be between server and network (in either direction) or between host and network (in either direction).
 
-Some use cases benefit from metadata provided by the server to the network and is described in ({{server-network}}).
-In other cases, the client provides information to the network and is described in ({{host-network}}).
+Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{host-network}}).
+
 For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
+
+REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
 
 
 ## Server-Network Metadata {#server-network}
@@ -312,6 +363,13 @@ The application provides information to identify either media frames or streams 
 
 In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
 
+Requirements:
+
+REQ-FRAME-START: Indicate packet containing start of media frame.
+
+REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
+
+REQ-FRAME-END: Indicate packet containing end of media frame.
 
 ### Relative Priority {#relative-priority}
 
@@ -322,6 +380,7 @@ Importance may be used to determine drop priority of a media frame in cases of e
 Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
 As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
 
+There is no requirement associated with this use-case.
 
 ### Tolerance to Delay {#delay}
 
@@ -331,6 +390,8 @@ ams may be able to tolerate more delay over the wire than others (e.g., a stream
 Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
 
 If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
+
+REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??
 
 
 ### Burst Indication {#burst}
@@ -342,6 +403,10 @@ Wireless networks on the other hand cannot reserve resources for the maximum bur
 
 The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
 The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
+
+REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+ISP, and ISP agrees it can handle that burst size.  (but what does ISP
+router do with the burst? Needs to be described above!)
 
 
 ## Host-Network Metadata {#host-network}
@@ -357,6 +422,8 @@ This eventually causes all flows to be marked as important, or -- more likely --
 
 However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
 
+There is no requirement associated with this use-case.
+
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
 
@@ -370,6 +437,7 @@ Thus, the flows originate from an IP address that is not known before connection
 Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.
 
+REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
 
 
 # Non-Requirements {#non-req}
