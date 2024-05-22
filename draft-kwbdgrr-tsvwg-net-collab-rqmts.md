@@ -56,6 +56,10 @@ informative:
     title:  "Study on XR (Extended Reality) and media services (Release 18)"
     date: August 2022
 
+  5G-Lumos:
+    title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
+    date: October 2020
+    
 --- abstract
 
 Wireless networks like cellular or Wi-Fi experience significant but transient variations in link capacity, have bandwidth or other policy constraints that affect user experience.
@@ -70,7 +74,7 @@ This document lists some use cases that demonstrate the need for a mechanism to 
 
 Wireless networks inherently experience large variations in link capacity due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
-These variations in link capacity can be in the order of a millisecond or less which is far lower than RTT.
+These variations in link capacity can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
 End-to-end congestion control algorithms are far from optimal when the link capacity is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
 It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 The result is applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
