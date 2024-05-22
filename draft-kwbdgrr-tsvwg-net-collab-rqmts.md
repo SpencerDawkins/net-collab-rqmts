@@ -351,30 +351,6 @@ REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may 
 
 ## Server-Network Metadata {#server-network}
 
-### Identification of Media Frames {#frame-id}
-
-Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames and adapt to changes in coding due to dynamic content or resulting from network conditions.
-
-Relative priority of media frames, tolerance to delay, identification of media frame boundaries are provided by the application to optimize traffic shaping at the wireless router.
-Alternatively, an application may prefer to provide only the information about streams and their relative priority (see {{mdu-stream-id}}).
-In such cases it does not provide any information to classify media frames.
-
-A wireless router should treat all packets of an media frame in the same manner for optimal application performance.
-Random, or tail drops that span media frame boundaries may result in the decoder being unable to decode many more media frames.
-
-The application should provide information that allows the wireless router to detect the start, end and set of packets of a media frame.
-In cases where the wireless network has to drop or delay processing, all packets of the media frame are treated in the same manner.
-
-Requirements:
-
-REQ-FRAME-START: Indicate packet containing start of media frame.
-
-REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
-
-REQ-FRAME-END: Indicate packet containing end of media frame.
-
-
 ### Identification of Media Frames and Streams {#mdu-stream-id}
 
 Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
@@ -387,8 +363,13 @@ The application provides information to identify either media frames or streams 
 
 In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
 
+Requirements:
 
-Requirement:  REQ-STREAM-IDENT: ?? identify media stream (??).  But the text for this use-case is discussing multiple different flows (thus, *inter*-flow).  We need to resolve this.
+REQ-FRAME-START: Indicate packet containing start of media frame.
+
+REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
+
+REQ-FRAME-END: Indicate packet containing end of media frame.
 
 ### Relative Priority {#relative-priority}
 
