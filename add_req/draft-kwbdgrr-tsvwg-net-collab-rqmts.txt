@@ -536,25 +536,6 @@ Table of Contents
 
 5.1.  Server-Network Metadata
 
-   In many scenarios that require low latency media delivery, the server
-   and wireless router have established relationships and contractual
-   agreements to optimize the delivery of media flows.  For example, the
-   Content Provider (CP) and Mobile Network Operator (MNO) may have a
-   limited domain ([RFC8799]) that manages trust and configures policies
-   related to the delivery of content.  The server and wireless router
-   (3GPP UPF) are located in networks operated by CP and MNO
-   respectively.  The transit (IP) network in between is either a
-   trusted network that is managed and operated by the CP/MNO, or the
-   CP/MNO use security gateways at the boundaries of their network to
-   encrypt all traffic flowing between them.  Thus, the requirements in
-   this section are not expected to satisfy sending metadata between
-   arbitrary servers and wireless routers located across a wide area
-   network.
-
-   Some use cases benefit from client involvement (Section 5.2).
-
-   REQ-??: ?? _need text here_
-
 5.1.1.  Identification of Media Frames
 
    Feedback provided by ECN/L4S to the server (UDP sender) is not fast
@@ -828,10 +809,6 @@ Informative References
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/rfc/rfc8558>.
-
-   [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
-              Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
-              <https://www.rfc-editor.org/rfc/rfc8799>.
 
    [RFC9049]  Dawkins, S., Ed., "Path Aware Networking: Obstacles to
               Deployment (A Bestiary of Roads Not Taken)", RFC 9049,
