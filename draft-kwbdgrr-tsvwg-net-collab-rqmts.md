@@ -389,7 +389,7 @@ Leveraging previous experience ({{?RFC9049}}), the metadata signals does not nee
 
 The metadata connections may be between server and network (in either direction) or between host and network (in either direction).
 
-Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{host-network}}).
+Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{client-network}}).
 
 For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
 
@@ -456,23 +456,11 @@ ISP, and ISP agrees it can handle that burst size.  (but what does ISP
 router do with the burst? Needs to be described above!)
 
 
-## Host-Network Metadata {#host-network}
-
-### Priority between Flows (Inter-flow) {#interflow-priority}
-
-Certain flows being received by a host (or by an application on a host) are less or more important than other flows of *the same host*.
-For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.
-By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.
-
-Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
-This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
-
-However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
-
-There is no requirement associated with this use-case.
-
+## client-Network Metadata {#client-network}
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
+
+Intra-flow priority is the prioritization of streams within the same flow (same 5-tuple). Priorities between flows (inter-flow) is outside the scope of this document.
 
 Interactive Audio/Video has long been using {{?RFC3550}} which runs over UDP.  As described in Section 2.3.7.2 of {{?RFC7478}}, there is value in differentiating between voice, video and data.
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{?I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
