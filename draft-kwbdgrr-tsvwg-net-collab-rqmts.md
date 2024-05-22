@@ -349,17 +349,6 @@ REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may 
 
 ## Server-Network Metadata {#server-network}
 
-In many scenarios that require low latency media delivery, the server and wireless router have established relationships and contractual agreements to optimize the delivery of media flows.
-For example, the Content Provider (CP) and Mobile Network Operator (MNO) may have a limited domain ({{?RFC8799}}) that manages trust and configures policies related to the delivery of content.
-The server and wireless router (3GPP UPF) are located in networks operated by CP and MNO respectively.
-The transit (IP) network in between is either a trusted network that is managed and operated by the CP/MNO, or the CP/MNO use security gateways at the boundaries of their network to encrypt all traffic flowing between them.
-Thus, the requirements in this section are not expected to satisfy sending metadata between arbitrary servers and wireless routers located across a wide area network.
-
-Some use cases benefit from client involvement ({{host-network}}).
-
-REQ-??: ?? *need text here*
-
-
 ### Identification of Media Frames {#frame-id}
 
 Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
