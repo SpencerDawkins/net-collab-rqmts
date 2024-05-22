@@ -274,7 +274,7 @@ Table of Contents
       shown in Figure 3.
 
       For a definitive description of 3GPP network architectures, the
-      reader should refer to the 3GPP's TR 23.501.
+      reader should refer to the 3GPP's TR 23.501 [TR.23.501-3GPP].
 
        ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
        │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
