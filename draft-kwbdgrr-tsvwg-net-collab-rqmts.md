@@ -90,8 +90,8 @@ informative:
 
 --- abstract
 
-Wireless networks like cellular or Wi-Fi experience significant but transient variations in link capacity, have policy constraints (e.g., bandwidth) that affect user experience.
-Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of frames or streams without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that the client is aware of the network's treatment of incoming packets. For host-to-network, collaboration can be put in place without requiring revealing the identity of the remote server. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
+Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
+Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
 This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
 
@@ -103,6 +103,7 @@ Wireless networks inherently experience large variations in link quality due to 
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
 These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
 End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
+
 It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
 
@@ -184,10 +185,6 @@ In summary, the rapid variation of wireless link quality and/or bandwidth limita
 
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
 
-# Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
 ## Definitions
 
 The document makes use of the following terms:
@@ -203,7 +200,7 @@ Traffic shaping:
 
 User Plane Function (UPF):
 : Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
-: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501.
+: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 {{TR.23.501-3GPP}}.
 
 ~~~
   ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
