@@ -1226,19 +1226,16 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames and Streams</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
-                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-identification-of-media-fram" class="internal xref">Identification of Media Frames and Streams</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.3">
-                    <p id="section-toc.1-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="auto internal xref">5.1.3</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="auto internal xref">5.1.3</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.4">
-                    <p id="section-toc.1-1.5.2.1.2.4.1"><a href="#section-5.1.4" class="auto internal xref">5.1.4</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.5">
-                    <p id="section-toc.1-1.5.2.1.2.5.1"><a href="#section-5.1.5" class="auto internal xref">5.1.5</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.4.1"><a href="#section-5.1.4" class="auto internal xref">5.1.4</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
 </li>
                 </ul>
 </li>
@@ -1606,81 +1603,64 @@ Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9
         <h3 id="name-server-network-metadata">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
         </h3>
-<div id="frame-id">
+<div id="mdu-stream-id">
 <section id="section-5.1.1">
           <h4 id="name-identification-of-media-fra">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames</a>
+<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames and Streams</a>
           </h4>
 <p id="section-5.1.1-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">Relative priority of media frames, tolerance to delay, identification of media frame boundaries are provided by the application to optimize traffic shaping at the wireless router.
-Alternatively, an application may prefer to provide only the information about streams and their relative priority (see <a href="#mdu-stream-id" class="auto internal xref">Section 5.1.2</a>).
-In such cases it does not provide any information to classify media frames.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3">A wireless router should treat all packets of an media frame in the same manner for optimal application performance.
-Random, or tail drops that span media frame boundaries may result in the decoder being unable to decode many more media frames.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-4">The application should provide information that allows the wireless router to detect the start, end and set of packets of a media frame.
-In cases where the wireless network has to drop or delay processing, all packets of the media frame are treated in the same manner.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-5">Requirements:<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-6">REQ-FRAME-START: Indicate packet containing start of media frame.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-7">REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.<a href="#section-5.1.1-7" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-8">REQ-FRAME-END: Indicate packet containing end of media frame.<a href="#section-5.1.1-8" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="mdu-stream-id">
-<section id="section-5.1.2">
-          <h4 id="name-identification-of-media-fram">
-<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-identification-of-media-fram" class="section-name selfRef">Identification of Media Frames and Streams</a>
-          </h4>
-<p id="section-5.1.2-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
+Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
 The application can provide information to detect the start, end and set of packets that belong to a media frame.
 Alternatively, the application may provide information to identify one stream of the flow from another.
-The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-4">Requirement:  REQ-STREAM-IDENT: ?? identify media stream (??).  But the text for this use-case is discussing multiple different flows (thus, <em>inter</em>-flow).  We need to resolve this.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
+The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-4">Requirements:<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-5">REQ-FRAME-START: Indicate packet containing start of media frame.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-6">REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-7">REQ-FRAME-END: Indicate packet containing end of media frame.<a href="#section-5.1.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="relative-priority">
-<section id="section-5.1.3">
+<section id="section-5.1.2">
           <h4 id="name-relative-priority">
-<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
+<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
           </h4>
-<p id="section-5.1.3-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
+<p id="section-5.1.2-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
 The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
-Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
-As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-3">There is no requirement associated with this use-case.<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
+Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
+As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-3">There is no requirement associated with this use-case.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delay">
-<section id="section-5.1.4">
+<section id="section-5.1.3">
           <h4 id="name-tolerance-to-delay">
-<a href="#section-5.1.4" class="section-number selfRef">5.1.4. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
+<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
           </h4>
-<p id="section-5.1.4-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+<p id="section-5.1.3-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
 Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
 ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
-Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.4-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-5.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.4-3">REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??<a href="#section-5.1.4-3" class="pilcrow">¶</a></p>
+Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-3">REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="burst">
-<section id="section-5.1.5">
+<section id="section-5.1.4">
           <h4 id="name-burst-indication">
-<a href="#section-5.1.5" class="section-number selfRef">5.1.5. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
+<a href="#section-5.1.4" class="section-number selfRef">5.1.4. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
           </h4>
-<p id="section-5.1.5-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
+<p id="section-5.1.4-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
 Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
 The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
-Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-5.1.5-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.5-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
-The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-5.1.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.5-3">REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.4-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
+The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-5.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.4-3">REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
 ISP, and ISP agrees it can handle that burst size.  (but what does ISP
-router do with the burst? Needs to be described above!)<a href="#section-5.1.5-3" class="pilcrow">¶</a></p>
+router do with the burst? Needs to be described above!)<a href="#section-5.1.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
