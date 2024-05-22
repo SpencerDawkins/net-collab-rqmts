@@ -303,18 +303,6 @@ entities to infer sensitive information about the data being transmitted.
 
 Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no additional information about the IP packet.
 
-
-## Key Establishment {#key-establishment}
-
-Various proposals have suggested establishing a key to validate per-packet metadata, decrypt per-packet metadata, or obfuscate the metadata.  However, most proposals have not specified how this key would be established.
-A signaling protocol from the receiving host to its ISP could establish such a key.
-The host can then convey the key to the sending host to use to integrity protect or encrypt the per-packet metadata.
-
-Note: The CPU overhead of validating or decrypting such per-packet metadata needs to be carefully considered (and further assessed via experiments) by the signaling protocol proposing such keying.
-Also, the required operational setup should be documented.
-
-Requirement: REQ-METADATA-KEY: Convey key or obfuscation information from client to ISP.
-
 ## Scalability {#scalability}
 
 There may be a large number of media flows handled by the server and wireless/access router.
