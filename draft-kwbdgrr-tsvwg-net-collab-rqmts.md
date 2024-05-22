@@ -230,7 +230,7 @@ User Plane          ╱     │           │         ╲
 ## Media Streaming {#uc-streaming}
 
 Streaming video contains the occasional key frame ("I-frame") containing a full video frame.
-These are necessary to rebuild receiver state after loss of delta frames.
+These frames are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
 
 Streaming video also contains audio frames which can be encoded
@@ -240,11 +240,11 @@ REQ-MEDIA-KEYFRAME).
 Audio is more critical than video for many applications, but its
 importance (relative to other packets in the flow) is still an
 application decision (requirements: REQ-MEDIA-AV-SEPARATE,
-REQ-MEDIA-CLIENT-DECIDES).
+REQ-MEDIA-CLIENT-DECIDES). For example, the ability of the receiver to change the priority by communicating to the network -- without cooperation of the sender -- gives a hearing-impaired user the ability to adjust video above audio.
 
-Especially with media over QUIC, the server or proxy sends the same
-stream to all receivers, including the same metadata.  Thus, when a
-client needs different prioritization (e.g., video over audio), this
+Especially with media over QUIC, the server (or relay) sends the same
+stream to many receivers, including the same metadata.  Thus, when a
+client needs different prioritization (e.g., video over audio or the other way around), this
 is only achievable by signaling that priority inversion from the
 client to the ISP router (requirement: REQ-CLIENT-DECIDES).
 
