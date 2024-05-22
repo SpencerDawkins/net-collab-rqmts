@@ -529,7 +529,11 @@ Table of Contents
    direction) or between host and network (in either direction).
 
    Some use cases benefit from server – network metadata exchanges
-   (Section 5.1) and others need client involvement (Section 5.2)
+   (Section 5.1) and others need client involvement (Section 5.2).
+
+   For the requirements that follow, the assumption is that the client
+   agrees to the exchange of metadata between the server and network, or
+   between the client and network.
 
    REQ-PACKET-SELF: Packet importance is indicated by the packet itself,
    which may need to be decrypted or de-obfuscated.

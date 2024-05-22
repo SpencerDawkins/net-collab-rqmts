@@ -1598,8 +1598,9 @@ The requirements here focus on proxied metadata connections on path with the dat
 <p id="section-5-2">The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>.
 Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client(host)-to-server encrypted payload.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The metadata connections may be between server and network (in either direction) or between host and network (in either direction).<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 5.1</a>) and others need client involvement (<a href="#host-network" class="auto internal xref">Section 5.2</a>)<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 5.1</a>) and others need client involvement (<a href="#host-network" class="auto internal xref">Section 5.2</a>).<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.<a href="#section-5-6" class="pilcrow">¶</a></p>
 <div id="server-network">
 <section id="section-5.1">
         <h3 id="name-server-network-metadata">
