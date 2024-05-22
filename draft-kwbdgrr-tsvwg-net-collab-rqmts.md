@@ -99,27 +99,28 @@ This document lists some use cases that demonstrate the need for a mechanism to 
 
 # Introduction {#intro}
 
-Wireless networks inherently experience large variations in link capacity due to several factors.
-These include the change in wireless channel conditions, interference between proximate cells, and channels or because of the end user movement.
-These variations in link capacity can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
-End-to-end congestion control algorithms are far from optimal when the link capacity is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
+Wireless networks inherently experience large variations in link quality due to several factors.
+These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
+These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
+End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
+
 It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
-The result is applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
-With unencrypted packets, networks used Deep Packet Inspection (DPI) to identify an “implicit signal” derived from the contents of a packet to prioritize or otherwise shape flows.
-Implicit signals are not desirable as it leads to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
+As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
+
+With not fully encrypted packets, networks may used some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
+Implicit signals are not desirable as they leads to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.
 
 Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
-Users who are serviced via these networks use clients which run various applications; each having different connectivity needs for an optimal user experience.
+Users who are serviced via these networks use hosts which run various application clients; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
-An explicit signal to the user can help to manage the use of available bandwidth better.
+An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.
 
-Applications like interactive media on the other hand can demand both high throughput and low latency, and in some cases carry different media streams (e.g., audio, video) in a single transport connection (e.g., WebRTC).
+Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
-With RTP, the type of media could be examined and used as an implicit signal for relative priority. However, {{!RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and CSRCs. Further, a full encrypted transport such as QUIC does not expose any media header information that networks on path can use.
+With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{!RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
 
-Traffic patterns in some emerging applications can vary significantly during the session.
-For example, live media or AI generated content can have significant dynamic variations and potentially aperiodic frames.
+Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~
@@ -144,29 +145,30 @@ Information in unencrypted media packets and headers that wireless networks have
 {: #Figure-e2e title=”E2E Media Transport Overview”}
 
 {{Figure-e2e}} shows where such bandwidth and performance constraints usually exist with a “B” (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
-When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and thus lead to suboptimal perceived experience.
+When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.
 
-A connection represents the communication link between user (client) and network (router) while a connection session represents the QoS and policy applied to flows within that connection.
-A connection session maybe established using control plane signaling between the client and the network (access) router and is out of scope of this document.
-Transport flows in a connection session may consist of multiple streams such as video or audio.
-The requirements in {{metadata-req}} apply to streams or data units like frames within a flow, but not between flows.
-{{Figure-conn-flow}} shows a high level view of connection sessions, flows and QoS/policy proposed in {{metadata-req}} is applied.
+A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.
+
+A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
+Transport flows over a network attachment may consist of multiple streams such as video or audio. {{Figure-conn-flow}} shows a high level view of network attachments, flows, and QoS/policy discussed in {{metadata-req}}.
+
+The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.
 
 ~~~~~~~~
 +----------+          +-----------------+
 |+----+    |          | +-------------+ |
 || A1 |--+ |          | | QoS, Policy | |
 |+-+--+A2| |          | +---+-----+---+ |          +------+
-|  |+-+--+ |          |     |     |     |          |srv-A2|
-|  |  |    |  conn/session  V     |     |          +--+---+
+|  |+-+--+ |  Network |     |     |     |          |srv-A2|
+|  |  |    |attachment|     v     |     |          +--+---+
 |  |  |  *************************|**** |             |
 |  |  +------------- flow-x2 -----|-------------------+   +------+
 |  +------------ flow-x1 ---------|-----------------------+srv-A1|
 |        *************************|**** |                 +--+---+
 +-Client-1-+          |           |     |                    |
                       |           |     |                    |
-+----------+  conn/session        V     |                    |
++----------+  Network attachment  V     |                    |
 |+----+  ****************************** |                    |
 || A1 +------------ flow-x3 ---------------------------------+
 |+----+  ****************************** |
@@ -175,14 +177,13 @@ The requirements in {{metadata-req}} apply to streams or data units like frames 
 ~~~~~~~~
 {: #Figure-conn-flow title=”E2E transport flows and connection session”}
 
-{{Figure-conn-flow}} shows Client-1 and Client-2 that negotiate  QoS, policy and other aspects like mobility handling, charging applied to flows in that connection session establised to (access) Router.
-Client-1 has flow-x1 and flow-x2 in its connection session while Client-2 has flow-x3.
-The requirements in this document propose on-path media collaboration signals that apply to streams or data units such as media frames within flows like flow-x1/x2/x3 but not between them.
+{{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
+"Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
+The requirements in this document focuses on on-path media collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
 
-In summary, the rapid variation of wireless link capacity and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to poor user experience.
-{{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
+In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
+
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
-
 
 ## Definitions
 
