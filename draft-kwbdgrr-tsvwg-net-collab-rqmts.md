@@ -180,7 +180,7 @@ The requirements in {{metadata-req}} apply to data units like frames within a fl
 "Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
 The requirements in this document focuses on on-path media collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
 
-In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling. 
+In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
 
