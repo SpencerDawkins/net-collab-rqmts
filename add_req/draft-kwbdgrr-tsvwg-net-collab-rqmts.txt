@@ -97,7 +97,7 @@ Table of Contents
      3.1.  Media Streaming
      3.2.  Interactive Media
      3.3.  User Preferences
-     3.4.  Honoring of Metadata for servers behind a gateway
+     3.4.  Honoring of Metadata for Servers Behind a Gateway
    4.  Operational Considerations
      4.1.  Policy Enforcement
      4.2.  Redundant Functions and Classification Complications
@@ -322,7 +322,7 @@ Table of Contents
    importance of packets it receives, as the client may have changing
    needs over time.
 
-3.4.  Honoring of Metadata for servers behind a gateway
+3.4.  Honoring of Metadata for Servers Behind a Gateway
 
    In enterprise networks and remote desktop use case, a server can host
    multiple connections with varying type of traffic to it.  These
