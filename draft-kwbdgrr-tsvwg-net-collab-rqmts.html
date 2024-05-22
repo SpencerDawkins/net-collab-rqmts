@@ -1289,13 +1289,15 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
       </h2>
 <p id="section-1-1">Wireless networks inherently experience large variations in link capacity due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
-These variations in link capacity can be in the order of a millisecond or less.
-Media frames may experience high sojourn times in the wireless network or the flow may experience lower throughput, neither of which is desirable.
+These variations in link capacity can be in the order of a millisecond or less <span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
+End-to-end congestion control algorithms are far from optimal when the link capacity is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
+It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 The result is applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
 With unencrypted packets, networks used Deep Packet Inspection (DPI) to identify an “implicit signal” derived from the contents of a packet to prioritize or otherwise shape flows.
-When packet contents are encrypted, this approach is no longer viable.<a href="#section-1-1" class="pilcrow">¶</a></p>
+Implicit signals are not desirable as it leads to ossification of protocols as result of introducing unintended dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.
+When packet contents are encrypted, the approach of using implicit signals is no longer viable.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
-Users who are serviced via these networks use various hosts which run various applications; each having different connectivity needs for an optimal user experience.
+Users who are serviced via these networks use clients which run various applications; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the user can help to manage the use of available bandwidth better.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Applications like interactive media on the other hand can demand both high throughput and low latency, and in some cases carry different media streams (e.g., audio, video) in a single transport connection (e.g., WebRTC).
@@ -1308,33 +1310,67 @@ Information in unencrypted media packets and headers that wireless networks have
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-1-5.1">
 <pre>
-                      |
-           3GPP/mobile network
-+---------------------|----------------------+
-|+------+             |   +-----+    +-----+ |
-||client+-----------(B)--+radio +----+ UPF | |
-|+------+             |   +-----+    +--+--+ |
-+---------------------|-----------------|----+
-                      |                 |
-        Wireless home/ISP network       |
-+---------------------|-----------+     |    |          |
-|+------+    +------+ |  +------+ | +---+--+ | +------+ | +------+
-||client+-(B)+ WLAN +(B)-+router+---+router+---+router+---+server|
-|+------+    +------+ |  +------+ | +------+ | +------+ | +------+
-+---------------------|-----------+          |          |
-                      |                      |          |
-                      |                      | Transit  |  Content
- User device/Network  |    MNO/ISP Network   | Network  |  Network
-
+                     |
+       3GPP/mobile network
++--------------------|----------------------+
+|+-- ---+            |   +-----+    +-----+ |
+||client+-----------(B)--+radio+----+ UPF | |
+|+------+            |   +-----+    +--+--+ |
++--------------------|-----------------|----+
+                     |                 |
+       Wireless home/ISP network       |
++--------------------|-----------+     |    |          |
+|+--- --+    +----+  |  +------+ | +---+--+ | +------+ | +------+
+||client+-(B)+WLAN+-(B)-+router+---+router+---+router+---+server|
+|+------+    +----+  |  +------+ | +------+ | +------+ | +------+
++--------------------|-----------+          |          |
+                     |                      |          |
+                     |                      | Transit  |  Content
+ User device/Network |    MNO/ISP Network   | Network  |  Network
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
 </div>
 <p id="section-1-6"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints usually exist with a “B” (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
-When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and thus lead to suboptimal perceived experience.  In this document, this is termed 'reactive policy'.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">The rapid variation of wireless link capacity and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to poor user experience.
-<a href="#uc" class="auto internal xref">Section 3</a> outlines use cases to illustrate the issues.
-<a href="#operational" class="auto internal xref">Section 4</a> provides operational constraints in the network and <a href="#metadata-req" class="auto internal xref">Section 5</a> describes the requirements for on-path media collaboration signals.<a href="#section-1-7" class="pilcrow">¶</a></p>
+When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and thus lead to suboptimal perceived experience.
+In this document, this is termed 'reactive policy'.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">A connection represents the communication link between user (client) and network (router) while a connection session represents the QoS and policy applied to flows within that connection.
+A connection session maybe established using control plane signaling between the client and the network (access) router and is out of scope of this document.
+Transport flows in a connection session may consist of multiple streams such as video or audio.
+The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to streams or data units like frames within a flow, but not between flows.
+<a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows a high level view of connection sessions, flows and QoS/policy proposed in <a href="#metadata-req" class="auto internal xref">Section 5</a> is applied.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<div id="Figure-conn-flow">
+<figure id="figure-2">
+        <div class="alignLeft art-text artwork" id="section-1-8.1">
+<pre>
++----------+          +-----------------+
+|+----+    |          | +-------------+ |
+|| A1 |--+ |          | | QoS, Policy | |
+|+-+--+A2| |          | +---+-----+---+ |          +------+
+|  |+-+--+ |          |     |     |     |          |srv-A2|
+|  |  |    |  conn/session  V     |     |          +--+---+
+|  |  |  *************************|**** |             |
+|  |  +------------- flow-x2 -----|-------------------+   +------+
+|  +------------ flow-x1 ---------|-----------------------+srv-A1|
+|        *************************|**** |                 +--+---+
++-Client-1-+          |           |     |                    |
+                      |           |     |                    |
++----------+  conn/session        V     |                    |
+|+----+  ****************************** |                    |
+|| A1 +------------ flow-x3 ---------------------------------+
+|+----+  ****************************** |
++----------+          +-----------------+
+  Client-2                  Router
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
+</div>
+<p id="section-1-9"><a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows Client-1 and Client-2 that negotiate  QoS, policy and other aspects like mobility handling, charging applied to flows in that connection session establised to (access) Router.
+Client-1 has flow-x1 and flow-x2 in its connection session while Client-2 has flow-x3.
+The requirements in this document propose on-path media collaboration signals that apply to streams or data units such as media frames within flows like flow-x1/x2/x3 but not between them.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">In summary, the rapid variation of wireless link capacity and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to poor user experience.
+<a href="#uc" class="auto internal xref">Section 3</a> outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
+<a href="#operational" class="auto internal xref">Section 4</a> provides operational constraints in the network and <a href="#metadata-req" class="auto internal xref">Section 5</a> describes the requirements for on-path media collaboration signals.<a href="#section-1-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1370,7 +1406,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <dd class="break"></dd>
 <dt id="section-2.1-2.7">User Plane Function (UPF):</dt>
           <dd style="margin-left: 1.5em" id="section-2.1-2.8">
-            <p id="section-2.1-2.8.1">Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in <a href="#Figure-3gpp" class="auto internal xref">Figure 2</a>.<a href="#section-2.1-2.8.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-2.8.1">Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in <a href="#Figure-3gpp" class="auto internal xref">Figure 3</a>.<a href="#section-2.1-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-2.1-2.9"></dt>
@@ -1380,7 +1416,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 </dl>
 <span id="name-5gs-architecture"></span><div id="Figure-3gpp">
-<figure id="figure-2">
+<figure id="figure-3">
           <div class="alignCenter art-text artwork" id="section-2.1-3.1">
 <pre>
   ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
@@ -1401,7 +1437,7 @@ User Plane          ╱     │           │         ╲
                 └───┘  └─────┘     └─────┘    └─────┘     `───'
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-5gs-architecture" class="selfRef">5GS Architecture</a>
           </figcaption></figure>
 </div>
@@ -1807,8 +1843,20 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">D. Schinazi</span>, <span class="refTitle">"An Unreliable Datagram Extension to QUIC"</span>, <span class="seriesInfo">RFC 9221</span>, <span class="seriesInfo">DOI 10.17487/RFC9221</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9221">https://www.rfc-editor.org/rfc/rfc9221</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9419">[RFC9419]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Hardie, T.</span>, <span class="refAuthor">Pauly, T.</span>, and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Considerations on Application - Network Collaboration Using Path Signals"</span>, <span class="seriesInfo">RFC 9419</span>, <span class="seriesInfo">DOI 10.17487/RFC9419</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9419">https://www.rfc-editor.org/rfc/rfc9419</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TR.23.501-3GPP">[TR.23.501-3GPP]</dt>
+        <dd>
+<span class="refTitle">"3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"</span>, <time datetime="2023-03" class="refDate">March 2023</time>. </dd>
+<dd class="break"></dd>
+<dt id="TR.23.700-60-3GPP">[TR.23.700-60-3GPP]</dt>
+        <dd>
+<span class="refTitle">"Study on XR (Extended Reality) and media services (Release 18)"</span>, <time datetime="2022-08" class="refDate">August 2022</time>. </dd>
+<dd class="break"></dd>
+<dt id="_5G-Lumos">[_5G-Lumos]</dt>
+      <dd>
+<span class="refTitle">"Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"</span>, <time datetime="2020-10" class="refDate">October 2020</time>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
