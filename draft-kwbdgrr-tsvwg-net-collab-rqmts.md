@@ -379,7 +379,7 @@ Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to ad
 Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames and adapt to changes in coding due to dynamic content or resulting from network conditions.
 
 Relative priority of media frames, tolerance to delay, identification of media frame boundaries are provided by the application to optimize traffic shaping at the wireless router.
-Alternatively, an application may prefer to provide only the information about streams and their relative priority (see {{stream-id}}).
+Alternatively, an application may prefer to provide only the information about streams and their relative priority (see {{mdu-stream-id}}).
 In such cases it does not provide any information to classify media frames.
 
 A wireless router should treat all packets of an media frame in the same manner for optimal application performance.
