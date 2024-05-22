@@ -199,7 +199,7 @@ Traffic shaping:
 
 User Plane Function (UPF):
 : Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
-: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501.
+: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 {{TR.23.501-3GPP}}.
 
 ~~~
   ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
