@@ -342,7 +342,9 @@ Leveraging previous experience ({{?RFC9049}}), the metadata signals does not nee
 
 The metadata connections may be between server and network (in either direction) or between host and network (in either direction).
 
-Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{host-network}})
+Some use cases benefit from server – network metadata exchanges ({{server-network}}) and others need client involvement ({{host-network}}).
+
+For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
 
 REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
 
