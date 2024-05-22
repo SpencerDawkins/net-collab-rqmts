@@ -1508,8 +1508,8 @@ This section focuses on operational constraints that impact  server – network,
         </h3>
 <p id="section-3.1-1">Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows.
 However, that metadata may have a dependency on the service offering that is subscribed by a user.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3">There is no requirement associated with this use-case.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Requirement:  REQ-METADATA-ACCURACY.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="classification">
@@ -1519,8 +1519,8 @@ However, that metadata may have a dependency on the service offering that is sub
         </h3>
 <p id="section-3.2-1">If distinct channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Likewise, the network will require to implement redundant functions; for each signaling interface.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3"><em>As such, application- and protocol-specific signaling channels are suboptimal.</em><a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">There is no requirement associated with this use-case.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-3"><em>As such, application- and protocol-specific signaling channels are suboptimal.</em> (REQ-SINGLE-CHANNEL)<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">Requirement:  REQ-SINGLE-CHANNEL is preferred.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="metadata-scope">
@@ -1532,7 +1532,7 @@ However, that metadata may have a dependency on the service offering that is sub
 <p id="section-3.3-2">As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">There is no requirement associated with this use-case.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">Requirement:  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="app-interference">
@@ -1542,7 +1542,7 @@ However, that metadata may have a dependency on the service offering that is sub
         </h3>
 <p id="section-3.4-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">There is no requirement associated with this use-case.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Requirement:  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy">
@@ -1575,8 +1575,8 @@ entities to infer sensitive information about the data being transmitted.<a href
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
         </h3>
 <p id="section-3.6-1">There may be a large number of media flows handled by the server and wireless/access router.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.6-2">Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increase.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
-<p id="section-3.6-3">The metadata and other state information that a wireless router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.6-2">Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-3">The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 <p id="section-3.6-4">Requirement:  REQ-ISP-SCALE: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.<a href="#section-3.6-4" class="pilcrow">¶</a></p>
 </section>
 </div>

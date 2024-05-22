@@ -415,9 +415,9 @@ Table of Contents
    SLOs) may be serviced by the same network nodes.  Instead, the
    network needs to dynamically adjust the bitrate based on each user's
    service package and connectivity SLOs to ensure optimal delivery for
-   all users.
+   all users (REQ-METADATA-ACCURACY).
 
-   There is no requirement associated with this use-case.
+   Requirement: REQ-METADATA-ACCURACY.
 
 3.2.  Redundant Functions and Classification Complications
 
@@ -431,9 +431,9 @@ Table of Contents
    for each signaling interface.
 
    _As such, application- and protocol-specific signaling channels are
-   suboptimal._
+   suboptimal._ (REQ-SINGLE-CHANNEL)
 
-   There is no requirement associated with this use-case.
+   Requirement: REQ-SINGLE-CHANNEL is preferred.
 
 3.3.  Metadata Scope
 
@@ -457,7 +457,9 @@ Table of Contents
    PDU Sessions) where network attachments with Guaranteed Bit Rate
    (GBR) for specific flows is provided.
 
-   There is no requirement associated with this use-case.
+   Requirement: REQ-SCOPED-METADATA: Means to characterize the scope of
+   a shared metadata for the sake of better interoperability should be
+   supported.
 
 3.4.  Application Interference
 
@@ -470,7 +472,8 @@ Table of Contents
    running behind the same CPE, with each of them running a video
    application.  The same challenge may apply when tethering is enabled.
 
-   There is no requirement associated with this use-case.
+   Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal
+   independent of the application should be considered.
 
 3.5.  Privacy Considerations
 
@@ -523,11 +526,11 @@ Table of Contents
 
    Per flow information (state) at a wireless router for optimizing the
    flow can negate the advantages offered as the number of flows handled
-   increase.
+   increases.
 
-   The metadata and other state information that a wireless router has
-   to maintain for each additional media flow it handles should be kept
-   to a minimum or eliminated altogether.
+   The metadata and other state information that a router has to
+   maintain for each additional media flow it handles should be kept to
+   a minimum or eliminated altogether.
 
    Requirement: REQ-ISP-SCALE: The metadata other state information that
    a wireless router has to maintain for each additional media flow it
