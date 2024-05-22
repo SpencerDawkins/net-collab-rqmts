@@ -86,7 +86,7 @@ informative:
   5G-Lumos:
     title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
     date: October 2020
-   
+
 
 --- abstract
 
