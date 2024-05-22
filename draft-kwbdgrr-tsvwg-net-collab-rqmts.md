@@ -274,7 +274,7 @@ Requirements:  REQ-CLIENT-DECIDES: The receiving client determines importance of
 
 ## Honoring of Metadata for Servers Behind a Gateway
 
-In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic to it. These servers are often in a database, exposed to the internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the ISPs.
+In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.
 
 Requirements:  REQ-CLIENT-DECIDES as defined previously.
 
