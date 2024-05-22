@@ -104,10 +104,9 @@ Table of Contents
      4.3.  Metadata Scope
      4.4.  Application Interference
      4.5.  Privacy Considerations
-     4.6.  Key Establishment
-     4.7.  Scalability
-     4.8.  Session Continuity
-     4.9.  Abuse and Constraints
+     4.6.  Scalability
+     4.7.  Session Continuity
+     4.8.  Abuse and Constraints
    5.  On-path Metadata Requirements
      5.1.  Server-Network Metadata
        5.1.1.  Identification of Media Frames
@@ -463,25 +462,7 @@ Table of Contents
    Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no
    additional information about the IP packet.
 
-4.6.  Key Establishment
-
-   Various proposals have suggested establishing a key to validate per-
-   packet metadata, decrypt per-packet metadata, or obfuscate the
-   metadata.  However, most proposals have not specified how this key
-   would be established.  A signaling protocol from the receiving host
-   to its ISP could establish such a key.  The host can then convey the
-   key to the sending host to use to integrity protect or encrypt the
-   per-packet metadata.
-
-   Note: The CPU overhead of validating or decrypting such per-packet
-   metadata needs to be carefully considered (and further assessed via
-   experiments) by the signaling protocol proposing such keying.  Also,
-   the required operational setup should be documented.
-
-   Requirement: REQ-METADATA-KEY: Convey key or obfuscation information
-   from client to ISP.
-
-4.7.  Scalability
+4.6.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -498,7 +479,7 @@ Table of Contents
    a wireless router has to maintain for each additional media flow it
    handles should be very low or none.
 
-4.8.  Session Continuity
+4.7.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -513,7 +494,7 @@ Table of Contents
    Requirement: REQ-CONTINUITY: Handover from one radio or router to
    another should continue to provide same service level.
 
-4.9.  Abuse and Constraints
+4.8.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
