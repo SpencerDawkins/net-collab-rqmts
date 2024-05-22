@@ -258,12 +258,12 @@ REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
 
 ## Interactive Media {#uc-interactive}
 
-Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
+Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
 They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.
 
 Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR), Virtual Apps and Desktops.
 
-REQ-INTERACTIVE: The receiver indicates an incoming flow is interactive, and requests the network to honor the incoming flow's
+REQ-INTERACTIVE: The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
 per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 ## User Preferences {#uc-preferences}
