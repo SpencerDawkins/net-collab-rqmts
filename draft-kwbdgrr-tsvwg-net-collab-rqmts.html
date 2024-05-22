@@ -1439,7 +1439,7 @@ User Plane          ╱     │           │         ╲
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-media-streaming" class="section-name selfRef">Media Streaming</a>
         </h3>
 <p id="section-2.1-1">Streaming video contains the occasional key frame ("I-frame") containing a full video frame.
-These are necessary to rebuild receiver state after loss of delta frames.
+These frames are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">Streaming video also contains audio frames which can be encoded
 separately and, thus, can be signaled separately (requirement:
@@ -1447,10 +1447,10 @@ REQ-MEDIA-KEYFRAME).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1-3">Audio is more critical than video for many applications, but its
 importance (relative to other packets in the flow) is still an
 application decision (requirements: REQ-MEDIA-AV-SEPARATE,
-REQ-MEDIA-CLIENT-DECIDES).<a href="#section-2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.1-4">Especially with media over QUIC, the server or proxy sends the same
-stream to all receivers, including the same metadata.  Thus, when a
-client needs different prioritization (e.g., video over audio), this
+REQ-MEDIA-CLIENT-DECIDES). For example, the ability of the receiver to change the priority by communicating to the network -- without cooperation of the sender -- gives a hearing-impaired user the ability to adjust video above audio.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">Especially with media over QUIC, the server (or relay) sends the same
+stream to many receivers, including the same metadata.  Thus, when a
+client needs different prioritization (e.g., video over audio or the other way around), this
 is only achievable by signaling that priority inversion from the
 client to the ISP router (requirement: REQ-CLIENT-DECIDES).<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 <p id="section-2.1-5">Examples: live broadcast, on-demand video streaming<a href="#section-2.1-5" class="pilcrow">¶</a></p>
