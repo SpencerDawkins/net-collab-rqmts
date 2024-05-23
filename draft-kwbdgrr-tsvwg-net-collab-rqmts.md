@@ -503,9 +503,9 @@ This document has no other security considerations.
 # Acknowledgments
 {:numbered="false"}
 
-This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}} and {{I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
+This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}} and {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
 
-Acknowledgments from {{I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
+Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 : Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.
 : The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.
 : The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
