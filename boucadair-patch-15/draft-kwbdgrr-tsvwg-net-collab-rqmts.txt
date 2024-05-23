@@ -262,7 +262,7 @@ Table of Contents
 
    Some of the complications that are induced by the phenomena discussed
    above may be eliminated by adequate dimensioning and upgrades.
-   However, such upgrades may not be always (immediately) possible
+   However, such upgrades may not be always (immediately) possible or
    justified.  Complementary mitigations are thus needed to soften these
    complications by introducing some collaboration between endpoints and
    networks to adjust their behaviors.
