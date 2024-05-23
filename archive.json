@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-21T01:08:40.494022+00:00",
+  "timestamp": "2024-05-23T01:08:34.203775+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case. Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.\r\n\r\nComment> The above text is not clear to me. How will the signaling mechanism between a receiving host and its network prevent a misbehaving remote peer from marking every packet of a flow as import ? \r\n\r\nThe signalling requirement to detect and block such a misuse is not discussed in this section.",
       "createdAt": "2024-05-07T11:35:01Z",
-      "updatedAt": "2024-05-16T18:21:07Z",
+      "updatedAt": "2024-05-21T10:52:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -85,6 +85,13 @@
           "body": "> Worse, the text in the I-D is discussing _inter_ flow priority. That is, priority between flows, where every flow says \"I am important\".\r\n\r\nWe need to put in bold that the focus is intra-flow or flows of the same user. I updated the abstract to have the warning early in the document. Otherwise, we will be opening lot of noise.",
           "createdAt": "2024-05-16T18:21:06Z",
           "updatedAt": "2024-05-16T18:21:06Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Worse, the text in the I-D is discussing _inter_ flow priority. That is, priority between flows, where every flow says \"I am important\".\r\n> \r\n> We need to put in bold that the focus is intra-flow or flows of the same user. I updated the abstract to have the warning early in the document. Otherwise, we will be opening lot of noise.\r\n\r\nPrioritizing flows from the same host is also error-prone because the network cannot distinguish between legitimate and malicious flows. For example, a poorly written application might request the highest priority for its flows, which could be unjustified. Additionally, it is challenging to identify whether the traffic belongs to a single user or multiple users, such as in tethering scenarios. Therefore, I propose focusing solely on \"intra-flow\" prioritization. Both WebRTC and QUIC, multiplex multiple streams on the same 5-tuple.\r\n\r\n",
+          "createdAt": "2024-05-21T10:52:34Z",
+          "updatedAt": "2024-05-21T10:52:34Z"
         }
       ]
     },
@@ -229,16 +236,40 @@
       "id": "I_kwDOL0HpzM6IrPoH",
       "title": "Chapter 5 On path metadata requirements",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In chapter 5:\r\n- what is necessary for the client (as a stakeholder) to communicate to the network, server in relation to metadata exchange\r\n- in the above, address the point that an opaque channel without client's acceptance will raise privacy \r\n- privacy considerations for extensible metadata? \r\n\r\nIn chapter 5.1 and 5.2\r\n- merge into one set of requirements that consider rationale, and what is needed  (i.e., why importance, delay tolerance, burst size/end)\r\n- state that the above requirements may apply to multiple streams in a transport flow, or to frames of a media stream within a flow (but not both)\r\n\r\nAlign with any updates in related issue.\r\n",
       "createdAt": "2024-05-13T14:40:59Z",
-      "updatedAt": "2024-05-13T14:40:59Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-21T22:50:45Z",
+      "closedAt": "2024-05-21T22:50:45Z",
       "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOL0HpzM6JvzGI",
+      "title": "API ",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/26",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Along the lines of [SCONE's API](https://datatracker.ietf.org/doc/draft-eddy-sconepro-api/), do we want to say anything about the API needs?\r\n\r\nI noticed their API document conflates a single API with \"receiving data over the QUIC flow\", which of course isn't necessary considering that [ICMP errors are sent to (connected) UDP sockets](https://mailarchive.ietf.org/arch/msg/behave/ZXQ4xLYrqPB3CxLMnRNmzApK0oU/), and those are different flows. So, there could be a single API which does all your QUIC things and, under the covers, does a separate signaling channel with the ISP(s) router(s), exposing the information to the application without the application needing to do heavy lifting. We might call that a 'library' or I suppose in 2024 we would have to call that a 'framework' or 'wrapper' or some-such.",
+      "createdAt": "2024-05-22T16:41:59Z",
+      "updatedAt": "2024-05-22T16:58:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This can be mentioned as part of a new OPS section, e.g., \"Exposure Handling\".\r\n\r\nThe local exposure (OS API) can be mentioned, e.g., next to REQ-SIGNAL-EXPOSURE-FAIRNESS in #25. ",
+          "createdAt": "2024-05-22T16:58:41Z",
+          "updatedAt": "2024-05-22T16:58:41Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -277,24 +308,26 @@
       "id": "PR_kwDOL0HpzM5uu65i",
       "title": "Address some comments discussed during meeting",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-07T09:08:11Z",
-      "updatedAt": "2024-05-20T16:42:26Z",
+      "updatedAt": "2024-05-21T08:24:24Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "tireddy2-patch-1",
       "headRefOid": "f149cb86274ea635849b47d309ec5157d5e479fc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-05-21T08:24:24Z",
+      "mergedAt": "2024-05-21T08:24:24Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "0b9d520884a8edfdce97be1ef9ca2e9ed4ed8639"
+      },
       "comments": [],
       "reviews": [
         {
@@ -341,6 +374,26 @@
           "createdAt": "2024-05-17T17:30:50Z",
           "updatedAt": "2024-05-17T17:30:50Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57Pv5f",
+          "commit": {
+            "abbreviatedOid": "f149cb8"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T07:11:04Z",
+          "updatedAt": "2024-05-21T07:12:46Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "```suggestion\r\nfrom the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. An\r\n```",
+              "createdAt": "2024-05-21T07:11:04Z",
+              "updatedAt": "2024-05-21T07:12:46Z"
+            }
+          ]
         }
       ]
     },
@@ -349,25 +402,35 @@
       "id": "PR_kwDOL0HpzM5u0Okh",
       "title": "add initial set of REQ- requirements",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-07T23:04:34Z",
-      "updatedAt": "2024-05-17T17:29:47Z",
+      "updatedAt": "2024-05-22T09:42:10Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "baseRefOid": "1c7d2d79abd25dd299c55af8cbb1ac38551e675e",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "add_req",
-      "headRefOid": "8120031bd569852f2d4d8600420b39a909475464",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "48411f2dabb8ed980793f916127e53e06befc2d7",
+      "closedAt": "2024-05-22T09:42:10Z",
+      "mergedAt": "2024-05-22T09:42:10Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "cafece032a2e9bb0396a58a186a39f8cc24a156b"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Dan, please rebase to resolve conflicts. It is safe if you can do that check yourself. Thanks.",
+          "createdAt": "2024-05-21T08:40:49Z",
+          "updatedAt": "2024-05-21T08:40:49Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOL0HpzM553yio",
@@ -544,24 +607,26 @@
       "id": "PR_kwDOL0HpzM5vs0fl",
       "title": "Updates to the abstract",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-16T18:03:49Z",
-      "updatedAt": "2024-05-20T20:46:50Z",
+      "updatedAt": "2024-05-21T08:31:49Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "baseRefOid": "0b9d520884a8edfdce97be1ef9ca2e9ed4ed8639",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "boucadair-patch-1",
-      "headRefOid": "66a274e39746065f2909155e815f2c75c4a35620",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ad5883ef9121acf53fb2bfcebc3c563899277458",
+      "closedAt": "2024-05-21T08:31:49Z",
+      "mergedAt": "2024-05-21T08:31:49Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "5800f0fa4d2f4b907f4d179ae039f401729d4528"
+      },
       "comments": [
         {
           "author": "sridharangirish91",
@@ -576,6 +641,13 @@
           "body": "> In the abstract, can we include the fact that this signaling (client to network/ISP) could also enable the honoring of explicit signals from servers behind the proxy without ISP--Server contract? It'll be appealing to both small scale companies (and ones who operate behind data centers like Citrix) as well as net neutrality cause :)\r\n\r\nI suggest something like this to abstract,\r\n\r\n  \"The client signaling the network ensures the client is aware of the network's treatment of incoming packets.\"\r\n\r\n(I fear mentioning network neutrality in the document itself.)",
           "createdAt": "2024-05-20T20:46:49Z",
           "updatedAt": "2024-05-20T20:46:49Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree with Dan. Updated the PR [df33111](https://github.com/SpencerDawkins/net-collab-rqmts/pull/12/commits/df33111fda853f00cf8412f26ce0a1e980685186)",
+          "createdAt": "2024-05-21T07:19:57Z",
+          "updatedAt": "2024-05-21T07:19:57Z"
         }
       ],
       "reviews": [
@@ -591,6 +663,19 @@
           "createdAt": "2024-05-16T18:14:50Z",
           "updatedAt": "2024-05-16T18:14:50Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57P5WB",
+          "commit": {
+            "abbreviatedOid": "df33111"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-21T07:30:04Z",
+          "updatedAt": "2024-05-21T07:30:04Z",
+          "comments": []
         }
       ]
     },
@@ -599,50 +684,68 @@
       "id": "PR_kwDOL0HpzM5vtChP",
       "title": "Definitions Update",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-16T18:36:03Z",
-      "updatedAt": "2024-05-16T18:41:06Z",
+      "updatedAt": "2024-05-21T11:18:54Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "baseRefOid": "5800f0fa4d2f4b907f4d179ae039f401729d4528",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "boucadair-patch-2",
-      "headRefOid": "a3984958c966ed5f0cc896b3c067cfebcd89f2b4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4f579700ad90cf9aed8237776499941cda00dad0",
+      "closedAt": "2024-05-21T11:18:54Z",
+      "mergedAt": "2024-05-21T11:18:54Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "92145b6d7fd666d6aca5380a914cd2b0ddcd3085"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57R1VD",
+          "commit": {
+            "abbreviatedOid": "4f57970"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-21T10:46:16Z",
+          "updatedAt": "2024-05-21T10:46:16Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 14,
       "id": "PR_kwDOL0HpzM5vtJT7",
       "title": "updates to the ops cons",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-16T18:54:10Z",
-      "updatedAt": "2024-05-16T19:02:29Z",
+      "updatedAt": "2024-05-21T08:35:40Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "baseRefOid": "5800f0fa4d2f4b907f4d179ae039f401729d4528",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "boucadair-patch-3",
-      "headRefOid": "5793d7cc13c1d727d287fbcd9d43e7e0e270b4fe",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3dbca17bb3f4d17f7883dc4a8e685dd08f05b72d",
+      "closedAt": "2024-05-21T08:35:40Z",
+      "mergedAt": "2024-05-21T08:35:40Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "553df63f9dc176c911b0ea4e486c113285572391"
+      },
       "comments": [],
       "reviews": [
         {
@@ -665,24 +768,26 @@
       "id": "PR_kwDOL0HpzM5v6EdU",
       "title": "Update draft-kwbdgrr-tsvwg-net-collab-rqmts.md",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Updates in Introduction section to address Issue: \"Intro updates on justification, diagram, etc\" #10",
       "createdAt": "2024-05-20T03:52:34Z",
-      "updatedAt": "2024-05-21T00:54:28Z",
+      "updatedAt": "2024-05-22T17:31:33Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "baseRefOid": "cafece032a2e9bb0396a58a186a39f8cc24a156b",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "jk-intro-updates",
-      "headRefOid": "4546ccc5e2e59e74ebfe61f5b9ec9cf2c5fa3cb3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e5bd475fad64c181cddc8469d75b62fcd7dad6cd",
+      "closedAt": "2024-05-22T09:48:50Z",
+      "mergedAt": "2024-05-22T09:48:50Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508"
+      },
       "comments": [],
       "reviews": [
         {
@@ -744,8 +849,705 @@
               "updatedAt": "2024-05-21T00:54:29Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57TB9U",
+          "commit": {
+            "abbreviatedOid": "fe5527a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T13:06:08Z",
+          "updatedAt": "2024-05-21T13:30:31Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "seems \"link capacity\" is not consistent with \"millisecond\" mention. ",
+              "createdAt": "2024-05-21T13:06:08Z",
+              "updatedAt": "2024-05-21T13:30:31Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "can we have a reference to cite here?",
+              "createdAt": "2024-05-21T13:06:44Z",
+              "updatedAt": "2024-05-21T13:30:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57WOWi",
+          "commit": {
+            "abbreviatedOid": "fe5527a"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T19:00:20Z",
+          "updatedAt": "2024-05-21T19:00:20Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Since the scheduling interval for 5G mid band is 0.5ms, there can be variations in that interval.\r\nWith mmWave, the scheduling interval is 0.0125 ms and much larger variations in capacity over that period of time.\r\nBoth number of users and change the wireless medium result in large link variations in sub-ms timeframes.\r\nThe argument was intended to say that rate estimation in CCA take multiple RTTs and that is several orders of magnitude slower than the change of radio link capacity.\r\n\r\nIf the above reasoning is ok, I'll re-write that sentence to be more clear :\r\n\"Wireless link capacity can vary in sub-millisecond timeframes while rate estimation at the server (sender) takes multiple RTTs, or several tens of milliseconds.\"",
+              "createdAt": "2024-05-21T19:00:20Z",
+              "updatedAt": "2024-05-21T19:00:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57WOm5",
+          "commit": {
+            "abbreviatedOid": "fe5527a"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T19:00:57Z",
+          "updatedAt": "2024-05-21T19:00:57Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Probably many references, but two that are good:\r\n1. 5G: Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM https://dl.acm.org/doi/10.1145/3419394.3423629\r\n2. LTE: Stochastic Forecasts Achieve High Throughput and Low Delay over Cellular Links, Winstein et al., USENIX NSDI, https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final113.pdf\r\n\r\nIn the draft, we could add (1) which is more recent.\r\n",
+              "createdAt": "2024-05-21T19:00:57Z",
+              "updatedAt": "2024-05-21T19:00:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57WRnc",
+          "commit": {
+            "abbreviatedOid": "fe5527a"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-21T19:08:22Z",
+          "updatedAt": "2024-05-21T19:08:22Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Just to clarify the scheduling interval (0,5 ms, or 0.0125 ms) is the minimum period. The scheduler may allocate 10 or more slots to a user (less if there are more users). So the variation in capacity available for a user can be seen at 0.0125*10 onwards ~ 0.1ms for mmWave (and around 2-3 ms in congested 5G mid-band)\r\n\r\nMaybe better wording would be:\r\n\"Wireless link capacity can vary in the order of a millisecond or less while CCA estimates of rate at the server (sender) takes multiple RTTs, or several tens of milliseconds\". ",
+              "createdAt": "2024-05-21T19:08:22Z",
+              "updatedAt": "2024-05-21T19:08:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57bEsA",
+          "commit": {
+            "abbreviatedOid": "e5bd475"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T09:48:44Z",
+          "updatedAt": "2024-05-22T09:48:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57dVzP",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T13:53:28Z",
+          "updatedAt": "2024-05-22T13:53:28Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "I was zooming out a bit more to ask if we should include bulk transfer traffic as well to the mix (like backup/restore, downloads/uploads, print jobs etc) so that the document is more generic and not just confined to media traffic. That way, we got more requirements and use-cases as well to bolster the claim that explicit signaling is required to make things more efficient. There are cases where bulk traffic is also in the same application as interactive traffic (like saving a PPT or printing word file while continuing to type within a remote session (or cloud)). Will that be useful to include these as well in the draft?",
+              "createdAt": "2024-05-22T13:53:28Z",
+              "updatedAt": "2024-05-22T13:54:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fIdm",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T16:20:04Z",
+          "updatedAt": "2024-05-22T16:20:04Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "Agreed would be useful to add.  To keep applicable to the web browser crowd, let's include 'downloading a file' as an example of a lower-priority thing.  With QUIC, that could occur with the same web server as other browsing but is obviously less important than the interactive stuff the user is doing with the same web server.",
+              "createdAt": "2024-05-22T16:20:04Z",
+              "updatedAt": "2024-05-22T16:20:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57flM9",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T17:08:43Z",
+          "updatedAt": "2024-05-22T17:08:44Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "Agree, the use case would be good to document.\r\nAnd the abstraction in figure with 2 flows (x1/x2)  in a connection session illustrate what the router sees.\r\nPerhaps we should also think if additional requirements for metadata are needed. (my earlier response assumes that the h2n network requirements capture this.)",
+              "createdAt": "2024-05-22T17:08:44Z",
+              "updatedAt": "2024-05-22T17:08:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fnrS",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T17:14:27Z",
+          "updatedAt": "2024-05-22T17:14:27Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "John, are we trying to handle two flows owned by the same application?  Like, I am visiting www.example.com and click on a file to download from files.example.com (a different server)??  \r\n\r\nPerhaps we can allow inter-flow priority if a flow is declaring itself as *lower* priority, but not *higher* priority??\r\n\r\nI worry that we don't now, or won't in the future, have such a binary \"lower priority\", though...  ",
+              "createdAt": "2024-05-22T17:14:27Z",
+              "updatedAt": "2024-05-22T17:14:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fvPA",
+          "commit": {
+            "abbreviatedOid": "a02ff9c"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T17:31:33Z",
+          "updatedAt": "2024-05-22T17:31:33Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "In the figure, it is 2 flows owned by different servers (srv-1, srv-2) as in the \"example.com\" example with file download from another server.  The figure was trying to illustrate the GBR/non-GBR (best effort) sessions in 5G, and be general enough to cover the different cases. \r\n\r\nIn a way, inter-flow priority of sorts is there in the network, but not signaled.\r\nFor example, the problem in Sconepro is that one flow (YouTube) out of many of a non-GBR/ BE session(i.e., has the same signaled connection info between UE - 5G network) is a heavy consumer of bandwidth while other flows in the conn session are not. The flows are all to different servers. The traffic shaper in 5G (UPF) only reduces rate for the high bw user (Youtube) and leaves the others unchanged. My understanding is that Sconepro wants to provide a direct signal as to how the network is constraining that high bw user, i.e., max flow bw. \r\n",
+              "createdAt": "2024-05-22T17:31:33Z",
+              "updatedAt": "2024-05-22T17:31:33Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOL0HpzM5wCz2-",
+      "title": "List all co-authors as codeowners",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/16",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-21T07:36:38Z",
+      "updatedAt": "2024-05-21T08:23:56Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8bb551ca2194b08f16965b01555fc4a53ad7262a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-4",
+      "headRefOid": "1904de5cb958700392e16dc3adfa467ff2bf47e2",
+      "closedAt": "2024-05-21T08:23:55Z",
+      "mergedAt": "2024-05-21T08:23:55Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "f99887405c08a60e36ee5ff19900c414db44ea19"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57Qbdq",
+          "commit": {
+            "abbreviatedOid": "1904de5"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-21T08:23:42Z",
+          "updatedAt": "2024-05-21T08:23:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOL0HpzM5wHl6W",
+      "title": "Update draft-kwbdgrr-tsvwg-net-collab-rqmts.md",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/17",
+      "state": "MERGED",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Revised  chapter 5.1 to group relative priority and tolerance to delay requirements for media frames and streams.",
+      "createdAt": "2024-05-21T19:21:01Z",
+      "updatedAt": "2024-05-21T22:50:44Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "92145b6d7fd666d6aca5380a914cd2b0ddcd3085",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "11-chapter-5-on-path-metadata-requirements",
+      "headRefOid": "b2612e9cb5d364f265a0da776d9d1c97b9855d90",
+      "closedAt": "2024-05-21T22:50:44Z",
+      "mergedAt": "2024-05-21T22:50:44Z",
+      "mergedBy": "John-Kaippallimalil",
+      "mergeCommit": {
+        "oid": "1c7d2d79abd25dd299c55af8cbb1ac38551e675e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57WqsA",
+          "commit": {
+            "abbreviatedOid": "8d92d08"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-21T20:11:07Z",
+          "updatedAt": "2024-05-21T20:11:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOL0HpzM5wNwoG",
+      "title": "some tweaks to the abstract",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/18",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T14:46:04Z",
+      "updatedAt": "2024-05-22T17:37:17Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "abstract-tweaks",
+      "headRefOid": "d3482617bc270c49fc97ac8584d5b4c679a704f9",
+      "closedAt": "2024-05-22T17:37:17Z",
+      "mergedAt": "2024-05-22T17:37:17Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "28d3fd3ee556a8987f8954a85835a7d41d358248"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57fMVM",
+          "commit": {
+            "abbreviatedOid": "d348261"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:26:43Z",
+          "updatedAt": "2024-05-22T16:26:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOL0HpzM5wN-xW",
+      "title": "avoid connection/connection session",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/19",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "as this can be confused with the actual application session/connection",
+      "createdAt": "2024-05-22T15:12:23Z",
+      "updatedAt": "2024-05-22T17:40:21Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "ba0f23e3234f43101a4f0b673bf0e89780b5c10a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-5",
+      "headRefOid": "b38709dfd1d5fcb8877ae74bb8e7e37fc65de5dc",
+      "closedAt": "2024-05-22T17:40:21Z",
+      "mergedAt": "2024-05-22T17:40:21Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "22f9d43f7cfc0fba10901047240f0a3bf6e6ff7a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57egWm",
+          "commit": {
+            "abbreviatedOid": "56e88dc"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T15:14:56Z",
+          "updatedAt": "2024-05-22T15:14:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOL0HpzM5wOAEb",
+      "title": "remove the boilerplate",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/20",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T15:15:08Z",
+      "updatedAt": "2024-05-22T17:38:11Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-6",
+      "headRefOid": "d7ed5a5d471eb29bddf7604a89c31ac3413615d0",
+      "closedAt": "2024-05-22T17:38:11Z",
+      "mergedAt": "2024-05-22T17:38:11Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "47e5f03973b1c5402e69465d5c2023fb8ffcfa3a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57fMq-",
+          "commit": {
+            "abbreviatedOid": "d7ed5a5"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:27:18Z",
+          "updatedAt": "2024-05-22T16:27:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOL0HpzM5wOBHR",
+      "title": "missing ref in the definitions section",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/21",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T15:17:17Z",
+      "updatedAt": "2024-05-22T17:38:29Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-7",
+      "headRefOid": "f5e5a711b1121f6335d4d42cad8e0fe16f328348",
+      "closedAt": "2024-05-22T17:38:28Z",
+      "mergedAt": "2024-05-22T17:38:28Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "ba0f23e3234f43101a4f0b673bf0e89780b5c10a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57ekCO",
+          "commit": {
+            "abbreviatedOid": "f5e5a71"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T15:21:02Z",
+          "updatedAt": "2024-05-22T15:21:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fM3Y",
+          "commit": {
+            "abbreviatedOid": "f5e5a71"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:27:34Z",
+          "updatedAt": "2024-05-22T16:27:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOL0HpzM5wODbX",
+      "title": "minor edits to the media streaming UC",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/22",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T15:22:24Z",
+      "updatedAt": "2024-05-22T17:40:43Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-8",
+      "headRefOid": "4022626d8793d121c955311d6669ccb5e73846ee",
+      "closedAt": "2024-05-22T17:40:43Z",
+      "mergedAt": "2024-05-22T17:40:43Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "0fbc83cead0f2daf9e9701e9f585bc208ca6ad3b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57ely8",
+          "commit": {
+            "abbreviatedOid": "4022626"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T15:23:59Z",
+          "updatedAt": "2024-05-22T15:23:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fNJ3",
+          "commit": {
+            "abbreviatedOid": "4022626"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:28:08Z",
+          "updatedAt": "2024-05-22T16:28:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOL0HpzM5wOE5-",
+      "title": "interactive media",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/23",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T15:25:38Z",
+      "updatedAt": "2024-05-22T17:41:01Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-9",
+      "headRefOid": "f0a898839d320031f1d54f90b5b94756218043cb",
+      "closedAt": "2024-05-22T17:41:00Z",
+      "mergedAt": "2024-05-22T17:41:00Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "a1031ee88f0a25343edaa310e1666e006d08bcce"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57fNXo",
+          "commit": {
+            "abbreviatedOid": "f0a8988"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:28:35Z",
+          "updatedAt": "2024-05-22T16:28:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fPtV",
+          "commit": {
+            "abbreviatedOid": "f0a8988"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:33:19Z",
+          "updatedAt": "2024-05-22T16:33:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOL0HpzM5wOhV3",
+      "title": "servers behind proxy",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/24",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T16:25:16Z",
+      "updatedAt": "2024-05-22T17:41:18Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-10",
+      "headRefOid": "338ade9ca0d4d258489643dacf261b34e9311d6b",
+      "closedAt": "2024-05-22T17:41:18Z",
+      "mergedAt": "2024-05-22T17:41:18Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "bad0487be82ec142992368241a4cb65db210fa77"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57fNm4",
+          "commit": {
+            "abbreviatedOid": "338ade9"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:28:56Z",
+          "updatedAt": "2024-05-22T16:28:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57fPX1",
+          "commit": {
+            "abbreviatedOid": "338ade9"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:32:38Z",
+          "updatedAt": "2024-05-22T16:32:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOL0HpzM5wOnUB",
+      "title": "Ops requirements",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/25",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T16:35:03Z",
+      "updatedAt": "2024-05-22T17:41:40Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-11",
+      "headRefOid": "5a5a2c0791014f60390f2ab2e42743811166f319",
+      "closedAt": "2024-05-22T17:41:40Z",
+      "mergedAt": "2024-05-22T17:41:39Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "2a87b6ca95dc914fe388753b5dad1cc2c7d2de38"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM57fRZg",
+          "commit": {
+            "abbreviatedOid": "5a5a2c0"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-22T16:36:53Z",
+          "updatedAt": "2024-05-22T16:36:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOL0HpzM5wOz7J",
+      "title": "remove inter-flow language",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/27",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-22T16:57:11Z",
+      "updatedAt": "2024-05-22T16:57:12Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "0558cb567c26a3a3bd8c6386e2e60bb183be3508",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sri-interflow",
+      "headRefOid": "a3059997da81e1c41180b13bb93e1c9a68de9fb9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
