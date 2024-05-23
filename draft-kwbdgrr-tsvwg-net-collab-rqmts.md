@@ -27,7 +27,6 @@ venue:
   latest:
 
 author:
-author:
  -
     ins: J. Kaippallimalil
     name: John Kaippallimalil
@@ -118,7 +117,7 @@ An explicit signal to the host can help to manage the use of available bandwidth
 
 Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
-With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{!RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
+With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
 
 Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.
@@ -306,7 +305,7 @@ Requirement:  REQ-SINGLE-CHANNEL is preferred.
 
 ## Metadata Scope {#metadata-scope}
 
-An operational challenge for sharing resource-quota like metadata (e.g., maximum bitrate) is that the network is generally not entitled to allocate quota per-application, per-flow, per-stream, etc. that delivered as part of an Internet connectivity service.  However, the network has a visibility about the overall network attachment (e.g. inbound/outbound bandwidth discussed in {{!I-D.ietf-opsawg-teas-attachment-circuit}}).
+An operational challenge for sharing resource-quota like metadata (e.g., maximum bitrate) is that the network is generally not entitled to allocate quota per-application, per-flow, per-stream, etc. that delivered as part of an Internet connectivity service.  However, the network has a visibility about the overall network attachment (e.g. inbound/outbound bandwidth discussed in {{?I-D.ietf-opsawg-teas-attachment-circuit}}).
 
 As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.
 
@@ -472,7 +471,7 @@ There is no requirement associated with this use-case.
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
 
 Interactive Audio/Video has long been using {{?RFC3550}} which runs over UDP.  As described in Section 2.3.7.2 of {{?RFC7478}}, there is value in differentiating between voice, video and data.
-Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{!I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
+Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{?I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
 Other applications such as gaming and remote desktop also benefit from differentiating their packets to the network.
 
 Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, CDN).
