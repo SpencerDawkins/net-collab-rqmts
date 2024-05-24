@@ -120,9 +120,7 @@ Table of Contents
    6.  IANA Considerations
    7.  Security Considerations
    Acknowledgments
-   References
-     Normative References
-     Informative References
+   Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -808,9 +806,7 @@ Acknowledgments
       identify the issues.  Thanks to Hang Shi for the review and
       comments on host-to-network signaling.
 
-References
-
-Normative References
+Informative References
 
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
@@ -826,13 +822,6 @@ Normative References
               Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-
               12, 14 May 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-opsawg-teas-attachment-circuit-12>.
-
-   [RFC9335]  Uberti, J., Jennings, C., and S. Murillo, "Completely
-              Encrypting RTP Header Extensions and Contributing
-              Sources", RFC 9335, DOI 10.17487/RFC9335, January 2023,
-              <https://www.rfc-editor.org/rfc/rfc9335>.
-
-Informative References
 
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
@@ -888,6 +877,11 @@ Informative References
               Datagram Extension to QUIC", RFC 9221,
               DOI 10.17487/RFC9221, March 2022,
               <https://www.rfc-editor.org/rfc/rfc9221>.
+
+   [RFC9335]  Uberti, J., Jennings, C., and S. Murillo, "Completely
+              Encrypting RTP Header Extensions and Contributing
+              Sources", RFC 9335, DOI 10.17487/RFC9335, January 2023,
+              <https://www.rfc-editor.org/rfc/rfc9335>.
 
    [RFC9419]  Arkko, J., Hardie, T., Pauly, T., and M. Kühlewind,
               "Considerations on Application - Network Collaboration
