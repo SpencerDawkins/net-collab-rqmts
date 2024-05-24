@@ -33,27 +33,27 @@ author:
     organization: Futurewei
     email: john.kaippallimalil@futurewei.com
  -
-    ins: S. Gundavelli
-    name: Sri Gundavelli
-    organization: Cisco
-    email: sgundave@cisco.com
- -
-    ins: S. Dawkins
-    name: Spencer Dawkins
-    organization: Tencent America LLC
-    email: spencerdawkins.ietf@gmail.com
- -
     ins: D. Wing
     name: Dan Wing
     organization: Cloud Software Group Holdings, Inc.
     abbrev: Cloud Software Group
     email: danwing@gmail.com
  -
+    ins: S. Gundavelli
+    name: Sri Gundavelli
+    organization: Cisco
+    email: sgundave@cisco.com
+ -
     ins: S. Rajagopalan
     name: Sridharan Rajagopalan
     organization: Cloud Software Group Holdings, Inc.
     abbrev: Cloud Software Group
     email: Sridharan.girish@gmail.com
+ -
+    ins: S. Dawkins
+    name: Spencer Dawkins
+    organization: Tencent America LLC
+    email: spencerdawkins.ietf@gmail.com
  -
     fullname: Mohamed Boucadair
     organization: Orange
