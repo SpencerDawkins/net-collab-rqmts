@@ -510,7 +510,7 @@ REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
 
 REQ-FRAME-END: Indicate packet containing end of media frame.
 
-### Identification of traffic types {#TrafficType}
+### Identification of Traffic Type without Disclosure the Application {#TrafficType}
 
 Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant {{?RFC9221}}, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.
 
