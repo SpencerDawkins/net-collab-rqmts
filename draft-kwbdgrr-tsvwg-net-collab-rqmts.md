@@ -371,7 +371,7 @@ Applications that have access to a resource-quota information may adopt an aggre
 This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
 Requirement:
-  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered.
+  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
 
 ## Privacy Considerations {#privacy}
 
