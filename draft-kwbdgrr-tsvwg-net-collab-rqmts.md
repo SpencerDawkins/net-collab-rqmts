@@ -252,7 +252,7 @@ Examples: live broadcast, on-demand video streaming
 
 Use cases:
 
-  1. In loss-prone networks or during reactive policy events, retransmissions cause immense delay. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
+  1. In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
 
   2. Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
 
