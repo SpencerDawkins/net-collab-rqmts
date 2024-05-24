@@ -97,7 +97,8 @@ Table of Contents
      2.1.  Media Streaming
      2.2.  Interactive Media
      2.3.  User Preferences
-     2.4.  Honoring of Metadata for Servers Behind a Gateway
+     2.4.  Mixed Traffic
+     2.5.  Honoring of Metadata for Servers Behind a Gateway
    3.  Operational Considerations
      3.1.  Policy Enforcement
      3.2.  Redundant Functions and Classification Complications
@@ -114,9 +115,10 @@ Table of Contents
        4.1.3.  Assisted Offload
      4.2.  Server-Network Metadata
        4.2.1.  Identification of Media Frames and Streams
-       4.2.2.  Relative Priority
-       4.2.3.  Tolerance to Delay
-       4.2.4.  Burst Indication
+       4.2.2.  Identification of traffic types
+       4.2.3.  Relative Priority
+       4.2.4.  Tolerance to Delay
+       4.2.5.  Burst Indication
    5.  Non-Requirements
    6.  IANA Considerations
    7.  Security Considerations
@@ -250,8 +252,8 @@ Table of Contents
    applied to flows in that network attachment.  "Client-1" has "flow-
    x1" and "flow-x2" over its network attachment while "Client-2" has
    "flow-x3".  The requirements in this document focuses on on-path
-   media collaboration signals that apply to data units such as media
-   frames within flows like "flow-x1/x2/x3" but not between them.
+   collaboration signals that apply to data units such as media frames
+   within flows like "flow-x1/x2/x3" but not between them.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -344,6 +346,24 @@ Table of Contents
 
    Examples: live broadcast, on-demand video streaming
 
+   Use cases:
+
+   1.  In loss-prone networks or during reactive policy events,
+       retransmissions cause immense delay.  All packets being treated
+       the same can have challenges in efficiently handling/forwarding
+       data.  Today, there is no way to identify packets which are less
+       important and/or loss-tolerant to prioritize packets in
+       challenging networks and/or during reactive events.
+
+   2.  Some media frames may be able to tolerate more delay over the
+       wire than others (e.g., live media frames require very low
+       latency while a background image for augmented reality may be
+       delivered with more delay tolerance).  Even when the media
+       payload is not encrypted, the network has no means to distinguish
+       these different requirements.
+
+   Requirements:
+
    REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames,
    which need to be distinguished so that full frames can be indicated
    to the network.
@@ -355,15 +375,19 @@ Table of Contents
 
    Interactive media includes content that a user can actively engage
    with and results in input and response actions that can be highly
-   delay-sensitive.  It also includes mixed traffic where both bulk and
-   interactive data are exchanged within the same flow.  They may
-   include digital models of the real world, multimedia content,
-   virtualized desktop/apps, and interactive engagement.
+   delay-sensitive.
 
    Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
-   eXtended Reality (XR), Virtual Apps and Desktops.
+   eXtended Reality (XR).
 
-   REQ-INTERACTIVE: The receiver indicates that a flow is interactive
+   Use cases:
+
+   1.  A mobile/roaming user prioritizes audio over video during a VoIP
+       call to have a seamless meeting experience.
+
+   Requirements:
+
+   REQ-PACKET-NATURE: The receiver indicates that a flow is interactive
    and requests that the network honors the incoming flow's per-packet
    signals, which prevents denial of service of mis-marked incoming
    flows.
@@ -380,11 +404,59 @@ Table of Contents
    Determination of such preferences is outside of the scope of this
    document.
 
-   Requirements: REQ-CLIENT-DECIDES: The receiving client determines
-   importance of packets it receives, as the client may have changing
-   needs over time.
+   Requirements:
 
-2.4.  Honoring of Metadata for Servers Behind a Gateway
+   REQ-CLIENT-DECIDES: The receiving client determines importance of
+   packets it receives, as the client may have changing needs over time.
+
+   Use cases:
+
+   1.  Dynamic changes to priority based on user activity is not
+       possible today.  For example, audio packets having the same
+       priority when a user mutes the audio locally, or change in
+       priority during times of emergency where video streaming
+       applications share the same priority as SOS signals.
+
+   2.  A user prioritizing video over audio while playing an interactive
+       game.
+
+   3.  User's foreground application should receive priority over
+       background tasks.  For eg., a user is typing in a document while
+       playing a media in the background within the same session.
+
+2.4.  Mixed Traffic
+
+   Mixed traffic can contain multiple types of data flowing through the
+   same 5-tuple connection.  They may include digital models of the real
+   world, multimedia content, virtualized desktop/apps, and interactive
+   engagement.
+
+   In cases where the wireless network has to drop or delay processing,
+   all packets of the media frame or stream are treated in the same
+   manner.
+
+   Requirements:
+
+   REQ-PACKET-RELIABILITY: Indicate if a packet is treated as reliable
+   or unreliable by the application.
+
+   REQ-PACKET-NATURE: Indicate if a packet belongs to bulk traffic or
+   interactive traffic.
+
+   Examples: Virtual Apps and Desktops.
+
+   Use cases: 1.  Document being printed/saved while being edited.  The
+   interactive traffic has higher priority over bulk traffic).
+
+   1.  File download while intearacting with the webpage.  With QUIC,
+       this could occur with the same webserver.  Interactive activity
+       performed with the webpage higher priority over file download.
+
+   2.  In graphics remoting, Critical Glyphs (Reliable) has more
+       priority over Smoothing Glyphs (unreliable) during reactive
+       events.
+
+2.5.  Honoring of Metadata for Servers Behind a Gateway
 
    In enterprise networks and remote desktop use case, a server can host
    multiple connections with varying type of traffic.  These servers are
@@ -392,7 +464,7 @@ Table of Contents
    and the signaling (like DSCP bits) from these servers are often
    ignored by the access/transit networks.
 
-   Requirements: REQ-CLIENT-DECIDES as defined previously.
+   Requirement: REQ-CLIENT-DECIDES as defined previously.
 
 3.  Operational Considerations
 
@@ -707,7 +779,20 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-4.2.2.  Relative Priority
+4.2.2.  Identification of traffic types
+
+   Different nature/types of traffic can be part of the same 5-tuple
+   flow.  This could be reliable/loss-tolerant [RFC9221], bulk/
+   interactive traffic.  The type of traffic can be used to prioritize/
+   buffer packets as needed and deprioritize/discard appropriate packets
+   during reactive events, thereby optimizing performance.  The
+   application may provide information to identify the type of traffic
+   in per-packet metadata.
+
+   Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined
+   previously.
+
+4.2.3.  Relative Priority
 
    Relative importance of a media frame provides the priority level of
    one media frame over another media frame within a stream.  The
@@ -724,7 +809,7 @@ Table of Contents
 
    There is no requirement associated with this use-case.
 
-4.2.3.  Tolerance to Delay
+4.2.4.  Tolerance to Delay
 
    Some media frames may be able to tolerate more delay over the wire
    than others (e.g., live media frames require very low latency while a
@@ -744,7 +829,7 @@ Table of Contents
    REQ-DELAY-TOLERANCE: ??  How is this different from three sections
    earlier??
 
-4.2.4.  Burst Indication
+4.2.5.  Burst Indication
 
    Media flows can have large and unexpected variations in packet bursts
    due to dynamic changes in content, server estimation of network
