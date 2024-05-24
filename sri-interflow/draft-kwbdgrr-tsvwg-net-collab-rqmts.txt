@@ -421,8 +421,8 @@ Table of Contents
        game.
 
    3.  User's foreground application should receive priority over
-       background tasks.  For eg., a user is typing in a document while
-       playing a media in the background within the same session.
+       background tasks.  For example, a user is typing in a document
+       while playing a media in the background within the same session.
 
 2.4.  Mixed Traffic
 
