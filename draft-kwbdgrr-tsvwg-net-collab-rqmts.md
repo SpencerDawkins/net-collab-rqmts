@@ -396,66 +396,6 @@ For the requirements that follow, the assumption is that the client agrees to th
 REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
 
 
-## Server-Network Metadata {#server-network}
-
-### Identification of Media Frames and Streams {#mdu-stream-id}
-
-Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.
-
-Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
-The application can provide information to detect the start, end and set of packets that belong to a media frame.
-Alternatively, the application may provide information to identify one stream of the flow from another.
-The application provides information to identify either media frames or streams in a flow but not both.
-
-In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
-
-Requirements:
-
-REQ-FRAME-START: Indicate packet containing start of media frame.
-
-REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
-
-REQ-FRAME-END: Indicate packet containing end of media frame.
-
-### Relative Priority {#relative-priority}
-
-Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
-The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
-Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.
-
-Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
-As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
-
-There is no requirement associated with this use-case.
-
-### Tolerance to Delay {#delay}
-
-Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
-Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
-ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
-Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
-
-If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
-
-REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??
-
-
-### Burst Indication {#burst}
-
-Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
-Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
-The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
-Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.
-
-The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
-The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
-
-REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
-ISP, and ISP agrees it can handle that burst size.  (but what does ISP
-router do with the burst? Needs to be described above!)
-
-
 ## Host-Network Metadata {#host-network}
 
 ### Priority between Flows (Inter-flow) {#interflow-priority}
@@ -501,6 +441,64 @@ REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
    Network-to-host signals are useful to put in place adequate traffic
    distribution policies on the host (e.g., prefer the use of alternate paths,
    offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+
+## Server-Network Metadata {#server-network}
+
+### Identification of Media Frames and Streams {#mdu-stream-id}
+
+Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
+Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.
+
+Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
+The application can provide information to detect the start, end and set of packets that belong to a media frame.
+Alternatively, the application may provide information to identify one stream of the flow from another.
+The application provides information to identify either media frames or streams in a flow but not both.
+
+In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
+
+Requirements:
+
+REQ-FRAME-START: Indicate packet containing start of media frame.
+
+REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
+
+REQ-FRAME-END: Indicate packet containing end of media frame.
+
+### Relative Priority {#relative-priority}
+
+Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
+The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
+Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.
+
+Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
+As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
+
+There is no requirement associated with this use-case.
+
+### Tolerance to Delay {#delay}
+
+Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
+ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
+Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
+
+If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
+
+REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??
+
+### Burst Indication {#burst}
+
+Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
+Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
+The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
+Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.
+
+The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
+The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
+
+REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+ISP, and ISP agrees it can handle that burst size.  (but what does ISP
+router do with the burst? Needs to be described above!)
 
 # Non-Requirements {#non-req}
 
