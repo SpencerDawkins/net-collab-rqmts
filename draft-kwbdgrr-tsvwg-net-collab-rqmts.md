@@ -188,7 +188,7 @@ Some of the complications that are induced by the phenomena discussed above may 
 
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
 
-## Definitions
+# Definitions
 
 The document makes use of the following terms:
 
