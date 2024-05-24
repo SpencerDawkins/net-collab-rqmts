@@ -92,37 +92,37 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Definitions
-   2.  Use Cases
-     2.1.  Media Streaming
-     2.2.  Interactive Media
-     2.3.  User Preferences
-     2.4.  Mixed Traffic
-     2.5.  Honoring of Metadata for Servers Behind a Gateway
-   3.  Operational Considerations
-     3.1.  Policy Enforcement
-     3.2.  Redundant Functions and Classification Complications
-     3.3.  Metadata Scope
-     3.4.  Application Interference
-     3.5.  Privacy Considerations
-     3.6.  Scalability
-     3.7.  Session Continuity
-     3.8.  Abuse and Constraints
-   4.  On-path Metadata Requirements
-     4.1.  Host-Network Metadata
-       4.1.1.  Priority between Flows (Inter-flow)
-       4.1.2.  Priority within a Flow (Intra-Flow)
-       4.1.3.  Assisted Offload
-     4.2.  Server-Network Metadata
-       4.2.1.  Identification of Media Frames and Streams
-       4.2.2.  Identification of Traffic Type without Disclosure the
+   2.  Definitions
+   3.  Use Cases
+     3.1.  Media Streaming
+     3.2.  Interactive Media
+     3.3.  User Preferences
+     3.4.  Mixed Traffic
+     3.5.  Honoring of Metadata for Servers Behind a Gateway
+   4.  Operational Considerations
+     4.1.  Policy Enforcement
+     4.2.  Redundant Functions and Classification Complications
+     4.3.  Metadata Scope
+     4.4.  Application Interference
+     4.5.  Privacy Considerations
+     4.6.  Scalability
+     4.7.  Session Continuity
+     4.8.  Abuse and Constraints
+   5.  On-path Metadata Requirements
+     5.1.  Host-Network Metadata
+       5.1.1.  Priority between Flows (Inter-flow)
+       5.1.2.  Priority within a Flow (Intra-Flow)
+       5.1.3.  Assisted Offload
+     5.2.  Server-Network Metadata
+       5.2.1.  Identification of Media Frames and Streams
+       5.2.2.  Identification of Traffic Type without Disclosure the
                Application
-       4.2.3.  Relative Priority
-       4.2.4.  Tolerance to Delay
-       4.2.5.  Burst Indication
-   5.  Non-Requirements
-   6.  IANA Considerations
-   7.  Security Considerations
+       5.2.3.  Relative Priority
+       5.2.4.  Tolerance to Delay
+       5.2.5.  Burst Indication
+   6.  Non-Requirements
+   7.  IANA Considerations
+   8.  Security Considerations
    Acknowledgments
    Informative References
    Authors' Addresses
@@ -221,9 +221,9 @@ Table of Contents
    scope of this document.  Transport flows over a network attachment
    may consist of multiple streams such as video or audio.  Figure 2
    shows a high level view of network attachments, flows, and QoS/policy
-   discussed in Section 4.
+   discussed in Section 5.
 
-   The requirements in Section 4 apply to data units like frames within
+   The requirements in Section 5 apply to data units like frames within
    a flow, but not between flows.  Specifically, this document does not
    discuss flows of distinct hosts/users.
 
@@ -259,7 +259,7 @@ Table of Contents
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
    that demand low latency and high throughput can lead to suboptimal
-   user experience.  Section 2 outlines use cases to illustrate the
+   user experience.  Section 3 outlines use cases to illustrate the
    issues and the need for additional information per flow to allow the
    network to optimize its handling.
 
@@ -270,11 +270,11 @@ Table of Contents
    complications by introducing some collaboration between endpoints and
    networks to adjust their behaviors.
 
-   Section 3 provides operational constraints in the network and
-   Section 4 describes the requirements for on-path media collaboration
+   Section 4 provides operational constraints in the network and
+   Section 5 describes the requirements for on-path media collaboration
    signals.
 
-1.1.  Definitions
+2.  Definitions
 
    The document makes use of the following terms:
 
@@ -317,9 +317,9 @@ Table of Contents
 
                          Figure 3: 5GS Architecture
 
-2.  Use Cases
+3.  Use Cases
 
-2.1.  Media Streaming
+3.1.  Media Streaming
 
    Streaming video contains the occasional key frame ("I-frame")
    containing a full video frame.  These frames are necessary to rebuild
@@ -372,7 +372,7 @@ Table of Contents
    REQ-MEDIA-AV-SEPARATE: Audio can be prioritized differently than
    video.
 
-2.2.  Interactive Media
+3.2.  Interactive Media
 
    Interactive media includes content that a user can actively engage
    with and results in input and response actions that can be highly
@@ -393,7 +393,7 @@ Table of Contents
    signals, which prevents denial of service of mis-marked incoming
    flows.
 
-2.3.  User Preferences
+3.3.  User Preferences
 
    A game or VoIP application may want to signal different metadata for
    the same type of packet in each direction.  For example, for a game,
@@ -425,7 +425,7 @@ Table of Contents
        background tasks.  For example, a user is typing in a document
        while playing a media in the background within the same session.
 
-2.4.  Mixed Traffic
+3.4.  Mixed Traffic
 
    Mixed traffic can contain multiple types of data flowing through the
    same 5-tuple connection.  They may include digital models of the real
@@ -457,7 +457,7 @@ Table of Contents
        priority over Smoothing Glyphs (unreliable) during reactive
        events.
 
-2.5.  Honoring of Metadata for Servers Behind a Gateway
+3.5.  Honoring of Metadata for Servers Behind a Gateway
 
    In enterprise networks and remote desktop use case, a server can host
    multiple connections with varying type of traffic.  These servers are
@@ -467,7 +467,7 @@ Table of Contents
 
    Requirement: REQ-CLIENT-DECIDES as defined previously.
 
-3.  Operational Considerations
+4.  Operational Considerations
 
    Traffic policing and shaping are enforced in ingress/egress network
    points for various reasons (protect the network against attacks,
@@ -482,7 +482,7 @@ Table of Contents
    impact server – network, and host – network modes of sending
    metadata.
 
-3.1.  Policy Enforcement
+4.1.  Policy Enforcement
 
    Some metadata requires the network to share some hints with a host to
    adjust its behavior for some specific flows.  However, that metadata
@@ -499,7 +499,7 @@ Table of Contents
 
    Requirement: REQ-METADATA-ACCURACY.
 
-3.2.  Redundant Functions and Classification Complications
+4.2.  Redundant Functions and Classification Complications
 
    If distinct channels are used to share the metadata between a host
    and a network, a network that engages in the collaborative signaling
@@ -515,7 +515,7 @@ Table of Contents
 
    Requirement: REQ-SINGLE-CHANNEL is preferred.
 
-3.3.  Metadata Scope
+4.3.  Metadata Scope
 
    An operational challenge for sharing resource-quota like metadata
    (e.g., maximum bitrate) is that the network is generally not entitled
@@ -541,7 +541,7 @@ Table of Contents
    a shared metadata for the sake of better interoperability should be
    supported.
 
-3.4.  Application Interference
+4.4.  Application Interference
 
    Applications that have access to a resource-quota information may
    adopt an aggressive behavior (compared to those that don't have
@@ -556,7 +556,7 @@ Table of Contents
    independent of the application should be considered.  An example of
    such exposure is OS APIs.
 
-3.5.  Privacy Considerations
+4.5.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -600,7 +600,7 @@ Table of Contents
    Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no
    additional information about the IP packet.
 
-3.6.  Scalability
+4.6.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -617,7 +617,7 @@ Table of Contents
    a wireless router has to maintain for each additional media flow it
    handles should be very low or none.
 
-3.7.  Session Continuity
+4.7.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -632,7 +632,7 @@ Table of Contents
    Requirement: REQ-CONTINUITY: Handover from one radio or router to
    another should continue to provide same service level.
 
-3.8.  Abuse and Constraints
+4.8.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -647,7 +647,7 @@ Table of Contents
 
    Requirement: REQ-??: _need text here_
 
-4.  On-path Metadata Requirements
+5.  On-path Metadata Requirements
 
    There are various approaches for collaborative signaling between the
    server/host and network including out-of-band signaling, client-
@@ -667,7 +667,7 @@ Table of Contents
    direction) or between host and network (in either direction).
 
    Some use cases benefit from server – network metadata exchanges
-   (Section 4.2) and others need client involvement (Section 4.1).
+   (Section 5.2) and others need client involvement (Section 5.1).
 
    For the requirements that follow, the assumption is that the client
    agrees to the exchange of metadata between the server and network, or
@@ -676,9 +676,9 @@ Table of Contents
    REQ-PACKET-SELF: Packet importance is indicated by the packet itself,
    which may need to be decrypted or de-obfuscated.
 
-4.1.  Host-Network Metadata
+5.1.  Host-Network Metadata
 
-4.1.1.  Priority between Flows (Inter-flow)
+5.1.1.  Priority between Flows (Inter-flow)
 
    Certain flows being received by a host (or by an application on a
    host) are less or more important than other flows of _the same host_.
@@ -702,7 +702,7 @@ Table of Contents
 
    There is no requirement associated with this use-case.
 
-4.1.2.  Priority within a Flow (Intra-Flow)
+5.1.2.  Priority within a Flow (Intra-Flow)
 
    Interactive Audio/Video has long been using [RFC3550] which runs over
    UDP.  As described in Section 2.3.7.2 of [RFC7478], there is value in
@@ -732,7 +732,7 @@ Table of Contents
 
    REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
 
-4.1.3.  Assisted Offload
+5.1.3.  Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
@@ -748,9 +748,9 @@ Table of Contents
    distribution policies on the host (e.g., prefer the use of alternate
    paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
-4.2.  Server-Network Metadata
+5.2.  Server-Network Metadata
 
-4.2.1.  Identification of Media Frames and Streams
+5.2.1.  Identification of Media Frames and Streams
 
    Feedback provided by ECN/L4S to the server (UDP sender) is not fast
    enough to adjust the sending rate when available wireless capacity
@@ -781,7 +781,7 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-4.2.2.  Identification of Traffic Type without Disclosure the
+5.2.2.  Identification of Traffic Type without Disclosure the
         Application
 
    Different nature/types of traffic can be part of the same 5-tuple
@@ -795,7 +795,7 @@ Table of Contents
    Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined
    previously.
 
-4.2.3.  Relative Priority
+5.2.3.  Relative Priority
 
    Relative importance of a media frame provides the priority level of
    one media frame over another media frame within a stream.  The
@@ -812,7 +812,7 @@ Table of Contents
 
    There is no requirement associated with this use-case.
 
-4.2.4.  Tolerance to Delay
+5.2.4.  Tolerance to Delay
 
    Some media frames may be able to tolerate more delay over the wire
    than others (e.g., live media frames require very low latency while a
@@ -832,7 +832,7 @@ Table of Contents
    REQ-DELAY-TOLERANCE: ??  How is this different from three sections
    earlier??
 
-4.2.5.  Burst Indication
+5.2.5.  Burst Indication
 
    Media flows can have large and unexpected variations in packet bursts
    due to dynamic changes in content, server estimation of network
@@ -856,22 +856,22 @@ Table of Contents
    ISP, and ISP agrees it can handle that burst size.  (but what does
    ISP router do with the burst?  Needs to be described above!)
 
-5.  Non-Requirements
+6.  Non-Requirements
 
    Application feedback with measurements of packets lost and delay
    incurred may affect the sending rate and other behavior of the
    application.  The requirements and specification to mitigate these
    aspects are not in the scope of this document.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    None.
 
-7.  Security Considerations
+8.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 3.5.  The
+   Security aspects for the metadata are discussed in Section 4.5.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
-   security considerations and are referenced in Section 4.
+   security considerations and are referenced in Section 5.
 
    This document has no other security considerations.
 
