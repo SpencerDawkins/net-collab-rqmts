@@ -483,6 +483,21 @@ Eventually, when all packets of every flow are marked as important, there is no 
 
 REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
 
+### Assisted Offload
+
+   There are cases (crisis) where "normal" network resources cannot be
+   used at maximum and, thus, a network would seek to reduce or offload
+   some of the traffic during these events -- often called 'reactive
+   traffic policy'.  An example of such use case is cellular networks
+   that are overly used (and radio resources exhausted) such as a large
+   collection of people (e.g., parade, sporting event), or such as a
+   partial radio network outage (e.g., tower power outage).  During such
+   a condition, an alternative network attachment may be available to
+   the host (e.g., Wi-Fi).
+
+   Network-to-host signals are useful to put in place adequate traffic
+   distribution policies on the host (e.g., prefer the use of alternate paths,
+   offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
 # Non-Requirements {#non-req}
 
