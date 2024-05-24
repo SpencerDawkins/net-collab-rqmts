@@ -518,14 +518,14 @@ This document has no other security considerations.
 # Acknowledgments
 {:numbered="false"}
 
-Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.
+This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}} and {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
 
-The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.
-
-The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
+Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
+: Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.
+: The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.
+: The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.
-
-Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
+: Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
 
 --- back
