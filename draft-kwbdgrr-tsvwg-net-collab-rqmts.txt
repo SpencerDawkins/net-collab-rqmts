@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                             S. Gundavelli
-Expires: 23 November 2024                                          Cisco
+Expires: 25 November 2024                                          Cisco
                                                               S. Dawkins
                                                      Tencent America LLC
                                                                  D. Wing
@@ -15,7 +15,7 @@ Expires: 23 November 2024                                          Cisco
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             22 May 2024
+                                                             24 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 November 2024.
+   This Internet-Draft will expire on 25 November 2024.
 
 Copyright Notice
 
@@ -115,6 +115,7 @@ Table of Contents
      4.2.  Host-Network Metadata
        4.2.1.  Priority between Flows (Inter-flow)
        4.2.2.  Priority within a Flow (Intra-Flow)
+       4.2.3.  Assisted Offload
    5.  Non-Requirements
    6.  IANA Considerations
    7.  Security Considerations
@@ -744,6 +745,22 @@ Table of Contents
    the network unable to improve reactive policy decisions.
 
    REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
+
+4.2.3.  Assisted Offload
+
+   There are cases (crisis) where "normal" network resources cannot be
+   used at maximum and, thus, a network would seek to reduce or offload
+   some of the traffic during these events -- often called 'reactive
+   traffic policy'.  An example of such use case is cellular networks
+   that are overly used (and radio resources exhausted) such as a large
+   collection of people (e.g., parade, sporting event), or such as a
+   partial radio network outage (e.g., tower power outage).  During such
+   a condition, an alternative network attachment may be available to
+   the host (e.g., Wi-Fi).
+
+   Network-to-host signals are useful to put in place adequate traffic
+   distribution policies on the host (e.g., prefer the use of alternate
+   paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
 5.  Non-Requirements
 
