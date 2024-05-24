@@ -552,7 +552,8 @@ Table of Contents
    application.  The same challenge may apply when tethering is enabled.
 
    Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal
-   independent of the application should be considered.
+   independent of the application should be considered.  An example of
+   such exposure is OS APIs.
 
 3.5.  Privacy Considerations
 
