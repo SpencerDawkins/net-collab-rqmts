@@ -115,7 +115,8 @@ Table of Contents
        4.1.3.  Assisted Offload
      4.2.  Server-Network Metadata
        4.2.1.  Identification of Media Frames and Streams
-       4.2.2.  Identification of traffic types
+       4.2.2.  Identification of Traffic Type without Disclosure the
+               Application
        4.2.3.  Relative Priority
        4.2.4.  Tolerance to Delay
        4.2.5.  Burst Indication
@@ -780,7 +781,8 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-4.2.2.  Identification of traffic types
+4.2.2.  Identification of Traffic Type without Disclosure the
+        Application
 
    Different nature/types of traffic can be part of the same 5-tuple
    flow.  This could be reliable/loss-tolerant [RFC9221], bulk/
