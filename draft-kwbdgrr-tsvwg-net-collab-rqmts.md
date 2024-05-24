@@ -37,7 +37,7 @@ author:
     name: Dan Wing
     organization: Cloud Software Group Holdings, Inc.
     abbrev: Cloud Software Group
-    email: danwing@gmail.com    
+    email: danwing@gmail.com
  -
     ins: S. Gundavelli
     name: Sri Gundavelli
@@ -48,7 +48,7 @@ author:
     name: Sridharan Rajagopalan
     organization: Cloud Software Group Holdings, Inc.
     abbrev: Cloud Software Group
-    email: Sridharan.girish@gmail.com    
+    email: Sridharan.girish@gmail.com
  -
     ins: S. Dawkins
     name: Spencer Dawkins
