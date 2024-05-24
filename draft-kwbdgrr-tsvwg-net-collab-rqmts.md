@@ -296,7 +296,7 @@ Use cases:
 
   2. A user prioritizing video over audio while playing an interactive game.
 
-  3. User's foreground application should receive priority over background tasks. For eg., a user is typing in a document while playing a media in the background within the same session.
+  3. User's foreground application should receive priority over background tasks. For example, a user is typing in a document while playing a media in the background within the same session.
 
 ## Mixed Traffic {#mixed-traffic}
 
