@@ -6,10 +6,10 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Requirements for Network Collaboration Signaling</title>
 <meta content="John Kaippallimalil" name="author">
-<meta content="Sri Gundavelli" name="author">
-<meta content="Spencer Dawkins" name="author">
 <meta content="Dan Wing" name="author">
+<meta content="Sri Gundavelli" name="author">
 <meta content="Sridharan Rajagopalan" name="author">
+<meta content="Spencer Dawkins" name="author">
 <meta content="Mohamed Boucadair" name="author">
 <meta content="Tirumaleswar Reddy" name="author">
 <meta content="
@@ -1068,20 +1068,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="org">Futurewei</div>
 </div>
 <div class="author">
-      <div class="author-name">S. Gundavelli</div>
-<div class="org">Cisco</div>
-</div>
-<div class="author">
-      <div class="author-name">S. Dawkins</div>
-<div class="org">Tencent America LLC</div>
-</div>
-<div class="author">
       <div class="author-name">D. Wing</div>
 <div class="org">Cloud Software Group</div>
 </div>
 <div class="author">
+      <div class="author-name">S. Gundavelli</div>
+<div class="org">Cisco</div>
+</div>
+<div class="author">
       <div class="author-name">S. Rajagopalan</div>
 <div class="org">Cloud Software Group</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Dawkins</div>
+<div class="org">Tencent America LLC</div>
 </div>
 <div class="author">
       <div class="author-name">M. Boucadair</div>
@@ -1220,30 +1220,33 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-on-path-metadata-requiremen" class="internal xref">On-path Metadata Requirements</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-host-network-metadata" class="internal xref">Host-Network Metadata</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames and Streams</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-priority-between-flows-inte" class="internal xref">Priority between Flows (Inter-flow)</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
-                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-priority-within-a-flow-intr" class="internal xref">Priority within a Flow (Intra-Flow)</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
-                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.4">
-                    <p id="section-toc.1-1.4.2.1.2.4.1"><a href="#section-4.1.4" class="auto internal xref">4.1.4</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-client-network-metadata" class="internal xref">client-Network Metadata</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
-                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-priority-within-a-flow-intr" class="internal xref">Priority within a Flow (Intra-Flow)</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames and Streams</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
-                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
+                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
 </li>
                 </ul>
 </li>
@@ -1609,103 +1612,49 @@ The requirements here focus on proxied metadata connections on path with the dat
 <p id="section-4-2">The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>.
 Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client(host)-to-server encrypted payload.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The metadata connections may be between server and network (in either direction) or between host and network (in either direction).<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 4.1</a>) and others need client involvement (<a href="#client-network" class="auto internal xref">Section 4.2</a>).<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 4.2</a>) and others need client involvement (<a href="#host-network" class="auto internal xref">Section 4.1</a>).<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.<a href="#section-4-6" class="pilcrow">¶</a></p>
-<div id="server-network">
+<div id="host-network">
 <section id="section-4.1">
-        <h3 id="name-server-network-metadata">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
+        <h3 id="name-host-network-metadata">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-host-network-metadata" class="section-name selfRef">Host-Network Metadata</a>
         </h3>
-<div id="mdu-stream-id">
+<div id="interflow-priority">
 <section id="section-4.1.1">
-          <h4 id="name-identification-of-media-fra">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames and Streams</a>
+          <h4 id="name-priority-between-flows-inte">
+<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-priority-between-flows-inte" class="section-name selfRef">Priority between Flows (Inter-flow)</a>
           </h4>
-<p id="section-4.1.1-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
-The application can provide information to detect the start, end and set of packets that belong to a media frame.
-Alternatively, the application may provide information to identify one stream of the flow from another.
-The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-4">Requirements:<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-5">REQ-FRAME-START: Indicate packet containing start of media frame.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-6">REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.<a href="#section-4.1.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-7">REQ-FRAME-END: Indicate packet containing end of media frame.<a href="#section-4.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">Certain flows being received by a host (or by an application on a host) are less or more important than other flows of <em>the same host</em>.
+For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.
+By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
+This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-3">However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-4">There is no requirement associated with this use-case.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="relative-priority">
-<section id="section-4.1.2">
-          <h4 id="name-relative-priority">
-<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
-          </h4>
-<p id="section-4.1.2-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
-The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
-Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
-As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-3">There is no requirement associated with this use-case.<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="delay">
-<section id="section-4.1.3">
-          <h4 id="name-tolerance-to-delay">
-<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
-          </h4>
-<p id="section-4.1.3-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
-Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
-ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
-Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.3-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.3-3">REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??<a href="#section-4.1.3-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="burst">
-<section id="section-4.1.4">
-          <h4 id="name-burst-indication">
-<a href="#section-4.1.4" class="section-number selfRef">4.1.4. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
-          </h4>
-<p id="section-4.1.4-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
-Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
-The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
-Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-4.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.4-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
-The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-4.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.4-3">REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
-ISP, and ISP agrees it can handle that burst size.  (but what does ISP
-router do with the burst? Needs to be described above!)<a href="#section-4.1.4-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="client-network">
-<section id="section-4.2">
-        <h3 id="name-client-network-metadata">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-client-network-metadata" class="section-name selfRef">client-Network Metadata</a>
-        </h3>
 <div id="intra-flow-priority">
-<section id="section-4.2.1">
+<section id="section-4.1.2">
           <h4 id="name-priority-within-a-flow-intr">
-<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-priority-within-a-flow-intr" class="section-name selfRef">Priority within a Flow (Intra-Flow)</a>
+<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-priority-within-a-flow-intr" class="section-name selfRef">Priority within a Flow (Intra-Flow)</a>
           </h4>
-<p id="section-4.2.1-1">Intra-flow priority is the prioritization of streams within the same flow (same 5-tuple). Priorities between flows (inter-flow) is outside the scope of this document.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-2">Interactive Audio/Video has long been using <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span> which runs over UDP.  As described in Section 2.3.7.2 of <span>[<a href="#RFC7478" class="cite xref">RFC7478</a>]</span>, there is value in differentiating between voice, video and data.
+<p id="section-4.1.2-1">Interactive Audio/Video has long been using <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span> which runs over UDP.  As described in Section 2.3.7.2 of <span>[<a href="#RFC7478" class="cite xref">RFC7478</a>]</span>, there is value in differentiating between voice, video and data.
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport (<span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, <span>[<a href="#I-D.ietf-moq-transport" class="cite xref">I-D.ietf-moq-transport</a>]</span>).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
-Other applications such as gaming and remote desktop also benefit from differentiating their packets to the network.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-3">Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, CDN).
-Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-4">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
-Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.<a href="#section-4.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-5">REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
+Other applications such as gaming and remote desktop also benefit from differentiating their packets to the network.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-2">Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, CDN).
+Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-3">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
+Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-4">REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??<a href="#section-4.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="assisted-offload">
-<section id="section-4.2.2">
+<section id="section-4.1.3">
           <h4 id="name-assisted-offload">
-<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
+<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
           </h4>
-<p id="section-4.2.2-1">There are cases (crisis) where "normal" network resources cannot be
+<p id="section-4.1.3-1">There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
    some of the traffic during these events -- often called 'reactive
    traffic policy'.  An example of such use case is cellular networks
@@ -1713,10 +1662,77 @@ Eventually, when all packets of every flow are marked as important, there is no 
    collection of people (e.g., parade, sporting event), or such as a
    partial radio network outage (e.g., tower power outage).  During such
    a condition, an alternative network attachment may be available to
-   the host (e.g., Wi-Fi).<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.2-2">Network-to-host signals are useful to put in place adequate traffic
+   the host (e.g., Wi-Fi).<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-2">Network-to-host signals are useful to put in place adequate traffic
    distribution policies on the host (e.g., prefer the use of alternate paths,
-   offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+   offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="server-network">
+<section id="section-4.2">
+        <h3 id="name-server-network-metadata">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
+        </h3>
+<div id="mdu-stream-id">
+<section id="section-4.2.1">
+          <h4 id="name-identification-of-media-fra">
+<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames and Streams</a>
+          </h4>
+<p id="section-4.2.1-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
+Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
+The application can provide information to detect the start, end and set of packets that belong to a media frame.
+Alternatively, the application may provide information to identify one stream of the flow from another.
+The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-4">Requirements:<a href="#section-4.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-5">REQ-FRAME-START: Indicate packet containing start of media frame.<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-6">REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.<a href="#section-4.2.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-7">REQ-FRAME-END: Indicate packet containing end of media frame.<a href="#section-4.2.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="relative-priority">
+<section id="section-4.2.2">
+          <h4 id="name-relative-priority">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
+          </h4>
+<p id="section-4.2.2-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
+The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
+Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
+As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-3">There is no requirement associated with this use-case.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="delay">
+<section id="section-4.2.3">
+          <h4 id="name-tolerance-to-delay">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
+          </h4>
+<p id="section-4.2.3-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
+ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
+Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-3">REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??<a href="#section-4.2.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="burst">
+<section id="section-4.2.4">
+          <h4 id="name-burst-indication">
+<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
+          </h4>
+<p id="section-4.2.4-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
+Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
+The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
+Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
+The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-4.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-3">REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+ISP, and ISP agrees it can handle that burst size.  (but what does ISP
+router do with the burst? Needs to be described above!)<a href="#section-4.2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1873,22 +1889,6 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 </div>
 </address>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Sri Gundavelli</span></div>
-<div dir="auto" class="left"><span class="org">Cisco</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:sgundave@cisco.com" class="email">sgundave@cisco.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Spencer Dawkins</span></div>
-<div dir="auto" class="left"><span class="org">Tencent America LLC</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:spencerdawkins.ietf@gmail.com" class="email">spencerdawkins.ietf@gmail.com</a>
-</div>
-</address>
-<address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Dan Wing</span></div>
 <div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
 <div class="email">
@@ -1897,11 +1897,27 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 </div>
 </address>
 <address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sri Gundavelli</span></div>
+<div dir="auto" class="left"><span class="org">Cisco</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:sgundave@cisco.com" class="email">sgundave@cisco.com</a>
+</div>
+</address>
+<address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Sridharan Rajagopalan</span></div>
 <div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:Sridharan.girish@gmail.com" class="email">Sridharan.girish@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Spencer Dawkins</span></div>
+<div dir="auto" class="left"><span class="org">Tencent America LLC</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:spencerdawkins.ietf@gmail.com" class="email">spencerdawkins.ietf@gmail.com</a>
 </div>
 </address>
 <address class="vcard">

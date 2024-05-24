@@ -4,13 +4,14 @@
 
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
-Intended status: Informational                             S. Gundavelli
-Expires: 25 November 2024                                          Cisco
-                                                              S. Dawkins
-                                                     Tencent America LLC
-                                                                 D. Wing
+Intended status: Informational                                   D. Wing
+Expires: 25 November 2024                           Cloud Software Group
+                                                           S. Gundavelli
+                                                                   Cisco
                                                           S. Rajagopalan
                                                     Cloud Software Group
+                                                              S. Dawkins
+                                                     Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
                                                                 T. Reddy
@@ -107,14 +108,15 @@ Table of Contents
      3.7.  Session Continuity
      3.8.  Abuse and Constraints
    4.  On-path Metadata Requirements
-     4.1.  Server-Network Metadata
-       4.1.1.  Identification of Media Frames and Streams
-       4.1.2.  Relative Priority
-       4.1.3.  Tolerance to Delay
-       4.1.4.  Burst Indication
-     4.2.  client-Network Metadata
-       4.2.1.  Priority within a Flow (Intra-Flow)
-       4.2.2.  Assisted Offload
+     4.1.  Host-Network Metadata
+       4.1.1.  Priority between Flows (Inter-flow)
+       4.1.2.  Priority within a Flow (Intra-Flow)
+       4.1.3.  Assisted Offload
+     4.2.  Server-Network Metadata
+       4.2.1.  Identification of Media Frames and Streams
+       4.2.2.  Relative Priority
+       4.2.3.  Tolerance to Delay
+       4.2.4.  Burst Indication
    5.  Non-Requirements
    6.  IANA Considerations
    7.  Security Considerations
@@ -591,7 +593,7 @@ Table of Contents
    direction) or between host and network (in either direction).
 
    Some use cases benefit from server – network metadata exchanges
-   (Section 4.1) and others need client involvement (Section 4.2).
+   (Section 4.2) and others need client involvement (Section 4.1).
 
    For the requirements that follow, the assumption is that the client
    agrees to the exchange of metadata between the server and network, or
@@ -600,9 +602,81 @@ Table of Contents
    REQ-PACKET-SELF: Packet importance is indicated by the packet itself,
    which may need to be decrypted or de-obfuscated.
 
-4.1.  Server-Network Metadata
+4.1.  Host-Network Metadata
 
-4.1.1.  Identification of Media Frames and Streams
+4.1.1.  Priority between Flows (Inter-flow)
+
+   Certain flows being received by a host (or by an application on a
+   host) are less or more important than other flows of _the same host_.
+   For example, a host downloading a software update is generally
+   considered less important than another host doing interactive audio/
+   video or gaming.  By signaling the relative importance of flows to a
+   network element, the network element can (de-)prioritize those flows
+   to best accommodate the needs of the various applications on a same
+   host.
+
+   Without a signaling in place between a receiving host and its
+   network, remote peers are able to mark packets that interfere with
+   the desires of the receiving host -- making their flows more
+   important than what the receiving host considers more important.
+   This eventually causes all flows to be marked as important, or --
+   more likely -- such priority markings to be ignored.
+
+   However, prioritizing between flows presents challenges because the
+   host can have both malicious and legitimate applications, and the
+   remote peers can also be malicious and benign.
+
+   There is no requirement associated with this use-case.
+
+4.1.2.  Priority within a Flow (Intra-Flow)
+
+   Interactive Audio/Video has long been using [RFC3550] which runs over
+   UDP.  As described in Section 2.3.7.2 of [RFC7478], there is value in
+   differentiating between voice, video and data.  Today's video
+   streaming is exclusively over TCP but will migrate to QUIC and
+   eventually is likely to support unreliable transport ([RFC9221],
+   [I-D.ietf-moq-transport]).  With unreliable transport of video in RTP
+   or QUIC, it is beneficial to differentiate the important video
+   keyframes from other video frames.  Other applications such as gaming
+   and remote desktop also benefit from differentiating their packets to
+   the network.
+
+   Many of these flows do not originate from a content provider's
+   network -- rather, they originate from a peer (e.g., VoIP,
+   interactive video, peer-to-peer gaming, Remote Desktop, CDN).  Thus,
+   the flows originate from an IP address that is not known before
+   connection establishment, so there needs to be a way for the client
+   to authorize the network elements to receive and hopefully to honor
+   the metadata of those packets from a remote peer.
+
+   Without a signaling in place between a receiving host and its
+   network, remote peers are able to mark every packet of a flow as
+   important, causing much the same problem as the previous use-case.
+   Eventually, when all packets of every flow are marked as important,
+   there is no differentiation between packets within a flow, rendering
+   the network unable to improve reactive policy decisions.
+
+   REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
+
+4.1.3.  Assisted Offload
+
+   There are cases (crisis) where "normal" network resources cannot be
+   used at maximum and, thus, a network would seek to reduce or offload
+   some of the traffic during these events -- often called 'reactive
+   traffic policy'.  An example of such use case is cellular networks
+   that are overly used (and radio resources exhausted) such as a large
+   collection of people (e.g., parade, sporting event), or such as a
+   partial radio network outage (e.g., tower power outage).  During such
+   a condition, an alternative network attachment may be available to
+   the host (e.g., Wi-Fi).
+
+   Network-to-host signals are useful to put in place adequate traffic
+   distribution policies on the host (e.g., prefer the use of alternate
+   paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+
+4.2.  Server-Network Metadata
+
+4.2.1.  Identification of Media Frames and Streams
 
    Feedback provided by ECN/L4S to the server (UDP sender) is not fast
    enough to adjust the sending rate when available wireless capacity
@@ -633,7 +707,7 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-4.1.2.  Relative Priority
+4.2.2.  Relative Priority
 
    Relative importance of a media frame provides the priority level of
    one media frame over another media frame within a stream.  The
@@ -650,7 +724,7 @@ Table of Contents
 
    There is no requirement associated with this use-case.
 
-4.1.3.  Tolerance to Delay
+4.2.3.  Tolerance to Delay
 
    Some media frames may be able to tolerate more delay over the wire
    than others (e.g., live media frames require very low latency while a
@@ -670,7 +744,7 @@ Table of Contents
    REQ-DELAY-TOLERANCE: ??  How is this different from three sections
    earlier??
 
-4.1.4.  Burst Indication
+4.2.4.  Burst Indication
 
    Media flows can have large and unexpected variations in packet bursts
    due to dynamic changes in content, server estimation of network
@@ -693,58 +767,6 @@ Table of Contents
    REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
    ISP, and ISP agrees it can handle that burst size.  (but what does
    ISP router do with the burst?  Needs to be described above!)
-
-4.2.  client-Network Metadata
-
-4.2.1.  Priority within a Flow (Intra-Flow)
-
-   Intra-flow priority is the prioritization of streams within the same
-   flow (same 5-tuple).  Priorities between flows (inter-flow) is
-   outside the scope of this document.
-
-   Interactive Audio/Video has long been using [RFC3550] which runs over
-   UDP.  As described in Section 2.3.7.2 of [RFC7478], there is value in
-   differentiating between voice, video and data.  Today's video
-   streaming is exclusively over TCP but will migrate to QUIC and
-   eventually is likely to support unreliable transport ([RFC9221],
-   [I-D.ietf-moq-transport]).  With unreliable transport of video in RTP
-   or QUIC, it is beneficial to differentiate the important video
-   keyframes from other video frames.  Other applications such as gaming
-   and remote desktop also benefit from differentiating their packets to
-   the network.
-
-   Many of these flows do not originate from a content provider's
-   network -- rather, they originate from a peer (e.g., VoIP,
-   interactive video, peer-to-peer gaming, Remote Desktop, CDN).  Thus,
-   the flows originate from an IP address that is not known before
-   connection establishment, so there needs to be a way for the client
-   to authorize the network elements to receive and hopefully to honor
-   the metadata of those packets from a remote peer.
-
-   Without a signaling in place between a receiving host and its
-   network, remote peers are able to mark every packet of a flow as
-   important, causing much the same problem as the previous use-case.
-   Eventually, when all packets of every flow are marked as important,
-   there is no differentiation between packets within a flow, rendering
-   the network unable to improve reactive policy decisions.
-
-   REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
-
-4.2.2.  Assisted Offload
-
-   There are cases (crisis) where "normal" network resources cannot be
-   used at maximum and, thus, a network would seek to reduce or offload
-   some of the traffic during these events -- often called 'reactive
-   traffic policy'.  An example of such use case is cellular networks
-   that are overly used (and radio resources exhausted) such as a large
-   collection of people (e.g., parade, sporting event), or such as a
-   partial radio network outage (e.g., tower power outage).  During such
-   a condition, an alternative network attachment may be available to
-   the host (e.g., Wi-Fi).
-
-   Network-to-host signals are useful to put in place adequate traffic
-   distribution policies on the host (e.g., prefer the use of alternate
-   paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
 5.  Non-Requirements
 
@@ -898,24 +920,24 @@ Authors' Addresses
    Email: john.kaippallimalil@futurewei.com
 
 
-   Sri Gundavelli
-   Cisco
-   Email: sgundave@cisco.com
-
-
-   Spencer Dawkins
-   Tencent America LLC
-   Email: spencerdawkins.ietf@gmail.com
-
-
    Dan Wing
    Cloud Software Group Holdings, Inc.
    Email: danwing@gmail.com
 
 
+   Sri Gundavelli
+   Cisco
+   Email: sgundave@cisco.com
+
+
    Sridharan Rajagopalan
    Cloud Software Group Holdings, Inc.
    Email: Sridharan.girish@gmail.com
+
+
+   Spencer Dawkins
+   Tencent America LLC
+   Email: spencerdawkins.ietf@gmail.com
 
 
    Mohamed Boucadair
