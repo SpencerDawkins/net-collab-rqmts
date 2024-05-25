@@ -178,7 +178,7 @@ The requirements in {{metadata-req}} apply to data units like frames within a fl
 
 {{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
 "Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
-The requirements in this document focuses on on-path media collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
+The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
 
 In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
@@ -188,7 +188,7 @@ Some of the complications that are induced by the phenomena discussed above may 
 
 {{operational}} provides operational constraints in the network and {{metadata-req}} describes the requirements for on-path media collaboration signals.
 
-## Definitions
+# Definitions
 
 The document makes use of the following terms:
 
@@ -250,20 +250,33 @@ client to the ISP router (requirement: REQ-CLIENT-DECIDES).
 
 Examples: live broadcast, on-demand video streaming
 
-REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
+Use cases:
+
+  1. In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
+
+  2. Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
+
+Requirements:
+
+  REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
 full frames can be indicated to the network.
 
-REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
+  REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
 
 
 ## Interactive Media {#uc-interactive}
 
-Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive. It also includes mixed traffic where both bulk and interactive data are exchanged within the same flow.
-They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.
+Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive.
 
-Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR), Virtual Apps and Desktops.
+Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR).
 
-REQ-INTERACTIVE: The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
+Use cases:
+
+  1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
+
+Requirements:
+
+  REQ-PACKET-NATURE: The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
 per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 ## User Preferences {#uc-preferences}
@@ -273,13 +286,44 @@ For example, for a game, video in the server-to-client direction might be more i
 
 Determination of such preferences is outside of the scope of this document.
 
-Requirements:  REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
+Requirements:
+
+  REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
+
+Use cases:
+
+  1. Dynamic changes to priority based on user activity is not possible today. For example, audio packets having the same priority when a user mutes the audio locally, or change in priority during times of emergency where video streaming applications share the same priority as SOS signals.
+
+  2. A user prioritizing video over audio while playing an interactive game.
+
+  3. User's foreground application should receive priority over background tasks. For example, a user is typing in a document while playing a media in the background within the same session.
+
+## Mixed Traffic {#mixed-traffic}
+
+Mixed traffic can contain multiple types of data flowing through the same 5-tuple connection. They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.
+
+In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
+
+Requirements:
+
+  REQ-PACKET-RELIABILITY: Indicate if a packet is treated as reliable or unreliable by the application.
+
+  REQ-PACKET-NATURE: Indicate if a packet belongs to bulk traffic or interactive traffic.
+
+Examples: Virtual Apps and Desktops.
+
+Use cases:
+  1. Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).
+
+  2. File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.
+
+  3. In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.
 
 ## Honoring of Metadata for Servers Behind a Gateway
 
 In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.
 
-Requirements:  REQ-CLIENT-DECIDES as defined previously.
+Requirement: REQ-CLIENT-DECIDES as defined previously.
 
 # Operational Considerations {#operational}
 
@@ -317,7 +361,8 @@ Most importantly, the metadata can be used by the network to prioritize traffic 
 
 It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
-Requirement:  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
+Requirement:
+  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
 
 ## Application Interference {#app-interference}
 
@@ -325,7 +370,8 @@ Applications that have access to a resource-quota information may adopt an aggre
 
 This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
-Requirement:  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered.
+Requirement:
+  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
 
 ## Privacy Considerations {#privacy}
 
@@ -463,6 +509,12 @@ REQ-FRAME-START: Indicate packet containing start of media frame.
 REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
 
 REQ-FRAME-END: Indicate packet containing end of media frame.
+
+### Identification of Traffic Type without Disclosure the Application {#TrafficType}
+
+Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant {{?RFC9221}}, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.
+
+Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined previously.
 
 ### Relative Priority {#relative-priority}
 
