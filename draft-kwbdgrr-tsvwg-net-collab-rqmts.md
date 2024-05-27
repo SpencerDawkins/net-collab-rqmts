@@ -425,7 +425,7 @@ Such a mechanism might be simple, for example, a cellular network might allow on
 
 Requirements:
 
-  REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority is unique for every type of traffic within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
+  REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
 
   REQ-CLIENT-VALIDATION: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
 
