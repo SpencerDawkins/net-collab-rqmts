@@ -648,9 +648,9 @@ Table of Contents
    Requirements:
 
    REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/
-   client signaling of priority is unique for every type of traffic
-   within the same flow, thereby avoiding prioritizing of all the
-   streams/traffic the same way.
+   client signaling of priority (if any) does not associate the same
+   priority level with all traffic types within the same flow, thereby
+   avoiding prioritizing of all the streams/traffic the same way.
 
    REQ-CLIENT-VALIDATION: The network needs to ensure the signal is
    coming from the same user/client that is part of the 5-tuple flow.
