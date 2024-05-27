@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 26 November 2024                           Cloud Software Group
+Expires: 28 November 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 26 November 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             25 May 2024
+                                                             27 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2024.
+   This Internet-Draft will expire on 28 November 2024.
 
 Copyright Notice
 
@@ -729,8 +729,8 @@ Table of Contents
 
    Many of these flows do not originate from a content provider's
    network -- rather, they originate from a peer (e.g., VoIP,
-   interactive video, peer-to-peer gaming, Remote Desktop, CDN).  Thus,
-   the flows originate from an IP address that is not known before
+   interactive video, peer-to-peer gaming, Remote Desktop, and CDN).
+   Thus, the flows originate from an IP address that is not known before
    connection establishment, so there needs to be a way for the client
    to authorize the network elements to receive and hopefully to honor
    the metadata of those packets from a remote peer.
