@@ -423,7 +423,11 @@ It is important that not every flow be prioritized; otherwise, the network devol
 
 Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.
 
-Requirement: REQ-??: *need text here*
+Requirements:
+
+  REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
+
+  REQ-CLIENT-VALIDATION: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
 
 # On-path Metadata Requirements {#metadata-req}
 
@@ -462,15 +466,15 @@ There is no requirement associated with this use-case.
 
 Interactive Audio/Video has long been using {{?RFC3550}} which runs over UDP.  As described in Section 2.3.7.2 of {{?RFC7478}}, there is value in differentiating between voice, video and data.
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{?I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
-Other applications such as gaming and remote desktop also benefit from differentiating their packets to the network.
 
-Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, CDN).
-Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.
+Other applications, as mentioned in {{uc}}, such as gaming and remote desktop also benefit from differentiating their packets to the network.
+
+Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.
 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.
 
-REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
+Requirements: The requirements vary based on use case and user preference. The requirements listed in {{uc}} are applicable here.
 
 ### Assisted Offload
 
@@ -514,7 +518,7 @@ REQ-FRAME-END: Indicate packet containing end of media frame.
 
 Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant {{?RFC9221}}, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.
 
-Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined previously.
+Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in {{mixed-traffic}}.
 
 ### Relative Priority {#relative-priority}
 
@@ -536,7 +540,7 @@ Even when the media payload is not encrypted, the network has no means to distin
 
 If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
 
-REQ-DELAY-TOLERANCE: ??  How is this different from three sections earlier??
+REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in {{mixed-traffic}}.
 
 ### Burst Indication {#burst}
 
