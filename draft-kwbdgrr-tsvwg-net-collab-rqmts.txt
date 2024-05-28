@@ -112,14 +112,15 @@ Table of Contents
      5.1.  Host-Network Metadata
        5.1.1.  Priority between Flows (Inter-flow)
        5.1.2.  Priority within a Flow (Intra-Flow)
-       5.1.3.  Assisted Offload
-     5.2.  Server-Network Metadata
-       5.2.1.  Identification of Media Frames and Streams
-       5.2.2.  Identification of Traffic Type without Disclosure the
+     5.2.  Network-Host Metadata
+       5.2.1.  Assisted Offload
+     5.3.  Server-Network Metadata
+       5.3.1.  Identification of Media Frames and Streams
+       5.3.2.  Identification of Traffic Type without Disclosure the
                Application
-       5.2.3.  Relative Priority
-       5.2.4.  Tolerance to Delay
-       5.2.5.  Burst Indication
+       5.3.3.  Relative Priority
+       5.3.4.  Tolerance to Delay
+       5.3.5.  Burst Indication
    6.  Non-Requirements
    7.  IANA Considerations
    8.  Security Considerations
@@ -677,7 +678,7 @@ Table of Contents
    direction) or between host and network (in either direction).
 
    Some use cases benefit from server – network metadata exchanges
-   (Section 5.2) and others need client involvement (Section 5.1).
+   (Section 5.3) and others need client involvement (Section 5.1).
 
    For the requirements that follow, the assumption is that the client
    agrees to the exchange of metadata between the server and network, or
@@ -746,7 +747,9 @@ Table of Contents
    preference.  The requirements listed in Section 3 are applicable
    here.
 
-5.1.3.  Assisted Offload
+5.2.  Network-Host Metadata
+
+5.2.1.  Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
@@ -762,9 +765,9 @@ Table of Contents
    distribution policies on the host (e.g., prefer the use of alternate
    paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
-5.2.  Server-Network Metadata
+5.3.  Server-Network Metadata
 
-5.2.1.  Identification of Media Frames and Streams
+5.3.1.  Identification of Media Frames and Streams
 
    Feedback provided by ECN/L4S to the server (UDP sender) is not fast
    enough to adjust the sending rate when available wireless capacity
@@ -795,7 +798,7 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-5.2.2.  Identification of Traffic Type without Disclosure the
+5.3.2.  Identification of Traffic Type without Disclosure the
         Application
 
    Different nature/types of traffic can be part of the same 5-tuple
@@ -809,7 +812,7 @@ Table of Contents
    Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in
    Section 3.4.
 
-5.2.3.  Relative Priority
+5.3.3.  Relative Priority
 
    Relative importance of a media frame provides the priority level of
    one media frame over another media frame within a stream.  The
@@ -826,7 +829,7 @@ Table of Contents
 
    There is no requirement associated with this use-case.
 
-5.2.4.  Tolerance to Delay
+5.3.4.  Tolerance to Delay
 
    Some media frames may be able to tolerate more delay over the wire
    than others (e.g., live media frames require very low latency while a
@@ -846,7 +849,7 @@ Table of Contents
    REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as
    defined in Section 3.4.
 
-5.2.5.  Burst Indication
+5.3.5.  Burst Indication
 
    Media flows can have large and unexpected variations in packet bursts
    due to dynamic changes in content, server estimation of network
