@@ -472,6 +472,8 @@ Eventually, when all packets of every flow are marked as important, there is no 
 
 REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
 
+## Network-Host Metadata {#network-host}
+
 ### Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
