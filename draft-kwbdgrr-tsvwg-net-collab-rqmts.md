@@ -476,6 +476,8 @@ Eventually, when all packets of every flow are marked as important, there is no 
 
 Requirements: The requirements vary based on use case and user preference. The requirements listed in {{uc}} are applicable here.
 
+## Network-Host Metadata {#network-host}
+
 ### Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
