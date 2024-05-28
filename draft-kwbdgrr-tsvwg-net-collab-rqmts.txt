@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 26 November 2024                           Cloud Software Group
+Expires: 29 November 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 26 November 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             25 May 2024
+                                                             28 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2024.
+   This Internet-Draft will expire on 29 November 2024.
 
 Copyright Notice
 
@@ -645,7 +645,17 @@ Table of Contents
    prioritize themselves.  However, the network cannot identify whether
    the prioritized flow is legitimate or malicious.
 
-   Requirement: REQ-??: _need text here_
+   Requirements:
+
+   REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/
+   client signaling of priority (if any) does not associate the same
+   priority level with all traffic types within the same flow, thereby
+   avoiding prioritizing of all the streams/traffic the same way.
+
+   REQ-CLIENT-VALIDATION: The network needs to ensure the signal is
+   coming from the same user/client that is part of the 5-tuple flow.
+   This is to ensure no other application influences the priority of
+   another application's flow.
 
 5.  On-path Metadata Requirements
 
@@ -711,14 +721,16 @@ Table of Contents
    eventually is likely to support unreliable transport ([RFC9221],
    [I-D.ietf-moq-transport]).  With unreliable transport of video in RTP
    or QUIC, it is beneficial to differentiate the important video
-   keyframes from other video frames.  Other applications such as gaming
-   and remote desktop also benefit from differentiating their packets to
-   the network.
+   keyframes from other video frames.
+
+   Other applications, as mentioned in Section 3, such as gaming and
+   remote desktop also benefit from differentiating their packets to the
+   network.
 
    Many of these flows do not originate from a content provider's
    network -- rather, they originate from a peer (e.g., VoIP,
-   interactive video, peer-to-peer gaming, Remote Desktop, CDN).  Thus,
-   the flows originate from an IP address that is not known before
+   interactive video, peer-to-peer gaming, Remote Desktop, and CDN).
+   Thus, the flows originate from an IP address that is not known before
    connection establishment, so there needs to be a way for the client
    to authorize the network elements to receive and hopefully to honor
    the metadata of those packets from a remote peer.
@@ -730,7 +742,9 @@ Table of Contents
    there is no differentiation between packets within a flow, rendering
    the network unable to improve reactive policy decisions.
 
-   REQ-INTERACTIVE: ??  Is this same as REQ-INTERACTIVE (above) ??
+   Requirements: The requirements vary based on use case and user
+   preference.  The requirements listed in Section 3 are applicable
+   here.
 
 5.1.3.  Assisted Offload
 
@@ -792,8 +806,8 @@ Table of Contents
    application may provide information to identify the type of traffic
    in per-packet metadata.
 
-   Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined
-   previously.
+   Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in
+   Section 3.4.
 
 5.2.3.  Relative Priority
 
@@ -829,8 +843,8 @@ Table of Contents
    tolerate high delay the wireless router can opt to delay packets
    rather than drop during transient congestion periods.
 
-   REQ-DELAY-TOLERANCE: ??  How is this different from three sections
-   earlier??
+   REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as
+   defined in Section 3.4.
 
 5.2.5.  Burst Indication
 
