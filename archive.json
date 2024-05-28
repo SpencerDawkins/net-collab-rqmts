@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-26T01:14:09.521765+00:00",
+  "timestamp": "2024-05-28T01:09:18.205194+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -270,6 +270,38 @@
           "updatedAt": "2024-05-22T16:58:41Z"
         }
       ]
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOL0HpzM6KPexN",
+      "title": "Video requirements and encryption/decryption of metadata",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/36",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/html/draft-joras-sconepro-video-opt-requirements-00 - In this draft, they seem to talk about key exchange that we have kept out (implementation part)... But wonder if we have already incorporated the rest in our draft under \"media\" itself. Should we dig a little deeper into the cryptographic stuff or at least come up with a different draft for that?",
+      "createdAt": "2024-05-27T14:39:19Z",
+      "updatedAt": "2024-05-27T14:42:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOL0HpzM6KPgQm",
+      "title": "Network to host section required?",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/37",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In https://datatracker.ietf.org/doc/html/draft-joras-sconepro-video-opt-requirements-00, the requirements seem to have a network to host part, which we haven't focused much on here (some of it is in https://github.com/boucadair/draft-xxx-ac-rate-policy-discovery/blob/main/draft-brw-sconepro-rate-policy-discovery.md). Do we need to add a section iterating the requirements for network to host signaling to have a more holistic picture?",
+      "createdAt": "2024-05-27T14:42:30Z",
+      "updatedAt": "2024-05-27T14:42:30Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2028,13 +2060,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-25T06:18:14Z",
-      "updatedAt": "2024-05-25T06:54:55Z",
+      "updatedAt": "2024-05-27T08:21:18Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "4b71e4b9426896c6f904ee8ab40caafd5602ab11",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sri-text",
-      "headRefOid": "4c0993f466c5c655ee9a81bbb2a90a9f76ea9c48",
+      "headRefOid": "dfe46c31e311936bc7bd53ac3e40419af82b4cb8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2078,6 +2110,106 @@
               "body": "I purposely didn't include any signaling or host involvement in the process so as not to get into implementation details. ",
               "createdAt": "2024-05-25T06:54:55Z",
               "updatedAt": "2024-05-25T06:54:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM5783a5",
+          "commit": {
+            "abbreviatedOid": "4c0993f"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-26T09:15:14Z",
+          "updatedAt": "2024-05-26T09:15:14Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "line 428 / requirement is not clear how it would work. Assuming that the e2e flow is encrypted, what would the user/client be able to signal about 'type of traffic within a flow' (i.e., to the network every packet looks the same). For example, in QUIC, only the connection id and spin bit are not encrypted and neither has meaning for packet priority. It would seem that only the server can indicate if a packet (or frame) has higher priority. ",
+              "createdAt": "2024-05-26T09:15:14Z",
+              "updatedAt": "2024-05-26T09:15:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM579P9V",
+          "commit": {
+            "abbreviatedOid": "4c0993f"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-26T15:32:44Z",
+          "updatedAt": "2024-05-26T15:32:44Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "The E2E flow is encrypted (DTLS) but the signaling of metadata would lie outside of the DTLS payload... There should be a mechanism through which the network should be able to decipher the metadata (getting into the mechanism will be moving into implementation stuff and hence, I didn't get into it here). The metadata will obfuscated/encrypted by the server and the key will be sent to the client over the encrypted channel. The client would then share the key with the network/OS (in band or out of band). This is another use of client-to-network signaling that we had in the document but removed since it goes into implementation details. So left it as a requirement. Implementation would be ideally part of a different draft. Metadata can be filled into the CID for QUIC(https://datatracker.ietf.org/doc/draft-wing-cidfi/) or UDP options or anything else...\r\n\r\nUser/Client would provide a way to decipher the metadata alone and signal \"Hey, treat the packets with metadata b10110 with highest priority\".\r\n\r\nThere would be a <metadata,priority> pair for every flow and not all the metadata should be allowed to have highest priority is what being conveyed here, although how to design that is again getting into implementation part and so I strayed away from it too.",
+              "createdAt": "2024-05-26T15:32:44Z",
+              "updatedAt": "2024-05-26T15:37:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM5794Bi",
+          "commit": {
+            "abbreviatedOid": "4c0993f"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-26T23:33:09Z",
+          "updatedAt": "2024-05-26T23:33:09Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Thanks, I follow now, and agree with the proposal",
+              "createdAt": "2024-05-26T23:33:09Z",
+              "updatedAt": "2024-05-26T23:33:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57-sgl",
+          "commit": {
+            "abbreviatedOid": "4c0993f"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-27T05:47:32Z",
+          "updatedAt": "2024-05-27T05:47:32Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n  REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.\r\n```",
+              "createdAt": "2024-05-27T05:47:32Z",
+              "updatedAt": "2024-05-27T05:47:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM57-tCc",
+          "commit": {
+            "abbreviatedOid": "4c0993f"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-27T05:49:33Z",
+          "updatedAt": "2024-05-27T05:49:33Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nMany of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.\r\n```",
+              "createdAt": "2024-05-27T05:49:33Z",
+              "updatedAt": "2024-05-27T05:49:33Z"
             }
           ]
         }
