@@ -376,25 +376,34 @@ Requirement:
 ## Privacy Considerations {#privacy}
 
 Encrypted media payloads along with temporary IPv6 addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
-It should however be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.
+It should, however, be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.
 To avoid this kind of frequency analysis, media sent by the server would need to be scheduled or multiplexed differently to each user/recipient.
 This may be possible in transports like QUIC which allows flexibility in scheduling each stream.
-Transports like QUIC also fully encrypt the entire stream and therefore no media headers are observable on path either.
-The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.
-
-Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.
+Transports like QUIC also fully encrypt the entire stream and, therefore, no media headers are observable on-path either.
+The security aspects of the media payload / transport are not in the scope of this document and is described here only to provide context for metadata privacy.
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
 along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in
 the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent
-from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
+from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an
 on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
 as unimportant, but such changes are detectable by the receiver. The privacy implications of revealing metadata to network elements need to
 be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
 entities to infer sensitive information about the data being transmitted.
 
-Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no additional information about the IP packet.
+Requirements:
+
+REQ-PRIVACY-ADDITIONAL:
+: An on-path observer obtains no additional information about the IP packet.
+
+REQ-SIGNALING-AVOIDANCE:
+: Leveraging previous experience {{?RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
+
+   * Reveal the application identity.
+   * Expose the application cause (or 'reason') to signal metadata.
+   * Reveal server identity.
+   * Inspect client-to-server encrypted payload by network elements.
 
 ## Scalability {#scalability}
 
@@ -516,7 +525,7 @@ REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
 
 REQ-FRAME-END: Indicate packet containing end of media frame.
 
-### Identification of Traffic Type without Disclosure the Application {#TrafficType}
+### Identification of Traffic Type without Disclosure of the Application {#TrafficType}
 
 Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant {{?RFC9221}}, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.
 
