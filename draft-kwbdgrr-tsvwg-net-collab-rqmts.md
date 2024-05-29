@@ -523,7 +523,7 @@ Use cases:
 
   5. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
 
-Requirement: REQ-NETWORK-BANDWIDTH: The network shall implement a mechanism to periodically signal the available bandwidth to hosts. Any changes in available bandwidth shall also be communicated to the connected hosts.
+Requirement: REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
 
 ### Network Rate Limiting Policies {#nrlp}
 
