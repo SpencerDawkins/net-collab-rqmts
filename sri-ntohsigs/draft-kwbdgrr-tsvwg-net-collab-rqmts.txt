@@ -803,10 +803,9 @@ Table of Contents
        videos that were downloaded.  The network can assist the client
        by informing the client of the network's bandwidth policy.
 
-   Requirement: REQ-NETWORK-BANDWIDTH: The network shall implement a
-   mechanism to periodically signal the available bandwidth to hosts.
-   Any changes in available bandwidth shall also be communicated to the
-   connected hosts.
+   Requirement: REQ-NETWORK-THROUGHPUT: A mechanism to signal the
+   available network throughput to interested hosts, including changes
+   to throughput.
 
 5.2.3.  Network Rate Limiting Policies
 
