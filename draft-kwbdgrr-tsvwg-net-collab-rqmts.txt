@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 29 November 2024                           Cloud Software Group
+Expires: 30 November 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 29 November 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             28 May 2024
+                                                             29 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2024.
+   This Internet-Draft will expire on 30 November 2024.
 
 Copyright Notice
 
@@ -114,6 +114,8 @@ Table of Contents
        5.1.2.  Priority within a Flow (Intra-Flow)
      5.2.  Network-Host Metadata
        5.2.1.  Assisted Offload
+       5.2.2.  Network Bandwidth
+       5.2.3.  Network Rate Limiting Policies
      5.3.  Server-Network Metadata
        5.3.1.  Identification of Media Frames and Streams
        5.3.2.  Identification of Traffic Type without Disclosure the
@@ -447,14 +449,16 @@ Table of Contents
 
    Examples: Virtual Apps and Desktops.
 
-   Use cases: 1.  Document being printed/saved while being edited.  The
-   interactive traffic has higher priority over bulk traffic).
+   Use cases:
 
-   1.  File download while intearacting with the webpage.  With QUIC,
+   1.  Document being printed/saved while being edited.  The interactive
+       traffic has higher priority over bulk traffic).
+
+   2.  File download while intearacting with the webpage.  With QUIC,
        this could occur with the same webserver.  Interactive activity
        performed with the webpage higher priority over file download.
 
-   2.  In graphics remoting, Critical Glyphs (Reliable) has more
+   3.  In graphics remoting, Critical Glyphs (Reliable) has more
        priority over Smoothing Glyphs (unreliable) during reactive
        events.
 
@@ -684,6 +688,8 @@ Table of Contents
    agrees to the exchange of metadata between the server and network, or
    between the client and network.
 
+   Requirement:
+
    REQ-PACKET-SELF: Packet importance is indicated by the packet itself,
    which may need to be decrypted or de-obfuscated.
 
@@ -764,6 +770,55 @@ Table of Contents
    Network-to-host signals are useful to put in place adequate traffic
    distribution policies on the host (e.g., prefer the use of alternate
    paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+
+5.2.2.  Network Bandwidth
+
+   Bandwidth constraints exist most predominantly at the access network.
+   This can be constraints in the network itself or a result of rate
+   limiting due to various reasons.
+
+   Use cases:
+
+   1.  Performance Optimization: Some applications support some forms of
+       bandwidth measurements (e.g., [app-measurement]) which feed how
+       the content is accessed to using ABR.  Complementing or replacing
+       these measurements with explicit signals will improve overall
+       network performance and can help optimize the data transfer.
+       Signaling bandwidth availability allows hosts to avoid
+       contributing to network congestion.
+
+   2.  Dynamic Adaptation: When the network informs the host about
+       available bandwidth, the host can dynamically adjust its data
+       transmission rate.
+
+   3.  Efficient Resource Utilization: Knowing available bandwidth helps
+       the host allocate resources efficiently.
+
+   4.  Auto-Scaling Applications: Cloud-based applications can auto-
+       scale based on available bandwidth.
+
+   5.  Rate Limiting: Monthly data quotas on cellular networks can be
+       easily exceeded by video streaming, in particular, if the client
+       chooses excessively high quality or routinely abandons watching
+       videos that were downloaded.  The network can assist the client
+       by informing the client of the network's bandwidth policy.
+
+   Requirement: REQ-NETWORK-THROUGHPUT: A mechanism to signal the
+   available network throughput to interested hosts, including changes
+   to throughput.
+
+5.2.3.  Network Rate Limiting Policies
+
+   Traffic exchanged over a network attachment may be subject to rate-
+   limit policies.  These policies may be intentional policies (e.g.,
+   enforced as part of the activation of the network attachment and
+   typically agreed upon service subscription) or be reactive policies
+   (e.g., enforced temporarily to manage an overload or during a DDoS
+   attack mitigation).
+
+   Requirement: REQ-NRLP: The network shall inform the host of the Rate
+   limiting policies, as explained in
+   [I-D.brw-sconepro-rate-policy-discovery].
 
 5.3.  Server-Network Metadata
 
@@ -921,6 +976,19 @@ Acknowledgments
 
 Informative References
 
+   [app-measurement]
+              Gurel, Z. and A. C. Begen, "Bandwidth measurement for
+              QUIC", 2024, <https://datatracker.ietf.org/doc/slides-119-
+              moq-bandwidth-measurement-for-quic/>.
+
+   [I-D.brw-sconepro-rate-policy-discovery]
+              Boucadair, M., Wing, D., Reddy.K, T., Rajagopalan, S., and
+              G. S. Mishra, "Discovery of Network Rate-Limit Policies
+              (NRLPs)", Work in Progress, Internet-Draft, draft-brw-
+              sconepro-rate-policy-discovery-01, 7 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-brw-sconepro-
+              rate-policy-discovery-01>.
+
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
@@ -933,8 +1001,8 @@ Informative References
               and B. Wu, "YANG Data Models for Bearers and 'Attachment
               Circuits'-as-a-Service (ACaaS)", Work in Progress,
               Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-
-              12, 14 May 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-opsawg-teas-attachment-circuit-12>.
+              13, 29 May 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-teas-attachment-circuit-13>.
 
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
