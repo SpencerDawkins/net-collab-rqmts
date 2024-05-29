@@ -86,6 +86,16 @@ informative:
     title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
     date: October 2020
 
+  app-measurement:
+        title: "Bandwidth measurement for QUIC"
+        date: 2024
+        author:
+        -
+          fullname: Zafer Gurel
+        -
+          fullname: Ali C. Begen
+        target: https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/
+
 
 --- abstract
 
@@ -313,6 +323,7 @@ Requirements:
 Examples: Virtual Apps and Desktops.
 
 Use cases:
+
   1. Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).
 
   2. File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.
@@ -443,7 +454,9 @@ Some use cases benefit from server – network metadata exchanges ({{server-netw
 
 For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
 
-REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
+Requirement:
+
+  REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
 
 
 ## Host-Network Metadata {#host-network}
@@ -480,19 +493,43 @@ Requirements: The requirements vary based on use case and user preference. The r
 
 ### Assisted Offload
 
-   There are cases (crisis) where "normal" network resources cannot be
-   used at maximum and, thus, a network would seek to reduce or offload
-   some of the traffic during these events -- often called 'reactive
-   traffic policy'.  An example of such use case is cellular networks
-   that are overly used (and radio resources exhausted) such as a large
-   collection of people (e.g., parade, sporting event), or such as a
-   partial radio network outage (e.g., tower power outage).  During such
-   a condition, an alternative network attachment may be available to
-   the host (e.g., Wi-Fi).
+There are cases (crisis) where "normal" network resources cannot be
+used at maximum and, thus, a network would seek to reduce or offload
+some of the traffic during these events -- often called 'reactive
+traffic policy'.  An example of such use case is cellular networks
+that are overly used (and radio resources exhausted) such as a large
+collection of people (e.g., parade, sporting event), or such as a
+partial radio network outage (e.g., tower power outage).  During such
+a condition, an alternative network attachment may be available to
+the host (e.g., Wi-Fi).
 
-   Network-to-host signals are useful to put in place adequate traffic
-   distribution policies on the host (e.g., prefer the use of alternate paths,
-   offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+Network-to-host signals are useful to put in place adequate traffic
+distribution policies on the host (e.g., prefer the use of alternate paths,
+offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+
+### Network Bandwidth
+
+Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.
+
+Use cases:
+
+  1. Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., {{app-measurement}}) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.
+
+  2. Dynamic Adaptation: When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate.
+
+  3. Efficient Resource Utilization: Knowing available bandwidth helps the host allocate resources efficiently.
+
+  4. Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.
+
+  5. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
+
+Requirement: REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+
+### Network Rate Limiting Policies {#nrlp}
+
+Traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
+
+Requirement: REQ-NRLP: The network shall inform the host of the Rate limiting policies, as explained in {{?I-D.brw-sconepro-rate-policy-discovery}}.
 
 ## Server-Network Metadata {#server-network}
 
