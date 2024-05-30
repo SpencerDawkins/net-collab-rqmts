@@ -263,12 +263,6 @@ client to the ISP router (requirement: REQ-CLIENT-DECIDES).
 
 Examples: live broadcast, on-demand video streaming
 
-Use cases:
-
-  1. In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
-
-  2. Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
-
 Requirements:
 
   REQ-MEDIA-KEYFRAME:
@@ -278,6 +272,11 @@ full frames can be indicated to the network.
   REQ-MEDIA-AV-SEPARATE:
   :  Audio can be prioritized differently than video.
 
+Use cases:
+
+  1. In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
+
+  2. Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
 
 ## Interactive Media {#uc-interactive}
 
@@ -285,15 +284,15 @@ Interactive media includes content that a user can actively engage with and resu
 
 Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR).
 
-Use cases:
-
-  1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
-
 Requirements:
 
   REQ-PACKET-NATURE:
   : The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
 per-packet signals, which prevents denial of service of mis-marked incoming flows.
+
+Use cases:
+
+  1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
 
 ## User Preferences {#uc-preferences}
 
@@ -503,7 +502,7 @@ This eventually causes all flows to be marked as important, or -- more likely --
 
 However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
 
-There is no requirement associated with this use-case.
+There is no requirement associated with this use case.
 
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
@@ -515,7 +514,7 @@ Other applications, as mentioned in {{uc}}, such as gaming and remote desktop al
 
 Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.
 
-Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
+Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.
 
 Requirements: The requirements vary based on use case and user preference. The requirements listed in {{uc}} are applicable here.
@@ -544,6 +543,14 @@ Bandwidth constraints exist most predominantly at the access network. This can b
 
 Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
 
+Requirements:
+
+REQ-NETWORK-THROUGHPUT:
+:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+
+REQ-NRLP:
+: The network shall inform the host of the Rate limiting policies
+
 Use cases:
 
   1. Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., {{app-measurement}}) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.
@@ -555,15 +562,6 @@ Use cases:
   4. Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.
 
   5. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
-
-Requirements:
-
-REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
-
-REQ-NRLP:
-: The network shall inform the host of the Rate limiting policies
-
 
 ## Server-Network Metadata {#server-network}
 
@@ -605,7 +603,7 @@ Importance may be used to determine drop priority of a media frame in cases of e
 Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
 As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
 
-There is no requirement associated with this use-case.
+There is no requirement associated with this use case.
 
 ### Tolerance to Delay {#delay}
 
