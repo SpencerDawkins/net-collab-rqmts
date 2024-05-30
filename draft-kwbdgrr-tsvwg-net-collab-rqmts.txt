@@ -114,8 +114,7 @@ Table of Contents
        5.1.2.  Priority within a Flow (Intra-Flow)
      5.2.  Network-Host Metadata
        5.2.1.  Assisted Offload
-       5.2.2.  Network Bandwidth
-       5.2.3.  Network Rate Limiting Policies
+       5.2.2.  Network Bandwidth & Network Rate Limiting Policies
      5.3.  Server-Network Metadata
        5.3.1.  Identification of Media Frames and Streams
        5.3.2.  Identification of Traffic Type without Disclosure of
@@ -780,11 +779,18 @@ Table of Contents
    distribution policies on the host (e.g., prefer the use of alternate
    paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
-5.2.2.  Network Bandwidth
+5.2.2.  Network Bandwidth & Network Rate Limiting Policies
 
    Bandwidth constraints exist most predominantly at the access network.
    This can be constraints in the network itself or a result of rate
    limiting due to various reasons.
+
+   Also, traffic exchanged over a network attachment may be subject to
+   rate-limit policies.  These policies may be intentional policies
+   (e.g., enforced as part of the activation of the network attachment
+   and typically agreed upon service subscription) or be reactive
+   policies (e.g., enforced temporarily to manage an overload or during
+   a DDoS attack mitigation).
 
    Use cases:
 
@@ -812,22 +818,13 @@ Table of Contents
        videos that were downloaded.  The network can assist the client
        by informing the client of the network's bandwidth policy.
 
-   Requirement: REQ-NETWORK-THROUGHPUT: A mechanism to signal the
-   available network throughput to interested hosts, including changes
-   to throughput.
+   Requirements:
 
-5.2.3.  Network Rate Limiting Policies
+   REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network
+      throughput to interested hosts, including changes to throughput.
 
-   Traffic exchanged over a network attachment may be subject to rate-
-   limit policies.  These policies may be intentional policies (e.g.,
-   enforced as part of the activation of the network attachment and
-   typically agreed upon service subscription) or be reactive policies
-   (e.g., enforced temporarily to manage an overload or during a DDoS
-   attack mitigation).
-
-   Requirement: REQ-NRLP: The network shall inform the host of the Rate
-   limiting policies, as explained in
-   [I-D.brw-sconepro-rate-policy-discovery].
+   REQ-NRLP:  The network shall inform the host of the Rate limiting
+      policies
 
 5.3.  Server-Network Metadata
 
@@ -989,14 +986,6 @@ Informative References
               Gurel, Z. and A. C. Begen, "Bandwidth measurement for
               QUIC", 2024, <https://datatracker.ietf.org/doc/slides-119-
               moq-bandwidth-measurement-for-quic/>.
-
-   [I-D.brw-sconepro-rate-policy-discovery]
-              Boucadair, M., Wing, D., Reddy.K, T., Rajagopalan, S., and
-              G. S. Mishra, "Discovery of Network Rate-Limit Policies
-              (NRLPs)", Work in Progress, Internet-Draft, draft-brw-
-              sconepro-rate-policy-discovery-01, 7 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-brw-sconepro-
-              rate-policy-discovery-01>.
 
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
