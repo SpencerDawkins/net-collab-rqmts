@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 30 November 2024                           Cloud Software Group
+Expires: 1 December 2024                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 30 November 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             29 May 2024
+                                                             30 May 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2024.
+   This Internet-Draft will expire on 1 December 2024.
 
 Copyright Notice
 
@@ -118,8 +118,8 @@ Table of Contents
        5.2.3.  Network Rate Limiting Policies
      5.3.  Server-Network Metadata
        5.3.1.  Identification of Media Frames and Streams
-       5.3.2.  Identification of Traffic Type without Disclosure the
-               Application
+       5.3.2.  Identification of Traffic Type without Disclosure of
+               the Application
        5.3.3.  Relative Priority
        5.3.4.  Tolerance to Delay
        5.3.5.  Burst Indication
@@ -565,7 +565,7 @@ Table of Contents
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
-   content and the identity of the user.  It should however be noted
+   content and the identity of the user.  It should, however, be noted
    that media flows (e.g., encrypted video payloads in SRTP) exhibit a
    pattern of bursts and intervals that amounts to a signature and is
    vulnerable to frequency analysis.  To avoid this kind of frequency
@@ -573,15 +573,10 @@ Table of Contents
    multiplexed differently to each user/recipient.  This may be possible
    in transports like QUIC which allows flexibility in scheduling each
    stream.  Transports like QUIC also fully encrypt the entire stream
-   and therefore no media headers are observable on path either.  The
-   security aspects of the media payload/ transport are not in the scope
-   of these requirements and is described here only to provide context
+   and, therefore, no media headers are observable on-path either.  The
+   security aspects of the media payload / transport are not in the
+   scope of this document and is described here only to provide context
    for metadata privacy.
-
-   Privacy considerations for the metadata itself should ensure that no
-   additional information about the content is disclosed to the network,
-   and no information about the user of the content is disclosed to the
-   network or server.
 
    Some metadata (e.g., the size of a burst of packets, sequence number,
    and timestamp) can be readily observed or inferred by entities along
@@ -589,7 +584,7 @@ Table of Contents
    sequence numbers and timestamps are typically visible in the clear-
    text headers of protocols (e.g., TCP, RTP, or SRTP) they are not
    directly observable in encrypted protocols such as QUIC.  All
-   metadata sent from the server to the wireless router, including these
+   metadata sent from the server to the network, including these
    elements and others, are vulnerable to modification while in transit.
    Only an on-path attacker can modify on-path metadata.  Such an
    attacker could engage in other malicious activities, like corrupting
@@ -602,8 +597,22 @@ Table of Contents
    compromise user privacy or allow unauthorized entities to infer
    sensitive information about the data being transmitted.
 
-   Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no
-   additional information about the IP packet.
+   Requirements:
+
+   REQ-PRIVACY-ADDITIONAL:  An on-path observer obtains no additional
+      information about the IP packet.
+
+   REQ-SIGNALING-AVOIDANCE:  Leveraging previous experience [RFC9049],
+      the folliwing is not required to make use of the collaborative
+      signaling:
+
+      *  Reveal the application identity.
+
+      *  Expose the application cause (or 'reason') to signal metadata.
+
+      *  Reveal server identity.
+
+      *  Inspect client-to-server encrypted payload by network elements.
 
 4.6.  Scalability
 
@@ -853,7 +862,7 @@ Table of Contents
 
    REQ-FRAME-END: Indicate packet containing end of media frame.
 
-5.3.2.  Identification of Traffic Type without Disclosure the
+5.3.2.  Identification of Traffic Type without Disclosure of the
         Application
 
    Different nature/types of traffic can be part of the same 5-tuple
@@ -992,9 +1001,9 @@ Informative References
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
-              Internet-Draft, draft-ietf-moq-transport-03, 4 March 2024,
+              Internet-Draft, draft-ietf-moq-transport-04, 29 May 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-moq-
-              transport-03>.
+              transport-04>.
 
    [I-D.ietf-opsawg-teas-attachment-circuit]
               Boucadair, M., Roberts, R., de Dios, O. G., Barguil, S.,
