@@ -516,9 +516,11 @@ Network-to-host signals are useful to put in place adequate traffic
 distribution policies on the host (e.g., prefer the use of alternate paths,
 offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
-### Network Bandwidth
+### Network Bandwidth & Network Rate Limiting Policies {#nrlp}
 
 Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.
+
+Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
 
 Use cases:
 
@@ -532,13 +534,14 @@ Use cases:
 
   5. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
 
-Requirement: REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+Requirements:
 
-### Network Rate Limiting Policies {#nrlp}
+REQ-NETWORK-THROUGHPUT:
+:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
 
-Traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
+REQ-NRLP:
+: The network shall inform the host of the Rate limiting policies
 
-Requirement: REQ-NRLP: The network shall inform the host of the Rate limiting policies, as explained in {{?I-D.brw-sconepro-rate-policy-discovery}}.
 
 ## Server-Network Metadata {#server-network}
 
