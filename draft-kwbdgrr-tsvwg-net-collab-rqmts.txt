@@ -353,6 +353,15 @@ Table of Contents
 
    Examples: live broadcast, on-demand video streaming
 
+   Requirements:
+
+   REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
+      which need to be distinguished so that full frames can be
+      indicated to the network.
+
+   REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
+      video.
+
    Use cases:
 
    1.  In loss-prone networks or during reactive policy events,
@@ -369,15 +378,6 @@ Table of Contents
        payload is not encrypted, the network has no means to distinguish
        these different requirements.
 
-   Requirements:
-
-   REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
-      which need to be distinguished so that full frames can be
-      indicated to the network.
-
-   REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
-      video.
-
 3.2.  Interactive Media
 
    Interactive media includes content that a user can actively engage
@@ -387,17 +387,17 @@ Table of Contents
    Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
    eXtended Reality (XR).
 
-   Use cases:
-
-   1.  A mobile/roaming user prioritizes audio over video during a VoIP
-       call to have a seamless meeting experience.
-
    Requirements:
 
    REQ-PACKET-NATURE:  The receiver indicates that a flow is interactive
       and requests that the network honors the incoming flow's per-
       packet signals, which prevents denial of service of mis-marked
       incoming flows.
+
+   Use cases:
+
+   1.  A mobile/roaming user prioritizes audio over video during a VoIP
+       call to have a seamless meeting experience.
 
 3.3.  User Preferences
 
@@ -739,7 +739,7 @@ Table of Contents
    host can have both malicious and legitimate applications, and the
    remote peers can also be malicious and benign.
 
-   There is no requirement associated with this use-case.
+   There is no requirement associated with this use case.
 
 5.1.2.  Priority within a Flow (Intra-Flow)
 
@@ -766,7 +766,7 @@ Table of Contents
 
    Without a signaling in place between a receiving host and its
    network, remote peers are able to mark every packet of a flow as
-   important, causing much the same problem as the previous use-case.
+   important, causing much the same problem as the previous use case.
    Eventually, when all packets of every flow are marked as important,
    there is no differentiation between packets within a flow, rendering
    the network unable to improve reactive policy decisions.
@@ -806,6 +806,14 @@ Table of Contents
    policies (e.g., enforced temporarily to manage an overload or during
    a DDoS attack mitigation).
 
+   Requirements:
+
+   REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network
+      throughput to interested hosts, including changes to throughput.
+
+   REQ-NRLP:  The network shall inform the host of the Rate limiting
+      policies
+
    Use cases:
 
    1.  Performance Optimization: Some applications support some forms of
@@ -831,14 +839,6 @@ Table of Contents
        chooses excessively high quality or routinely abandons watching
        videos that were downloaded.  The network can assist the client
        by informing the client of the network's bandwidth policy.
-
-   Requirements:
-
-   REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network
-      throughput to interested hosts, including changes to throughput.
-
-   REQ-NRLP:  The network shall inform the host of the Rate limiting
-      policies
 
 5.3.  Server-Network Metadata
 
@@ -902,7 +902,7 @@ Table of Contents
    5-tuple).  As with media frames, importance may be used to determine
    drop priority in cases of extreme congestion in the wireless network.
 
-   There is no requirement associated with this use-case.
+   There is no requirement associated with this use case.
 
 5.3.4.  Tolerance to Delay
 

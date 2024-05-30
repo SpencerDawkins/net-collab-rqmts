@@ -1469,29 +1469,29 @@ client needs different prioritization (e.g., video over audio or the other way a
 is only achievable by signaling that priority inversion from the
 client to the ISP router (requirement: REQ-CLIENT-DECIDES).<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">Examples: live broadcast, on-demand video streaming<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">Use cases:<a href="#section-3.1-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.1-7">
-<li id="section-3.1-7.1">
-            <p id="section-3.1-7.1.1">In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.<a href="#section-3.1-7.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li id="section-3.1-7.2">
-            <p id="section-3.1-7.2.1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-3.1-7.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-3.1-8">Requirements:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.1-9">
-          <dt id="section-3.1-9.1">REQ-MEDIA-KEYFRAME:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-9.2">
-            <p id="section-3.1-9.2.1">Video contains partial frames and full frames, which need to be distinguished so that
-full frames can be indicated to the network.<a href="#section-3.1-9.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">Requirements:<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1-7">
+          <dt id="section-3.1-7.1">REQ-MEDIA-KEYFRAME:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-7.2">
+            <p id="section-3.1-7.2.1">Video contains partial frames and full frames, which need to be distinguished so that
+full frames can be indicated to the network.<a href="#section-3.1-7.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-9.3">REQ-MEDIA-AV-SEPARATE:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-9.4">
-            <p id="section-3.1-9.4.1">Audio can be prioritized differently than video.<a href="#section-3.1-9.4.1" class="pilcrow">¶</a></p>
+<dt id="section-3.1-7.3">REQ-MEDIA-AV-SEPARATE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-7.4">
+            <p id="section-3.1-7.4.1">Audio can be prioritized differently than video.<a href="#section-3.1-7.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
+<p id="section-3.1-8">Use cases:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.1-9">
+<li id="section-3.1-9.1">
+            <p id="section-3.1-9.1.1">In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.<a href="#section-3.1-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.1-9.2">
+            <p id="section-3.1-9.2.1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-3.1-9.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
 </section>
 </div>
 <div id="uc-interactive">
@@ -1501,21 +1501,21 @@ full frames can be indicated to the network.<a href="#section-3.1-9.2.1" class="
         </h3>
 <p id="section-3.2-1">Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Use cases:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.2-4">
-<li id="section-3.2-4.1">
-            <p id="section-3.2-4.1.1">A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-3.2-5">Requirements:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.2-6">
-          <dt id="section-3.2-6.1">REQ-PACKET-NATURE:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.2-6.2">
-            <p id="section-3.2-6.2.1">The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
-per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Requirements:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.2-4">
+          <dt id="section-3.2-4.1">REQ-PACKET-NATURE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-4.2">
+            <p id="section-3.2-4.2.1">The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
+per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
+<p id="section-3.2-5">Use cases:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.2-6">
+<li id="section-3.2-6.1">
+            <p id="section-3.2-6.1.1">A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
 </section>
 </div>
 <div id="uc-preferences">
@@ -1806,7 +1806,7 @@ By signaling the relative importance of flows to a network element, the network 
 <p id="section-5.1.1-2">Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.1-3">However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-4">There is no requirement associated with this use-case.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-4">There is no requirement associated with this use case.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="intra-flow-priority">
@@ -1818,7 +1818,7 @@ This eventually causes all flows to be marked as important, or -- more likely --
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport (<span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, <span>[<a href="#I-D.ietf-moq-transport" class="cite xref">I-D.ietf-moq-transport</a>]</span>).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-2">Other applications, as mentioned in <a href="#uc" class="auto internal xref">Section 3</a>, such as gaming and remote desktop also benefit from differentiating their packets to the network.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-3">Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-4">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
+<p id="section-5.1.2-4">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-5">Requirements: The requirements vary based on use case and user preference. The requirements listed in <a href="#uc" class="auto internal xref">Section 3</a> are applicable here.<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
 </section>
@@ -1856,37 +1856,37 @@ offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#section-5.2.1-2" clas
           </h4>
 <p id="section-5.2.2-1">Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.2-2">Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-3">Use cases:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5.2.2-4">
-<li id="section-5.2.2-4.1">
-              <p id="section-5.2.2-4.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.<a href="#section-5.2.2-4.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-5.2.2-4.2">
-              <p id="section-5.2.2-4.2.1">Dynamic Adaptation: When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-5.2.2-4.3">
-              <p id="section-5.2.2-4.3.1">Efficient Resource Utilization: Knowing available bandwidth helps the host allocate resources efficiently.<a href="#section-5.2.2-4.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-5.2.2-4.4">
-              <p id="section-5.2.2-4.4.1">Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-5.2.2-4.5">
-              <p id="section-5.2.2-4.5.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#section-5.2.2-4.5.1" class="pilcrow">¶</a></p>
-</li>
-          </ol>
-<p id="section-5.2.2-5">Requirements:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-5.2.2-6">
-            <dt id="section-5.2.2-6.1">REQ-NETWORK-THROUGHPUT:</dt>
-            <dd style="margin-left: 1.5em" id="section-5.2.2-6.2">
-              <p id="section-5.2.2-6.2.1">A mechanism to signal the available network throughput to interested hosts, including changes to throughput.<a href="#section-5.2.2-6.2.1" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">Requirements:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5.2.2-4">
+            <dt id="section-5.2.2-4.1">REQ-NETWORK-THROUGHPUT:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.2.2-4.2">
+              <p id="section-5.2.2-4.2.1">A mechanism to signal the available network throughput to interested hosts, including changes to throughput.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-5.2.2-6.3">REQ-NRLP:</dt>
-            <dd style="margin-left: 1.5em" id="section-5.2.2-6.4">
-              <p id="section-5.2.2-6.4.1">The network shall inform the host of the Rate limiting policies<a href="#section-5.2.2-6.4.1" class="pilcrow">¶</a></p>
+<dt id="section-5.2.2-4.3">REQ-NRLP:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.2.2-4.4">
+              <p id="section-5.2.2-4.4.1">The network shall inform the host of the Rate limiting policies<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
+<p id="section-5.2.2-5">Use cases:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.2.2-6">
+<li id="section-5.2.2-6.1">
+              <p id="section-5.2.2-6.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.<a href="#section-5.2.2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.2">
+              <p id="section-5.2.2-6.2.1">Dynamic Adaptation: When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate.<a href="#section-5.2.2-6.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.3">
+              <p id="section-5.2.2-6.3.1">Efficient Resource Utilization: Knowing available bandwidth helps the host allocate resources efficiently.<a href="#section-5.2.2-6.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.4">
+              <p id="section-5.2.2-6.4.1">Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.<a href="#section-5.2.2-6.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.5">
+              <p id="section-5.2.2-6.5.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#section-5.2.2-6.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
 </section>
 </div>
 </section>
@@ -1947,7 +1947,7 @@ The application server determines the importance based on the media encoded in t
 Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
 As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-3">There is no requirement associated with this use-case.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3.3-3">There is no requirement associated with this use case.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delay">
