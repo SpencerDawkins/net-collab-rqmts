@@ -100,9 +100,9 @@ informative:
 --- abstract
 
 Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
-Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
+Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
-This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
+This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
 
 --- middle
 
@@ -110,14 +110,14 @@ This document lists some use cases that demonstrate the need for a mechanism to 
 
 Wireless networks inherently experience large variations in link quality due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
-These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
-End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.
+These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate.
+End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}).
 
 It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
 
-With not fully encrypted packets, networks may used some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
-Implicit signals are not desirable as they leads to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
+With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
+Implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.
 
 Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
@@ -130,7 +130,7 @@ There may be preferences that an application may wish to convey, such as a highe
 With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
 
 Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
-Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.
+Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~
                      |
@@ -153,7 +153,7 @@ Information in unencrypted media packets and headers that wireless networks have
 ~~~~~~~~
 {: #Figure-e2e title=”E2E Media Transport Overview”}
 
-{{Figure-e2e}} shows where such bandwidth and performance constraints usually exist with a “B” (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
+{{Figure-e2e}} shows where such bandwidth and performance constraints usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
 When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.
 
@@ -201,6 +201,9 @@ Some of the complications that are induced by the phenomena discussed above may 
 # Definitions
 
 The document makes use of the following terms:
+
+Discard preference:
+: Is an indication of drop preference within a flow when there are no sufficient network resources to handle all competing packets of that same flow.
 
 Intentional Management:
 : Network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
@@ -268,10 +271,12 @@ Use cases:
 
 Requirements:
 
-  REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
+  REQ-MEDIA-KEYFRAME:
+  : Video contains partial frames and full frames, which need to be distinguished so that
 full frames can be indicated to the network.
 
-  REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.
+  REQ-MEDIA-AV-SEPARATE:
+  :  Audio can be prioritized differently than video.
 
 
 ## Interactive Media {#uc-interactive}
@@ -286,7 +291,8 @@ Use cases:
 
 Requirements:
 
-  REQ-PACKET-NATURE: The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
+  REQ-PACKET-NATURE:
+  : The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
 per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 ## User Preferences {#uc-preferences}
@@ -298,7 +304,8 @@ Determination of such preferences is outside of the scope of this document.
 
 Requirements:
 
-  REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.
+  REQ-CLIENT-DECIDES:
+  : The receiving client determines importance of packets it receives, as the client may have changing needs over time.
 
 Use cases:
 
@@ -316,9 +323,11 @@ In cases where the wireless network has to drop or delay processing, all packets
 
 Requirements:
 
-  REQ-PACKET-RELIABILITY: Indicate if a packet is treated as reliable or unreliable by the application.
+  REQ-PACKET-RELIABILITY:
+  : Indicate if a packet is treated as reliable or unreliable by the application.
 
-  REQ-PACKET-NATURE: Indicate if a packet belongs to bulk traffic or interactive traffic.
+  REQ-PACKET-NATURE:
+  : Indicate if a packet belongs to bulk traffic or interactive traffic.
 
 Examples: Virtual Apps and Desktops.
 
@@ -373,7 +382,9 @@ Most importantly, the metadata can be used by the network to prioritize traffic 
 It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
 Requirement:
-  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
+
+  REQ-SCOPED-METADATA:
+  : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
 
 ## Application Interference {#app-interference}
 
@@ -382,7 +393,9 @@ Applications that have access to a resource-quota information may adopt an aggre
 This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
 Requirement:
-  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
+
+  REQ-SIGNAL-EXPOSURE-FAIRNESS:
+  : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
 
 ## Privacy Considerations {#privacy}
 
@@ -424,7 +437,10 @@ Per flow information (state) at a wireless router for optimizing the flow can ne
 
 The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
 
-Requirement:  REQ-ISP-SCALE: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
+Requirement:
+
+REQ-ISP-SCALE:
+: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
 
 ## Session Continuity {#continuity}
 
@@ -434,7 +450,10 @@ The frequency of handovers increases when a user moves faster or when the media 
 
 During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.
 
-Requirement: REQ-CONTINUITY: Handover from one radio or router to another should continue to provide same service level.
+Requirement:
+
+REQ-CONTINUITY:
+: Handover from one radio or router to another should continue to provide same service level.
 
 
 ## Abuse and Constraints {#abuse}
@@ -445,9 +464,11 @@ Such a mechanism might be simple, for example, a cellular network might allow on
 
 Requirements:
 
-  REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
+  REQ-SIGNAL-VALIDATION:
+  : The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
 
-  REQ-CLIENT-VALIDATION: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
+  REQ-CLIENT-VALIDATION:
+  : The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
 
 # On-path Metadata Requirements {#metadata-req}
 
@@ -465,7 +486,8 @@ For the requirements that follow, the assumption is that the client agrees to th
 
 Requirement:
 
-  REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
+  REQ-PACKET-SELF:
+  : Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
 
 
 ## Host-Network Metadata {#host-network}
@@ -559,11 +581,14 @@ In cases where the wireless network has to drop or delay processing, all packets
 
 Requirements:
 
-REQ-FRAME-START: Indicate packet containing start of media frame.
+REQ-FRAME-START:
+: Indicate packet containing start of media frame.
 
-REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.
+REQ-FRAME-MIDDLE:
+: Indicate packet containing middle(s) of media frame.
 
-REQ-FRAME-END: Indicate packet containing end of media frame.
+REQ-FRAME-END:
+: Indicate packet containing end of media frame.
 
 ### Identification of Traffic Type without Disclosure of the Application {#TrafficType}
 
@@ -591,6 +616,8 @@ Even when the media payload is not encrypted, the network has no means to distin
 
 If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
 
+Requirements:
+
 REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in {{mixed-traffic}}.
 
 ### Burst Indication {#burst}
@@ -603,7 +630,8 @@ Wireless networks on the other hand cannot reserve resources for the maximum bur
 The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
 The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
 
-REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+REQ-BURST-INDICATOR:
+: Client indicates this flow's maximum burst to
 ISP, and ISP agrees it can handle that burst size.  (but what does ISP
 router do with the burst? Needs to be described above!)
 
