@@ -385,6 +385,17 @@ Requirement:
   REQ-SCOPED-METADATA:
   : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
 
+
+## Multiple Bottlenecks
+
+Whereas models often show a single bottleneck, there are frequently
+two (or more) bottlenecks: the ISP network and within the subscriber
+network (e.g., Wi-Fi link).  As such, all bottlenecks near the
+subscriber should be able to benefit from network/host collaboration.
+
+Requirement: REQ-MULTIPLE-BOTTLENECKS should be supported.
+
+
 ## Application Interference {#app-interference}
 
 Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.
@@ -661,5 +672,6 @@ Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.
 : Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
+Thanks to Luis Miguel Contreras for his review and comments.
 
 --- back
