@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-30T01:10:06.442703+00:00",
+  "timestamp": "2024-06-02T01:14:28.599344+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -292,15 +292,15 @@
       "id": "I_kwDOL0HpzM6KPgQm",
       "title": "Network to host section required?",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/37",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In https://datatracker.ietf.org/doc/html/draft-joras-sconepro-video-opt-requirements-00, the requirements seem to have a network to host part, which we haven't focused much on here (some of it is in https://github.com/boucadair/draft-xxx-ac-rate-policy-discovery/blob/main/draft-brw-sconepro-rate-policy-discovery.md). Do we need to add a section iterating the requirements for network to host signaling to have a more holistic picture?",
       "createdAt": "2024-05-27T14:42:30Z",
-      "updatedAt": "2024-05-29T05:54:31Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-30T07:33:00Z",
+      "closedAt": "2024-05-30T07:33:00Z",
       "comments": [
         {
           "author": "danwing",
@@ -2299,24 +2299,26 @@
       "id": "PR_kwDOL0HpzM5w1gKL",
       "title": "privacy/signaling avoidance",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/39",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "@tireddy2, please check the privacy text as some text seems to be redundant. Thanks.",
       "createdAt": "2024-05-29T05:37:48Z",
-      "updatedAt": "2024-05-29T05:47:49Z",
+      "updatedAt": "2024-05-30T04:30:03Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "ad4f271869e4f959e445055a25a9afc6a7a5b1cf",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "privacy/signaling-avoidance",
       "headRefOid": "d6ca46b551f07b0a72d309e1d5836eba9c201fe2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-05-30T04:30:03Z",
+      "mergedAt": "2024-05-30T04:30:03Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "d27f2da9bc5485d790336033d39560e74ad370e2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2372,6 +2374,262 @@
           "body": "",
           "createdAt": "2024-05-29T18:27:44Z",
           "updatedAt": "2024-05-29T18:27:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOL0HpzM5w9Tjw",
+      "title": "remove solution specs + merge two sections",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/41",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-30T04:36:26Z",
+      "updatedAt": "2024-05-30T05:02:40Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d27f2da9bc5485d790336033d39560e74ad370e2",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-19",
+      "headRefOid": "37d2bae875b12af4a3860616541570e852ecbdec",
+      "closedAt": "2024-05-30T05:02:40Z",
+      "mergedAt": "2024-05-30T05:02:40Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "6e8f259f2e79d06e107f485b1ca8d7f4b234b4f7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58aJS-",
+          "commit": {
+            "abbreviatedOid": "37d2bae"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T04:58:47Z",
+          "updatedAt": "2024-05-30T04:58:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "PR_kwDOL0HpzM5xBTaf",
+      "title": "add discard preference definition + ref + fix some nits",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/42",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-30T14:33:55Z",
+      "updatedAt": "2024-05-30T15:49:59Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "6e8f259f2e79d06e107f485b1ca8d7f4b234b4f7",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-20",
+      "headRefOid": "18d3e4568b5690a63e3127428b4f551ff20e51b4",
+      "closedAt": "2024-05-30T15:49:59Z",
+      "mergedAt": "2024-05-30T15:49:59Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "dad9670e857e50b91eeee52d37de29d360303f77"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58fErG",
+          "commit": {
+            "abbreviatedOid": "18d3e45"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T14:58:24Z",
+          "updatedAt": "2024-05-30T14:58:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM58fwp5",
+          "commit": {
+            "abbreviatedOid": "18d3e45"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T15:45:20Z",
+          "updatedAt": "2024-05-30T15:45:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOL0HpzM5xCaBc",
+      "title": "nits - consistent ordering of use cases and requirements",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/43",
+      "state": "MERGED",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-30T17:08:30Z",
+      "updatedAt": "2024-05-30T17:31:40Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "dad9670e857e50b91eeee52d37de29d360303f77",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sri-nits",
+      "headRefOid": "04c1723b699292f54d9e797e9dc229ae224825a8",
+      "closedAt": "2024-05-30T17:31:32Z",
+      "mergedAt": "2024-05-30T17:31:32Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "e02121fd9a1c473cefc93b865b5baeff017d6075"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Seems this version is not based on the latest version in the main. Please rebase. Thanks",
+          "createdAt": "2024-05-30T17:19:01Z",
+          "updatedAt": "2024-05-30T17:19:01Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Done with https://github.com/SpencerDawkins/net-collab-rqmts/pull/44.",
+          "createdAt": "2024-05-30T17:21:06Z",
+          "updatedAt": "2024-05-30T17:21:06Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks Med!",
+          "createdAt": "2024-05-30T17:31:39Z",
+          "updatedAt": "2024-05-30T17:31:39Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58gt8q",
+          "commit": {
+            "abbreviatedOid": "04c1723"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T17:21:59Z",
+          "updatedAt": "2024-05-30T17:21:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "PR_kwDOL0HpzM5xCgIk",
+      "title": "sync with main",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/44",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-30T17:19:41Z",
+      "updatedAt": "2024-05-30T17:21:30Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "sri-nits",
+      "baseRefOid": "f9e22e3521445cdb908c81873c1b7f9f77ace052",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "main",
+      "headRefOid": "dad9670e857e50b91eeee52d37de29d360303f77",
+      "closedAt": "2024-05-30T17:21:30Z",
+      "mergedAt": "2024-05-30T17:21:30Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "04c1723b699292f54d9e797e9dc229ae224825a8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58gstJ",
+          "commit": {
+            "abbreviatedOid": "dad9670"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T17:20:56Z",
+          "updatedAt": "2024-05-30T17:20:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "PR_kwDOL0HpzM5xJ7x0",
+      "title": "multiple bottlenecks from Luis review",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/45",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-31T18:19:29Z",
+      "updatedAt": "2024-06-01T10:26:42Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "e02121fd9a1c473cefc93b865b5baeff017d6075",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "bottlenecks",
+      "headRefOid": "39808a727ce73838ee4e685591f592e51b1a8aff",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58skl8",
+          "commit": {
+            "abbreviatedOid": "39808a7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks, Dan.",
+          "createdAt": "2024-06-01T08:57:45Z",
+          "updatedAt": "2024-06-01T08:57:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM58sozP",
+          "commit": {
+            "abbreviatedOid": "39808a7"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-01T10:26:42Z",
+          "updatedAt": "2024-06-01T10:26:42Z",
           "comments": []
         }
       ]
