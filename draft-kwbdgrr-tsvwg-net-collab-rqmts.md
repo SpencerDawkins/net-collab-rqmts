@@ -497,8 +497,10 @@ For the requirements that follow, the assumption is that the client agrees to th
 Requirement:
 
   REQ-PACKET-SELF:
-  : Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.
+  : Packet importance is indicated by the packet itself.
 
+Note the importance indication should not reveal additional information about the payload to unauthorized
+parties; see REQ-PRIVACY-ADDITIONAL.
 
 ## Host-Network Metadata {#host-network}
 
