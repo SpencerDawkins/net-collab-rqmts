@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 1 December 2024                            Cloud Software Group
+Expires: 5 December 2024                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 1 December 2024                            Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             30 May 2024
+                                                             3 June 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 December 2024.
+   This Internet-Draft will expire on 5 December 2024.
 
 Copyright Notice
 
@@ -102,11 +102,12 @@ Table of Contents
      4.1.  Policy Enforcement
      4.2.  Redundant Functions and Classification Complications
      4.3.  Metadata Scope
-     4.4.  Application Interference
-     4.5.  Privacy Considerations
-     4.6.  Scalability
-     4.7.  Session Continuity
-     4.8.  Abuse and Constraints
+     4.4.  Multiple Bottlenecks
+     4.5.  Application Interference
+     4.6.  Privacy Considerations
+     4.7.  Scalability
+     4.8.  Session Continuity
+     4.9.  Abuse and Constraints
    5.  On-path Metadata Requirements
      5.1.  Host-Network Metadata
        5.1.1.  Priority between Flows (Inter-flow)
@@ -552,7 +553,16 @@ Table of Contents
       metadata for the sake of better interoperability should be
       supported.
 
-4.4.  Application Interference
+4.4.  Multiple Bottlenecks
+
+   Whereas models often show a single bottleneck, there are frequently
+   two (or more) bottlenecks: the ISP network and within the subscriber
+   network (e.g., Wi-Fi link).  As such, all bottlenecks near the
+   subscriber should be able to benefit from network/host collaboration.
+
+   Requirement: REQ-MULTIPLE-BOTTLENECKS should be supported.
+
+4.5.  Application Interference
 
    Applications that have access to a resource-quota information may
    adopt an aggressive behavior (compared to those that don't have
@@ -569,7 +579,7 @@ Table of Contents
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-4.5.  Privacy Considerations
+4.6.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -622,7 +632,7 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-4.6.  Scalability
+4.7.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -641,7 +651,7 @@ Table of Contents
       router has to maintain for each additional media flow it handles
       should be very low or none.
 
-4.7.  Session Continuity
+4.8.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -658,7 +668,7 @@ Table of Contents
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
 
-4.8.  Abuse and Constraints
+4.9.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -963,7 +973,7 @@ Table of Contents
 
 8.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 4.5.  The
+   Security aspects for the metadata are discussed in Section 4.6.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 5.
 
@@ -994,7 +1004,8 @@ Acknowledgments
       Ingemar Johansson's suggestions on fast fading (which L4S handles)
       and dramatic drops in wireless accesses have been helpful to
       identify the issues.  Thanks to Hang Shi for the review and
-      comments on host-to-network signaling.
+      comments on host-to-network signaling.  Thanks to Luis Miguel
+      Contreras for his review and comments.
 
 Informative References
 
