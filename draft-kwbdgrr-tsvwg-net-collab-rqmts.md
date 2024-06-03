@@ -500,7 +500,7 @@ Requirement:
   : Packet importance is indicated by the packet itself.
 
 Note the importance indication should not reveal additional information about the payload to unauthorized
-parties; see REQ-PRIVACY-ADDITIONAL.
+parties (see REQ-PRIVACY-ADDITIONAL in {{privacy}}).
 
 ## Host-Network Metadata {#host-network}
 
