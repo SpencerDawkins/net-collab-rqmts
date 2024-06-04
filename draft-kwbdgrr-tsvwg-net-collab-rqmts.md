@@ -424,7 +424,7 @@ on-path attacker can modify on-path metadata. Such an attacker could engage in o
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
 as unimportant, but such changes are detectable by the receiver.
 
-It is RECOMMENDED toencrypt or obfuscate the metadata information so it is only availableto hosts and to authorized network elements. The method ofencryption or obfuscation is not described in this document butrather in other documents describing how this metadata is encodedand exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
+It is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
 
 Requirements:
 
