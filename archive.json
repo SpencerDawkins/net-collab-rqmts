@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-02T01:14:28.599344+00:00",
+  "timestamp": "2024-06-04T01:10:58.437359+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -2586,24 +2586,26 @@
       "id": "PR_kwDOL0HpzM5xJ7x0",
       "title": "multiple bottlenecks from Luis review",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/45",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-31T18:19:29Z",
-      "updatedAt": "2024-06-01T10:26:42Z",
+      "updatedAt": "2024-06-03T17:28:39Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "e02121fd9a1c473cefc93b865b5baeff017d6075",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "bottlenecks",
       "headRefOid": "39808a727ce73838ee4e685591f592e51b1a8aff",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-03T17:28:38Z",
+      "mergedAt": "2024-06-03T17:28:38Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "a0d69968b040929c9b61c1ae5431bd4d6b776e21"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2630,6 +2632,72 @@
           "body": "",
           "createdAt": "2024-06-01T10:26:42Z",
           "updatedAt": "2024-06-01T10:26:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOL0HpzM5xVC4q",
+      "title": "remove secondary requirement from REQ-PACKET-SELF, provide foward pointer reminding implementations of REQ-PRIVACY-ADDITONAL",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/46",
+      "state": "CLOSED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-03T17:27:40Z",
+      "updatedAt": "2024-06-03T17:29:49Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "e02121fd9a1c473cefc93b865b5baeff017d6075",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "obfuscation",
+      "headRefOid": "dd6d804aea0991d59bba091f420feffd4c4d5a52",
+      "closedAt": "2024-06-03T17:29:49Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOL0HpzM5xVFJr",
+      "title": "remove subtle second requirement from REQ-PACKET-SELF, and instead re\u2026",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/47",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026fer to REQ-PRIVACY-ADDITIONAL",
+      "createdAt": "2024-06-03T17:33:54Z",
+      "updatedAt": "2024-06-03T18:12:31Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "a0d69968b040929c9b61c1ae5431bd4d6b776e21",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "obfuscation2",
+      "headRefOid": "44a45eb62b4041b5089c72b7688d9dff8e4016e9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM582GrM",
+          "commit": {
+            "abbreviatedOid": "44a45eb"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-03T18:12:31Z",
+          "updatedAt": "2024-06-03T18:12:31Z",
           "comments": []
         }
       ]
