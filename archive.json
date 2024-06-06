@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-04T01:10:58.437359+00:00",
+  "timestamp": "2024-06-06T01:10:28.305376+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -2667,24 +2667,26 @@
       "id": "PR_kwDOL0HpzM5xVFJr",
       "title": "remove subtle second requirement from REQ-PACKET-SELF, and instead re\u2026",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026fer to REQ-PRIVACY-ADDITIONAL",
       "createdAt": "2024-06-03T17:33:54Z",
-      "updatedAt": "2024-06-03T18:12:31Z",
+      "updatedAt": "2024-06-04T14:28:39Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "a0d69968b040929c9b61c1ae5431bd4d6b776e21",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "obfuscation2",
       "headRefOid": "44a45eb62b4041b5089c72b7688d9dff8e4016e9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-04T14:28:39Z",
+      "mergedAt": "2024-06-04T14:28:39Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "959c69f012144b13aeeb3e495e09a971ddd241a5"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2698,6 +2700,112 @@
           "body": "",
           "createdAt": "2024-06-03T18:12:31Z",
           "updatedAt": "2024-06-03T18:12:31Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM585Ff0",
+          "commit": {
+            "abbreviatedOid": "44a45eb"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-04T05:23:29Z",
+          "updatedAt": "2024-06-04T05:23:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOL0HpzM5xb6Qz",
+      "title": "adding more language to security consideration",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/48",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-04T14:29:06Z",
+      "updatedAt": "2024-06-05T16:16:51Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "959c69f012144b13aeeb3e495e09a971ddd241a5",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "a60ac0a0d9a7717b8810dddb06f86a7ba001b349",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM58-9jo",
+          "commit": {
+            "abbreviatedOid": "cfec731"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-06-04T16:23:11Z",
+          "updatedAt": "2024-06-04T16:23:30Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nIt is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.\r\n```",
+              "createdAt": "2024-06-04T16:23:12Z",
+              "updatedAt": "2024-06-04T16:23:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM58--y3",
+          "commit": {
+            "abbreviatedOid": "a60ac0a"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-04T16:25:39Z",
+          "updatedAt": "2024-06-04T16:25:39Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Thanks Med!",
+              "createdAt": "2024-06-04T16:25:39Z",
+              "updatedAt": "2024-06-04T16:25:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59FlwE",
+          "commit": {
+            "abbreviatedOid": "a60ac0a"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-05T09:59:00Z",
+          "updatedAt": "2024-06-05T09:59:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59JgFa",
+          "commit": {
+            "abbreviatedOid": "a60ac0a"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-05T16:02:32Z",
+          "updatedAt": "2024-06-05T16:02:32Z",
           "comments": []
         }
       ]
