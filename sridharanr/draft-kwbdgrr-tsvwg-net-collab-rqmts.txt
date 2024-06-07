@@ -756,8 +756,8 @@ Table of Contents
    This eventually causes all flows to be marked as important, or --
    more likely -- such priority markings to be ignored.
 
-   However, prioritizing between flows presents the following
-   challenges:
+   However, prioritizing between flows, even for the same user/
+   subscriber, presents the following challenges:
 
    1.  Identification and authentication of legitimate applications on
        the host.  The remote peers can also be malicious and benign.
