@@ -507,14 +507,21 @@ Note REQ-PACKET-SELF should meet the requirements of {{privacy}} especially REQ-
 
 Certain flows being received by a host (or by an application on a host) are less or more important than other flows of *the same host*.
 For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.
+
 By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.
 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
 
-However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.
+However, prioritizing between flows, even for the same user/subscriber, presents the following challenges:
 
-There is no requirement associated with this use case.
+  1. Identification and authentication of legitimate applications on the host. The remote peers can also be malicious and benign.
+  2. Identifying whether the traffic belongs to a single user or multiple users from a single network attachment (e.g., tethering or LAN connected to a CPE). The network will enforce per-subscriber policies, not per-host.
+  3. Enforcing fairness to all the flows belonging to a single host. For example, it is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to (de)prioritize certain applications over all the other applications on the same host. Such unfairness can be revealed during certification or public benchmark efforts, though.
+
+Taking into account these challenges, and despite the use case is described in the document, inter-flow (de)prioritization requirements are out of the scope of this document.
+
+> Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.
 
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
