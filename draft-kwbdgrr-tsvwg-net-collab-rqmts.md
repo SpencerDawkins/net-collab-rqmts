@@ -513,7 +513,7 @@ By signaling the relative importance of flows to a network element, the network 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
 
-However, prioritizing between flows presents the following challenges:
+However, prioritizing between flows, even for the same user/subscriber, presents the following challenges:
 
   1. Identification and authentication of legitimate applications on the host. The remote peers can also be malicious and benign.
   2. Identifying if the traffic belongs to a single user or multiple users from a single host (eg. tethering).
