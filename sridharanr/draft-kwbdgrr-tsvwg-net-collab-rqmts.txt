@@ -782,8 +782,6 @@ Table of Contents
       Future versions of the document may re-consider this conclusion as
       a function of the comments received from the TSVWG.
 
-   There is no requirement associated with this use case.
-
 5.1.2.  Priority within a Flow (Intra-Flow)
 
    Interactive Audio/Video has long been using [RFC3550] which runs over
