@@ -517,7 +517,7 @@ However, prioritizing between flows, even for the same user/subscriber, presents
 
   1. Identification and authentication of legitimate applications on the host. The remote peers can also be malicious and benign.
   2. Identifying whether the traffic belongs to a single user or multiple users from a single network attachment (e.g., tethering or LAN connected to a CPE). The network will enforce per-subscriber policies, not per-host.
-  3. Enforcing fairness to all the flows belonging to a single host. For eg. It is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to prioritize certain applications over all the other applications on the same host.
+  3. Enforcing fairness to all the flows belonging to a single host. For example, it is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to (de)prioritize certain applications over all the other applications on the same host. Such unfairness can be revealed during certification or public benchmark efforts, though.
 
 Due to the above challenges, inter-flow (de)prioritization is outside the scope of this document.
 
