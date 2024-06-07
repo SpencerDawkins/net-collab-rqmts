@@ -104,10 +104,11 @@ Table of Contents
      4.3.  Metadata Scope
      4.4.  Multiple Bottlenecks
      4.5.  Application Interference
-     4.6.  Privacy Considerations
-     4.7.  Scalability
-     4.8.  Session Continuity
-     4.9.  Abuse and Constraints
+     4.6.  Exposure Handling
+     4.7.  Privacy Considerations
+     4.8.  Scalability
+     4.9.  Session Continuity
+     4.10. Abuse and Constraints
    5.  On-path Metadata Requirements
      5.1.  Host-Network Metadata
        5.1.1.  Priority between Flows (Inter-flow)
@@ -579,7 +580,38 @@ Table of Contents
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-4.6.  Privacy Considerations
+4.6.  Exposure Handling
+
+   Signaling to the network (Section 5.1, Section 5.3) and consuming the
+   signals from the network (Section 5.2) will need to be facilitated by
+   Application Programming Interfaces (APIs) for any application to use
+   them.  Signaling and retrieving of signals may not be performed at a
+   single layer.  Hence, a framework is required to abstract the
+   underlying protocol(s) and allow the application(s) to retrive/send
+   signals using a single or a set of API(s).
+
+   Some of the ways the signals/metadata could be communicated:
+
+   *  QUIC flow [I-D.eddy-sconepro-api]
+
+   *  UDP Options (e.g., [I-D.kaippallimalil-tsvwg-media-hdr-wireless],
+      [I-D.reddy-tsvwg-explcit-signal])
+
+   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
+
+   *  SCONE Protocol ([SCONEPRO])
+
+   *  QUIC CID mapping ([I-D.wing-cidfi])
+
+   *  ICMP Errors (https://mailarchive.ietf.org/arch/msg/behave/
+      ZXQ4xLYrqPB3CxLMnRNmzApK0oU/)
+
+   Requirement:
+
+   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
+      applications.
+
+4.7.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -639,7 +671,7 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-4.7.  Scalability
+4.8.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -658,7 +690,7 @@ Table of Contents
       router has to maintain for each additional media flow it handles
       should be very low or none.
 
-4.8.  Session Continuity
+4.9.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -675,7 +707,7 @@ Table of Contents
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
 
-4.9.  Abuse and Constraints
+4.10.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -732,7 +764,7 @@ Table of Contents
    REQ-PACKET-SELF:  Packet importance is indicated by the packet
       itself.
 
-   Note REQ-PACKET-SELF should meet the requirements of Section 4.6
+   Note REQ-PACKET-SELF should meet the requirements of Section 4.7
    especially REQ-PRIVACY-ADDITIONAL.
 
 5.1.  Host-Network Metadata
@@ -1004,7 +1036,7 @@ Table of Contents
 
 8.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 4.6.  The
+   Security aspects for the metadata are discussed in Section 4.7.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 5.
 
@@ -1045,6 +1077,13 @@ Informative References
               QUIC", 2024, <https://datatracker.ietf.org/doc/slides-119-
               moq-bandwidth-measurement-for-quic/>.
 
+   [I-D.eddy-sconepro-api]
+              Eddy, W., Tiwari, A., and A. Frindell, "APIs To Expose
+              SCONEPRO Metadata to Applications", Work in Progress,
+              Internet-Draft, draft-eddy-sconepro-api-02, 20 May 2024,
+              <https://datatracker.ietf.org/doc/html/draft-eddy-
+              sconepro-api-02>.
+
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
@@ -1068,6 +1107,14 @@ Informative References
               <https://datatracker.ietf.org/doc/html/draft-
               kaippallimalil-tsvwg-media-hdr-wireless-04>.
 
+   [I-D.reddy-tsvwg-explcit-signal]
+              Reddy.K, T., Wing, D., and M. Boucadair, "An Approach for
+              Encrypted Transport Protocol Path Explicit Signals", Work
+              in Progress, Internet-Draft, draft-reddy-tsvwg-explcit-
+              signal-01, 7 July 2023,
+              <https://datatracker.ietf.org/doc/html/draft-reddy-tsvwg-
+              explcit-signal-01>.
+
    [I-D.rwbr-tsvwg-signaling-use-cases]
               Rajagopalan, S., Wing, D., Boucadair, M., and T. Reddy.K,
               "Host to Network Signaling Use Cases for Collaborative
@@ -1075,6 +1122,13 @@ Informative References
               Draft, draft-rwbr-tsvwg-signaling-use-cases-02, 17 March
               2024, <https://datatracker.ietf.org/doc/html/draft-rwbr-
               tsvwg-signaling-use-cases-02>.
+
+   [I-D.wing-cidfi]
+              Wing, D., Reddy.K, T., and M. Boucadair, "Framework for
+              CID Flow Indicator (CIDFI)", Work in Progress, Internet-
+              Draft, draft-wing-cidfi-04, 14 December 2023,
+              <https://datatracker.ietf.org/doc/html/draft-wing-cidfi-
+              04>.
 
    [RFC3550]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
@@ -1095,6 +1149,11 @@ Informative References
               Time Communication Use Cases and Requirements", RFC 7478,
               DOI 10.17487/RFC7478, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7478>.
+
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8200>.
 
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
@@ -1129,6 +1188,9 @@ Informative References
               "Considerations on Application - Network Collaboration
               Using Path Signals", RFC 9419, DOI 10.17487/RFC9419, July
               2023, <https://www.rfc-editor.org/rfc/rfc9419>.
+
+   [SCONEPRO] "SCONEPRO Working Group Charter", 2 February 2024,
+              <https://datatracker.ietf.org/group/sconepro/about/>.
 
    [TR.23.501-3GPP]
               "3rd Generation Partnership Project; Technical
