@@ -743,10 +743,11 @@ Table of Contents
    host) are less or more important than other flows of _the same host_.
    For example, a host downloading a software update is generally
    considered less important than another host doing interactive audio/
-   video or gaming.  By signaling the relative importance of flows to a
-   network element, the network element can (de-)prioritize those flows
-   to best accommodate the needs of the various applications on a same
-   host.
+   video or gaming.
+
+   By signaling the relative importance of flows to a network element,
+   the network element can (de-)prioritize those flows to best
+   accommodate the needs of the various applications on a same host.
 
    Without a signaling in place between a receiving host and its
    network, remote peers are able to mark packets that interfere with
