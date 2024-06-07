@@ -523,8 +523,6 @@ Taking into account these challenges, and despite the use case is described in t
 
 > Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.
 
-There is no requirement associated with this use case.
-
 
 ### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
 
