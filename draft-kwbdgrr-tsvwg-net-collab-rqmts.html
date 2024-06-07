@@ -1042,7 +1042,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 6 December 2024</td>
+<td class="center">Expires 9 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1055,12 +1055,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-04" class="published">4 June 2024</time>
+<time datetime="2024-06-07" class="published">7 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-06">6 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-09">9 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1692,31 +1692,30 @@ the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not direc
 from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an
 on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
-as unimportant, but such changes are detectable by the receiver. The privacy implications of revealing metadata to network elements need to
-be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
-entities to infer sensitive information about the data being transmitted.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
-<p id="section-4.6-3">Requirements:<a href="#section-4.6-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-4.6-4">
-          <dt id="section-4.6-4.1">REQ-PRIVACY-ADDITIONAL:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-4.2">
-            <p id="section-4.6-4.2.1">An on-path observer obtains no additional information about the IP packet.<a href="#section-4.6-4.2.1" class="pilcrow">¶</a></p>
+as unimportant, but such changes are detectable by the receiver.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.6-3">It is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.6-4">Requirements:<a href="#section-4.6-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.6-5">
+          <dt id="section-4.6-5.1">REQ-PRIVACY-ADDITIONAL:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-5.2">
+            <p id="section-4.6-5.2.1">An on-path observer obtains no additional information about the IP packet.<a href="#section-4.6-5.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-4.3">REQ-SIGNALING-AVOIDANCE:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-4.4">
-            <p id="section-4.6-4.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the folliwing is not required to make use of the collaborative signaling:<a href="#section-4.6-4.4.1" class="pilcrow">¶</a></p>
+<dt id="section-4.6-5.3">REQ-SIGNALING-AVOIDANCE:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-5.4">
+            <p id="section-4.6-5.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the folliwing is not required to make use of the collaborative signaling:<a href="#section-4.6-5.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.6-4.4.2.1">
-                <p id="section-4.6-4.4.2.1.1">Reveal the application identity.<a href="#section-4.6-4.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.6-5.4.2.1">
+                <p id="section-4.6-5.4.2.1.1">Reveal the application identity.<a href="#section-4.6-5.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.6-4.4.2.2">
-                <p id="section-4.6-4.4.2.2.1">Expose the application cause (or 'reason') to signal metadata.<a href="#section-4.6-4.4.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-4.6-5.4.2.2">
+                <p id="section-4.6-5.4.2.2.1">Expose the application cause (or 'reason') to signal metadata.<a href="#section-4.6-5.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.6-4.4.2.3">
-                <p id="section-4.6-4.4.2.3.1">Reveal server identity.<a href="#section-4.6-4.4.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-4.6-5.4.2.3">
+                <p id="section-4.6-5.4.2.3.1">Reveal server identity.<a href="#section-4.6-5.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.6-4.4.2.4">
-                <p id="section-4.6-4.4.2.4.1">Inspect client-to-server encrypted payload by network elements.<a href="#section-4.6-4.4.2.4.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-4.6-5.4.2.4">
+                <p id="section-4.6-5.4.2.4.1">Inspect client-to-server encrypted payload by network elements.<a href="#section-4.6-5.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </dd>
