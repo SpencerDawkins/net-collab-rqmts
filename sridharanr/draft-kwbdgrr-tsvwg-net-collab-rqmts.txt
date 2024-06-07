@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 6 December 2024                            Cloud Software Group
+Expires: 9 December 2024                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 6 December 2024                            Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             4 June 2024
+                                                             7 June 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2024.
+   This Internet-Draft will expire on 9 December 2024.
 
 Copyright Notice
 
@@ -730,7 +730,10 @@ Table of Contents
    Requirement:
 
    REQ-PACKET-SELF:  Packet importance is indicated by the packet
-      itself, which may need to be decrypted or de-obfuscated.
+      itself.
+
+   Note REQ-PACKET-SELF should meet the requirements of Section 4.6
+   especially REQ-PRIVACY-ADDITIONAL.
 
 5.1.  Host-Network Metadata
 
