@@ -775,8 +775,12 @@ Table of Contents
        revealed during certification or public benchmark efforts,
        though.
 
-   Due to the above challenges, inter-flow (de)prioritization is outside
-   the scope of this document.
+   Taking into account these challenges, and despite the use case is
+   described in the document, inter-flow (de)prioritization requirements
+   are out of the scope of this document.
+
+      Future versions of the document may re-consider this conclusion as
+      a function of the comments received from the TSVWG.
 
    There is no requirement associated with this use case.
 
