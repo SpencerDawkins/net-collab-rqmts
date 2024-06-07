@@ -96,6 +96,10 @@ informative:
           fullname: Ali C. Begen
         target: https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/
 
+  SCONEPRO:
+    title: SCONEPRO Working Group Charter
+    target: https://datatracker.ietf.org/group/sconepro/about/
+    date: 2024-02-02
 
 --- abstract
 
@@ -406,6 +410,25 @@ Requirement:
 
   REQ-SIGNAL-EXPOSURE-FAIRNESS:
   : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
+
+## Exposure Handling {#exposure-handling}
+
+Signaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieving of signals may not be performed at a single layer. Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrive/send signals using a single or a set of API(s).
+
+Some of the ways the signals/metadata could be communicated:
+
+
+   * QUIC flow {{?I-D.eddy-sconepro-api}}
+   * UDP Options (e.g., {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}, {{?I-D.reddy-tsvwg-explcit-signal}})
+   * IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
+   * SCONE Protocol ({{SCONEPRO}})
+   * QUIC CID mapping ({{?I-D.wing-cidfi}})
+   * [ICMP Errors](https://mailarchive.ietf.org/arch/msg/behave/ZXQ4xLYrqPB3CxLMnRNmzApK0oU/)
+
+Requirement:
+
+  REQ-API-FRAMEWORK:
+  : API framework to facilitate signaling for applications.
 
 ## Privacy Considerations {#privacy}
 
