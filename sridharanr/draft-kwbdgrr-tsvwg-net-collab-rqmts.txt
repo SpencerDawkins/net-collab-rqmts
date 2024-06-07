@@ -768,10 +768,12 @@ Table of Contents
        subscriber policies, not per-host.
 
    3.  Enforcing fairness to all the flows belonging to a single host.
-       For eg.  It is a challenge to prevent a platform from marking
+       For example, it is a challenge to prevent a platform from marking
        certain flows as low priority at platform layer, bypassing the
-       application, to prioritize certain applications over all the
-       other applications on the same host.
+       application, to (de)prioritize certain applications over all the
+       other applications on the same host.  Such unfairness can be
+       revealed during certification or public benchmark efforts,
+       though.
 
    Due to the above challenges, inter-flow (de)prioritization is outside
    the scope of this document.
