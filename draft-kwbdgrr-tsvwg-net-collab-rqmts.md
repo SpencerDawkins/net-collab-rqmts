@@ -519,7 +519,9 @@ However, prioritizing between flows, even for the same user/subscriber, presents
   2. Identifying whether the traffic belongs to a single user or multiple users from a single network attachment (e.g., tethering or LAN connected to a CPE). The network will enforce per-subscriber policies, not per-host.
   3. Enforcing fairness to all the flows belonging to a single host. For example, it is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to (de)prioritize certain applications over all the other applications on the same host. Such unfairness can be revealed during certification or public benchmark efforts, though.
 
-Due to the above challenges, inter-flow (de)prioritization is outside the scope of this document.
+Taking into account these challenges, and despite the use case is described in the document, inter-flow (de)prioritization requirements are out of the scope of this document. 
+
+> Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.
 
 There is no requirement associated with this use case.
 
