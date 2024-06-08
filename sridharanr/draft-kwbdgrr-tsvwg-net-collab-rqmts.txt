@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 9 December 2024                            Cloud Software Group
+Expires: 10 December 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 9 December 2024                            Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             7 June 2024
+                                                             8 June 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 December 2024.
+   This Internet-Draft will expire on 10 December 2024.
 
 Copyright Notice
 
@@ -585,26 +585,28 @@ Table of Contents
    Signaling to the network (Section 5.1, Section 5.3) and consuming the
    signals from the network (Section 5.2) will need to be facilitated by
    Application Programming Interfaces (APIs) for any application to use
-   them.  Signaling and retrieving of signals may not be performed at a
-   single layer.  Hence, a framework is required to abstract the
-   underlying protocol(s) and allow the application(s) to retrive/send
-   signals using a single or a set of API(s).
+   them.  Signaling and retrieval of the signals may not be performed at
+   a single layer (although not encouraged).  Hence, a framework is
+   required to abstract the underlying protocol(s) and allow the
+   application(s) to retrieve/send signals using a single or a set of
+   API(s) independent of the channels that are used to convey the
+   signals.  The API framework is required even if one single channel is
+   used so that any application can consume the signals.
 
-   Some of the ways the signals/metadata could be communicated:
+   There might be many channels to signal the metadata such as (non-
+   exhaustive list):
 
-   *  QUIC flow [I-D.eddy-sconepro-api]
+   *  Application layer
 
-   *  UDP Options (e.g., [I-D.kaippallimalil-tsvwg-media-hdr-wireless],
-      [I-D.reddy-tsvwg-explcit-signal])
+   *  TCP options [RFC9293]
+
+   *  UDP Options [I-D.ietf-tsvwg-udp-options]
 
    *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
 
-   *  SCONE Protocol ([SCONEPRO])
+   *  QUIC CID mapping
 
-   *  QUIC CID mapping ([I-D.wing-cidfi])
-
-   *  ICMP Errors (https://mailarchive.ietf.org/arch/msg/behave/
-      ZXQ4xLYrqPB3CxLMnRNmzApK0oU/)
+   *  ICMP messages
 
    Requirement:
 
@@ -1077,13 +1079,6 @@ Informative References
               QUIC", 2024, <https://datatracker.ietf.org/doc/slides-119-
               moq-bandwidth-measurement-for-quic/>.
 
-   [I-D.eddy-sconepro-api]
-              Eddy, W., Tiwari, A., and A. Frindell, "APIs To Expose
-              SCONEPRO Metadata to Applications", Work in Progress,
-              Internet-Draft, draft-eddy-sconepro-api-02, 20 May 2024,
-              <https://datatracker.ietf.org/doc/html/draft-eddy-
-              sconepro-api-02>.
-
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
@@ -1099,6 +1094,12 @@ Informative References
               13, 29 May 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-opsawg-teas-attachment-circuit-13>.
 
+   [I-D.ietf-tsvwg-udp-options]
+              Touch, J. D., "Transport Options for UDP", Work in
+              Progress, Internet-Draft, draft-ietf-tsvwg-udp-options-32,
+              21 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tsvwg-udp-options-32>.
+
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
               Handling Considerations for Wireless Networks", Work in
@@ -1107,14 +1108,6 @@ Informative References
               <https://datatracker.ietf.org/doc/html/draft-
               kaippallimalil-tsvwg-media-hdr-wireless-04>.
 
-   [I-D.reddy-tsvwg-explcit-signal]
-              Reddy.K, T., Wing, D., and M. Boucadair, "An Approach for
-              Encrypted Transport Protocol Path Explicit Signals", Work
-              in Progress, Internet-Draft, draft-reddy-tsvwg-explcit-
-              signal-01, 7 July 2023,
-              <https://datatracker.ietf.org/doc/html/draft-reddy-tsvwg-
-              explcit-signal-01>.
-
    [I-D.rwbr-tsvwg-signaling-use-cases]
               Rajagopalan, S., Wing, D., Boucadair, M., and T. Reddy.K,
               "Host to Network Signaling Use Cases for Collaborative
@@ -1122,13 +1115,6 @@ Informative References
               Draft, draft-rwbr-tsvwg-signaling-use-cases-02, 17 March
               2024, <https://datatracker.ietf.org/doc/html/draft-rwbr-
               tsvwg-signaling-use-cases-02>.
-
-   [I-D.wing-cidfi]
-              Wing, D., Reddy.K, T., and M. Boucadair, "Framework for
-              CID Flow Indicator (CIDFI)", Work in Progress, Internet-
-              Draft, draft-wing-cidfi-04, 14 December 2023,
-              <https://datatracker.ietf.org/doc/html/draft-wing-cidfi-
-              04>.
 
    [RFC3550]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
@@ -1179,6 +1165,10 @@ Informative References
               DOI 10.17487/RFC9221, March 2022,
               <https://www.rfc-editor.org/rfc/rfc9221>.
 
+   [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
+              STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9293>.
+
    [RFC9335]  Uberti, J., Jennings, C., and S. Murillo, "Completely
               Encrypting RTP Header Extensions and Contributing
               Sources", RFC 9335, DOI 10.17487/RFC9335, January 2023,
@@ -1188,9 +1178,6 @@ Informative References
               "Considerations on Application - Network Collaboration
               Using Path Signals", RFC 9419, DOI 10.17487/RFC9419, July
               2023, <https://www.rfc-editor.org/rfc/rfc9419>.
-
-   [SCONEPRO] "SCONEPRO Working Group Charter", 2 February 2024,
-              <https://datatracker.ietf.org/group/sconepro/about/>.
 
    [TR.23.501-3GPP]
               "3rd Generation Partnership Project; Technical
