@@ -96,10 +96,6 @@ informative:
           fullname: Ali C. Begen
         target: https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/
 
-  SCONEPRO:
-    title: SCONEPRO Working Group Charter
-    target: https://datatracker.ietf.org/group/sconepro/about/
-    date: 2024-02-02
 
 --- abstract
 
@@ -413,17 +409,17 @@ Requirement:
 
 ## Exposure Handling {#exposure-handling}
 
-Signaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieving of signals may not be performed at a single layer. Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrive/send signals using a single or a set of API(s).
+Signaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  The API framework is required even if one single channel is used so that any application can consume the signals.
 
-Some of the ways the signals/metadata could be communicated:
+There might be many channels to signal the metadata such as (non-exhaustive list):
 
 
-   * QUIC flow {{?I-D.eddy-sconepro-api}}
-   * UDP Options (e.g., {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}, {{?I-D.reddy-tsvwg-explcit-signal}})
+   * Application layer
+   * TCP options {{?RFC9293}}
+   * UDP Options {{?I-D.ietf-tsvwg-udp-options}}
    * IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
-   * SCONE Protocol ({{SCONEPRO}})
-   * QUIC CID mapping ({{?I-D.wing-cidfi}})
-   * [ICMP Errors](https://mailarchive.ietf.org/arch/msg/behave/ZXQ4xLYrqPB3CxLMnRNmzApK0oU/)
+   * QUIC CID mapping
+   * ICMP messages
 
 Requirement:
 
