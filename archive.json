@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-06T01:10:28.305376+00:00",
+  "timestamp": "2024-06-09T01:16:46.626247+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOL0HpzM6IFFGu",
       "title": "Comment on \"Priority within a Flow (Intra-Flow)\"",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case. Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.\r\n\r\nComment> The above text is not clear to me. How will the signaling mechanism between a receiving host and its network prevent a misbehaving remote peer from marking every packet of a flow as import ? \r\n\r\nThe signalling requirement to detect and block such a misuse is not discussed in this section.",
       "createdAt": "2024-05-07T11:35:01Z",
-      "updatedAt": "2024-05-21T10:52:35Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:44:47Z",
+      "closedAt": "2024-06-07T05:44:47Z",
       "comments": [
         {
           "author": "danwing",
@@ -100,15 +100,15 @@
       "id": "I_kwDOL0HpzM6IFGIc",
       "title": "Comment on \"Priority between Flows\"",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I don't agree with the text in this section. The scope of this draft is to discuss the use cases and requirements for prioritizing of packets within a flow and not between flows. Prioritizing between flows is error-prone because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign. \r\n",
       "createdAt": "2024-05-07T11:37:17Z",
-      "updatedAt": "2024-05-07T11:37:17Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:45:03Z",
+      "closedAt": "2024-06-07T05:45:03Z",
       "comments": []
     },
     {
@@ -116,15 +116,15 @@
       "id": "I_kwDOL0HpzM6IFH3T",
       "title": "Relative Priority of Media Frames",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The sections 5.1.2 and 5.1.4 are repeating the text, remove one of these sections. ",
       "createdAt": "2024-05-07T11:41:10Z",
-      "updatedAt": "2024-05-07T11:41:10Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:45:44Z",
+      "closedAt": "2024-06-07T05:45:44Z",
       "comments": []
     },
     {
@@ -132,15 +132,15 @@
       "id": "I_kwDOL0HpzM6IFJsT",
       "title": "Burst Indication",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.\r\n\r\nComment> The requirement seems specific to 3GPP, can you add a reference to the document ?",
       "createdAt": "2024-05-07T11:45:25Z",
-      "updatedAt": "2024-05-07T22:08:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:45:36Z",
+      "closedAt": "2024-06-07T05:45:36Z",
       "comments": [
         {
           "author": "danwing",
@@ -156,15 +156,15 @@
       "id": "I_kwDOL0HpzM6IFLwU",
       "title": "Abuse and Constraints ",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Abuse and Constraints {#abuse}\r\n\r\nIt is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.\r\n\r\nSuch a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves.\r\n\r\nComment> The network cannot identify whether the prioritized flow is legitimate or malicious. It has no info to detect malicious flows, if several flows mark themselves as important. I don't think prioritizing a flow over others is in the scope of this draft.",
       "createdAt": "2024-05-07T11:49:59Z",
-      "updatedAt": "2024-05-07T22:09:23Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:45:13Z",
+      "closedAt": "2024-06-07T05:45:13Z",
       "comments": [
         {
           "author": "danwing",
@@ -180,15 +180,15 @@
       "id": "I_kwDOL0HpzM6IFO4o",
       "title": "Highlight the requirements ",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It will be helpful to highlight the requirements associated with each use case, for instance, see https://datatracker.ietf.org/doc/rfc7478/",
       "createdAt": "2024-05-07T11:55:25Z",
-      "updatedAt": "2024-05-17T13:27:56Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:45:24Z",
+      "closedAt": "2024-06-07T05:45:24Z",
       "comments": [
         {
           "author": "sridharangirish91",
@@ -218,7 +218,7 @@
       "id": "I_kwDOL0HpzM6IrIzO",
       "title": "Intro updates on justification, diagram, etc",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -227,9 +227,17 @@
       "labels": [],
       "body": "- Add justification for network's need for additional metadata.\r\n- Per-flow and per-stream aspects, but remove inter-flow (align with updates in related issue)\r\n- Handling priority per flow within a single user (i.e., a single user may have a connectivity session that is policed (e.g., not to exceed X Mbps). Within the connectivity session, there may be multiple flows, one of which may be a high bandwidth consumer and target for traffic shaping. In this context, the user may have a preference on which flow to prioritize or get information on how the flow is being shaped (e.g., bandwidth limit).\r\n- Add new figure for the above.\r\n- Update Figure 1: host -> client, host -> server (and throughout the section)",
       "createdAt": "2024-05-13T14:28:28Z",
-      "updatedAt": "2024-05-20T02:46:34Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-06-06T18:12:14Z",
+      "closedAt": "2024-06-06T18:12:14Z",
+      "comments": [
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Updates completed as noted above.",
+          "createdAt": "2024-06-06T18:12:14Z",
+          "updatedAt": "2024-06-06T18:12:14Z"
+        }
+      ]
     },
     {
       "number": 11,
@@ -259,7 +267,7 @@
       "labels": [],
       "body": "Along the lines of [SCONE's API](https://datatracker.ietf.org/doc/draft-eddy-sconepro-api/), do we want to say anything about the API needs?\r\n\r\nI noticed their API document conflates a single API with \"receiving data over the QUIC flow\", which of course isn't necessary considering that [ICMP errors are sent to (connected) UDP sockets](https://mailarchive.ietf.org/arch/msg/behave/ZXQ4xLYrqPB3CxLMnRNmzApK0oU/), and those are different flows. So, there could be a single API which does all your QUIC things and, under the covers, does a separate signaling channel with the ISP(s) router(s), exposing the information to the application without the application needing to do heavy lifting. We might call that a 'library' or I suppose in 2024 we would have to call that a 'framework' or 'wrapper' or some-such.",
       "createdAt": "2024-05-22T16:41:59Z",
-      "updatedAt": "2024-05-22T16:58:42Z",
+      "updatedAt": "2024-06-07T14:48:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -268,6 +276,13 @@
           "body": "This can be mentioned as part of a new OPS section, e.g., \"Exposure Handling\".\r\n\r\nThe local exposure (OS API) can be mentioned, e.g., next to REQ-SIGNAL-EXPOSURE-FAIRNESS in #25. ",
           "createdAt": "2024-05-22T16:58:41Z",
           "updatedAt": "2024-05-22T16:58:41Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I thought this would be more of a metadata specific aspect but we could list the \"framework\" as a requirement in the signaling. In that case, do we need to have API(s) for the client/host to network signaling as well? Include that in the framework as well?",
+          "createdAt": "2024-06-07T14:40:46Z",
+          "updatedAt": "2024-06-07T14:48:39Z"
         }
       ]
     },
@@ -276,15 +291,15 @@
       "id": "I_kwDOL0HpzM6KPexN",
       "title": "Video requirements and encryption/decryption of metadata",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/36",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://datatracker.ietf.org/doc/html/draft-joras-sconepro-video-opt-requirements-00 - In this draft, they seem to talk about key exchange that we have kept out (implementation part)... But wonder if we have already incorporated the rest in our draft under \"media\" itself. Should we dig a little deeper into the cryptographic stuff or at least come up with a different draft for that?",
       "createdAt": "2024-05-27T14:39:19Z",
-      "updatedAt": "2024-05-27T14:42:53Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-07T05:26:57Z",
+      "closedAt": "2024-06-07T05:26:57Z",
       "comments": []
     },
     {
@@ -322,6 +337,110 @@
           "body": "Yes, agree. We need to have some text about this. ",
           "createdAt": "2024-05-29T05:54:31Z",
           "updatedAt": "2024-05-29T05:54:31Z"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "I_kwDOL0HpzM6Lc_-4",
+      "title": "REQ-FRAME-MIDDLE",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/49",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Regarding the requirement REQ-FRAME-MIDDLE, What will the network element do by identifying middle of media frame ?",
+      "createdAt": "2024-06-07T05:48:20Z",
+      "updatedAt": "2024-06-07T16:48:57Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Know it is related to an associated REQ-FRAME-FIRST or -FRAME-LAST, and either send all of them or none of them.\r\n\r\nIf there is a better way to express this in requirements, go for it!",
+          "createdAt": "2024-06-07T16:48:56Z",
+          "updatedAt": "2024-06-07T16:48:56Z"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOL0HpzM6LdAKw",
+      "title": "Prioritizing flows from the same host",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/50",
+      "state": "CLOSED",
+      "author": "tireddy2",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Prioritizing flows from the same host is also error-prone because the network cannot distinguish between legitimate and malicious flows. For example, a poorly written application might request the highest priority for its flows, which could be unjustified. Additionally, it is challenging to identify whether the traffic belongs to a single user or multiple users, such as in tethering scenarios. Therefore, I propose focusing solely on \"intra-flow\" prioritization. Both WebRTC and QUIC, multiplex multiple streams on the same 5-tuple.",
+      "createdAt": "2024-06-07T05:49:04Z",
+      "updatedAt": "2024-06-07T14:22:58Z",
+      "closedAt": "2024-06-07T14:22:58Z",
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Should we maybe add text to the inter flow section saying \"Due to these challenges, inter flow is out of scope of this document.\"?",
+          "createdAt": "2024-06-07T06:08:31Z",
+          "updatedAt": "2024-06-07T06:08:31Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@tireddy2, please see the discussion in https://github.com/SpencerDawkins/net-collab-rqmts/pull/33 for the reasoning to include this in the first version.",
+          "createdAt": "2024-06-07T06:29:38Z",
+          "updatedAt": "2024-06-07T06:29:38Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @tireddy2, please see the discussion in #33 for the reasoning to include this in the first version.\r\n\r\nYes, I saw the discussion but I am not convinced how the network can distinguish between legitimate and malicious flows for prioritization ?\r\nFurther,  it is challenging to identify whether the traffic belongs to a single user or multiple users, such as in tethering scenarios. ",
+          "createdAt": "2024-06-07T06:41:12Z",
+          "updatedAt": "2024-06-07T06:41:12Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "There might be methods to do that (more or less complex) but still this is possible. For example, legitimate flows can supply a token that is provided only to entitled ones. Also, the pref here is more about discard pref than taking higher prio.\r\n\r\ntethering is still seen as a same subscriber/user. \r\n\r\nThere are challenges that we need to record, for sure. However, let's  discuss this in the WG and see if the WG want to cover this or not. We need that discussion to happen publicly. Thanks.\r\n\r\n",
+          "createdAt": "2024-06-07T06:52:43Z",
+          "updatedAt": "2024-06-07T06:52:43Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> There might be methods to do that (more or less complex) but still this is possible. For example, legitimate flows can supply a token that is provided only to entitled ones. \r\n\r\nWho will provide the token to the applications and how will the network validate the token (in a scenario where is no agreement between the ISP and content provider) ?\r\n\r\n> Also, the pref here is more about discard pref than taking higher prio.\r\n\r\nYes.\r\n\r\n> \r\n> tethering is still seen as a same subscriber/user.\r\n\r\nOkay.\r\n\r\n> \r\n> There are challenges that we need to record, for sure. However, let's discuss this in the WG and see if the WG want to cover this or not. We need that discussion to happen publicly. Thanks.\r\n\r\nWorks for me but we may want to high-light the challenges in the draft for the WG to understand the complexities if this is to be supported.\r\n\r\n",
+          "createdAt": "2024-06-07T07:07:17Z",
+          "updatedAt": "2024-06-07T07:07:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Also, the pref here is more about discard pref than taking higher prio.\r\n> \r\n> Yes.\r\n> \r\n> > tethering is still seen as a same subscriber/user.\r\n> \r\n> Okay.\r\n> \r\n> > There are challenges that we need to record, for sure. However, let's discuss this in the WG and see if the WG want to cover this or not. We need that discussion to happen publicly. Thanks.\r\n> \r\n> Works for me but we may want to high-light the challenges in the draft for the WG to understand the complexities if this is to be supported.\r\n\r\nFully agree. Please update the text to list the challenges not already in the text.\r\n",
+          "createdAt": "2024-06-07T07:25:41Z",
+          "updatedAt": "2024-06-07T07:25:41Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This discussion can drift into implementation suggestions very quickly like suggesting token exchange etc, the reason why we kept client signalling of encryption key out of the draft as well. Listing the challenges and keeping it open ended is a good way, I agree. ",
+          "createdAt": "2024-06-07T08:04:07Z",
+          "updatedAt": "2024-06-07T08:04:07Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Reading Med's comment again on this being applicable only to lowering the priority of flows, will any app do that in practice? I mean, what would an app vendor get from saying \"Hey I have a lower priority\". Assuming it is a perfectly fair world, apps can signal this when they are not being used but I wasn't sure if they'd ever signal this themselves. Letting the platform/OS do the bidding for them is a dangerous thing...\r\n\r\nI was also wondering, will any OS companies like MSFT or Apple get into a deal with the big content giants like netflix and signal lowering flow priority for other apps themselves without anyone else noticing? Google could do the same with android to promote YouTube performance too... Will this be a concern? Especially if this signal is encrypted and the platform companies have tie ups with ISPs as well as a protocol between them to decrypt the signal, the platform companies could silently kill performance of other small-scale apps... Just wondering if this is a possibility or if I am flying into the crazy world, if we even choose to propose enabling control of inter-flow mechanism.",
+          "createdAt": "2024-06-07T10:04:53Z",
+          "updatedAt": "2024-06-07T10:04:53Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Reading Med's comment again on this being applicable only to lowering the priority of flows, will any app do that in practice?\r\n\r\nIt isn't intuitive to do so. However, with all the marketing hype and \"commitments\" for fair use of resources, some forms of this case may not be unrealistic. ",
+          "createdAt": "2024-06-07T11:20:19Z",
+          "updatedAt": "2024-06-07T11:20:19Z"
         }
       ]
     }
@@ -2722,25 +2841,35 @@
       "id": "PR_kwDOL0HpzM5xb6Qz",
       "title": "adding more language to security consideration",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-06-04T14:29:06Z",
-      "updatedAt": "2024-06-05T16:16:51Z",
+      "updatedAt": "2024-06-07T05:26:57Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "959c69f012144b13aeeb3e495e09a971ddd241a5",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
       "headRefOid": "a60ac0a0d9a7717b8810dddb06f86a7ba001b349",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2024-06-07T05:26:56Z",
+      "mergedAt": "2024-06-07T05:26:56Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "e4367d9aa22337f4a6d47cb9dba30c09e7692ccb"
+      },
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@boucadair - I think this pr requires your approval to merge since your review is still pending. Please can you approve if everything looks good?",
+          "createdAt": "2024-06-06T19:39:36Z",
+          "updatedAt": "2024-06-06T19:39:36Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOL0HpzM58-9jo",
@@ -2807,6 +2936,214 @@
           "createdAt": "2024-06-05T16:02:32Z",
           "updatedAt": "2024-06-05T16:02:32Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59Y1Tz",
+          "commit": {
+            "abbreviatedOid": "a60ac0a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-07T05:26:50Z",
+          "updatedAt": "2024-06-07T05:26:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOL0HpzM5xyXGk",
+      "title": "adding challenges to inter-flow prioritization",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/51",
+      "state": "MERGED",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-07T11:28:05Z",
+      "updatedAt": "2024-06-07T14:22:57Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "e4367d9aa22337f4a6d47cb9dba30c09e7692ccb",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "bd8214d68c12860e36fea208394d307a4138f52f",
+      "closedAt": "2024-06-07T14:22:57Z",
+      "mergedAt": "2024-06-07T14:22:57Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "53566494c256206a1ffc129ae31778bf3456e0cb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM59bY9T",
+          "commit": {
+            "abbreviatedOid": "161d870"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-06-07T11:36:12Z",
+          "updatedAt": "2024-06-07T11:42:33Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nHowever, prioritizing between flows, even for the same user/subscriber, presents the following challenges:\r\n```",
+              "createdAt": "2024-06-07T11:36:12Z",
+              "updatedAt": "2024-06-07T11:42:33Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n  2. Identifying whether the traffic belongs to a single user or multiple users from a single network attachment (e.g., tethering or LAN connected to a CPE). The network will enforce per-subscriber policies, not per-host.\r\n```",
+              "createdAt": "2024-06-07T11:38:04Z",
+              "updatedAt": "2024-06-07T11:42:33Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n  3. Enforcing fairness to all the flows belonging to a single host. For example, it is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to (de)prioritize certain applications over all the other applications on the same host. Such unfairness can be revealed during certification or public benchmark efforts, though.\r\n```",
+              "createdAt": "2024-06-07T11:39:52Z",
+              "updatedAt": "2024-06-07T11:42:33Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nTaking into account these challenges, and despite the use case is described in the document, inter-flow (de)prioritization requirements are out of the scope of this document. \r\n\r\n> Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.\r\n```",
+              "createdAt": "2024-06-07T11:42:00Z",
+              "updatedAt": "2024-06-07T11:42:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59b8as",
+          "commit": {
+            "abbreviatedOid": "bd8214d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-07T12:55:27Z",
+          "updatedAt": "2024-06-07T12:55:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOL0HpzM5x0EOK",
+      "title": "add initial requirement text for APIs",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/52",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-07T15:38:05Z",
+      "updatedAt": "2024-06-08T09:43:14Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "53566494c256206a1ffc129ae31778bf3456e0cb",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "7789e63ea0d578c5b9ebba7a1efd18e44a2e98a3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Thanks. We need to avoid including solution documents.\r\n\r\nUpdated the PR with the suggestions, thanks Med!",
+          "createdAt": "2024-06-08T09:43:14Z",
+          "updatedAt": "2024-06-08T09:43:14Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM59eUP7",
+          "commit": {
+            "abbreviatedOid": "9b3f546"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks. We need to avoid including solution documents.\r\n",
+          "createdAt": "2024-06-07T17:55:41Z",
+          "updatedAt": "2024-06-07T18:03:30Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-06-07T17:55:41Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nThere might be many channels to signal the metadata such as (non-exhaustive list):\r\n```",
+              "createdAt": "2024-06-07T17:56:42Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\n   * Application layer\r\n   * TCP options {{?RFC9293}}\r\n```",
+              "createdAt": "2024-06-07T17:57:13Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\n   * UDP Options {{I-D.ietf-tsvwg-udp-options}}\r\n```",
+              "createdAt": "2024-06-07T17:57:25Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n   * QUIC CID mapping\r\n```",
+              "createdAt": "2024-06-07T17:59:18Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n   * ICMP messages\r\n```",
+              "createdAt": "2024-06-07T17:59:38Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-06-07T17:59:51Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-06-07T17:59:59Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-06-07T18:00:05Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-06-07T18:00:11Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nSignaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  This APIs is required even if one single channel is used so that any application can consume the signals.\r\n```",
+              "createdAt": "2024-06-07T18:02:24Z",
+              "updatedAt": "2024-06-07T18:03:22Z"
+            }
+          ]
         }
       ]
     }
