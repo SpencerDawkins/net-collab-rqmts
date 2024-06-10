@@ -407,6 +407,25 @@ Requirement:
   REQ-SIGNAL-EXPOSURE-FAIRNESS:
   : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
 
+## Exposure Handling {#exposure-handling}
+
+Signaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  The API framework is required even if one single channel is used so that any application can consume the signals.
+
+There might be many channels to signal the metadata such as (non-exhaustive list):
+
+
+   * Application layer
+   * TCP options {{?RFC9293}}
+   * UDP Options {{?I-D.ietf-tsvwg-udp-options}}
+   * IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
+   * QUIC CID mapping
+   * ICMP messages
+
+Requirement:
+
+  REQ-API-FRAMEWORK:
+  : API framework to facilitate signaling for applications.
+
 ## Privacy Considerations {#privacy}
 
 Encrypted media payloads along with temporary IPv6 addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
