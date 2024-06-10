@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 9 December 2024                            Cloud Software Group
+Expires: 12 December 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 9 December 2024                            Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                             7 June 2024
+                                                            10 June 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 December 2024.
+   This Internet-Draft will expire on 12 December 2024.
 
 Copyright Notice
 
@@ -104,10 +104,11 @@ Table of Contents
      4.3.  Metadata Scope
      4.4.  Multiple Bottlenecks
      4.5.  Application Interference
-     4.6.  Privacy Considerations
-     4.7.  Scalability
-     4.8.  Session Continuity
-     4.9.  Abuse and Constraints
+     4.6.  Exposure Handling
+     4.7.  Privacy Considerations
+     4.8.  Scalability
+     4.9.  Session Continuity
+     4.10. Abuse and Constraints
    5.  On-path Metadata Requirements
      5.1.  Host-Network Metadata
        5.1.1.  Priority between Flows (Inter-flow)
@@ -579,7 +580,40 @@ Table of Contents
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-4.6.  Privacy Considerations
+4.6.  Exposure Handling
+
+   Signaling to the network (Section 5.1, Section 5.3) and consuming the
+   signals from the network (Section 5.2) will need to be facilitated by
+   Application Programming Interfaces (APIs) for any application to use
+   them.  Signaling and retrieval of the signals may not be performed at
+   a single layer (although not encouraged).  Hence, a framework is
+   required to abstract the underlying protocol(s) and allow the
+   application(s) to retrieve/send signals using a single or a set of
+   API(s) independent of the channels that are used to convey the
+   signals.  The API framework is required even if one single channel is
+   used so that any application can consume the signals.
+
+   There might be many channels to signal the metadata such as (non-
+   exhaustive list):
+
+   *  Application layer
+
+   *  TCP options [RFC9293]
+
+   *  UDP Options [I-D.ietf-tsvwg-udp-options]
+
+   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
+
+   *  QUIC CID mapping
+
+   *  ICMP messages
+
+   Requirement:
+
+   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
+      applications.
+
+4.7.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -639,7 +673,7 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-4.7.  Scalability
+4.8.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -658,7 +692,7 @@ Table of Contents
       router has to maintain for each additional media flow it handles
       should be very low or none.
 
-4.8.  Session Continuity
+4.9.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -675,7 +709,7 @@ Table of Contents
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
 
-4.9.  Abuse and Constraints
+4.10.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -732,7 +766,7 @@ Table of Contents
    REQ-PACKET-SELF:  Packet importance is indicated by the packet
       itself.
 
-   Note REQ-PACKET-SELF should meet the requirements of Section 4.6
+   Note REQ-PACKET-SELF should meet the requirements of Section 4.7
    especially REQ-PRIVACY-ADDITIONAL.
 
 5.1.  Host-Network Metadata
@@ -1004,7 +1038,7 @@ Table of Contents
 
 8.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 4.6.  The
+   Security aspects for the metadata are discussed in Section 4.7.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 5.
 
@@ -1060,6 +1094,12 @@ Informative References
               13, 29 May 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-opsawg-teas-attachment-circuit-13>.
 
+   [I-D.ietf-tsvwg-udp-options]
+              Touch, J. D., "Transport Options for UDP", Work in
+              Progress, Internet-Draft, draft-ietf-tsvwg-udp-options-32,
+              21 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tsvwg-udp-options-32>.
+
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
               Handling Considerations for Wireless Networks", Work in
@@ -1096,6 +1136,11 @@ Informative References
               DOI 10.17487/RFC7478, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7478>.
 
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8200>.
+
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/rfc/rfc8558>.
@@ -1119,6 +1164,10 @@ Informative References
               Datagram Extension to QUIC", RFC 9221,
               DOI 10.17487/RFC9221, March 2022,
               <https://www.rfc-editor.org/rfc/rfc9221>.
+
+   [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
+              STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9293>.
 
    [RFC9335]  Uberti, J., Jennings, C., and S. Murillo, "Completely
               Encrypting RTP Header Extensions and Contributing
