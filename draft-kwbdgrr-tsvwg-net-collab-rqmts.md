@@ -598,14 +598,8 @@ In cases where the wireless network has to drop or delay processing, all packets
 
 Requirements:
 
-REQ-FRAME-START:
-: Indicate packet containing start of media frame.
-
-REQ-FRAME-MIDDLE:
-: Indicate packet containing middle(s) of media frame.
-
-REQ-FRAME-END:
-: Indicate packet containing end of media frame.
+REQ-FRAME-ASSOCIATED:
+: Identify all packets belonging to the same media frame, so they can receive equal drop/forward treatment.
 
 ### Identification of Traffic Type without Disclosure of the Application {#TrafficType}
 
