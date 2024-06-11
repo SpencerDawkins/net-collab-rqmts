@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-09T01:16:46.626247+00:00",
+  "timestamp": "2024-06-11T01:11:55.564602+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -260,15 +260,15 @@
       "id": "I_kwDOL0HpzM6JvzGI",
       "title": "API ",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Along the lines of [SCONE's API](https://datatracker.ietf.org/doc/draft-eddy-sconepro-api/), do we want to say anything about the API needs?\r\n\r\nI noticed their API document conflates a single API with \"receiving data over the QUIC flow\", which of course isn't necessary considering that [ICMP errors are sent to (connected) UDP sockets](https://mailarchive.ietf.org/arch/msg/behave/ZXQ4xLYrqPB3CxLMnRNmzApK0oU/), and those are different flows. So, there could be a single API which does all your QUIC things and, under the covers, does a separate signaling channel with the ISP(s) router(s), exposing the information to the application without the application needing to do heavy lifting. We might call that a 'library' or I suppose in 2024 we would have to call that a 'framework' or 'wrapper' or some-such.",
       "createdAt": "2024-05-22T16:41:59Z",
-      "updatedAt": "2024-06-07T14:48:39Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-10T14:50:08Z",
+      "closedAt": "2024-06-10T14:50:08Z",
       "comments": [
         {
           "author": "boucadair",
@@ -345,15 +345,15 @@
       "id": "I_kwDOL0HpzM6Lc_-4",
       "title": "REQ-FRAME-MIDDLE",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/49",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tireddy2",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Regarding the requirement REQ-FRAME-MIDDLE, What will the network element do by identifying middle of media frame ?",
       "createdAt": "2024-06-07T05:48:20Z",
-      "updatedAt": "2024-06-07T16:48:57Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-10T14:54:41Z",
+      "closedAt": "2024-06-10T14:54:41Z",
       "comments": [
         {
           "author": "danwing",
@@ -361,6 +361,41 @@
           "body": "Know it is related to an associated REQ-FRAME-FIRST or -FRAME-LAST, and either send all of them or none of them.\r\n\r\nIf there is a better way to express this in requirements, go for it!",
           "createdAt": "2024-06-07T16:48:56Z",
           "updatedAt": "2024-06-07T16:48:56Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I understand the need for first and last frame but don't get the use of middle frame to be conveyed to the network.",
+          "createdAt": "2024-06-09T07:42:25Z",
+          "updatedAt": "2024-06-09T07:42:25Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I suppose what is necessary is \u201cidentify all packets belonging to the same media frame, so they can receive equal drop/forward treatment\u201d might be the actual requirement??-dOn Jun 9, 2024, at 12:43\u202fAM, Tirumaleswar Reddy ***@***.***> wrote:\ufeff\r\nI understand the need for first and last frame but don't get the use of middle frame to be conveyed to the network.\r\n\r\n\u2014Reply to this email directly, view it on GitHub, or unsubscribe.You are receiving this because you commented.Message ID: ***@***.***>",
+          "createdAt": "2024-06-09T17:32:46Z",
+          "updatedAt": "2024-06-09T17:32:46Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If that's the case, just a media identifier should suffice right? We may not need a start, middle and end if all the 3 are meant to do the same. Will the network do anything different knowing media has started and ended specifically?",
+          "createdAt": "2024-06-09T18:44:15Z",
+          "updatedAt": "2024-06-09T18:44:15Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I suppose what is necessary is \u201cidentify all packets belonging to the same media frame, so they can receive equal drop/forward treatment\u201d might be the actual requirement?\r\n\r\nYes, that makes sense. we can get rid of start, middle and end frames requirements. ",
+          "createdAt": "2024-06-10T04:52:17Z",
+          "updatedAt": "2024-06-10T04:52:17Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Submitted pull request https://github.com/SpencerDawkins/net-collab-rqmts/pull/53 to resolve this one",
+          "createdAt": "2024-06-10T13:58:43Z",
+          "updatedAt": "2024-06-10T13:59:02Z"
         }
       ]
     },
@@ -3037,24 +3072,26 @@
       "id": "PR_kwDOL0HpzM5x0EOK",
       "title": "add initial requirement text for APIs",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/52",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-06-07T15:38:05Z",
-      "updatedAt": "2024-06-08T09:43:14Z",
+      "updatedAt": "2024-06-10T14:50:07Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "53566494c256206a1ffc129ae31778bf3456e0cb",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
       "headRefOid": "7789e63ea0d578c5b9ebba7a1efd18e44a2e98a3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-10T14:50:07Z",
+      "mergedAt": "2024-06-10T14:50:07Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "4dd9444343e6b7d90669c3f2cdaa77275ac4e011"
+      },
       "comments": [
         {
           "author": "sridharangirish91",
@@ -3144,6 +3181,74 @@
               "updatedAt": "2024-06-07T18:03:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59osj4",
+          "commit": {
+            "abbreviatedOid": "7789e63"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-10T13:32:23Z",
+          "updatedAt": "2024-06-10T13:32:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOL0HpzM5x-3iW",
+      "title": "instead of first/middle/last, just identify they are all belonging to\u2026",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/53",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026 one media frame",
+      "createdAt": "2024-06-10T13:58:02Z",
+      "updatedAt": "2024-06-10T14:54:41Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "53566494c256206a1ffc129ae31778bf3456e0cb",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "media_frame",
+      "headRefOid": "380b1bcab6c408f9a421fd2382e2865c49ebf842",
+      "closedAt": "2024-06-10T14:54:40Z",
+      "mergedAt": "2024-06-10T14:54:40Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "d39e3de488413f626a210caf36e7dd9b74780e23"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM59pMem",
+          "commit": {
+            "abbreviatedOid": "380b1bc"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-10T14:20:51Z",
+          "updatedAt": "2024-06-10T14:20:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM59pfwG",
+          "commit": {
+            "abbreviatedOid": "380b1bc"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-10T14:49:21Z",
+          "updatedAt": "2024-06-10T14:49:21Z",
+          "comments": []
         }
       ]
     }
