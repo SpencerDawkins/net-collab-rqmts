@@ -662,9 +662,8 @@ The server may provide burst size at the beginning of the burst to allow the sch
 The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
 
 REQ-BURST-INDICATOR:
-: Client indicates this flow's maximum burst to
-ISP, and ISP agrees it can handle that burst size.  (but what does ISP
-router do with the burst? Needs to be described above!)
+: Client indicates this flow's maximum burst to ISP, and ISP agrees it can handle that burst size.
+
 
 # Non-Requirements {#non-req}
 
