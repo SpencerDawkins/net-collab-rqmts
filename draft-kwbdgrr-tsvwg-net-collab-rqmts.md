@@ -126,7 +126,7 @@ These needs are not frozen but change over time depending on the application and
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.
 
 Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
-There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
+There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
 With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
 
 Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
@@ -693,6 +693,6 @@ Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.
 : Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
-Thanks to Luis Miguel Contreras for his review and comments.
+Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.
 
 --- back
