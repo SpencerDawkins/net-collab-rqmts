@@ -122,10 +122,6 @@ Users who are serviced via these networks use hosts which run various applicatio
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.
 
-As mobile networks primarily service battery-operated devices, the same information is useful to those
-networks even without network congestion, as the information can inform the base station to aggregate
-packet transmission to allow the mobile device to briefly power down (sleep) its radio.
-
 Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
 With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
