@@ -167,12 +167,6 @@ Table of Contents
    manage the use of available bandwidth better and better share it with
    requesting applications.
 
-   As mobile networks primarily service battery-operated devices, the
-   same information is useful to those networks even without network
-   congestion, as the information can inform the base station to
-   aggregate packet transmission to allow the mobile device to briefly
-   power down (sleep) its radio.
-
    Other applications like interactive media can demand both high
    throughput and low latency and, in some cases, carry different media
    streams (e.g., audio and video) in a single transport connection
