@@ -167,12 +167,6 @@ Table of Contents
    manage the use of available bandwidth better and better share it with
    requesting applications.
 
-   As mobile networks primarily service battery-operated devices, the
-   same information is useful to those networks even without network
-   congestion, as the information can inform the base station to
-   aggregate packet transmission to allow the mobile device to briefly
-   power down (sleep) its radio.
-
    Other applications like interactive media can demand both high
    throughput and low latency and, in some cases, carry different media
    streams (e.g., audio and video) in a single transport connection
@@ -310,7 +304,7 @@ Table of Contents
       shown in Figure 3.
 
       For a definitive description of 3GPP network architectures, the
-      reader should refer to the 3GPP's TS 23.501 [TS.23.501-3GPP].
+      reader should refer to the 3GPP's TR 23.501 [TR.23.501-3GPP].
 
        ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
        │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
@@ -1180,11 +1174,15 @@ Informative References
               Using Path Signals", RFC 9419, DOI 10.17487/RFC9419, July
               2023, <https://www.rfc-editor.org/rfc/rfc9419>.
 
-   [TS.23.501-3GPP]
+   [TR.23.501-3GPP]
               "3rd Generation Partnership Project; Technical
               Specification Group Servies and System Aspects; System
               architecture for the 5G System (5GS); Stage 2 (Release
               18)", March 2023.
+
+   [TR.23.700-60-3GPP]
+              "Study on XR (Extended Reality) and media services
+              (Release 18)", August 2022.
 
    [_5G-Lumos]
               "Lumos5G: Mapping and Predicting Commercial mmWave 5G

@@ -1310,17 +1310,14 @@ When packet contents are encrypted, the approach of using implicit signals is no
 Users who are serviced via these networks use hosts which run various application clients; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">As mobile networks primarily service battery-operated devices, the same information is useful to those
-networks even without network congestion, as the information can inform the base station to aggregate
-packet transmission to allow the mobile device to briefly power down (sleep) its radio.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
+<p id="section-1-5">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
-With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the type of media could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
-Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-7" class="pilcrow">¶</a></p>
+With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the type of media could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
+Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="Figure-e2e">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-1-8.1">
+        <div class="alignLeft art-text artwork" id="section-1-7.1">
 <pre>
                      |
        3GPP/mobile network
@@ -1343,16 +1340,16 @@ Information gleaned from unencrypted media packets and headers that wireless net
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
 </div>
-<p id="section-1-9"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
+<p id="section-1-8"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
 When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and, thus, lead to suboptimal perceived experience.
-In this document, this is termed 'reactive policy'.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.<a href="#section-1-10" class="pilcrow">¶</a></p>
-<p id="section-1-11">A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
-Transport flows over a network attachment may consist of multiple streams such as video or audio. <a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows a high level view of network attachments, flows, and QoS/policy discussed in <a href="#metadata-req" class="auto internal xref">Section 5</a>.<a href="#section-1-11" class="pilcrow">¶</a></p>
-<p id="section-1-12">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.<a href="#section-1-12" class="pilcrow">¶</a></p>
+In this document, this is termed 'reactive policy'.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
+Transport flows over a network attachment may consist of multiple streams such as video or audio. <a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows a high level view of network attachments, flows, and QoS/policy discussed in <a href="#metadata-req" class="auto internal xref">Section 5</a>.<a href="#section-1-10" class="pilcrow">¶</a></p>
+<p id="section-1-11">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.<a href="#section-1-11" class="pilcrow">¶</a></p>
 <div id="Figure-conn-flow">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-1-13.1">
+        <div class="alignLeft art-text artwork" id="section-1-12.1">
 <pre>
 +----------+          +-----------------+
 |+----+    |          | +-------------+ |
@@ -1376,14 +1373,14 @@ Transport flows over a network attachment may consist of multiple streams such a
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
 </div>
-<p id="section-1-14"><a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
+<p id="section-1-13"><a href="#Figure-conn-flow" class="auto internal xref">Figure 2</a> shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
 "Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
-The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.<a href="#section-1-14" class="pilcrow">¶</a></p>
-<p id="section-1-15">In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. <a href="#uc" class="auto internal xref">Section 3</a> outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.<a href="#section-1-15" class="pilcrow">¶</a></p>
-<p id="section-1-16">Some of the complications that are induced by the phenomena discussed above may be eliminated by
+The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.<a href="#section-1-13" class="pilcrow">¶</a></p>
+<p id="section-1-14">In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. <a href="#uc" class="auto internal xref">Section 3</a> outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.<a href="#section-1-14" class="pilcrow">¶</a></p>
+<p id="section-1-15">Some of the complications that are induced by the phenomena discussed above may be eliminated by
    adequate dimensioning and upgrades.  However, such upgrades may not
-   be always (immediately) possible or justified. Complementary mitigations are thus needed to soften these complications by introducing some collaboration between endpoints and networks to adjust their behaviors.<a href="#section-1-16" class="pilcrow">¶</a></p>
-<p id="section-1-17"><a href="#operational" class="auto internal xref">Section 4</a> provides operational constraints in the network and <a href="#metadata-req" class="auto internal xref">Section 5</a> describes the requirements for on-path media collaboration signals.<a href="#section-1-17" class="pilcrow">¶</a></p>
+   be always (immediately) possible or justified. Complementary mitigations are thus needed to soften these complications by introducing some collaboration between endpoints and networks to adjust their behaviors.<a href="#section-1-15" class="pilcrow">¶</a></p>
+<p id="section-1-16"><a href="#operational" class="auto internal xref">Section 4</a> provides operational constraints in the network and <a href="#metadata-req" class="auto internal xref">Section 5</a> describes the requirements for on-path media collaboration signals.<a href="#section-1-16" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="definitions">
@@ -1420,7 +1417,7 @@ The requirements in this document focuses on on-path collaboration signals that 
         <dd class="break"></dd>
 <dt id="section-2-2.11"></dt>
         <dd style="margin-left: 1.5em" id="section-2-2.12">
-          <p id="section-2-2.12.1">For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TS 23.501 <span>[<a href="#TS.23.501-3GPP" class="cite xref">TS.23.501-3GPP</a>]</span>.<a href="#section-2-2.12.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.12.1">For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 <span>[<a href="#TR.23.501-3GPP" class="cite xref">TR.23.501-3GPP</a>]</span>.<a href="#section-2-2.12.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2194,9 +2191,13 @@ Thanks to Luis Miguel Contreras for his review and comments.<a href="#section-9-
       <dd>
 <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Hardie, T.</span>, <span class="refAuthor">Pauly, T.</span>, and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Considerations on Application - Network Collaboration Using Path Signals"</span>, <span class="seriesInfo">RFC 9419</span>, <span class="seriesInfo">DOI 10.17487/RFC9419</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9419">https://www.rfc-editor.org/rfc/rfc9419</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="TS.23.501-3GPP">[TS.23.501-3GPP]</dt>
+<dt id="TR.23.501-3GPP">[TR.23.501-3GPP]</dt>
       <dd>
 <span class="refTitle">"3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"</span>, <time datetime="2023-03" class="refDate">March 2023</time>. </dd>
+<dd class="break"></dd>
+<dt id="TR.23.700-60-3GPP">[TR.23.700-60-3GPP]</dt>
+      <dd>
+<span class="refTitle">"Study on XR (Extended Reality) and media services (Release 18)"</span>, <time datetime="2022-08" class="refDate">August 2022</time>. </dd>
 <dd class="break"></dd>
 <dt id="_5G-Lumos">[_5G-Lumos]</dt>
     <dd>
