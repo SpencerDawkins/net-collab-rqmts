@@ -14,8 +14,8 @@
 <meta content="Tirumaleswar Reddy" name="author">
 <meta content="
        Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
-Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network. 
-       This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user. 
+Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network. 
+       This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user. 
     " name="description">
 <meta content="xml2rfc 3.21.0" name="generator">
 <meta content="Media" name="keyword">
@@ -27,17 +27,17 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
 <meta content="draft-kwbdgrr-tsvwg-net-collab-rqmts-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.21.0
-    Python 3.11.9
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.1
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.2.2
+    setuptools 69.5.1
     six 1.16.0
     wcwidth 0.2.13
 -->
@@ -1038,11 +1038,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Network Collaboration Requirements</td>
-<td class="right">May 2024</td>
+<td class="right">June 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 28 November 2024</td>
+<td class="center">Expires 29 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1055,12 +1055,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-27" class="published">27 May 2024</time>
+<time datetime="2024-06-27" class="published">27 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-28">28 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-29">29 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1098,8 +1098,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
-Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document lists some use cases that demonstrate the need for a mechanism to share metadata and outlines requirements for both server-to-network (and vice versa) and host-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1133,7 +1133,7 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1201,19 +1201,25 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-metadata-scope" class="internal xref">Metadata Scope</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-application-interference" class="internal xref">Application Interference</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-multiple-bottlenecks" class="internal xref">Multiple Bottlenecks</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-application-interference" class="internal xref">Application Interference</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
-                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-scalability" class="internal xref">Scalability</a></p>
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-exposure-handling" class="internal xref">Exposure Handling</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7">
-                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.  <a href="#name-session-continuity" class="internal xref">Session Continuity</a></p>
+                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.8">
-                <p id="section-toc.1-1.4.2.8.1"><a href="#section-4.8" class="auto internal xref">4.8</a>.  <a href="#name-abuse-and-constraints" class="internal xref">Abuse and Constraints</a></p>
+                <p id="section-toc.1-1.4.2.8.1"><a href="#section-4.8" class="auto internal xref">4.8</a>.  <a href="#name-scalability" class="internal xref">Scalability</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.9">
+                <p id="section-toc.1-1.4.2.9.1"><a href="#section-4.9" class="auto internal xref">4.9</a>.  <a href="#name-session-continuity" class="internal xref">Session Continuity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.10">
+                <p id="section-toc.1-1.4.2.10.1"><a href="#section-4.10" class="auto internal xref">4.10</a>. <a href="#name-abuse-and-constraints" class="internal xref">Abuse and Constraints</a></p>
 </li>
             </ul>
 </li>
@@ -1229,28 +1235,36 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
                     <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-priority-within-a-flow-intr" class="internal xref">Priority within a Flow (Intra-Flow)</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.3">
-                    <p id="section-toc.1-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="auto internal xref">5.1.3</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
-</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-network-host-metadata" class="internal xref">Network-Host Metadata</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.1">
-                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="auto internal xref">5.2.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames and Streams</a></p>
+                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="auto internal xref">5.2.1</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.2">
-                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="auto internal xref">5.2.2</a>.  <a href="#name-identification-of-traffic-t" class="internal xref">Identification of Traffic Type without Disclosure the Application</a></p>
+                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="auto internal xref">5.2.2</a>.  <a href="#name-network-bandwidth-network-r" class="internal xref">Network Bandwidth &amp; Network Rate Limiting Policies</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.3">
-                    <p id="section-toc.1-1.5.2.2.2.3.1"><a href="#section-5.2.3" class="auto internal xref">5.2.3</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
+                </ul>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.4">
-                    <p id="section-toc.1-1.5.2.2.2.4.1"><a href="#section-5.2.4" class="auto internal xref">5.2.4</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.1">
+                    <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="auto internal xref">5.3.1</a>.  <a href="#name-identification-of-media-fra" class="internal xref">Identification of Media Frames and Streams</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.5">
-                    <p id="section-toc.1-1.5.2.2.2.5.1"><a href="#section-5.2.5" class="auto internal xref">5.2.5</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.2">
+                    <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="auto internal xref">5.3.2</a>.  <a href="#name-identification-of-traffic-t" class="internal xref">Identification of Traffic Type without Disclosure of the Application</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.3">
+                    <p id="section-toc.1-1.5.2.3.2.3.1"><a href="#section-5.3.3" class="auto internal xref">5.3.3</a>.  <a href="#name-relative-priority" class="internal xref">Relative Priority</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.4">
+                    <p id="section-toc.1-1.5.2.3.2.4.1"><a href="#section-5.3.4" class="auto internal xref">5.3.4</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3.2.5">
+                    <p id="section-toc.1-1.5.2.3.2.5.1"><a href="#section-5.3.5" class="auto internal xref">5.3.5</a>.  <a href="#name-burst-indication" class="internal xref">Burst Indication</a></p>
 </li>
                 </ul>
 </li>
@@ -1285,22 +1299,22 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
       </h2>
 <p id="section-1-1">Wireless networks inherently experience large variations in link quality due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
-These variations in link quality can be in the order of a millisecond or less <span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of milliseconds (more than one RTT) to estimate data rate.
-End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth.<a href="#section-1-1" class="pilcrow">¶</a></p>
+These variations in link quality can be in the order of a millisecond or less <span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate.
+End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>).<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">With not fully encrypted packets, networks may used some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
-Implicit signals are not desirable as they leads to ossification of protocols as result of introducing unintended dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.
+<p id="section-1-3">With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
+Implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
 Users who are serviced via these networks use hosts which run various application clients; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
-There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
+There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
 With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the type of media could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
-Information in unencrypted media packets and headers that wireless networks have used to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-6" class="pilcrow">¶</a></p>
+Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="Figure-e2e">
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-1-7.1">
@@ -1326,7 +1340,7 @@ Information in unencrypted media packets and headers that wireless networks have
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
 </div>
-<p id="section-1-8"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints usually exist with a “B” (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
+<p id="section-1-8"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and WLAN/ISP networks.
 When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <p id="section-1-9">A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.<a href="#section-1-9" class="pilcrow">¶</a></p>
@@ -1376,29 +1390,34 @@ The requirements in this document focuses on on-path collaboration signals that 
       </h2>
 <p id="section-2-1">The document makes use of the following terms:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-2">
-        <dt id="section-2-2.1">Intentional Management:</dt>
+        <dt id="section-2-2.1">Discard preference:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.2">
-          <p id="section-2-2.2.1">Network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)) assurances.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.2.1">Is an indication of drop preference within a flow when there are no sufficient network resources to handle all competing packets of that same flow.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.3">Reactive Management:</dt>
+<dt id="section-2-2.3">Intentional Management:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.4">
-          <p id="section-2-2.4.1">Network reactions to congestion events or protection polices under attacks, with very short to very long durations (e.g., varying wireless and mobile air interface conditions).<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.4.1">Network policy such as (monthly) bandwidth quota or bandwidth limit, or quality (delay and/or jitter)) assurances.<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.5">Traffic shaping:</dt>
+<dt id="section-2-2.5">Reactive Management:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.6">
-          <p id="section-2-2.6.1">Refers in this document to QoS management at the wireless/access router to delay or discard packets of lower priority to achieve bounded latency and high throughput.<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.6.1">Network reactions to congestion events or protection polices under attacks, with very short to very long durations (e.g., varying wireless and mobile air interface conditions).<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.7">User Plane Function (UPF):</dt>
+<dt id="section-2-2.7">Traffic shaping:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.8">
-          <p id="section-2-2.8.1">Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in <a href="#Figure-3gpp" class="auto internal xref">Figure 3</a>.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.8.1">Refers in this document to QoS management at the wireless/access router to delay or discard packets of lower priority to achieve bounded latency and high throughput.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.9"></dt>
+<dt id="section-2-2.9">User Plane Function (UPF):</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.10">
-          <p id="section-2-2.10.1">For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 <span>[<a href="#TR.23.501-3GPP" class="cite xref">TR.23.501-3GPP</a>]</span>.<a href="#section-2-2.10.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.10.1">Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in <a href="#Figure-3gpp" class="auto internal xref">Figure 3</a>.<a href="#section-2-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.11"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.12">
+          <p id="section-2-2.12.1">For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 <span>[<a href="#TR.23.501-3GPP" class="cite xref">TR.23.501-3GPP</a>]</span>.<a href="#section-2-2.12.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1456,19 +1475,29 @@ client needs different prioritization (e.g., video over audio or the other way a
 is only achievable by signaling that priority inversion from the
 client to the ISP router (requirement: REQ-CLIENT-DECIDES).<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">Examples: live broadcast, on-demand video streaming<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">Use cases:<a href="#section-3.1-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.1-7">
-<li id="section-3.1-7.1">
-            <p id="section-3.1-7.1.1">In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.<a href="#section-3.1-7.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">Requirements:<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1-7">
+          <dt id="section-3.1-7.1">REQ-MEDIA-KEYFRAME:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-7.2">
+            <p id="section-3.1-7.2.1">Video contains partial frames and full frames, which need to be distinguished so that
+full frames can be indicated to the network.<a href="#section-3.1-7.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.1-7.3">REQ-MEDIA-AV-SEPARATE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-7.4">
+            <p id="section-3.1-7.4.1">Audio can be prioritized differently than video.<a href="#section-3.1-7.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-3.1-8">Use cases:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.1-9">
+<li id="section-3.1-9.1">
+            <p id="section-3.1-9.1.1">In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.<a href="#section-3.1-9.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-7.2">
-            <p id="section-3.1-7.2.1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-3.1-7.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.1-9.2">
+            <p id="section-3.1-9.2.1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-3.1-9.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.1-8">Requirements:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
-<p id="section-3.1-9">REQ-MEDIA-KEYFRAME: Video contains partial frames and full frames, which need to be distinguished so that
-full frames can be indicated to the network.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
-<p id="section-3.1-10">REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than video.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uc-interactive">
@@ -1478,15 +1507,21 @@ full frames can be indicated to the network.<a href="#section-3.1-9" class="pilc
         </h3>
 <p id="section-3.2-1">Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Use cases:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.2-4">
-<li id="section-3.2-4.1">
-            <p id="section-3.2-4.1.1">A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Requirements:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.2-4">
+          <dt id="section-3.2-4.1">REQ-PACKET-NATURE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-4.2">
+            <p id="section-3.2-4.2.1">The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
+per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-3.2-5">Use cases:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.2-6">
+<li id="section-3.2-6.1">
+            <p id="section-3.2-6.1.1">A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.2-5">Requirements:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">REQ-PACKET-NATURE: The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
-per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uc-preferences">
@@ -1498,7 +1533,13 @@ per-packet signals, which prevents denial of service of mis-marked incoming flow
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">Determination of such preferences is outside of the scope of this document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">Requirements:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">REQ-CLIENT-DECIDES: The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.3-4">
+          <dt id="section-3.3-4.1">REQ-CLIENT-DECIDES:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-4.2">
+            <p id="section-3.3-4.2.1">The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.3-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 <p id="section-3.3-5">Use cases:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.3-6">
 <li id="section-3.3-6.1">
@@ -1521,17 +1562,29 @@ For example, for a game, video in the server-to-client direction might be more i
 <p id="section-3.4-1">Mixed traffic can contain multiple types of data flowing through the same 5-tuple connection. They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4-3">Requirements:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.4-4">REQ-PACKET-RELIABILITY: Indicate if a packet is treated as reliable or unreliable by the application.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
-<p id="section-3.4-5">REQ-PACKET-NATURE: Indicate if a packet belongs to bulk traffic or interactive traffic.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
-<p id="section-3.4-6">Examples: Virtual Apps and Desktops.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
-<p id="section-3.4-7">Use cases:
-  1. Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).<a href="#section-3.4-7" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.4-8">
-<li id="section-3.4-8.1">
-            <p id="section-3.4-8.1.1">File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.<a href="#section-3.4-8.1.1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.4-4">
+          <dt id="section-3.4-4.1">REQ-PACKET-RELIABILITY:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-4.2">
+            <p id="section-3.4-4.2.1">Indicate if a packet is treated as reliable or unreliable by the application.<a href="#section-3.4-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.4-4.3">REQ-PACKET-NATURE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-4.4">
+            <p id="section-3.4-4.4.1">Indicate if a packet belongs to bulk traffic or interactive traffic.<a href="#section-3.4-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-3.4-5">Examples: Virtual Apps and Desktops.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-6">Use cases:<a href="#section-3.4-6" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.4-7">
+<li id="section-3.4-7.1">
+            <p id="section-3.4-7.1.1">Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).<a href="#section-3.4-7.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-8.2">
-            <p id="section-3.4-8.2.1">In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.<a href="#section-3.4-8.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-7.2">
+            <p id="section-3.4-7.2.1">File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.<a href="#section-3.4-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.4-7.3">
+            <p id="section-3.4-7.3.1">In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.<a href="#section-3.4-7.3.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
@@ -1586,78 +1639,187 @@ However, that metadata may have a dependency on the service offering that is sub
 <p id="section-4.3-2">As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3-3">Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
-<p id="section-4.3-5">Requirement:
-  REQ-SCOPED-METADATA: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+<p id="section-4.3-5">Requirement:<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.3-6">
+          <dt id="section-4.3-6.1">REQ-SCOPED-METADATA:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-6.2">
+            <p id="section-4.3-6.2.1">Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.<a href="#section-4.3-6.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="multiple-bottlenecks">
+<section id="section-4.4">
+        <h3 id="name-multiple-bottlenecks">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-multiple-bottlenecks" class="section-name selfRef">Multiple Bottlenecks</a>
+        </h3>
+<p id="section-4.4-1">Whereas models often show a single bottleneck, there are frequently
+two (or more) bottlenecks: the ISP network and within the subscriber
+network (e.g., Wi-Fi link).  As such, all bottlenecks near the
+subscriber should be able to benefit from network/host collaboration.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">Requirement: REQ-MULTIPLE-BOTTLENECKS should be supported.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="app-interference">
-<section id="section-4.4">
+<section id="section-4.5">
         <h3 id="name-application-interference">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-application-interference" class="section-name selfRef">Application Interference</a>
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-application-interference" class="section-name selfRef">Application Interference</a>
         </h3>
-<p id="section-4.4-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4-3">Requirement:
-  REQ-SIGNAL-EXPOSURE-FAIRNESS: Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.5-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">This is challenging for home networks where multiple hosts may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-3">Requirement:<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.5-4">
+          <dt id="section-4.5-4.1">REQ-SIGNAL-EXPOSURE-FAIRNESS:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.5-4.2">
+            <p id="section-4.5-4.2.1">Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.<a href="#section-4.5-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="exposure-handling">
+<section id="section-4.6">
+        <h3 id="name-exposure-handling">
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-exposure-handling" class="section-name selfRef">Exposure Handling</a>
+        </h3>
+<p id="section-4.6-1">Signaling to the network (<a href="#host-network" class="auto internal xref">Section 5.1</a>, <a href="#server-network" class="auto internal xref">Section 5.3</a>) and consuming the signals from the network (<a href="#network-host" class="auto internal xref">Section 5.2</a>) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  The API framework is required even if one single channel is used so that any application can consume the signals.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.6-2">There might be many channels to signal the metadata such as (non-exhaustive list):<a href="#section-4.6-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.6-3.1">
+            <p id="section-4.6-3.1.1">Application layer<a href="#section-4.6-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-3.2">
+            <p id="section-4.6-3.2.1">TCP options <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span><a href="#section-4.6-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-3.3">
+            <p id="section-4.6-3.3.1">UDP Options <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span><a href="#section-4.6-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-3.4">
+            <p id="section-4.6-3.4.1">IPv6 Hop-by-Hop Options (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>)<a href="#section-4.6-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-3.5">
+            <p id="section-4.6-3.5.1">QUIC CID mapping<a href="#section-4.6-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.6-3.6">
+            <p id="section-4.6-3.6.1">ICMP messages<a href="#section-4.6-3.6.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.6-4">Requirement:<a href="#section-4.6-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.6-5">
+          <dt id="section-4.6-5.1">REQ-API-FRAMEWORK:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-5.2">
+            <p id="section-4.6-5.2.1">API framework to facilitate signaling for applications.<a href="#section-4.6-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="privacy">
-<section id="section-4.5">
+<section id="section-4.7">
         <h3 id="name-privacy-considerations">
-<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+<a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
         </h3>
-<p id="section-4.5-1">Encrypted media payloads along with temporary IPv6 addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
-It should however be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.
+<p id="section-4.7-1">Encrypted media payloads along with temporary IPv6 addresses between a server and user (client) provide a measure of privacy for the content and the identity of the user.
+It should, however, be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.
 To avoid this kind of frequency analysis, media sent by the server would need to be scheduled or multiplexed differently to each user/recipient.
 This may be possible in transports like QUIC which allows flexibility in scheduling each stream.
-Transports like QUIC also fully encrypt the entire stream and therefore no media headers are observable on path either.
-The security aspects of the media payload/ transport are not in the scope of these requirements and is described here only to provide context for metadata privacy.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">Privacy considerations for the metadata itself should ensure that no additional information about the content is disclosed to the network, and no information about the user of the content is disclosed to the network or server.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
-<p id="section-4.5-3">Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
+Transports like QUIC also fully encrypt the entire stream and, therefore, no media headers are observable on-path either.
+The security aspects of the media payload / transport are not in the scope of this document and is described here only to provide context for metadata privacy.<a href="#section-4.7-1" class="pilcrow">¶</a></p>
+<p id="section-4.7-2">Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities
 along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in
 the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent
-from the server to the wireless router, including these elements and others, are vulnerable to modification while in transit. Only an
+from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an
 on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or
 completely dropping the packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames
-as unimportant, but such changes are detectable by the receiver. The privacy implications of revealing metadata to network elements need to
-be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized
-entities to infer sensitive information about the data being transmitted.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
-<p id="section-4.5-4">Requirement: REQ-PRIVACY-ADDITIONAL: An on-path observer obtains no additional information about the IP packet.<a href="#section-4.5-4" class="pilcrow">¶</a></p>
+as unimportant, but such changes are detectable by the receiver.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
+<p id="section-4.7-3">It is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
+<p id="section-4.7-4">Requirements:<a href="#section-4.7-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.7-5">
+          <dt id="section-4.7-5.1">REQ-PRIVACY-ADDITIONAL:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.7-5.2">
+            <p id="section-4.7-5.2.1">An on-path observer obtains no additional information about the IP packet.<a href="#section-4.7-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.7-5.3">REQ-SIGNALING-AVOIDANCE:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.7-5.4">
+            <p id="section-4.7-5.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the folliwing is not required to make use of the collaborative signaling:<a href="#section-4.7-5.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.7-5.4.2.1">
+                <p id="section-4.7-5.4.2.1.1">Reveal the application identity.<a href="#section-4.7-5.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.7-5.4.2.2">
+                <p id="section-4.7-5.4.2.2.1">Expose the application cause (or 'reason') to signal metadata.<a href="#section-4.7-5.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.7-5.4.2.3">
+                <p id="section-4.7-5.4.2.3.1">Reveal server identity.<a href="#section-4.7-5.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.7-5.4.2.4">
+                <p id="section-4.7-5.4.2.4.1">Inspect client-to-server encrypted payload by network elements.<a href="#section-4.7-5.4.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="scalability">
-<section id="section-4.6">
+<section id="section-4.8">
         <h3 id="name-scalability">
-<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
+<a href="#section-4.8" class="section-number selfRef">4.8. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
         </h3>
-<p id="section-4.6-1">There may be a large number of media flows handled by the server and wireless/access router.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
-<p id="section-4.6-2">Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
-<p id="section-4.6-3">The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
-<p id="section-4.6-4">Requirement:  REQ-ISP-SCALE: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.<a href="#section-4.6-4" class="pilcrow">¶</a></p>
+<p id="section-4.8-1">There may be a large number of media flows handled by the server and wireless/access router.<a href="#section-4.8-1" class="pilcrow">¶</a></p>
+<p id="section-4.8-2">Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases.<a href="#section-4.8-2" class="pilcrow">¶</a></p>
+<p id="section-4.8-3">The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.<a href="#section-4.8-3" class="pilcrow">¶</a></p>
+<p id="section-4.8-4">Requirement:<a href="#section-4.8-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.8-5">
+          <dt id="section-4.8-5.1">REQ-ISP-SCALE:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.8-5.2">
+            <p id="section-4.8-5.2.1">The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.<a href="#section-4.8-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="continuity">
-<section id="section-4.7">
+<section id="section-4.9">
         <h3 id="name-session-continuity">
-<a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-session-continuity" class="section-name selfRef">Session Continuity</a>
+<a href="#section-4.9" class="section-number selfRef">4.9. </a><a href="#name-session-continuity" class="section-name selfRef">Session Continuity</a>
         </h3>
-<p id="section-4.7-1">The general trend in wireless networks is to deploy the wireless router closer to the user.
+<p id="section-4.9-1">The general trend in wireless networks is to deploy the wireless router closer to the user.
 This can help with low link latency but can result in more frequent handovers as the user moves between routers.
-The frequency of handovers increases when a user moves faster or when the media session lasts longer.<a href="#section-4.7-1" class="pilcrow">¶</a></p>
-<p id="section-4.7-2">During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.7-3">Requirement: REQ-CONTINUITY: Handover from one radio or router to another should continue to provide same service level.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
+The frequency of handovers increases when a user moves faster or when the media session lasts longer.<a href="#section-4.9-1" class="pilcrow">¶</a></p>
+<p id="section-4.9-2">During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.<a href="#section-4.9-2" class="pilcrow">¶</a></p>
+<p id="section-4.9-3">Requirement:<a href="#section-4.9-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.9-4">
+          <dt id="section-4.9-4.1">REQ-CONTINUITY:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.9-4.2">
+            <p id="section-4.9-4.2.1">Handover from one radio or router to another should continue to provide same service level.<a href="#section-4.9-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="abuse">
-<section id="section-4.8">
+<section id="section-4.10">
         <h3 id="name-abuse-and-constraints">
-<a href="#section-4.8" class="section-number selfRef">4.8. </a><a href="#name-abuse-and-constraints" class="section-name selfRef">Abuse and Constraints</a>
+<a href="#section-4.10" class="section-number selfRef">4.10. </a><a href="#name-abuse-and-constraints" class="section-name selfRef">Abuse and Constraints</a>
         </h3>
-<p id="section-4.8-1">It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.<a href="#section-4.8-1" class="pilcrow">¶</a></p>
-<p id="section-4.8-2">Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.<a href="#section-4.8-2" class="pilcrow">¶</a></p>
-<p id="section-4.8-3">Requirements:<a href="#section-4.8-3" class="pilcrow">¶</a></p>
-<p id="section-4.8-4">REQ-SIGNAL-VALIDATION: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.<a href="#section-4.8-4" class="pilcrow">¶</a></p>
-<p id="section-4.8-5">REQ-CLIENT-VALIDATION: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.<a href="#section-4.8-5" class="pilcrow">¶</a></p>
+<p id="section-4.10-1">It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.<a href="#section-4.10-1" class="pilcrow">¶</a></p>
+<p id="section-4.10-2">Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.<a href="#section-4.10-2" class="pilcrow">¶</a></p>
+<p id="section-4.10-3">Requirements:<a href="#section-4.10-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.10-4">
+          <dt id="section-4.10-4.1">REQ-SIGNAL-VALIDATION:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.10-4.2">
+            <p id="section-4.10-4.2.1">The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.<a href="#section-4.10-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.10-4.3">REQ-CLIENT-VALIDATION:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.10-4.4">
+            <p id="section-4.10-4.4.1">The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.<a href="#section-4.10-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 </section>
@@ -1672,9 +1834,17 @@ The requirements here focus on proxied metadata connections on path with the dat
 <p id="section-5-2">The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>.
 Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client(host)-to-server encrypted payload.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The metadata connections may be between server and network (in either direction) or between host and network (in either direction).<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 5.2</a>) and others need client involvement (<a href="#host-network" class="auto internal xref">Section 5.1</a>).<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 5.3</a>) and others need client involvement (<a href="#host-network" class="auto internal xref">Section 5.1</a>).<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">REQ-PACKET-SELF: Packet importance is indicated by the packet itself, which may need to be decrypted or de-obfuscated.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-6">Requirement:<a href="#section-5-6" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5-7">
+        <dt id="section-5-7.1">REQ-PACKET-SELF:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-7.2">
+          <p id="section-5-7.2.1">Packet importance is indicated by the packet itself.<a href="#section-5-7.2.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-5-8">Note REQ-PACKET-SELF should meet the requirements of <a href="#privacy" class="auto internal xref">Section 4.7</a> especially REQ-PRIVACY-ADDITIONAL.<a href="#section-5-8" class="pilcrow">¶</a></p>
 <div id="host-network">
 <section id="section-5.1">
         <h3 id="name-host-network-metadata">
@@ -1686,12 +1856,28 @@ Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-priority-between-flows-inte" class="section-name selfRef">Priority between Flows (Inter-flow)</a>
           </h4>
 <p id="section-5.1.1-1">Certain flows being received by a host (or by an application on a host) are less or more important than other flows of <em>the same host</em>.
-For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.
-By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
-This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3">However, prioritizing between flows presents challenges because the host can have both malicious and legitimate applications, and the remote peers can also be malicious and benign.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-4">There is no requirement associated with this use-case.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
+For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-3">Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
+This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-4">However, prioritizing between flows, even for the same user/subscriber, presents the following challenges:<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.1.1-5">
+<li id="section-5.1.1-5.1">
+              <p id="section-5.1.1-5.1.1">Identification and authentication of legitimate applications on the host. The remote peers can also be malicious and benign.<a href="#section-5.1.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.1.1-5.2">
+              <p id="section-5.1.1-5.2.1">Identifying whether the traffic belongs to a single user or multiple users from a single network attachment (e.g., tethering or LAN connected to a CPE). The network will enforce per-subscriber policies, not per-host.<a href="#section-5.1.1-5.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.1.1-5.3">
+              <p id="section-5.1.1-5.3.1">Enforcing fairness to all the flows belonging to a single host. For example, it is a challenge to prevent a platform from marking certain flows as low priority at platform layer, bypassing the application, to (de)prioritize certain applications over all the other applications on the same host. Such unfairness can be revealed during certification or public benchmark efforts, though.<a href="#section-5.1.1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<p id="section-5.1.1-6">Taking into account these challenges, and despite the use case is described in the document, inter-flow (de)prioritization requirements are out of the scope of this document.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-5.1.1-7.1">
+              <p id="section-5.1.1-7.1.1">Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.<a href="#section-5.1.1-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 <div id="intra-flow-priority">
@@ -1703,104 +1889,162 @@ This eventually causes all flows to be marked as important, or -- more likely --
 Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport (<span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, <span>[<a href="#I-D.ietf-moq-transport" class="cite xref">I-D.ietf-moq-transport</a>]</span>).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-2">Other applications, as mentioned in <a href="#uc" class="auto internal xref">Section 3</a>, such as gaming and remote desktop also benefit from differentiating their packets to the network.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-3">Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-4">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use-case.
+<p id="section-5.1.2-4">Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use case.
 Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-5">Requirements: The requirements vary based on use case and user preference. The requirements listed in <a href="#uc" class="auto internal xref">Section 3</a> are applicable here.<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
+</section>
+</div>
+<div id="network-host">
+<section id="section-5.2">
+        <h3 id="name-network-host-metadata">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-network-host-metadata" class="section-name selfRef">Network-Host Metadata</a>
+        </h3>
 <div id="assisted-offload">
-<section id="section-5.1.3">
+<section id="section-5.2.1">
           <h4 id="name-assisted-offload">
-<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
+<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
           </h4>
-<p id="section-5.1.3-1">There are cases (crisis) where "normal" network resources cannot be
-   used at maximum and, thus, a network would seek to reduce or offload
-   some of the traffic during these events -- often called 'reactive
-   traffic policy'.  An example of such use case is cellular networks
-   that are overly used (and radio resources exhausted) such as a large
-   collection of people (e.g., parade, sporting event), or such as a
-   partial radio network outage (e.g., tower power outage).  During such
-   a condition, an alternative network attachment may be available to
-   the host (e.g., Wi-Fi).<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-2">Network-to-host signals are useful to put in place adequate traffic
-   distribution policies on the host (e.g., prefer the use of alternate paths,
-   offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-1">There are cases (crisis) where "normal" network resources cannot be
+used at maximum and, thus, a network would seek to reduce or offload
+some of the traffic during these events -- often called 'reactive
+traffic policy'.  An example of such use case is cellular networks
+that are overly used (and radio resources exhausted) such as a large
+collection of people (e.g., parade, sporting event), or such as a
+partial radio network outage (e.g., tower power outage).  During such
+a condition, an alternative network attachment may be available to
+the host (e.g., Wi-Fi).<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-2">Network-to-host signals are useful to put in place adequate traffic
+distribution policies on the host (e.g., prefer the use of alternate paths,
+offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="nrlp">
+<section id="section-5.2.2">
+          <h4 id="name-network-bandwidth-network-r">
+<a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-network-bandwidth-network-r" class="section-name selfRef">Network Bandwidth &amp; Network Rate Limiting Policies</a>
+          </h4>
+<p id="section-5.2.2-1">Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-2">Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">Requirements:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5.2.2-4">
+            <dt id="section-5.2.2-4.1">REQ-NETWORK-THROUGHPUT:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.2.2-4.2">
+              <p id="section-5.2.2-4.2.1">A mechanism to signal the available network throughput to interested hosts, including changes to throughput.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-5.2.2-4.3">REQ-NRLP:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.2.2-4.4">
+              <p id="section-5.2.2-4.4.1">The network shall inform the host of the Rate limiting policies<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+<p id="section-5.2.2-5">Use cases:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.2.2-6">
+<li id="section-5.2.2-6.1">
+              <p id="section-5.2.2-6.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.<a href="#section-5.2.2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.2">
+              <p id="section-5.2.2-6.2.1">Dynamic Adaptation: When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate.<a href="#section-5.2.2-6.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.3">
+              <p id="section-5.2.2-6.3.1">Efficient Resource Utilization: Knowing available bandwidth helps the host allocate resources efficiently.<a href="#section-5.2.2-6.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.4">
+              <p id="section-5.2.2-6.4.1">Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.<a href="#section-5.2.2-6.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-5.2.2-6.5">
+              <p id="section-5.2.2-6.5.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#section-5.2.2-6.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
 </section>
 </div>
 </section>
 </div>
 <div id="server-network">
-<section id="section-5.2">
+<section id="section-5.3">
         <h3 id="name-server-network-metadata">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
         </h3>
 <div id="mdu-stream-id">
-<section id="section-5.2.1">
+<section id="section-5.3.1">
           <h4 id="name-identification-of-media-fra">
-<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames and Streams</a>
+<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-identification-of-media-fra" class="section-name selfRef">Identification of Media Frames and Streams</a>
           </h4>
-<p id="section-5.2.1-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
+<p id="section-5.3.1-1">Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
+Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.1-2">Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
 The application can provide information to detect the start, end and set of packets that belong to a media frame.
 Alternatively, the application may provide information to identify one stream of the flow from another.
-The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-4">Requirements:<a href="#section-5.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-5">REQ-FRAME-START: Indicate packet containing start of media frame.<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-6">REQ-FRAME-MIDDLE: Indicate packet containing middle(s) of media frame.<a href="#section-5.2.1-6" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-7">REQ-FRAME-END: Indicate packet containing end of media frame.<a href="#section-5.2.1-7" class="pilcrow">¶</a></p>
+The application provides information to identify either media frames or streams in a flow but not both.<a href="#section-5.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.1-3">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.3.1-4">Requirements:<a href="#section-5.3.1-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5.3.1-5">
+            <dt id="section-5.3.1-5.1">REQ-FRAME-ASSOCIATED:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.3.1-5.2">
+              <p id="section-5.3.1-5.2.1">Identify all packets belonging to the same media frame, so they can receive equal drop/forward treatment.<a href="#section-5.3.1-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="TrafficType">
-<section id="section-5.2.2">
+<section id="section-5.3.2">
           <h4 id="name-identification-of-traffic-t">
-<a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-identification-of-traffic-t" class="section-name selfRef">Identification of Traffic Type without Disclosure the Application</a>
+<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-identification-of-traffic-t" class="section-name selfRef">Identification of Traffic Type without Disclosure of the Application</a>
           </h4>
-<p id="section-5.2.2-1">Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-2">Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-1">Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-2">Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="relative-priority">
-<section id="section-5.2.3">
+<section id="section-5.3.3">
           <h4 id="name-relative-priority">
-<a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
+<a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-relative-priority" class="section-name selfRef">Relative Priority</a>
           </h4>
-<p id="section-5.2.3-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
+<p id="section-5.3.3-1">Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
 The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
-Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.3-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
-As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.3-3">There is no requirement associated with this use-case.<a href="#section-5.2.3-3" class="pilcrow">¶</a></p>
+Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.3-2">Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
+As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.3-3">There is no requirement associated with this use case.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delay">
-<section id="section-5.2.4">
+<section id="section-5.3.4">
           <h4 id="name-tolerance-to-delay">
-<a href="#section-5.2.4" class="section-number selfRef">5.2.4. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
+<a href="#section-5.3.4" class="section-number selfRef">5.3.4. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
           </h4>
-<p id="section-5.2.4-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+<p id="section-5.3.4-1">Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
 Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
 ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
-Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.4-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-5.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.4-3">REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.2.4-3" class="pilcrow">¶</a></p>
+Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.4-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.4-3">Requirements:<a href="#section-5.3.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.3.4-4">REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="burst">
-<section id="section-5.2.5">
+<section id="section-5.3.5">
           <h4 id="name-burst-indication">
-<a href="#section-5.2.5" class="section-number selfRef">5.2.5. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
+<a href="#section-5.3.5" class="section-number selfRef">5.3.5. </a><a href="#name-burst-indication" class="section-name selfRef">Burst Indication</a>
           </h4>
-<p id="section-5.2.5-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
+<p id="section-5.3.5-1">Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
 Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
 The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
-Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
-The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-3">REQ-BURST-INDICATOR: Client indicates this flow's maximum burst to
+Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.<a href="#section-5.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.5-2">The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
+The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.<a href="#section-5.3.5-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5.3.5-3">
+            <dt id="section-5.3.5-3.1">REQ-BURST-INDICATOR:</dt>
+            <dd style="margin-left: 1.5em" id="section-5.3.5-3.2">
+              <p id="section-5.3.5-3.2.1">Client indicates this flow's maximum burst to
 ISP, and ISP agrees it can handle that burst size.  (but what does ISP
-router do with the burst? Needs to be described above!)<a href="#section-5.2.5-3" class="pilcrow">¶</a></p>
+router do with the burst? Needs to be described above!)<a href="#section-5.3.5-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
 </section>
 </div>
 </section>
@@ -1829,7 +2073,7 @@ The requirements and specification to mitigate these aspects are not in the scop
       <h2 id="name-security-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-8-1">Security aspects for the metadata are discussed in <a href="#privacy" class="auto internal xref">Section 4.5</a>.
+<p id="section-8-1">Security aspects for the metadata are discussed in <a href="#privacy" class="auto internal xref">Section 4.7</a>.
 The principles outlined in <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>, <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span> and <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> contain security considerations and are referenced in <a href="#metadata-req" class="auto internal xref">Section 5</a>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">This document has no other security considerations.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
@@ -1860,7 +2104,8 @@ Ruediger Geib suggested that limiting the amount of state information that a wir
 <dt id="section-9-2.7"></dt>
         <dd style="margin-left: 1.5em" id="section-9-2.8">
           <p id="section-9-2.8.1">Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
-Thanks to Hang Shi for the review and comments on host-to-network signaling.<a href="#section-9-2.8.1" class="pilcrow">¶</a></p>
+Thanks to Hang Shi for the review and comments on host-to-network signaling.
+Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.<a href="#section-9-2.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1872,13 +2117,21 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
+<dt id="app-measurement">[app-measurement]</dt>
+      <dd>
+<span class="refAuthor">Gurel, Z.</span> and <span class="refAuthor">A. C. Begen</span>, <span class="refTitle">"Bandwidth measurement for QUIC"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/">https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-moq-transport">[I-D.ietf-moq-transport]</dt>
       <dd>
-<span class="refAuthor">Curley, L.</span>, <span class="refAuthor">Pugin, K.</span>, <span class="refAuthor">Nandakumar, S.</span>, <span class="refAuthor">Vasiliev, V.</span>, and <span class="refAuthor">I. Swett</span>, <span class="refTitle">"Media over QUIC Transport"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-moq-transport-03</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-moq-transport-03">https://datatracker.ietf.org/doc/html/draft-ietf-moq-transport-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Curley, L.</span>, <span class="refAuthor">Pugin, K.</span>, <span class="refAuthor">Nandakumar, S.</span>, <span class="refAuthor">Vasiliev, V.</span>, and <span class="refAuthor">I. Swett</span>, <span class="refTitle">"Media over QUIC Transport"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-moq-transport-04</span>, <time datetime="2024-05-29" class="refDate">29 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-moq-transport-04">https://datatracker.ietf.org/doc/html/draft-ietf-moq-transport-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-teas-attachment-circuit">[I-D.ietf-opsawg-teas-attachment-circuit]</dt>
       <dd>
-<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-12</span>, <time datetime="2024-05-14" class="refDate">14 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-12</a>&gt;</span>. </dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-13</span>, <time datetime="2024-05-29" class="refDate">29 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-13">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-13</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-tsvwg-udp-options">[I-D.ietf-tsvwg-udp-options]</dt>
+      <dd>
+<span class="refAuthor">Touch, J. D.</span>, <span class="refTitle">"Transport Options for UDP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tsvwg-udp-options-32</span>, <time datetime="2024-03-21" class="refDate">21 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-udp-options-32">https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-udp-options-32</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.kaippallimalil-tsvwg-media-hdr-wireless">[I-D.kaippallimalil-tsvwg-media-hdr-wireless]</dt>
       <dd>
@@ -1896,9 +2149,17 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
       <dd>
 <span class="refAuthor">Bless, R.</span>, <span class="refAuthor">Nichols, K.</span>, and <span class="refAuthor">K. Wehrle</span>, <span class="refTitle">"A Lower Effort Per-Domain Behavior (PDB) for Differentiated Services"</span>, <span class="seriesInfo">RFC 3662</span>, <span class="seriesInfo">DOI 10.17487/RFC3662</span>, <time datetime="2003-12" class="refDate">December 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3662">https://www.rfc-editor.org/rfc/rfc3662</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6077">[RFC6077]</dt>
+      <dd>
+<span class="refAuthor">Papadimitriou, D., Ed.</span>, <span class="refAuthor">Welzl, M.</span>, <span class="refAuthor">Scharf, M.</span>, and <span class="refAuthor">B. Briscoe</span>, <span class="refTitle">"Open Research Issues in Internet Congestion Control"</span>, <span class="seriesInfo">RFC 6077</span>, <span class="seriesInfo">DOI 10.17487/RFC6077</span>, <time datetime="2011-02" class="refDate">February 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6077">https://www.rfc-editor.org/rfc/rfc6077</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7478">[RFC7478]</dt>
       <dd>
 <span class="refAuthor">Holmberg, C.</span>, <span class="refAuthor">Hakansson, S.</span>, and <span class="refAuthor">G. Eriksson</span>, <span class="refTitle">"Web Real-Time Communication Use Cases and Requirements"</span>, <span class="seriesInfo">RFC 7478</span>, <span class="seriesInfo">DOI 10.17487/RFC7478</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7478">https://www.rfc-editor.org/rfc/rfc7478</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8200">[RFC8200]</dt>
+      <dd>
+<span class="refAuthor">Deering, S.</span> and <span class="refAuthor">R. Hinden</span>, <span class="refTitle">"Internet Protocol, Version 6 (IPv6) Specification"</span>, <span class="seriesInfo">STD 86</span>, <span class="seriesInfo">RFC 8200</span>, <span class="seriesInfo">DOI 10.17487/RFC8200</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8200">https://www.rfc-editor.org/rfc/rfc8200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8558">[RFC8558]</dt>
       <dd>
@@ -1919,6 +2180,10 @@ Thanks to Hang Shi for the review and comments on host-to-network signaling.<a h
 <dt id="RFC9221">[RFC9221]</dt>
       <dd>
 <span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">D. Schinazi</span>, <span class="refTitle">"An Unreliable Datagram Extension to QUIC"</span>, <span class="seriesInfo">RFC 9221</span>, <span class="seriesInfo">DOI 10.17487/RFC9221</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9221">https://www.rfc-editor.org/rfc/rfc9221</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9293">[RFC9293]</dt>
+      <dd>
+<span class="refAuthor">Eddy, W., Ed.</span>, <span class="refTitle">"Transmission Control Protocol (TCP)"</span>, <span class="seriesInfo">STD 7</span>, <span class="seriesInfo">RFC 9293</span>, <span class="seriesInfo">DOI 10.17487/RFC9293</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9293">https://www.rfc-editor.org/rfc/rfc9293</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9335">[RFC9335]</dt>
       <dd>
