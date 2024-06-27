@@ -74,10 +74,13 @@ normative:
 
 informative:
 
-  TS.23.501-3GPP:
+  TR.23.501-3GPP:
     title:  "3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"
     date: March 2023
 
+  TR.23.700-60-3GPP:
+     title:  "Study on XR (Extended Reality) and media services (Release 18)"
+     date: August 2022
 
   5G-Lumos:
     title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
@@ -121,10 +124,6 @@ Bandwidth constraints exist most predominantly at the access network (e.g., radi
 Users who are serviced via these networks use hosts which run various application clients; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.
-
-As mobile networks primarily service battery-operated devices, the same information is useful to those
-networks even without network congestion, as the information can inform the base station to aggregate
-packet transmission to allow the mobile device to briefly power down (sleep) its radio.
 
 Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
@@ -217,7 +216,7 @@ Traffic shaping:
 
 User Plane Function (UPF):
 : Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
-: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TS 23.501 {{TS.23.501-3GPP}}.
+: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 {{TR.23.501-3GPP}}.
 
 ~~~
   ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
