@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 29 December 2024                           Cloud Software Group
+Expires: 30 December 2024                           Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 29 December 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                            27 June 2024
+                                                            28 June 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2024.
+   This Internet-Draft will expire on 30 December 2024.
 
 Copyright Notice
 
@@ -1018,7 +1018,8 @@ Table of Contents
    there is no paging message.
 
    REQ-BURST-INDICATOR:  Client indicates this flow's maximum burst to
-      ISP, and ISP agrees it can handle that burst size.
+      the service provider network, and network agrees it can handle
+      that burst size.
 
 6.  Non-Requirements
 
