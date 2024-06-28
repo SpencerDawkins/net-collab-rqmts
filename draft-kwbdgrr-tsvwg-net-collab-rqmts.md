@@ -74,13 +74,10 @@ normative:
 
 informative:
 
-  TR.23.501-3GPP:
+  TS.23.501-3GPP:
     title:  "3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"
     date: March 2023
 
-  TR.23.700-60-3GPP:
-    title:  "Study on XR (Extended Reality) and media services (Release 18)"
-    date: August 2022
 
   5G-Lumos:
     title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
@@ -216,7 +213,7 @@ Traffic shaping:
 
 User Plane Function (UPF):
 : Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
-: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 {{TR.23.501-3GPP}}.
+: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TS 23.501 {{TS.23.501-3GPP}}.
 
 ~~~
   ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
