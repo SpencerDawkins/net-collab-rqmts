@@ -1311,7 +1311,7 @@ Users who are serviced via these networks use hosts which run various applicatio
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
-There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks.
+There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
 With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the type of media could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-6" class="pilcrow">¶</a></p>
@@ -2105,7 +2105,7 @@ Ruediger Geib suggested that limiting the amount of state information that a wir
         <dd style="margin-left: 1.5em" id="section-9-2.8">
           <p id="section-9-2.8.1">Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
-Thanks to Luis Miguel Contreras for his review and comments.<a href="#section-9-2.8.1" class="pilcrow">¶</a></p>
+Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.<a href="#section-9-2.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
