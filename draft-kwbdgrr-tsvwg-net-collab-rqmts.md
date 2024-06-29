@@ -61,13 +61,7 @@ author:
     code: 35000
     country: France
     email: mohamed.boucadair@orange.com
- -
-    fullname: Tirumaleswar Reddy
-    organization: Nokia
-    city: Bangalore
-    region: Karnataka
-    country: India
-    email: "kondtir@gmail.com"
+
 
 
 normative:
