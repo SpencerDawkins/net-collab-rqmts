@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-27T01:11:59.762272+00:00",
+  "timestamp": "2024-06-30T01:17:48.779640+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -478,6 +478,68 @@
           "updatedAt": "2024-06-07T11:20:19Z"
         }
       ]
+    },
+    {
+      "number": 60,
+      "id": "I_kwDOL0HpzM6N9BGL",
+      "title": "Include text to mention network handling of the requirements, wherever applicable",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/60",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "sridharangirish91"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-29T08:27:32Z",
+      "updatedAt": "2024-06-29T08:30:40Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Mention \"what network would do\" with these requirements",
+          "createdAt": "2024-06-29T08:28:11Z",
+          "updatedAt": "2024-06-29T08:28:11Z"
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "id": "I_kwDOL0HpzM6N9BNx",
+      "title": "convert Bulk/real-time to allow-delay",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/61",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "sridharangirish91"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-29T08:28:55Z",
+      "updatedAt": "2024-06-29T08:28:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 62,
+      "id": "I_kwDOL0HpzM6N9BWS",
+      "title": "Add text to quantify why more granularity is needed and another priority bit won't fit",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/62",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "sridharangirish91"
+      ],
+      "labels": [],
+      "body": "I'll give it my best shot!\r\n\r\nhttps://github.com/danwing/metadata/commit/075575d017fd3745a447edd57cb23858f24fc370 - commit from metadata draft where simple priority was explained and tried to map granular with simple priority.",
+      "createdAt": "2024-06-29T08:30:32Z",
+      "updatedAt": "2024-06-29T08:30:44Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -3251,6 +3313,239 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOL0HpzM5zzE43",
+      "title": "mention i-frame in introduction",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/54",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-27T16:44:12Z",
+      "updatedAt": "2024-06-28T19:04:21Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d39e3de488413f626a210caf36e7dd9b74780e23",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "intro_iframe",
+      "headRefOid": "1e2dcd70744e518b6487bfbefabf4510bbe25f07",
+      "closedAt": "2024-06-28T19:04:15Z",
+      "mergedAt": "2024-06-28T19:04:15Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "40f0d76a35b64430fee99113902078b50c247603"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM5_-6G4",
+          "commit": {
+            "abbreviatedOid": "1e2dcd7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-28T06:52:50Z",
+          "updatedAt": "2024-06-28T06:52:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOL0HpzM5zzGa6",
+      "title": "explain client battery savings even when there is no congestion",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/55",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-27T16:48:14Z",
+      "updatedAt": "2024-06-28T18:54:49Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d39e3de488413f626a210caf36e7dd9b74780e23",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "battery",
+      "headRefOid": "9584f1e8ac5cd987c842021ba0fa3c81b459c135",
+      "closedAt": "2024-06-28T18:54:49Z",
+      "mergedAt": "2024-06-28T18:54:49Z",
+      "mergedBy": null,
+      "mergeCommit": {
+        "oid": "8c3dcd7882e9201018c498564e3200e6e181624a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM5_-6YP",
+          "commit": {
+            "abbreviatedOid": "9584f1e"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-28T06:53:37Z",
+          "updatedAt": "2024-06-28T06:53:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOL0HpzM5zzIZ4",
+      "title": "3gpp",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/56",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- **explain client battery savings even when there is no congestion**\n- **change from TS to TR for 23.501 reference, and remove reference to TR.23.700-60-3GPP as we aren't using it in text and idnits was whining**\n",
+      "createdAt": "2024-06-27T16:53:20Z",
+      "updatedAt": "2024-06-28T18:54:48Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d39e3de488413f626a210caf36e7dd9b74780e23",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "3gpp",
+      "headRefOid": "876355b3ce12d30f2959f6772e3a82a1cadc1b4f",
+      "closedAt": "2024-06-28T18:54:48Z",
+      "mergedAt": "2024-06-28T18:54:47Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "8c3dcd7882e9201018c498564e3200e6e181624a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM5_-6m5",
+          "commit": {
+            "abbreviatedOid": "876355b"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-28T06:54:17Z",
+          "updatedAt": "2024-06-28T06:54:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOL0HpzM5zzQt9",
+      "title": "burst",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/57",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- **explain client battery savings even when there is no congestion**\n- **change from TS to TR for 23.501 reference, and remove reference to TR.23.700-60-3GPP as we aren't using it in text and idnits was whining**\n- **clean up REQ-BURST-INDICATOR**\n",
+      "createdAt": "2024-06-27T17:16:01Z",
+      "updatedAt": "2024-06-28T18:54:00Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d39e3de488413f626a210caf36e7dd9b74780e23",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "burst",
+      "headRefOid": "9ada83acb3078aa3d7e9e83d559b41e8cd16e145",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM5_-7IP",
+          "commit": {
+            "abbreviatedOid": "9677d3e"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-28T06:55:45Z",
+          "updatedAt": "2024-06-28T06:55:45Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n: Client indicates this flow's maximum burst to the service provider network, and network agrees it can handle that burst size.\r\n```",
+              "createdAt": "2024-06-28T06:55:45Z",
+              "updatedAt": "2024-06-28T06:55:45Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOL0HpzM5z7D-D",
+      "title": "adjust location of *battery* paragraph",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/58",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-28T18:59:03Z",
+      "updatedAt": "2024-06-28T19:00:03Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "8c3dcd7882e9201018c498564e3200e6e181624a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "newburst",
+      "headRefOid": "d0631ed572d00fb0028401eeb85774d990ea8325",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOL0HpzM5z8Z_K",
+      "title": "remove tiru",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/59",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- **adjust location of burst paragraph**\n- **remove Tiru as author**\n",
+      "createdAt": "2024-06-29T01:59:38Z",
+      "updatedAt": "2024-06-29T08:59:40Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "40f0d76a35b64430fee99113902078b50c247603",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "remove_tiru",
+      "headRefOid": "bb77bc6bb74956ea2c500a14689b4784857f55c0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Maybe add him to acknowledgement?",
+          "createdAt": "2024-06-29T08:59:39Z",
+          "updatedAt": "2024-06-29T08:59:39Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
