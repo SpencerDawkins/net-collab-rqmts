@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 31 December 2024                           Cloud Software Group
+Expires: 2 January 2025                             Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 31 December 2024                           Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                            29 June 2024
+                                                             1 July 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2024.
+   This Internet-Draft will expire on 2 January 2025.
 
 Copyright Notice
 
@@ -1048,6 +1048,8 @@ Acknowledgments
 
    This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
+
+   T.  Reddy contributed text and ideas to this document.
 
    Acknowledgments from
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
