@@ -682,6 +682,8 @@ This document has no other security considerations.
 
 This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}} and {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
 
+T. Reddy contributed text and ideas to this document.
+
 Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 : Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.
 : The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.
