@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 30 December 2024                           Cloud Software Group
+Expires: 2 January 2025                             Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -16,7 +16,7 @@ Expires: 30 December 2024                           Cloud Software Group
                                                                   Orange
                                                                 T. Reddy
                                                                    Nokia
-                                                            28 June 2024
+                                                             1 July 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 December 2024.
+   This Internet-Draft will expire on 2 January 2025.
 
 Copyright Notice
 
@@ -304,7 +304,7 @@ Table of Contents
       shown in Figure 3.
 
       For a definitive description of 3GPP network architectures, the
-      reader should refer to the 3GPP's TS 23.501 [TS.23.501-3GPP].
+      reader should refer to the 3GPP's TR 23.501 [TR.23.501-3GPP].
 
        ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
        │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
@@ -1018,8 +1018,8 @@ Table of Contents
    there is no paging message.
 
    REQ-BURST-INDICATOR:  Client indicates this flow's maximum burst to
-      ISP, and ISP agrees it can handle that burst size.  (but what does
-      ISP router do with the burst?  Needs to be described above!)
+      the service provider network, and network agrees it can handle
+      that burst size.
 
 6.  Non-Requirements
 
@@ -1175,11 +1175,15 @@ Informative References
               Using Path Signals", RFC 9419, DOI 10.17487/RFC9419, July
               2023, <https://www.rfc-editor.org/rfc/rfc9419>.
 
-   [TS.23.501-3GPP]
+   [TR.23.501-3GPP]
               "3rd Generation Partnership Project; Technical
               Specification Group Servies and System Aspects; System
               architecture for the 5G System (5GS); Stage 2 (Release
               18)", March 2023.
+
+   [TR.23.700-60-3GPP]
+              "Study on XR (Extended Reality) and media services
+              (Release 18)", August 2022.
 
    [_5G-Lumos]
               "Lumos5G: Mapping and Predicting Commercial mmWave 5G
