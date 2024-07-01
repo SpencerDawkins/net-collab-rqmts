@@ -14,8 +14,6 @@ Expires: 2 January 2025                             Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                                T. Reddy
-                                                                   Nokia
                                                              1 July 2024
 
 
@@ -1051,6 +1049,8 @@ Acknowledgments
    This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
 
+   T.  Reddy contributed text and ideas to this document.
+
    Acknowledgments from
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
       authors of this draft have discussed the similarities and
@@ -1230,11 +1230,3 @@ Authors' Addresses
    35000 Rennes
    France
    Email: mohamed.boucadair@orange.com
-
-
-   Tirumaleswar Reddy
-   Nokia
-   Bangalore
-   Karnataka
-   India
-   Email: kondtir@gmail.com

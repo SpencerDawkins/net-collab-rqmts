@@ -11,7 +11,6 @@
 <meta content="Sridharan Rajagopalan" name="author">
 <meta content="Spencer Dawkins" name="author">
 <meta content="Mohamed Boucadair" name="author">
-<meta content="Tirumaleswar Reddy" name="author">
 <meta content="
        Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
 Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network. 
@@ -1087,10 +1086,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <div class="author-name">M. Boucadair</div>
 <div class="org">Orange</div>
 </div>
-<div class="author">
-      <div class="author-name">T. Reddy</div>
-<div class="org">Nokia</div>
-</div>
 </dd>
 </dl>
 </div>
@@ -2085,28 +2080,29 @@ The principles outlined in <span>[<a href="#RFC8558" class="cite xref">RFC8558</
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="section-9-1">This document is a merge of <span>[<a href="#I-D.rwbr-tsvwg-signaling-use-cases" class="cite xref">I-D.rwbr-tsvwg-signaling-use-cases</a>]</span> and <span>[<a href="#I-D.kaippallimalil-tsvwg-media-hdr-wireless" class="cite xref">I-D.kaippallimalil-tsvwg-media-hdr-wireless</a>]</span>.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-9-2">
-        <dt id="section-9-2.1">Acknowledgments from <span>[<a href="#I-D.kaippallimalil-tsvwg-media-hdr-wireless" class="cite xref">I-D.kaippallimalil-tsvwg-media-hdr-wireless</a>]</span>:</dt>
-        <dd style="margin-left: 1.5em" id="section-9-2.2">
-          <p id="section-9-2.2.1">Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.<a href="#section-9-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-9-2">T. Reddy contributed text and ideas to this document.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-9-3">
+        <dt id="section-9-3.1">Acknowledgments from <span>[<a href="#I-D.kaippallimalil-tsvwg-media-hdr-wireless" class="cite xref">I-D.kaippallimalil-tsvwg-media-hdr-wireless</a>]</span>:</dt>
+        <dd style="margin-left: 1.5em" id="section-9-3.2">
+          <p id="section-9-3.2.1">Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-9-2.3"></dt>
-        <dd style="margin-left: 1.5em" id="section-9-2.4">
-          <p id="section-9-2.4.1">The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.<a href="#section-9-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-9-3.3"></dt>
+        <dd style="margin-left: 1.5em" id="section-9-3.4">
+          <p id="section-9-3.4.1">The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.<a href="#section-9-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-9-2.5"></dt>
-        <dd style="margin-left: 1.5em" id="section-9-2.6">
-          <p id="section-9-2.6.1">The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
-Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.<a href="#section-9-2.6.1" class="pilcrow">¶</a></p>
+<dt id="section-9-3.5"></dt>
+        <dd style="margin-left: 1.5em" id="section-9-3.6">
+          <p id="section-9-3.6.1">The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
+Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.<a href="#section-9-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-9-2.7"></dt>
-        <dd style="margin-left: 1.5em" id="section-9-2.8">
-          <p id="section-9-2.8.1">Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
+<dt id="section-9-3.7"></dt>
+        <dd style="margin-left: 1.5em" id="section-9-3.8">
+          <p id="section-9-3.8.1">Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
-Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.<a href="#section-9-2.8.1" class="pilcrow">¶</a></p>
+Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.<a href="#section-9-3.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2264,18 +2260,6 @@ Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.<a 
 <div class="email">
 <span>Email:</span>
 <a href="mailto:mohamed.boucadair@orange.com" class="email">mohamed.boucadair@orange.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Tirumaleswar Reddy</span></div>
-<div dir="auto" class="left"><span class="org">Nokia</span></div>
-<div dir="auto" class="left">
-<span class="locality">Bangalore</span> </div>
-<div dir="auto" class="left"><span class="region">Karnataka</span></div>
-<div dir="auto" class="left"><span class="country-name">India</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:kondtir@gmail.com" class="email">kondtir@gmail.com</a>
 </div>
 </address>
 </section>
