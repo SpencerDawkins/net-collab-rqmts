@@ -181,6 +181,12 @@ Table of Contents
    transport (e.g., QUIC [RFC9000]) does not expose any media header
    information that on-path network elements can use for forwarding.
 
+   As mobile networks primarily service battery-operated devices, the
+   same information is useful to those networks even without network
+   congestion, as the information can inform the base station to
+   aggregate packet transmission to allow the mobile device to briefly
+   power down (sleep) its radio.
+
    Also, traffic patterns in some emerging applications can vary
    significantly during the session.  For example, live media or AI-
    generated content can have significant dynamic variations and
