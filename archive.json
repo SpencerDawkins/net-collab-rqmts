@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-30T01:17:48.779640+00:00",
+  "timestamp": "2024-07-02T01:12:31.319835+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3445,24 +3445,26 @@
       "id": "PR_kwDOL0HpzM5zzQt9",
       "title": "burst",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/57",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "- **explain client battery savings even when there is no congestion**\n- **change from TS to TR for 23.501 reference, and remove reference to TR.23.700-60-3GPP as we aren't using it in text and idnits was whining**\n- **clean up REQ-BURST-INDICATOR**\n",
       "createdAt": "2024-06-27T17:16:01Z",
-      "updatedAt": "2024-06-28T18:54:00Z",
+      "updatedAt": "2024-07-01T05:16:37Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "d39e3de488413f626a210caf36e7dd9b74780e23",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "burst",
       "headRefOid": "9ada83acb3078aa3d7e9e83d559b41e8cd16e145",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-07-01T05:16:37Z",
+      "mergedAt": "2024-07-01T05:16:37Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "9192f957611f4f2645fe863772a249af55dd929a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3484,6 +3486,19 @@
               "updatedAt": "2024-06-28T06:55:45Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6ALNl5",
+          "commit": {
+            "abbreviatedOid": "9ada83a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-01T05:13:54Z",
+          "updatedAt": "2024-07-01T05:13:54Z",
+          "comments": []
         }
       ]
     },
@@ -3492,50 +3507,68 @@
       "id": "PR_kwDOL0HpzM5z7D-D",
       "title": "adjust location of *battery* paragraph",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/58",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-06-28T18:59:03Z",
-      "updatedAt": "2024-06-28T19:00:03Z",
+      "updatedAt": "2024-07-01T05:16:50Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "8c3dcd7882e9201018c498564e3200e6e181624a",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "newburst",
       "headRefOid": "d0631ed572d00fb0028401eeb85774d990ea8325",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-07-01T05:16:50Z",
+      "mergedAt": "2024-07-01T05:16:50Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "49fb58ae6dda08ddb783811fda695eca387b7d24"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6ALNvW",
+          "commit": {
+            "abbreviatedOid": "d0631ed"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-01T05:14:36Z",
+          "updatedAt": "2024-07-01T05:14:36Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 59,
       "id": "PR_kwDOL0HpzM5z8Z_K",
       "title": "remove tiru",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/59",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "- **adjust location of burst paragraph**\n- **remove Tiru as author**\n",
       "createdAt": "2024-06-29T01:59:38Z",
-      "updatedAt": "2024-06-29T08:59:40Z",
+      "updatedAt": "2024-07-01T05:17:14Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "40f0d76a35b64430fee99113902078b50c247603",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "remove_tiru",
-      "headRefOid": "bb77bc6bb74956ea2c500a14689b4784857f55c0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "73d3fc19a0bf4fdf206148524c44dfc433905df6",
+      "closedAt": "2024-07-01T05:17:13Z",
+      "mergedAt": "2024-07-01T05:17:13Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "cadbd6f57cdb8f5beab149f1ed640f81423a83d0"
+      },
       "comments": [
         {
           "author": "sridharangirish91",
@@ -3545,7 +3578,21 @@
           "updatedAt": "2024-06-29T08:59:39Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6ALOTv",
+          "commit": {
+            "abbreviatedOid": "73d3fc1"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-01T05:17:06Z",
+          "updatedAt": "2024-07-01T05:17:06Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
