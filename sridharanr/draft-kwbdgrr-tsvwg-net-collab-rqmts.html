@@ -1172,13 +1172,16 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-interactive-media" class="internal xref">Interactive Media</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-user-preferences" class="internal xref">User Preferences</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-allow-delay-traffic" class="internal xref">Allow-Delay Traffic</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-mixed-traffic" class="internal xref">Mixed Traffic</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-user-preferences" class="internal xref">User Preferences</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-honoring-of-metadata-for-se" class="internal xref">Honoring of Metadata for Servers Behind a Gateway</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-mixed-traffic" class="internal xref">Mixed Traffic</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-honoring-of-metadata-for-se" class="internal xref">Honoring of Metadata for Servers Behind a Gateway</a></p>
 </li>
             </ul>
 </li>
@@ -1508,8 +1511,7 @@ full frames can be indicated to the network.<a href="#section-3.1-7.2.1" class="
 <span class="break"></span><dl class="dlParallel" id="section-3.2-4">
           <dt id="section-3.2-4.1">REQ-PACKET-NATURE:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-4.2">
-            <p id="section-3.2-4.2.1">The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
-per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-4.2.1">The receiver indicates that a flow can be allowed to be delayed/buffered (bulk data transfer) or not (interactive traffic) and requests that the network honors the incoming flow's per-packet signals, which prevents denial of service of mis-marked incoming flows.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1521,78 +1523,96 @@ per-packet signals, which prevents denial of service of mis-marked incoming flow
         </ol>
 </section>
 </div>
-<div id="uc-preferences">
+<div id="uc-allow-delay">
 <section id="section-3.3">
-        <h3 id="name-user-preferences">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-user-preferences" class="section-name selfRef">User Preferences</a>
+        <h3 id="name-allow-delay-traffic">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-allow-delay-traffic" class="section-name selfRef">Allow-Delay Traffic</a>
         </h3>
-<p id="section-3.3-1">A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
-For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Determination of such preferences is outside of the scope of this document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">Requirements:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.3-4">
-          <dt id="section-3.3-4.1">REQ-CLIENT-DECIDES:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.3-4.2">
-            <p id="section-3.3-4.2.1">The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.3-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">Allow-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Requirement: REQ-PACKET-NATURE as defined previously.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">Use cases:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.3-4">
+<li id="section-3.3-4.1">
+            <p id="section-3.3-4.1.1">A remote desktop user prioritizes graphics update over an on-going file copy operation.<a href="#section-3.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.3-4.2">
+            <p id="section-3.3-4.2.1">User application in foreground is given priority over downloading software updates.<a href="#section-3.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+</section>
+</div>
+<div id="uc-preferences">
+<section id="section-3.4">
+        <h3 id="name-user-preferences">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-user-preferences" class="section-name selfRef">User Preferences</a>
+        </h3>
+<p id="section-3.4-1">A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
+For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Determination of such preferences is outside of the scope of this document.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Requirements:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.4-4">
+          <dt id="section-3.4-4.1">REQ-CLIENT-DECIDES:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-4.2">
+            <p id="section-3.4-4.2.1">The receiving client determines importance of packets it receives, as the client may have changing needs over time.<a href="#section-3.4-4.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-3.3-5">Use cases:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.3-6">
-<li id="section-3.3-6.1">
-            <p id="section-3.3-6.1.1">Dynamic changes to priority based on user activity is not possible today. For example, audio packets having the same priority when a user mutes the audio locally, or change in priority during times of emergency where video streaming applications share the same priority as SOS signals.<a href="#section-3.3-6.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">Use cases:<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.4-6">
+<li id="section-3.4-6.1">
+            <p id="section-3.4-6.1.1">Dynamic changes to priority based on user activity is not possible today. For example, audio packets having the same priority when a user mutes the audio locally, or change in priority during times of emergency where video streaming applications share the same priority as SOS signals.<a href="#section-3.4-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.3-6.2">
-            <p id="section-3.3-6.2.1">A user prioritizing video over audio while playing an interactive game.<a href="#section-3.3-6.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-6.2">
+            <p id="section-3.4-6.2.1">A user prioritizing video over audio while playing an interactive game.<a href="#section-3.4-6.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.3-6.3">
-            <p id="section-3.3-6.3.1">User's foreground application should receive priority over background tasks. For example, a user is typing in a document while playing a media in the background within the same session.<a href="#section-3.3-6.3.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-6.3">
+            <p id="section-3.4-6.3.1">User's foreground application should receive priority over background tasks. For example, a user is typing in a document while playing a media in the background within the same session.<a href="#section-3.4-6.3.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
 </div>
 <div id="mixed-traffic">
-<section id="section-3.4">
+<section id="section-3.5">
         <h3 id="name-mixed-traffic">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-mixed-traffic" class="section-name selfRef">Mixed Traffic</a>
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-mixed-traffic" class="section-name selfRef">Mixed Traffic</a>
         </h3>
-<p id="section-3.4-1">Mixed traffic can contain multiple types of data flowing through the same 5-tuple connection. They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">Requirements:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.4-4">
-          <dt id="section-3.4-4.1">REQ-PACKET-RELIABILITY:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.4-4.2">
-            <p id="section-3.4-4.2.1">Indicate if a packet is treated as reliable or unreliable by the application.<a href="#section-3.4-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.5-1">Mixed traffic can contain multiple types of data flowing through the same 5-tuple connection. They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-3">Requirements:<a href="#section-3.5-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.5-4">
+          <dt id="section-3.5-4.1">REQ-PACKET-RELIABILITY:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.5-4.2">
+            <p id="section-3.5-4.2.1">Indicate if a packet is treated as reliable or unreliable by the application.<a href="#section-3.5-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.4-4.3">REQ-PACKET-NATURE:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.4-4.4">
-            <p id="section-3.4-4.4.1">Indicate if a packet belongs to bulk traffic or interactive traffic.<a href="#section-3.4-4.4.1" class="pilcrow">¶</a></p>
+<dt id="section-3.5-4.3">REQ-PACKET-NATURE:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.5-4.4">
+            <p id="section-3.5-4.4.1">Indicate if a packet belongs to bulk traffic or interactive traffic.<a href="#section-3.5-4.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-3.4-5">Examples: Virtual Apps and Desktops.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
-<p id="section-3.4-6">Use cases:<a href="#section-3.4-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.4-7">
-<li id="section-3.4-7.1">
-            <p id="section-3.4-7.1.1">Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).<a href="#section-3.4-7.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.5-5">Examples: Virtual Apps and Desktops.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.5-6">Use cases:<a href="#section-3.5-6" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.5-7">
+<li id="section-3.5-7.1">
+            <p id="section-3.5-7.1.1">Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).<a href="#section-3.5-7.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-7.2">
-            <p id="section-3.4-7.2.1">File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.<a href="#section-3.4-7.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.5-7.2">
+            <p id="section-3.5-7.2.1">File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.<a href="#section-3.5-7.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-7.3">
-            <p id="section-3.4-7.3.1">In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.<a href="#section-3.4-7.3.1" class="pilcrow">¶</a></p>
+          <li id="section-3.5-7.3">
+            <p id="section-3.5-7.3.1">In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.<a href="#section-3.5-7.3.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
 </div>
 <div id="honoring-of-metadata-for-servers-behind-a-gateway">
-<section id="section-3.5">
+<section id="section-3.6">
         <h3 id="name-honoring-of-metadata-for-se">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-honoring-of-metadata-for-se" class="section-name selfRef">Honoring of Metadata for Servers Behind a Gateway</a>
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-honoring-of-metadata-for-se" class="section-name selfRef">Honoring of Metadata for Servers Behind a Gateway</a>
         </h3>
-<p id="section-3.5-1">In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">Requirement: REQ-CLIENT-DECIDES as defined previously.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-1">In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-2">Requirement: REQ-CLIENT-DECIDES as defined previously.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1992,7 +2012,7 @@ The application provides information to identify either media frames or streams 
 <a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-identification-of-traffic-t" class="section-name selfRef">Identification of Traffic Type without Disclosure of the Application</a>
           </h4>
 <p id="section-5.3.2-1">Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span>, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.2-2">Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-2">Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.5</a>.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="relative-priority">
@@ -2019,7 +2039,7 @@ ams may be able to tolerate more delay over the wire than others (e.g., a stream
 Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.4-2">If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.4-3">Requirements:<a href="#section-5.3.4-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-4">REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.4</a>.<a href="#section-5.3.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.3.4-4">REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in <a href="#mixed-traffic" class="auto internal xref">Section 3.5</a>.<a href="#section-5.3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="burst">
