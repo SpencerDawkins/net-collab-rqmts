@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 10 December 2024                           Cloud Software Group
+Expires: 11 January 2025                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,9 +14,7 @@ Expires: 10 December 2024                           Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                                T. Reddy
-                                                                   Nokia
-                                                             8 June 2024
+                                                            10 July 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 December 2024.
+   This Internet-Draft will expire on 11 January 2025.
 
 Copyright Notice
 
@@ -172,14 +170,20 @@ Table of Contents
    streams (e.g., audio and video) in a single transport connection
    (e.g., WebRTC [RFC8825]).  There may be preferences that an
    application may wish to convey, such as a higher priority for audio
-   over video (or the opposite) in congested networks.  With RTP
-   [RFC3550], the type of media could be examined and used as an
-   implicit signal for determining relative priority.  However,
-   [RFC9335] defines a new mechanism that completely encrypts RTP header
-   extensions and Contributing sources (CSRCs).  Furthermore, a full
-   encrypted transport (e.g., QUIC [RFC9000]) does not expose any media
-   header information that on-path network elements can use for
-   forwarding.
+   over video (or the opposite) in congested networks or importance of
+   certain packets (e.g., video key frames).  With RTP [RFC3550], the
+   type of media could be examined and used as an implicit signal for
+   determining relative priority.  However, [RFC9335] defines a new
+   mechanism that completely encrypts RTP header extensions and
+   Contributing sources (CSRCs).  Furthermore, a full encrypted
+   transport (e.g., QUIC [RFC9000]) does not expose any media header
+   information that on-path network elements can use for forwarding.
+
+   As mobile networks primarily service battery-operated devices, the
+   same information is useful to those networks even without network
+   congestion, as the information can inform the base station to
+   aggregate packet transmission to allow the mobile device to briefly
+   power down (sleep) its radio.
 
    Also, traffic patterns in some emerging applications can vary
    significantly during the session.  For example, live media or AI-
@@ -941,12 +945,8 @@ Table of Contents
 
    Requirements:
 
-   REQ-FRAME-START:  Indicate packet containing start of media frame.
-
-   REQ-FRAME-MIDDLE:  Indicate packet containing middle(s) of media
-      frame.
-
-   REQ-FRAME-END:  Indicate packet containing end of media frame.
+   REQ-FRAME-ASSOCIATED:  Identify all packets belonging to the same
+      media frame, so they can receive equal drop/forward treatment.
 
 5.3.2.  Identification of Traffic Type without Disclosure of the
         Application
@@ -1022,8 +1022,8 @@ Table of Contents
    there is no paging message.
 
    REQ-BURST-INDICATOR:  Client indicates this flow's maximum burst to
-      ISP, and ISP agrees it can handle that burst size.  (but what does
-      ISP router do with the burst?  Needs to be described above!)
+      the service provider network, and network agrees it can handle
+      that burst size.
 
 6.  Non-Requirements
 
@@ -1049,6 +1049,8 @@ Acknowledgments
    This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
 
+   T.  Reddy contributed text and ideas to this document.
+
    Acknowledgments from
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
       authors of this draft have discussed the similarities and
@@ -1070,7 +1072,7 @@ Acknowledgments
       and dramatic drops in wireless accesses have been helpful to
       identify the issues.  Thanks to Hang Shi for the review and
       comments on host-to-network signaling.  Thanks to Luis Miguel
-      Contreras for his review and comments.
+      Contreras and Colin Kahn for their review and comments.
 
 Informative References
 
@@ -1082,9 +1084,9 @@ Informative References
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
-              Internet-Draft, draft-ietf-moq-transport-04, 29 May 2024,
+              Internet-Draft, draft-ietf-moq-transport-05, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-moq-
-              transport-04>.
+              transport-05>.
 
    [I-D.ietf-opsawg-teas-attachment-circuit]
               Boucadair, M., Roberts, R., de Dios, O. G., Barguil, S.,
@@ -1228,11 +1230,3 @@ Authors' Addresses
    35000 Rennes
    France
    Email: mohamed.boucadair@orange.com
-
-
-   Tirumaleswar Reddy
-   Nokia
-   Bangalore
-   Karnataka
-   India
-   Email: kondtir@gmail.com
