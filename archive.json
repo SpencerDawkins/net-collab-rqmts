@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-09T01:13:28.992240+00:00",
+  "timestamp": "2024-07-11T01:14:07.679040+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3593,6 +3593,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOL0HpzM51BD8Z",
+      "title": "Network handling (#60), Allow-Delay use case with requirements (#61) and Metadata granularity (#62)",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/63",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-10T20:39:17Z",
+      "updatedAt": "2024-07-10T21:29:48Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "cadbd6f57cdb8f5beab149f1ed640f81423a83d0",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "b40c64473ae00b34a7ce4813acab710a97d746ca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
