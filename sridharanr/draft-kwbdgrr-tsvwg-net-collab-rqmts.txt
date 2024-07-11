@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 11 January 2025                            Cloud Software Group
+Expires: 12 January 2025                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 11 January 2025                            Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                            10 July 2024
+                                                            11 July 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 January 2025.
+   This Internet-Draft will expire on 12 January 2025.
 
 Copyright Notice
 
@@ -93,7 +93,7 @@ Table of Contents
    3.  Use Cases
      3.1.  Media Streaming
      3.2.  Interactive Media
-     3.3.  Allow-Delay Traffic
+     3.3.  Accommodate-Delay Traffic
      3.4.  User Preferences
      3.5.  Mixed Traffic
      3.6.  Honoring of Metadata for Servers Behind a Gateway
@@ -410,9 +410,9 @@ Table of Contents
    1.  A mobile/roaming user prioritizes audio over video during a VoIP
        call to have a seamless meeting experience.
 
-3.3.  Allow-Delay Traffic
+3.3.  Accommodate-Delay Traffic
 
-   Allow-Delay traffic includes content that is more resilient to
+   Accommodate-Delay traffic includes content that is more resilient to
    buffering and delays (e.g., file copy, file download) compared to
    interactive traffic.  This traffic can be buffered in favor of
    improved interactivity, without significant impact to the user
