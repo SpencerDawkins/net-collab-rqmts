@@ -292,9 +292,9 @@ Use cases:
 
   1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
 
-## Allow-Delay Traffic {#uc-allow-delay}
+## Accommodate-Delay Traffic {#uc-accommodate-delay}
 
-Allow-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.
+Accommodate-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.
 
 Requirement: REQ-PACKET-NATURE as defined previously.
 
