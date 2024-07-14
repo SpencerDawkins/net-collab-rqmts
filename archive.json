@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-11T01:14:07.679040+00:00",
+  "timestamp": "2024-07-14T01:19:26.385822+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3606,19 +3606,46 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-07-10T20:39:17Z",
-      "updatedAt": "2024-07-10T21:29:48Z",
+      "updatedAt": "2024-07-11T14:57:51Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "cadbd6f57cdb8f5beab149f1ed640f81423a83d0",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
-      "headRefOid": "b40c64473ae00b34a7ce4813acab710a97d746ca",
+      "headRefOid": "f45175d2a1287503aa2429f0d922d939fb4cc06a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6Bc2nn",
+          "commit": {
+            "abbreviatedOid": "b40c644"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-07-11T12:57:49Z",
+          "updatedAt": "2024-07-11T12:59:58Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n## Accommodate-Delay Traffic {#uc-allow-delay}\r\n```",
+              "createdAt": "2024-07-11T12:57:49Z",
+              "updatedAt": "2024-07-11T12:59:58Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nAccommodate-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.\r\n```",
+              "createdAt": "2024-07-11T12:58:07Z",
+              "updatedAt": "2024-07-11T12:59:58Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
