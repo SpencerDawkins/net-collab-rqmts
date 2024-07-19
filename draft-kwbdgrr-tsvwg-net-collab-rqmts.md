@@ -286,12 +286,22 @@ Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Realit
 Requirements:
 
   REQ-PACKET-NATURE:
-  : The receiver indicates that a flow is interactive and requests that the network honors the incoming flow's
-per-packet signals, which prevents denial of service of mis-marked incoming flows.
+  : The receiver indicates that a flow can be allowed to be delayed/buffered (bulk data transfer) or not (interactive traffic) and requests that the network honors the incoming flow's per-packet signals, which prevents denial of service of mis-marked incoming flows.
 
 Use cases:
 
   1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
+
+## Accommodate-Delay Traffic {#uc-accommodate-delay}
+
+Accommodate-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.
+
+Requirement: REQ-PACKET-NATURE as defined previously.
+
+Use cases:
+
+  1. A remote desktop user prioritizes graphics update over an on-going file copy operation.
+  2. User application in foreground is given priority over downloading software updates.
 
 ## User Preferences {#uc-preferences}
 
@@ -336,6 +346,8 @@ Use cases:
   2. File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.
 
   3. In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.
+
+  4. During reactive policy events, the network can choose to drop the packets marked unreliable by the application, thereby prioritizing reliable packets to avoid retransmissions and performance degradation.
 
 ## Honoring of Metadata for Servers Behind a Gateway
 
@@ -385,6 +397,31 @@ Requirement:
   : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
 
 
+## Metadata Granularity {#metadata-granularity}
+
+The packet requirements mentioned above can be broadly classified into 2 catagories.
+
+### Application Metadata
+
+Application metadata comprise of fields in metadata that specifies how the application will treat the packet. This information, when available to the network, can be useful in deciding how to handle packets during reactive events. This level of granularity cannot be simply replaced by another bit added to the priority field as evidenced by the use-case below.
+
+Requirements:
+  Packet information such as REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined above.
+
+Use-case:
+
+  1. In an interactive gaming session, the traffic can be of multiple types such as critical and smoothening glyph updates for graphics traffic, haptic feedback traffic, audio traffic while the game is being saved (bulk data). In terms of priority, haptic feedback gets the highest priority and is often transmitted unreliably, since getting the feedback late is of minimal use. While considering only priority levels, during an uneventful session, haptic feedback would assume highest priority while the smoothening glyphs get the lower priority along with bulk data. Although, in a loss-prone network, haptic feedback can be dropped since it is unreliable while critical glyph and bulk data are expected to be delivered reliably and can result in retranmissions if lost. This distinction is not feasible with an addition to the priority level but can be done by defining more granular metadata. Information about application's treatment of the packet is used by the network in deciding how to handle certain types of packets over the other.
+
+### Network Metadata
+
+Network metadata comprise of fields in metadata that specifies how the network should treat the packet. This dictates how the network should prioritize the packet and has no bearing on the nature of the packet itself.
+
+Requirement: Packet handling information such as REQ-PACKET-SELF.
+
+Use-case:
+
+  1. In a VoIP session where audio is prioritized over video, both traffic has the same nature (reliability and interactivity) and differ only in how the packet needs to be prioritized by the network to ensure audio reaches more reliably, faster and coherently than video. This is solely the way application wants the network to prioritize the packet and not the nature of the packet itself.
+
 ## Multiple Bottlenecks
 
 Whereas models often show a single bottleneck, there are frequently
@@ -405,6 +442,7 @@ Requirement:
 
   REQ-SIGNAL-EXPOSURE-FAIRNESS:
   : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
+
 
 ## Exposure Handling {#exposure-handling}
 
