@@ -12,7 +12,7 @@
 <meta content="Spencer Dawkins" name="author">
 <meta content="Mohamed Boucadair" name="author">
 <meta content="
-       Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
+       Some networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
 Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network. 
        This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user. 
     " name="description">
@@ -1091,7 +1091,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Requirements for Network Collaboration Signaling</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
+<p id="section-abstract-1">Some networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
 Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
@@ -1305,26 +1305,26 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Wireless networks inherently experience large variations in link quality due to several factors.
+<p id="section-1-1">Some networks (e.g., wireless) inherently experience large variations in link quality due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
 These variations in link quality can be in the order of a millisecond or less <span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate.
-End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>).<a href="#section-1-1" class="pilcrow">¶</a></p>
+End-to-end congestion control algorithms are far from being optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>).<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
+<p id="section-1-3">With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" gleaned from a packet to prioritize or otherwise shape flows.
 Implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
 Users who are serviced via these networks use hosts which run various application clients; each having different connectivity needs for an optimal user experience.
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
+<p id="section-1-5">Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different streams (e.g., audio and video) in a single transport connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
-With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the type of media could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">As mobile networks primarily service battery-operated devices, the same information is useful to those
+With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used as an implicit signal for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose any media header information that on-path network elements can use for forwarding decisions.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Also, as mobile networks primarily service battery-operated devices, the same information is useful to those
 networks even without network congestion, as the information can inform the base station to aggregate
 packet transmission to allow the mobile device to briefly power down (sleep) its radio.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
+<p id="section-1-7">Traffic patterns in some emerging applications can vary significantly during a session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="Figure-e2e">
 <figure id="figure-1">
