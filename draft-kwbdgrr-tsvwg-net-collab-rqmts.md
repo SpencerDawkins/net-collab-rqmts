@@ -136,7 +136,7 @@ Information gleaned from unencrypted media packets and headers that wireless net
        3GPP/mobile network
 +--------------------|----------------------+
 |+-- ---+            |   +-----+    +-----+ |
-||client+-----------(B)--+radio+----+ UPF | |
+||client+-----------(B)--+radio+----+ CN  | |
 |+------+            |   +-----+    +--+--+ |
 +--------------------|-----------------|----+
                      |                 |
@@ -212,30 +212,6 @@ Reactive Management:
 
 Traffic shaping:
 : Refers in this document to QoS management at the wireless/access router to delay or discard packets of lower priority to achieve bounded latency and high throughput.
-
-User Plane Function (UPF):
-: Refers to a 3GPP element that is located between the mobile infrastructure and the Data Network (DN) as shown in {{Figure-3gpp}}.
-: For a definitive description of 3GPP network architectures, the reader should refer to the 3GPP's TR 23.501 {{TR.23.501-3GPP}}.
-
-~~~
-  ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
-  │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
-  └──┬──┘  └──┬──┘  └──┬──┘    └──┬──┘  └──┬──┘  └──┬──┘
-Nnssf│    Nnef│    Nnrf│      Npcf│    Nudm│        │Naf
-  ───┴────────┴──┬─────┴──┬───────┴───┬────┴────────┴────
-            Nausf│    Namf│       Nsmf│
-              ┌──┴──┐  ┌──┴──┐     ┌──┴──────┐
-              │AUSR │  │ AMF │     │   SMF   │
-              └─────┘  └──┬──┘     └──┬──────┘
-                       ╱  │           │      ╲
-Control Plane      N1 ╱   │N2         │N4     ╲N4
-════════════════════════════════════════════════════════════
-User Plane          ╱     │           │         ╲
-                ┌───┐  ┌──┴──┐  N3 ┌──┴──┐ N9 ┌─────┐ N6  .───.
-                │UE ├──┤(R)AN├─────┤ UPF ├────┤ UPF ├────( DN  )
-                └───┘  └─────┘     └─────┘    └─────┘     `───'
-~~~
-{: #Figure-3gpp title="5GS Architecture" artwork-align="center"}
 
 # Use Cases {#uc}
 
