@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 29 December 2024                           Cloud Software Group
+Expires: 1 February 2025                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,9 +14,7 @@ Expires: 29 December 2024                           Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                                T. Reddy
-                                                                   Nokia
-                                                            27 June 2024
+                                                            31 July 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -72,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2024.
+   This Internet-Draft will expire on 1 February 2025.
 
 Copyright Notice
 
@@ -95,20 +93,24 @@ Table of Contents
    3.  Use Cases
      3.1.  Media Streaming
      3.2.  Interactive Media
-     3.3.  User Preferences
-     3.4.  Mixed Traffic
-     3.5.  Honoring of Metadata for Servers Behind a Gateway
+     3.3.  Accommodate-Delay Traffic
+     3.4.  User Preferences
+     3.5.  Mixed Traffic
+     3.6.  Honoring of Metadata for Servers Behind a Gateway
    4.  Operational Considerations
      4.1.  Policy Enforcement
      4.2.  Redundant Functions and Classification Complications
      4.3.  Metadata Scope
-     4.4.  Multiple Bottlenecks
-     4.5.  Application Interference
-     4.6.  Exposure Handling
-     4.7.  Privacy Considerations
-     4.8.  Scalability
-     4.9.  Session Continuity
-     4.10. Abuse and Constraints
+     4.4.  Metadata Granularity
+       4.4.1.  Application Metadata
+       4.4.2.  Network Metadata
+     4.5.  Multiple Bottlenecks
+     4.6.  Application Interference
+     4.7.  Exposure Handling
+     4.8.  Privacy Considerations
+     4.9.  Scalability
+     4.10. Session Continuity
+     4.11. Abuse and Constraints
    5.  On-path Metadata Requirements
      5.1.  Host-Network Metadata
        5.1.1.  Priority between Flows (Inter-flow)
@@ -172,14 +174,20 @@ Table of Contents
    streams (e.g., audio and video) in a single transport connection
    (e.g., WebRTC [RFC8825]).  There may be preferences that an
    application may wish to convey, such as a higher priority for audio
-   over video (or the opposite) in congested networks.  With RTP
-   [RFC3550], the type of media could be examined and used as an
-   implicit signal for determining relative priority.  However,
-   [RFC9335] defines a new mechanism that completely encrypts RTP header
-   extensions and Contributing sources (CSRCs).  Furthermore, a full
-   encrypted transport (e.g., QUIC [RFC9000]) does not expose any media
-   header information that on-path network elements can use for
-   forwarding.
+   over video (or the opposite) in congested networks or importance of
+   certain packets (e.g., video key frames).  With RTP [RFC3550], the
+   type of media could be examined and used as an implicit signal for
+   determining relative priority.  However, [RFC9335] defines a new
+   mechanism that completely encrypts RTP header extensions and
+   Contributing sources (CSRCs).  Furthermore, a full encrypted
+   transport (e.g., QUIC [RFC9000]) does not expose any media header
+   information that on-path network elements can use for forwarding.
+
+   As mobile networks primarily service battery-operated devices, the
+   same information is useful to those networks even without network
+   congestion, as the information can inform the base station to
+   aggregate packet transmission to allow the mobile device to briefly
+   power down (sleep) its radio.
 
    Also, traffic patterns in some emerging applications can vary
    significantly during the session.  For example, live media or AI-
@@ -193,7 +201,7 @@ Table of Contents
           3GPP/mobile network
    +--------------------|----------------------+
    |+-- ---+            |   +-----+    +-----+ |
-   ||client+-----------(B)--+radio+----+ UPF | |
+   ||client+-----------(B)--+radio+----+ CN  | |
    |+------+            |   +-----+    +--+--+ |
    +--------------------|-----------------|----+
                         |                 |
@@ -299,32 +307,6 @@ Table of Contents
       wireless/access router to delay or discard packets of lower
       priority to achieve bounded latency and high throughput.
 
-   User Plane Function (UPF):  Refers to a 3GPP element that is located
-      between the mobile infrastructure and the Data Network (DN) as
-      shown in Figure 3.
-
-      For a definitive description of 3GPP network architectures, the
-      reader should refer to the 3GPP's TS 23.501 [TS.23.501-3GPP].
-
-       ┌─────┐  ┌─────┐  ┌─────┐    ┌─────┐  ┌─────┐  ┌─────┐
-       │NSSF │  │ NEF │  │ NRF │    │ PCF │  │ UDM │  │ AF  │
-       └──┬──┘  └──┬──┘  └──┬──┘    └──┬──┘  └──┬──┘  └──┬──┘
-     Nnssf│    Nnef│    Nnrf│      Npcf│    Nudm│        │Naf
-       ───┴────────┴──┬─────┴──┬───────┴───┬────┴────────┴────
-                 Nausf│    Namf│       Nsmf│
-                   ┌──┴──┐  ┌──┴──┐     ┌──┴──────┐
-                   │AUSR │  │ AMF │     │   SMF   │
-                   └─────┘  └──┬──┘     └──┬──────┘
-                            ╱  │           │      ╲
-     Control Plane      N1 ╱   │N2         │N4     ╲N4
-     ════════════════════════════════════════════════════════════
-     User Plane          ╱     │           │         ╲
-                     ┌───┐  ┌──┴──┐  N3 ┌──┴──┐ N9 ┌─────┐ N6  .───.
-                     │UE ├──┤(R)AN├─────┤ UPF ├────┤ UPF ├────( DN  )
-                     └───┘  └─────┘     └─────┘    └─────┘     `───'
-
-                         Figure 3: 5GS Architecture
-
 3.  Use Cases
 
 3.1.  Media Streaming
@@ -391,9 +373,10 @@ Table of Contents
 
    Requirements:
 
-   REQ-PACKET-NATURE:  The receiver indicates that a flow is interactive
-      and requests that the network honors the incoming flow's per-
-      packet signals, which prevents denial of service of mis-marked
+   REQ-PACKET-NATURE:  The receiver indicates that a flow can be allowed
+      to be delayed/buffered (bulk data transfer) or not (interactive
+      traffic) and requests that the network honors the incoming flow's
+      per-packet signals, which prevents denial of service of mis-marked
       incoming flows.
 
    Use cases:
@@ -401,7 +384,25 @@ Table of Contents
    1.  A mobile/roaming user prioritizes audio over video during a VoIP
        call to have a seamless meeting experience.
 
-3.3.  User Preferences
+3.3.  Accommodate-Delay Traffic
+
+   Accommodate-Delay traffic includes content that is more resilient to
+   buffering and delays (e.g., file copy, file download) compared to
+   interactive traffic.  This traffic can be buffered in favor of
+   improved interactivity, without significant impact to the user
+   experience.  It is least sensitive to buffer bloating.
+
+   Requirement: REQ-PACKET-NATURE as defined previously.
+
+   Use cases:
+
+   1.  A remote desktop user prioritizes graphics update over an on-
+       going file copy operation.
+
+   2.  User application in foreground is given priority over downloading
+       software updates.
+
+3.4.  User Preferences
 
    A game or VoIP application may want to signal different metadata for
    the same type of packet in each direction.  For example, for a game,
@@ -434,7 +435,7 @@ Table of Contents
        background tasks.  For example, a user is typing in a document
        while playing a media in the background within the same session.
 
-3.4.  Mixed Traffic
+3.5.  Mixed Traffic
 
    Mixed traffic can contain multiple types of data flowing through the
    same 5-tuple connection.  They may include digital models of the real
@@ -468,7 +469,12 @@ Table of Contents
        priority over Smoothing Glyphs (unreliable) during reactive
        events.
 
-3.5.  Honoring of Metadata for Servers Behind a Gateway
+   4.  During reactive policy events, the network can choose to drop the
+       packets marked unreliable by the application, thereby
+       prioritizing reliable packets to avoid retransmissions and
+       performance degradation.
+
+3.6.  Honoring of Metadata for Servers Behind a Gateway
 
    In enterprise networks and remote desktop use case, a server can host
    multiple connections with varying type of traffic.  These servers are
@@ -554,7 +560,63 @@ Table of Contents
       metadata for the sake of better interoperability should be
       supported.
 
-4.4.  Multiple Bottlenecks
+4.4.  Metadata Granularity
+
+   The packet requirements mentioned above can be broadly classified
+   into 2 catagories.
+
+4.4.1.  Application Metadata
+
+   Application metadata comprise of fields in metadata that specifies
+   how the application will treat the packet.  This information, when
+   available to the network, can be useful in deciding how to handle
+   packets during reactive events.  This level of granularity cannot be
+   simply replaced by another bit added to the priority field as
+   evidenced by the use-case below.
+
+   Requirements: Packet information such as REQ-PACKET-RELIABILITY, REQ-
+   PACKET-NATURE as defined above.
+
+   Use-case:
+
+   1.  In an interactive gaming session, the traffic can be of multiple
+       types such as critical and smoothening glyph updates for graphics
+       traffic, haptic feedback traffic, audio traffic while the game is
+       being saved (bulk data).  In terms of priority, haptic feedback
+       gets the highest priority and is often transmitted unreliably,
+       since getting the feedback late is of minimal use.  While
+       considering only priority levels, during an uneventful session,
+       haptic feedback would assume highest priority while the
+       smoothening glyphs get the lower priority along with bulk data.
+       Although, in a loss-prone network, haptic feedback can be dropped
+       since it is unreliable while critical glyph and bulk data are
+       expected to be delivered reliably and can result in
+       retranmissions if lost.  This distinction is not feasible with an
+       addition to the priority level but can be done by defining more
+       granular metadata.  Information about application's treatment of
+       the packet is used by the network in deciding how to handle
+       certain types of packets over the other.
+
+4.4.2.  Network Metadata
+
+   Network metadata comprise of fields in metadata that specifies how
+   the network should treat the packet.  This dictates how the network
+   should prioritize the packet and has no bearing on the nature of the
+   packet itself.
+
+   Requirement: Packet handling information such as REQ-PACKET-SELF.
+
+   Use-case:
+
+   1.  In a VoIP session where audio is prioritized over video, both
+       traffic has the same nature (reliability and interactivity) and
+       differ only in how the packet needs to be prioritized by the
+       network to ensure audio reaches more reliably, faster and
+       coherently than video.  This is solely the way application wants
+       the network to prioritize the packet and not the nature of the
+       packet itself.
+
+4.5.  Multiple Bottlenecks
 
    Whereas models often show a single bottleneck, there are frequently
    two (or more) bottlenecks: the ISP network and within the subscriber
@@ -563,7 +625,7 @@ Table of Contents
 
    Requirement: REQ-MULTIPLE-BOTTLENECKS should be supported.
 
-4.5.  Application Interference
+4.6.  Application Interference
 
    Applications that have access to a resource-quota information may
    adopt an aggressive behavior (compared to those that don't have
@@ -580,7 +642,7 @@ Table of Contents
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-4.6.  Exposure Handling
+4.7.  Exposure Handling
 
    Signaling to the network (Section 5.1, Section 5.3) and consuming the
    signals from the network (Section 5.2) will need to be facilitated by
@@ -613,7 +675,7 @@ Table of Contents
    REQ-API-FRAMEWORK:  API framework to facilitate signaling for
       applications.
 
-4.7.  Privacy Considerations
+4.8.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -673,7 +735,7 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-4.8.  Scalability
+4.9.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.
@@ -692,7 +754,7 @@ Table of Contents
       router has to maintain for each additional media flow it handles
       should be very low or none.
 
-4.9.  Session Continuity
+4.10.  Session Continuity
 
    The general trend in wireless networks is to deploy the wireless
    router closer to the user.  This can help with low link latency but
@@ -709,7 +771,7 @@ Table of Contents
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
 
-4.10.  Abuse and Constraints
+4.11.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -766,7 +828,7 @@ Table of Contents
    REQ-PACKET-SELF:  Packet importance is indicated by the packet
       itself.
 
-   Note REQ-PACKET-SELF should meet the requirements of Section 4.7
+   Note REQ-PACKET-SELF should meet the requirements of Section 4.8
    especially REQ-PRIVACY-ADDITIONAL.
 
 5.1.  Host-Network Metadata
@@ -956,7 +1018,7 @@ Table of Contents
    in per-packet metadata.
 
    Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in
-   Section 3.4.
+   Section 3.5.
 
 5.3.3.  Relative Priority
 
@@ -995,7 +1057,7 @@ Table of Contents
    Requirements:
 
    REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as
-   defined in Section 3.4.
+   defined in Section 3.5.
 
 5.3.5.  Burst Indication
 
@@ -1018,8 +1080,8 @@ Table of Contents
    there is no paging message.
 
    REQ-BURST-INDICATOR:  Client indicates this flow's maximum burst to
-      ISP, and ISP agrees it can handle that burst size.  (but what does
-      ISP router do with the burst?  Needs to be described above!)
+      the service provider network, and network agrees it can handle
+      that burst size.
 
 6.  Non-Requirements
 
@@ -1034,7 +1096,7 @@ Table of Contents
 
 8.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 4.7.  The
+   Security aspects for the metadata are discussed in Section 4.8.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 5.
 
@@ -1044,6 +1106,8 @@ Acknowledgments
 
    This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
+
+   T.  Reddy contributed text and ideas to this document.
 
    Acknowledgments from
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
@@ -1066,7 +1130,7 @@ Acknowledgments
       and dramatic drops in wireless accesses have been helpful to
       identify the issues.  Thanks to Hang Shi for the review and
       comments on host-to-network signaling.  Thanks to Luis Miguel
-      Contreras for his review and comments.
+      Contreras and Colin Kahn for their review and comments.
 
 Informative References
 
@@ -1078,17 +1142,17 @@ Informative References
    [I-D.ietf-moq-transport]
               Curley, L., Pugin, K., Nandakumar, S., Vasiliev, V., and
               I. Swett, "Media over QUIC Transport", Work in Progress,
-              Internet-Draft, draft-ietf-moq-transport-04, 29 May 2024,
+              Internet-Draft, draft-ietf-moq-transport-05, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-moq-
-              transport-04>.
+              transport-05>.
 
    [I-D.ietf-opsawg-teas-attachment-circuit]
               Boucadair, M., Roberts, R., de Dios, O. G., Barguil, S.,
               and B. Wu, "YANG Data Models for Bearers and 'Attachment
               Circuits'-as-a-Service (ACaaS)", Work in Progress,
               Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-
-              13, 29 May 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-opsawg-teas-attachment-circuit-13>.
+              14, 24 July 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-teas-attachment-circuit-14>.
 
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D., "Transport Options for UDP", Work in
@@ -1175,11 +1239,15 @@ Informative References
               Using Path Signals", RFC 9419, DOI 10.17487/RFC9419, July
               2023, <https://www.rfc-editor.org/rfc/rfc9419>.
 
-   [TS.23.501-3GPP]
+   [TR.23.501-3GPP]
               "3rd Generation Partnership Project; Technical
               Specification Group Servies and System Aspects; System
               architecture for the 5G System (5GS); Stage 2 (Release
               18)", March 2023.
+
+   [TR.23.700-60-3GPP]
+              "Study on XR (Extended Reality) and media services
+              (Release 18)", August 2022.
 
    [_5G-Lumos]
               "Lumos5G: Mapping and Predicting Commercial mmWave 5G
@@ -1220,11 +1288,3 @@ Authors' Addresses
    35000 Rennes
    France
    Email: mohamed.boucadair@orange.com
-
-
-   Tirumaleswar Reddy
-   Nokia
-   Bangalore
-   Karnataka
-   India
-   Email: kondtir@gmail.com
