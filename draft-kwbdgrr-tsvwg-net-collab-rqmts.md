@@ -93,7 +93,7 @@ informative:
 
 --- abstract
 
-Wireless networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
+Some networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
 Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
 This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
@@ -102,15 +102,15 @@ This document lists some use cases that illustrate the need for a mechanism to s
 
 # Introduction {#intro}
 
-Wireless networks inherently experience large variations in link quality due to several factors.
+Some networks (e.g., wireless) inherently experience large variations in link quality due to several factors.
 These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
 These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate.
-End-to-end congestion control algorithms are far from optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}).
+End-to-end congestion control algorithms are far from being optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}).
 
 It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
 As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
 
-With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" derived from the contents of a packet to prioritize or otherwise shape flows.
+With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" gleaned from a packet to prioritize or otherwise shape flows.
 Implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.
 
@@ -119,16 +119,15 @@ Users who are serviced via these networks use hosts which run various applicatio
 These needs are not frozen but change over time depending on the application and even depending on how an application is used (e.g., user's preferences).
 An explicit signal to the host can help to manage the use of available bandwidth better and better share it with requesting applications.
 
-Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different media streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
+Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
-With RTP {{?RFC3550}}, the type of media could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding.
+With RTP {{?RFC3550}}, the media type could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding decisions.
 
-As mobile networks primarily service battery-operated devices, the same information is useful to those
+Also, as mobile networks primarily service battery-operated devices, the same information is useful to those
 networks even without network congestion, as the information can inform the base station to aggregate
 packet transmission to allow the mobile device to briefly power down (sleep) its radio.
 
-
-Also, traffic patterns in some emerging applications can vary significantly during the session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
+Traffic patterns in some emerging applications can vary significantly during a session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~
