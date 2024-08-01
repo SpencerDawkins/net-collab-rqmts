@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-30T01:14:30.743495+00:00",
+  "timestamp": "2024-08-01T01:20:51.038338+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3658,6 +3658,46 @@
           "body": "",
           "createdAt": "2024-07-19T15:33:09Z",
           "updatedAt": "2024-07-19T15:33:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "id": "PR_kwDOL0HpzM529THJ",
+      "title": "soften 3GPP specifics",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/64",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-31T07:38:58Z",
+      "updatedAt": "2024-07-31T14:54:23Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "fa4522987e73726225ca8ede3f35c6017018ed26",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-21",
+      "headRefOid": "f8251c2a268867ca361a2ef2625412436ceb728e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6DwFB8",
+          "commit": {
+            "abbreviatedOid": "f8251c2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-31T14:54:23Z",
+          "updatedAt": "2024-07-31T14:54:23Z",
           "comments": []
         }
       ]
