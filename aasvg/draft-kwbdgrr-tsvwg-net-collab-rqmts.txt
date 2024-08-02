@@ -22,7 +22,7 @@ Expires: 3 February 2025                            Cloud Software Group
 
 Abstract
 
-   Wireless networks (e.g., cellular or WLAN) experience significant but
+   Some networks (e.g., cellular or WLAN) experience significant but
    transient variations in link quality and have policy constraints
    (e.g., bandwidth) that affect user experience.  Collaborative
    signaling (e.g., host-to-network and server-to-network) can improve
@@ -134,17 +134,17 @@ Table of Contents
 
 1.  Introduction
 
-   Wireless networks inherently experience large variations in link
-   quality due to several factors.  These include the change in wireless
-   channel conditions, interference between proximate cells and channels
-   or because of the end user movement.  These variations in link
-   quality can be in the order of a millisecond or less [_5G-Lumos]
+   Some networks (e.g., wireless) inherently experience large variations
+   in link quality due to several factors.  These include the change in
+   wireless channel conditions, interference between proximate cells and
+   channels or because of the end user movement.  These variations in
+   link quality can be in the order of a millisecond or less [_5G-Lumos]
    while congestion control takes several tens of milliseconds (more
    than one round-trip time (RTT)) to estimate data rate.  End-to-end
-   congestion control algorithms are far from optimal when the link
-   quality is highly variable in sub-RTT timeframes and the application
-   demands both low latency and high bandwidth (e.g., Section 2.1 of
-   [RFC6077]).
+   congestion control algorithms are far from being optimal when the
+   link quality is highly variable in sub-RTT timeframes and the
+   application demands both low latency and high bandwidth (e.g.,
+   Section 2.1 of [RFC6077]).
 
    It is also not practical to convey sub-RTT link changes using an end-
    to-end feedback signal.  As a consequence, applications settling for
@@ -152,12 +152,11 @@ Table of Contents
    throughput at the expense of much higher delays.
 
    With not fully encrypted packets, networks may use some heuristics to
-   build an "implicit signal" derived from the contents of a packet to
-   prioritize or otherwise shape flows.  Implicit signals are not
-   desirable as they lead to ossification of protocols as result of
-   introducing unintended dependencies [RFC9419].  When packet contents
-   are encrypted, the approach of using implicit signals is no longer
-   viable.
+   build an "implicit signal" gleaned from a packet to prioritize or
+   otherwise shape flows.  Implicit signals are not desirable as they
+   lead to ossification of protocols as result of introducing unintended
+   dependencies [RFC9419].  When packet contents are encrypted, the
+   approach of using implicit signals is no longer viable.
 
    Bandwidth constraints exist most predominantly at the access network
    (e.g., radio access networks).  Users who are serviced via these
@@ -170,32 +169,32 @@ Table of Contents
    requesting applications.
 
    Other applications like interactive media can demand both high
-   throughput and low latency and, in some cases, carry different media
+   throughput and low latency and, in some cases, carry different
    streams (e.g., audio and video) in a single transport connection
    (e.g., WebRTC [RFC8825]).  There may be preferences that an
    application may wish to convey, such as a higher priority for audio
    over video (or the opposite) in congested networks or importance of
    certain packets (e.g., video key frames).  With RTP [RFC3550], the
-   type of media could be examined and used as an implicit signal for
+   media type could be examined and used as an implicit signal for
    determining relative priority.  However, [RFC9335] defines a new
    mechanism that completely encrypts RTP header extensions and
    Contributing sources (CSRCs).  Furthermore, a full encrypted
    transport (e.g., QUIC [RFC9000]) does not expose any media header
-   information that on-path network elements can use for forwarding.
+   information that on-path network elements can use for forwarding
+   decisions.
 
-   As mobile networks primarily service battery-operated devices, the
-   same information is useful to those networks even without network
+   Also, as mobile networks primarily service battery-operated devices,
+   the same information is useful to those networks even without network
    congestion, as the information can inform the base station to
    aggregate packet transmission to allow the mobile device to briefly
    power down (sleep) its radio.
 
-   Also, traffic patterns in some emerging applications can vary
-   significantly during the session.  For example, live media or AI-
-   generated content can have significant dynamic variations and
-   potentially aperiodic frames.  Information gleaned from unencrypted
-   media packets and headers that wireless networks used in the past to
-   optimize traffic shaping and scheduling are not exposed in encrypted
-   communications.
+   Traffic patterns in some emerging applications can vary significantly
+   during a session.  For example, live media or AI-generated content
+   can have significant dynamic variations and potentially aperiodic
+   frames.  Information gleaned from unencrypted media packets and
+   headers that wireless networks used in the past to optimize traffic
+   shaping and scheduling are not exposed in encrypted communications.
 
                         :
           3GPP/mobile network
@@ -310,33 +309,6 @@ Table of Contents
    Traffic shaping:  Refers in this document to QoS management at the
       wireless/access router to delay or discard packets of lower
       priority to achieve bounded latency and high throughput.
-
-   User Plane Function (UPF):  Refers to a 3GPP element that is located
-      between the mobile infrastructure and the Data Network (DN) as
-      shown in Figure 3.
-
-      For a definitive description of 3GPP network architectures, the
-      reader should refer to the 3GPP's TR 23.501 [TR.23.501-3GPP].
-
-             +----+   +---+   +---+   +---+    +---+   +---+
-             |NSSF|   |NSF|   |NRF|   |PCF|    |UDM|   |AF |
-             +-+--+   +-+-+   +-+-+   +-+-+    +-+-+   +-+-+
-          Nnssf|    NNef|   Nnrf|   Npcf|    Nudm|    Naf|
-           ----+--------+-+-----+--+----+------+-+-------+----
-                     Nausf|    Namf|       Nsmf|
-                       +--+-+   +--+--+     +--+--+
-                       |AUSR|   | AMF |     | SMF |
-                       +----+   +-+-+-+     +-+-+-+
-                                  | |         | |
-                           .-----'  |         |  '----.
-        Control Plane   N1|       N2|       N4|      N4|
-       ===================+=========+=========+========+============
-        User Plane        |         |         |        |
-                        +-+-+ +-----+-+ N3  +-+-+ N9 +-+-+ N6  .--.
-                        |UE +-+ (R)AN +-----+UPF+----+UPF+----( DN )
-                        +---+ +-------+     +---+    +---+     '--'
-
-                         Figure 3: 5GS Architecture
 
 3.  Use Cases
 
