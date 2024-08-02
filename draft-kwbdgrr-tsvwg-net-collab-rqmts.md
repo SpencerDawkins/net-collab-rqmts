@@ -177,7 +177,7 @@ The requirements in {{metadata-req}} apply to data units like frames within a fl
 +--------------+          |          |      |         +--+---+
   Client-1                |          |      |         |srv-A1|
                           |          |      |         +--+---+
-+--------------+Network   |          |      |            |
++--------------+  Network |          |      |            |
 |              |attachment|          v      |            |
 | +----+  .--------------------------+-.    |            |
 | | A1 +-+----------- flow-x3 ----------+----------------+
