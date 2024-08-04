@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-01T01:20:51.038338+00:00",
+  "timestamp": "2024-08-04T01:20:09.734504+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3667,24 +3667,26 @@
       "id": "PR_kwDOL0HpzM529THJ",
       "title": "soften 3GPP specifics",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/64",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-07-31T07:38:58Z",
-      "updatedAt": "2024-07-31T14:54:23Z",
+      "updatedAt": "2024-08-02T21:23:16Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "fa4522987e73726225ca8ede3f35c6017018ed26",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "boucadair-patch-21",
       "headRefOid": "f8251c2a268867ca361a2ef2625412436ceb728e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-02T21:23:16Z",
+      "mergedAt": "2024-08-02T21:23:16Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "286ce72f1fd52cfcfc765404b3e71b6e8014331e"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3698,6 +3700,59 @@
           "body": "",
           "createdAt": "2024-07-31T14:54:23Z",
           "updatedAt": "2024-07-31T14:54:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6EG9s8",
+          "commit": {
+            "abbreviatedOid": "f8251c2"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-02T21:23:05Z",
+          "updatedAt": "2024-08-02T21:23:05Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOL0HpzM53TNud",
+      "title": "convert diagrams to AASVG",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/65",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-02T21:10:05Z",
+      "updatedAt": "2024-08-02T21:46:47Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "286ce72f1fd52cfcfc765404b3e71b6e8014331e",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "aasvg",
+      "headRefOid": "a893d033bf1c5f1c667e757b04f6176a48ab2eca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6EHCpV",
+          "commit": {
+            "abbreviatedOid": "8931351"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-02T21:38:21Z",
+          "updatedAt": "2024-08-02T21:38:21Z",
           "comments": []
         }
       ]
