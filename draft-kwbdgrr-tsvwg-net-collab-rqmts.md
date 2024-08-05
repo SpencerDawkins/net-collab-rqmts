@@ -135,7 +135,7 @@ Information gleaned from unencrypted media packets and headers that wireless net
        3GPP/mobile network
 +--------------------:----------------------+
 | +------+           :   +-----+    +-----+ |
-| |client+-----------B---+radio+----+ UPF | |
+| |client+-----------B---+radio+----+ CN | |
 | +------+           :   +-----+    +--+--+ |
 +--------------------:-----------------|----+
                      :                 |
