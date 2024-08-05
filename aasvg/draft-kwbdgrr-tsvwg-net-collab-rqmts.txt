@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 3 February 2025                            Cloud Software Group
+Expires: 6 February 2025                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 3 February 2025                            Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                           2 August 2024
+                                                           5 August 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 February 2025.
+   This Internet-Draft will expire on 6 February 2025.
 
 Copyright Notice
 
@@ -200,7 +200,7 @@ Table of Contents
           3GPP/mobile network
    +--------------------:----------------------+
    | +------+           :   +-----+    +-----+ |
-   | |client+-----------B---+radio+----+ UPF | |
+   | |client+-----------B---+radio+----+ CN | |
    | +------+           :   +-----+    +--+--+ |
    +--------------------:-----------------|----+
                         :                 |
