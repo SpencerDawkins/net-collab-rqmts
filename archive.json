@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-04T01:20:09.734504+00:00",
+  "timestamp": "2024-08-06T01:14:54.348807+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3729,13 +3729,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-08-02T21:10:05Z",
-      "updatedAt": "2024-08-02T21:46:47Z",
+      "updatedAt": "2024-08-05T15:53:09Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "286ce72f1fd52cfcfc765404b3e71b6e8014331e",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "aasvg",
-      "headRefOid": "a893d033bf1c5f1c667e757b04f6176a48ab2eca",
+      "headRefOid": "6b939baa21c79d35dda643ac73b40f0b15f13ed0",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3754,6 +3754,26 @@
           "createdAt": "2024-08-02T21:38:21Z",
           "updatedAt": "2024-08-02T21:38:21Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6ENewc",
+          "commit": {
+            "abbreviatedOid": "a893d03"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-05T06:23:18Z",
+          "updatedAt": "2024-08-05T06:23:18Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\n| |client+-----------B---+radio+----+ CN | |\r\n```",
+              "createdAt": "2024-08-05T06:23:18Z",
+              "updatedAt": "2024-08-05T06:23:19Z"
+            }
+          ]
         }
       ]
     }
