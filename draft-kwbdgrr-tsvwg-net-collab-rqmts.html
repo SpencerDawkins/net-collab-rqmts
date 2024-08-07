@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 3 February 2025</td>
+<td class="center">Expires 8 February 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-02" class="published">2 August 2024</time>
+<time datetime="2024-08-07" class="published">7 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-03">3 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-02-08">8 February 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1127,7 @@ Collaborative signaling (e.g., host-to-network and server-to-network) can improv
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1328,26 +1328,127 @@ packet transmission to allow the mobile device to briefly power down (sleep) its
 Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="Figure-e2e">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-1-8.1">
-<pre>
-                     |
-       3GPP/mobile network
-+--------------------|----------------------+
-|+-- ---+            |   +-----+    +-----+ |
-||client+-----------(B)--+radio+----+ CN  | |
-|+------+            |   +-----+    +--+--+ |
-+--------------------|-----------------|----+
-                     |                 |
-       Wireless home/ISP network       |
-+--------------------|-----------+     |    |          |
-|+--- --+    +----+  |  +------+ | +---+--+ | +------+ | +------+
-||client+-(B)+WLAN+-(B)-+router+---+router+---+router+---+server|
-|+------+    +----+  |  +------+ | +------+ | +------+ | +------+
-+--------------------|-----------+          |          |
-                     |                      |          |
-                     |                      | Transit  |  Content
- User device/Network |    MNO/ISP Network   | Network  |  Network
-</pre>
+        <div id="section-1-8.1">
+          <div class="alignLeft art-svg artwork" id="section-1-8.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="304" width="528" viewBox="0 0 528 304" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,64 L 8,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 8,240" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 24,112" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 24,224" fill="none" stroke="black"></path>
+              <path d="M 80,80 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 80,192 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 112,224" fill="none" stroke="black"></path>
+              <path d="M 152,192 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 200,224" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 208,112" fill="none" stroke="black"></path>
+              <path d="M 256,80 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 256,192 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 272,176 L 272,200" fill="none" stroke="black"></path>
+              <path d="M 272,216 L 272,240" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 288,224" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 296,112" fill="none" stroke="black"></path>
+              <path d="M 320,112 L 320,192" fill="none" stroke="black"></path>
+              <path d="M 336,88 L 336,104" fill="none" stroke="black"></path>
+              <path d="M 344,192 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 360,64 L 360,80" fill="none" stroke="black"></path>
+              <path d="M 360,112 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 376,224" fill="none" stroke="black"></path>
+              <path d="M 432,192 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 464,224" fill="none" stroke="black"></path>
+              <path d="M 520,192 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 168,64" fill="none" stroke="black"></path>
+              <path d="M 184,64 L 360,64" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 80,80" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 256,80" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 336,80" fill="none" stroke="black"></path>
+              <path d="M 80,96 L 168,96" fill="none" stroke="black"></path>
+              <path d="M 184,96 L 208,96" fill="none" stroke="black"></path>
+              <path d="M 256,96 L 296,96" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 208,112 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 296,112 L 336,112" fill="none" stroke="black"></path>
+              <path d="M 8,128 L 168,128" fill="none" stroke="black"></path>
+              <path d="M 184,128 L 312,128" fill="none" stroke="black"></path>
+              <path d="M 328,128 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 168,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 272,176" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 80,192" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 152,192" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 256,192" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 344,192" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 432,192" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 520,192" fill="none" stroke="black"></path>
+              <path d="M 152,208 L 168,208" fill="none" stroke="black"></path>
+              <path d="M 184,208 L 200,208" fill="none" stroke="black"></path>
+              <path d="M 256,208 L 288,208" fill="none" stroke="black"></path>
+              <path d="M 344,208 L 376,208" fill="none" stroke="black"></path>
+              <path d="M 432,208 L 464,208" fill="none" stroke="black"></path>
+              <path d="M 24,224 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,224 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,224 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 288,224 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 376,224 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,224 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,240 L 168,240" fill="none" stroke="black"></path>
+              <path d="M 184,240 L 272,240" fill="none" stroke="black"></path>
+              <path d="M 336,80 C 344.83064,80 352,87.16936 352,96" fill="none" stroke="black"></path>
+              <path d="M 336,112 C 344.83064,112 352,104.83064 352,96" fill="none" stroke="black"></path>
+              <g class="text">
+                <text x="176" y="36">:</text>
+                <text x="104" y="52">3GPP/mobile</text>
+                <text x="184" y="52">network</text>
+                <text x="176" y="68">:</text>
+                <text x="176" y="84">:</text>
+                <text x="52" y="100">client</text>
+                <text x="176" y="100">B</text>
+                <text x="232" y="100">radio</text>
+                <text x="316" y="100">CN</text>
+                <text x="176" y="116">:</text>
+                <text x="176" y="132">:</text>
+                <text x="176" y="148">:</text>
+                <text x="92" y="164">Wireless</text>
+                <text x="164" y="164">home/ISP</text>
+                <text x="232" y="164">network</text>
+                <text x="176" y="180">:</text>
+                <text x="360" y="180">:</text>
+                <text x="448" y="180">:</text>
+                <text x="176" y="196">:</text>
+                <text x="360" y="196">:</text>
+                <text x="448" y="196">:</text>
+                <text x="52" y="212">client</text>
+                <text x="96" y="212">-B-</text>
+                <text x="132" y="212">WLAN</text>
+                <text x="176" y="212">B</text>
+                <text x="228" y="212">router</text>
+                <text x="316" y="212">router</text>
+                <text x="404" y="212">router</text>
+                <text x="492" y="212">server</text>
+                <text x="176" y="228">:</text>
+                <text x="360" y="228">:</text>
+                <text x="448" y="228">:</text>
+                <text x="176" y="244">:</text>
+                <text x="360" y="244">:</text>
+                <text x="448" y="244">:</text>
+                <text x="176" y="260">:</text>
+                <text x="360" y="260">:</text>
+                <text x="448" y="260">:</text>
+                <text x="176" y="276">:</text>
+                <text x="360" y="276">:</text>
+                <text x="400" y="276">Transit</text>
+                <text x="448" y="276">:</text>
+                <text x="496" y="276">Content</text>
+                <text x="28" y="292">User</text>
+                <text x="108" y="292">device/Network</text>
+                <text x="176" y="292">:</text>
+                <text x="240" y="292">MNO/ISP</text>
+                <text x="304" y="292">Network</text>
+                <text x="360" y="292">:</text>
+                <text x="400" y="292">Network</text>
+                <text x="448" y="292">:</text>
+                <text x="496" y="292">Network</text>
+              </g>
+            </svg><a href="#section-1-8.1.1" class="pilcrow">¶</a>
+</div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
 </div>
@@ -1360,27 +1461,104 @@ Transport flows over a network attachment may consist of multiple streams such a
 <p id="section-1-12">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.<a href="#section-1-12" class="pilcrow">¶</a></p>
 <div id="Figure-conn-flow">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-1-13.1">
-<pre>
-+----------+          +-----------------+
-|+----+    |          | +-------------+ |
-|| A1 |--+ |          | | QoS, Policy | |
-|+-+--+A2| |          | +---+-----+---+ |          +------+
-|  |+-+--+ |  Network |     |     |     |          |srv-A2|
-|  |  |    |attachment|     v     |     |          +--+---+
-|  |  |  *************************|**** |             |
-|  |  +------------- flow-x2 -----|-------------------+   +------+
-|  +------------ flow-x1 ---------|-----------------------+srv-A1|
-|        *************************|**** |                 +--+---+
-+-Client-1-+          |           |     |                    |
-                      |           |     |                    |
-+----------+  Network attachment  V     |                    |
-|+----+  ****************************** |                    |
-|| A1 +------------ flow-x3 ---------------------------------+
-|+----+  ****************************** |
-+----------+          +-----------------+
-  Client-2                  Router
-</pre>
+        <div id="section-1-13.1">
+          <div class="alignLeft art-svg artwork" id="section-1-13.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="504" viewBox="0 0 504 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,208" fill="none" stroke="black"></path>
+              <path d="M 8,256 L 8,352" fill="none" stroke="black"></path>
+              <path d="M 24,48 L 24,80" fill="none" stroke="black"></path>
+              <path d="M 24,288 L 24,320" fill="none" stroke="black"></path>
+              <path d="M 40,80 L 40,160" fill="none" stroke="black"></path>
+              <path d="M 56,48 L 56,80" fill="none" stroke="black"></path>
+              <path d="M 64,288 L 64,320" fill="none" stroke="black"></path>
+              <path d="M 72,48 L 72,80" fill="none" stroke="black"></path>
+              <path d="M 88,80 L 88,144" fill="none" stroke="black"></path>
+              <path d="M 104,48 L 104,80" fill="none" stroke="black"></path>
+              <path d="M 104,144 L 104,160" fill="none" stroke="black"></path>
+              <path d="M 128,32 L 128,120" fill="none" stroke="black"></path>
+              <path d="M 128,184 L 128,208" fill="none" stroke="black"></path>
+              <path d="M 128,256 L 128,280" fill="none" stroke="black"></path>
+              <path d="M 128,328 L 128,352" fill="none" stroke="black"></path>
+              <path d="M 216,32 L 216,120" fill="none" stroke="black"></path>
+              <path d="M 216,184 L 216,280" fill="none" stroke="black"></path>
+              <path d="M 216,328 L 216,352" fill="none" stroke="black"></path>
+              <path d="M 232,48 L 232,80" fill="none" stroke="black"></path>
+              <path d="M 264,80 L 264,120" fill="none" stroke="black"></path>
+              <path d="M 288,144 L 288,160" fill="none" stroke="black"></path>
+              <path d="M 304,80 L 304,280" fill="none" stroke="black"></path>
+              <path d="M 344,48 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 360,32 L 360,296" fill="none" stroke="black"></path>
+              <path d="M 360,312 L 360,352" fill="none" stroke="black"></path>
+              <path d="M 424,80 L 424,112" fill="none" stroke="black"></path>
+              <path d="M 440,208 L 440,240" fill="none" stroke="black"></path>
+              <path d="M 448,112 L 448,144" fill="none" stroke="black"></path>
+              <path d="M 464,160 L 464,208" fill="none" stroke="black"></path>
+              <path d="M 464,240 L 464,304" fill="none" stroke="black"></path>
+              <path d="M 480,80 L 480,112" fill="none" stroke="black"></path>
+              <path d="M 496,208 L 496,240" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 128,32" fill="none" stroke="black"></path>
+              <path d="M 216,32 L 360,32" fill="none" stroke="black"></path>
+              <path d="M 24,48 L 56,48" fill="none" stroke="black"></path>
+              <path d="M 72,48 L 104,48" fill="none" stroke="black"></path>
+              <path d="M 232,48 L 344,48" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 56,80" fill="none" stroke="black"></path>
+              <path d="M 72,80 L 104,80" fill="none" stroke="black"></path>
+              <path d="M 232,80 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 424,80 L 480,80" fill="none" stroke="black"></path>
+              <path d="M 424,112 L 480,112" fill="none" stroke="black"></path>
+              <path d="M 120,128 L 272,128" fill="none" stroke="black"></path>
+              <path d="M 88,144 L 160,144" fill="none" stroke="black"></path>
+              <path d="M 240,144 L 296,144" fill="none" stroke="black"></path>
+              <path d="M 312,144 L 352,144" fill="none" stroke="black"></path>
+              <path d="M 368,144 L 448,144" fill="none" stroke="black"></path>
+              <path d="M 40,160 L 160,160" fill="none" stroke="black"></path>
+              <path d="M 240,160 L 296,160" fill="none" stroke="black"></path>
+              <path d="M 312,160 L 352,160" fill="none" stroke="black"></path>
+              <path d="M 368,160 L 464,160" fill="none" stroke="black"></path>
+              <path d="M 120,176 L 272,176" fill="none" stroke="black"></path>
+              <path d="M 8,208 L 128,208" fill="none" stroke="black"></path>
+              <path d="M 440,208 L 496,208" fill="none" stroke="black"></path>
+              <path d="M 440,240 L 496,240" fill="none" stroke="black"></path>
+              <path d="M 8,256 L 128,256" fill="none" stroke="black"></path>
+              <path d="M 24,288 L 64,288" fill="none" stroke="black"></path>
+              <path d="M 96,288 L 312,288" fill="none" stroke="black"></path>
+              <path d="M 64,304 L 168,304" fill="none" stroke="black"></path>
+              <path d="M 248,304 L 464,304" fill="none" stroke="black"></path>
+              <path d="M 24,320 L 64,320" fill="none" stroke="black"></path>
+              <path d="M 96,320 L 312,320" fill="none" stroke="black"></path>
+              <path d="M 8,352 L 128,352" fill="none" stroke="black"></path>
+              <path d="M 216,352 L 360,352" fill="none" stroke="black"></path>
+              <path d="M 120,128 C 111.16936,128 104,135.16936 104,144" fill="none" stroke="black"></path>
+              <path d="M 272,128 C 280.83064,128 288,135.16936 288,144" fill="none" stroke="black"></path>
+              <path d="M 120,176 C 111.16936,176 104,168.83064 104,160" fill="none" stroke="black"></path>
+              <path d="M 272,176 C 280.83064,176 288,168.83064 288,160" fill="none" stroke="black"></path>
+              <path d="M 96,288 C 87.16936,288 80,295.16936 80,304" fill="none" stroke="black"></path>
+              <path d="M 312,288 C 320.83064,288 328,295.16936 328,304" fill="none" stroke="black"></path>
+              <path d="M 96,320 C 87.16936,320 80,312.83064 80,304" fill="none" stroke="black"></path>
+              <path d="M 312,320 C 320.83064,320 328,312.83064 328,304" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="312,280 300,274.4 300,285.6" fill="black" transform="rotate(90,304,280)"></polygon>
+              <polygon class="arrowhead" points="272,120 260,114.4 260,125.6" fill="black" transform="rotate(90,264,120)"></polygon>
+              <g class="text">
+                <text x="36" y="68">A1</text>
+                <text x="84" y="68">A2</text>
+                <text x="260" y="68">QoS,</text>
+                <text x="308" y="68">Policy</text>
+                <text x="176" y="100">Network</text>
+                <text x="452" y="100">srv-A2</text>
+                <text x="172" y="116">attachment</text>
+                <text x="200" y="148">flow-x2</text>
+                <text x="200" y="164">flow-x1</text>
+                <text x="52" y="228">Client-1</text>
+                <text x="468" y="228">srv-A1</text>
+                <text x="176" y="260">Network</text>
+                <text x="172" y="276">attachment</text>
+                <text x="44" y="308">A1</text>
+                <text x="208" y="308">flow-x3</text>
+                <text x="52" y="372">Client-2</text>
+                <text x="252" y="372">Router</text>
+              </g>
+            </svg><a href="#section-1-13.1.1" class="pilcrow">¶</a>
+</div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
 </div>

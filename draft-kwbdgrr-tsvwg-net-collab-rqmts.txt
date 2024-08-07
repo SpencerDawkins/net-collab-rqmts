@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 3 February 2025                            Cloud Software Group
+Expires: 8 February 2025                            Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 3 February 2025                            Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                           2 August 2024
+                                                           7 August 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 February 2025.
+   This Internet-Draft will expire on 8 February 2025.
 
 Copyright Notice
 
@@ -196,23 +196,23 @@ Table of Contents
    headers that wireless networks used in the past to optimize traffic
    shaping and scheduling are not exposed in encrypted communications.
 
-                        |
+                        :
           3GPP/mobile network
-   +--------------------|----------------------+
-   |+-- ---+            |   +-----+    +-----+ |
-   ||client+-----------(B)--+radio+----+ CN  | |
-   |+------+            |   +-----+    +--+--+ |
-   +--------------------|-----------------|----+
-                        |                 |
+   +--------------------:----------------------+
+   | +------+           :   +-----+    +-----+ |
+   | |client+-----------B---+radio+----+ CN | |
+   | +------+           :   +-----+    +--+--+ |
+   +--------------------:-----------------|----+
+                        :                 |
           Wireless home/ISP network       |
-   +--------------------|-----------+     |    |          |
-   |+--- --+    +----+  |  +------+ | +---+--+ | +------+ | +------+
-   ||client+-(B)+WLAN+-(B)-+router+---+router+---+router+---+server|
-   |+------+    +----+  |  +------+ | +------+ | +------+ | +------+
-   +--------------------|-----------+          |          |
-                        |                      |          |
-                        |                      | Transit  |  Content
-    User device/Network |    MNO/ISP Network   | Network  |  Network
+   +--------------------:-----------+     |    :          :
+   | +------+   +----+  :  +------+ | +---+--+ : +------+ : +------+
+   | |client+-B-+WLAN+--B--+router+---+router+---+router+---+server|
+   | +------+   +----+  :  +------+ | +------+ : +------+ : +------+
+   +--------------------:-----------+          :          :
+                        :                      :          :
+                        :                      : Transit  :  Content
+    User device/Network :    MNO/ISP Network   : Network  :  Network
 
                                   Figure 1
 
@@ -238,23 +238,27 @@ Table of Contents
    a flow, but not between flows.  Specifically, this document does not
    discuss flows of distinct hosts/users.
 
-   +----------+          +-----------------+
-   |+----+    |          | +-------------+ |
-   || A1 |--+ |          | | QoS, Policy | |
-   |+-+--+A2| |          | +---+-----+---+ |          +------+
-   |  |+-+--+ |  Network |     |     |     |          |srv-A2|
-   |  |  |    |attachment|     v     |     |          +--+---+
-   |  |  |  *************************|**** |             |
-   |  |  +------------- flow-x2 -----|-------------------+   +------+
-   |  +------------ flow-x1 ---------|-----------------------+srv-A1|
-   |        *************************|**** |                 +--+---+
-   +-Client-1-+          |           |     |                    |
-                         |           |     |                    |
-   +----------+  Network attachment  V     |                    |
-   |+----+  ****************************** |                    |
-   || A1 +------------ flow-x3 ---------------------------------+
-   |+----+  ****************************** |
-   +----------+          +-----------------+
+   +--------------+          +-----------------+
+   | +---+ +---+  |          | +-------------+ |
+   | |A1 | |A2 |  |          | | QoS, Policy | |
+   | +-+-+ +-+-+  |          | +---+----+----+ |       +------+
+   |   |     |    |  Network |     |    |      |       |srv-A2|
+   |   |     |    |attachment|     v    |      |       +--+---+
+   |   |     |  .------------------+-.  |      |          |
+   |   |     +-+------- flow-x2 ------+-|------|----------+
+   |   +-------+------- flow-x1 ------+-|------|------------+
+   |            '--------------------'  |      |            |
+   |              |          |          |      |            |
+   +--------------+          |          |      |         +--+---+
+     Client-1                |          |      |         |srv-A1|
+                             |          |      |         +--+---+
+   +--------------+  Network |          |      |            |
+   |              |attachment|          v      |            |
+   | +----+  .--------------------------+-.    |            |
+   | | A1 +-+----------- flow-x3 ----------+----------------+
+   | +----+  '----------------------------'    |
+   |              |          |                 |
+   +--------------+          +-----------------+
      Client-2                  Router
 
                                   Figure 2
