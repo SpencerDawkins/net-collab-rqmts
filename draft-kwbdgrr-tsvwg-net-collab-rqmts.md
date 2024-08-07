@@ -130,24 +130,24 @@ packet transmission to allow the mobile device to briefly power down (sleep) its
 Traffic patterns in some emerging applications can vary significantly during a session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
 Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
-~~~~~~~~
-                     |
+~~~~~~~~aasvg
+                     :
        3GPP/mobile network
-+--------------------|----------------------+
-|+-- ---+            |   +-----+    +-----+ |
-||client+-----------(B)--+radio+----+ CN  | |
-|+------+            |   +-----+    +--+--+ |
-+--------------------|-----------------|----+
-                     |                 |
++--------------------:----------------------+
+| +------+           :   +-----+    +-----+ |
+| |client+-----------B---+radio+----+ CN | |
+| +------+           :   +-----+    +--+--+ |
++--------------------:-----------------|----+
+                     :                 |
        Wireless home/ISP network       |
-+--------------------|-----------+     |    |          |
-|+--- --+    +----+  |  +------+ | +---+--+ | +------+ | +------+
-||client+-(B)+WLAN+-(B)-+router+---+router+---+router+---+server|
-|+------+    +----+  |  +------+ | +------+ | +------+ | +------+
-+--------------------|-----------+          |          |
-                     |                      |          |
-                     |                      | Transit  |  Content
- User device/Network |    MNO/ISP Network   | Network  |  Network
++--------------------:-----------+     |    :          :
+| +------+   +----+  :  +------+ | +---+--+ : +------+ : +------+
+| |client+-B-+WLAN+--B--+router+---+router+---+router+---+server|
+| +------+   +----+  :  +------+ | +------+ : +------+ : +------+
++--------------------:-----------+          :          :
+                     :                      :          :
+                     :                      : Transit  :  Content
+ User device/Network :    MNO/ISP Network   : Network  :  Network
 ~~~~~~~~
 {: #Figure-e2e title=”E2E Media Transport Overview”}
 
@@ -162,24 +162,28 @@ Transport flows over a network attachment may consist of multiple streams such a
 
 The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.
 
-~~~~~~~~
-+----------+          +-----------------+
-|+----+    |          | +-------------+ |
-|| A1 |--+ |          | | QoS, Policy | |
-|+-+--+A2| |          | +---+-----+---+ |          +------+
-|  |+-+--+ |  Network |     |     |     |          |srv-A2|
-|  |  |    |attachment|     v     |     |          +--+---+
-|  |  |  *************************|**** |             |
-|  |  +------------- flow-x2 -----|-------------------+   +------+
-|  +------------ flow-x1 ---------|-----------------------+srv-A1|
-|        *************************|**** |                 +--+---+
-+-Client-1-+          |           |     |                    |
-                      |           |     |                    |
-+----------+  Network attachment  V     |                    |
-|+----+  ****************************** |                    |
-|| A1 +------------ flow-x3 ---------------------------------+
-|+----+  ****************************** |
-+----------+          +-----------------+
+~~~~~~~~aasvg
++--------------+          +-----------------+
+| +---+ +---+  |          | +-------------+ |
+| |A1 | |A2 |  |          | | QoS, Policy | |
+| +-+-+ +-+-+  |          | +---+----+----+ |       +------+
+|   |     |    |  Network |     |    |      |       |srv-A2|
+|   |     |    |attachment|     v    |      |       +--+---+
+|   |     |  .------------------+-.  |      |          |
+|   |     +-+------- flow-x2 ------+-|------|----------+
+|   +-------+------- flow-x1 ------+-|------|------------+
+|            '--------------------'  |      |            |
+|              |          |          |      |            |
++--------------+          |          |      |         +--+---+
+  Client-1                |          |      |         |srv-A1|
+                          |          |      |         +--+---+
++--------------+  Network |          |      |            |
+|              |attachment|          v      |            |
+| +----+  .--------------------------+-.    |            |
+| | A1 +-+----------- flow-x3 ----------+----------------+
+| +----+  '----------------------------'    |
+|              |          |                 |
++--------------+          +-----------------+
   Client-2                  Router
 ~~~~~~~~
 {: #Figure-conn-flow title=”E2E transport flows and connection session”}
