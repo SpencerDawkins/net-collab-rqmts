@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-06T01:14:54.348807+00:00",
+  "timestamp": "2024-08-08T01:15:34.405677+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3722,24 +3722,26 @@
       "id": "PR_kwDOL0HpzM53TNud",
       "title": "convert diagrams to AASVG",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/65",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-08-02T21:10:05Z",
-      "updatedAt": "2024-08-05T15:53:09Z",
+      "updatedAt": "2024-08-07T15:09:52Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "286ce72f1fd52cfcfc765404b3e71b6e8014331e",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "aasvg",
       "headRefOid": "6b939baa21c79d35dda643ac73b40f0b15f13ed0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-07T15:09:51Z",
+      "mergedAt": "2024-08-07T15:09:51Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7249974e94208d0536bdf3daa245bbc7f4c4b47a"
+      },
       "comments": [],
       "reviews": [
         {
