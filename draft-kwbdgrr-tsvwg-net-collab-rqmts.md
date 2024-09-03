@@ -68,17 +68,21 @@ normative:
 
 informative:
 
-  TR.23.501-3GPP:
+  TS.23.501-3GPP:
     title:  "3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"
     date: March 2023
 
-  TR.23.700-60-3GPP:
-     title:  "Study on XR (Extended Reality) and media services (Release 18)"
-     date: August 2022
+  TR.23.700-70-3GPP:
+     title:  "Study on XR (Extended Reality) and media services (Release 19)"
+     date: August 2024
 
   5G-Lumos:
     title: "Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"
     date: October 2020
+
+  5G-Octopus:
+    title: "Octopus: In-Network Content Adaptation to Control Congestion on 5G Links, Yongzhou Chen et al., ACM/IEEE Symposium on Edge Computing (SEC '23), https://dl.acm.org/doi/10.1145/3583740.3628438"
+    date: December 2023
 
   app-measurement:
         title: "Bandwidth measurement for QUIC"
@@ -93,25 +97,27 @@ informative:
 
 --- abstract
 
-Some networks (e.g., cellular or WLAN) experience significant but transient variations in link quality and have policy constraints (e.g., bandwidth) that affect user experience.
-Collaborative signaling (e.g., host-to-network and server-to-network) can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
+Wireless networks like 5G and WLAN) experience significant but transient variations in link quality that affect user experience.
+Collaborative signaling from host-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
-This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network (and vice versa) and server-to-network (and vice versa). The document focuses on intra-flow or flows bound to the same user.
+This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network and server-to-network. The document focuses on intra-flow or flows bound to the same user.
 
 --- middle
 
 # Introduction {#intro}
 
-Some networks (e.g., wireless) inherently experience large variations in link quality due to several factors.
-These include the change in wireless channel conditions, interference between proximate cells and channels or because of the end user movement.
+Wireless networks including 5G and WLAN inherently experience large variations in link quality over sub-RTT intervals and on the other hand applications such as interactive media demand both low latency and high bandwidth.
+Maximizing network utilization and end user experience under such conditions is challenging.
+Factors that affect wireless networks include change in channel conditions, interference between proximate cells and end user movement.
 These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate.
-End-to-end congestion control algorithms are far from being optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}).
+Similarly, application servers that encode and serve live or interactive media take time to adjust the encoding level and other processes to match the network rate.
+End-to-end congestion control algorithms are far from being optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., Section 2.1 of {{?RFC6077}}).
+In these conditions, applications settle for a lower throughput when latency is prioritized, or for higher throughput at the expense of much higher delays.
 
-It is also not practical to convey sub-RTT link changes using an end-to-end feedback signal.
-As a consequence, applications settling for a lower throughput when latency is prioritized or achieving higher throughput at the expense of much higher delays.
-
-With not fully encrypted packets, networks may use some heuristics to build an "implicit signal" gleaned from a packet to prioritize or otherwise shape flows.
-Implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
+While rate control based on feedback for a flow (UDP 4-tuple) is evidently not able adapt for sub-RTT changes in available wireless channel resources, the application server can provide information on a per-packet basis that a network shaper may use to utilize the available resources more effectively.
+{{5G-Octopus}} has shown for volumetric video packets and a rate controller that errs on the side of overestimation, that the network shaper can drop low priority frames of a group of pictures (corresponding to transient wireless link bandwidth drops) and still achieve significantly better performance than state-of-the-art based on feedback.
+With not fully encrypted packets, networks may use heuristics to build an "implicit signal" gleaned from a packet to prioritize or otherwise shape flows.
+However, implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}.
 When packet contents are encrypted, the approach of using implicit signals is no longer viable.
 
 Bandwidth constraints exist most predominantly at the access network (e.g., radio access networks).
@@ -122,13 +128,6 @@ An explicit signal to the host can help to manage the use of available bandwidth
 Other applications like interactive media can demand both high throughput and low latency and, in some cases, carry different streams (e.g., audio and video) in a single transport connection (e.g., WebRTC {{?RFC8825}}).
 There may be preferences that an application may wish to convey, such as a higher priority for audio over video (or the opposite) in congested networks or importance of certain packets (e.g., video key frames).
 With RTP {{?RFC3550}}, the media type could be examined and used as an implicit signal for determining relative priority. However, {{?RFC9335}} defines a new mechanism that completely encrypts RTP header extensions and Contributing sources (CSRCs). Furthermore, a full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose any media header information that on-path network elements can use for forwarding decisions.
-
-Also, as mobile networks primarily service battery-operated devices, the same information is useful to those
-networks even without network congestion, as the information can inform the base station to aggregate
-packet transmission to allow the mobile device to briefly power down (sleep) its radio.
-
-Traffic patterns in some emerging applications can vary significantly during a session. For example, live media or AI-generated content can have significant dynamic variations and potentially aperiodic frames.
-Information gleaned from unencrypted media packets and headers that wireless networks used in the past to optimize traffic shaping and scheduling are not exposed in encrypted communications.
 
 ~~~~~~~~aasvg
                      :
@@ -155,42 +154,30 @@ Information gleaned from unencrypted media packets and headers that wireless net
 When a bottleneck exists temporarily, the network has no choice but to discard or delay packets -- which can harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.
 
-A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.
-
-A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
-Transport flows over a network attachment may consist of multiple streams such as video or audio. {{Figure-conn-flow}} shows a high level view of network attachments, flows, and QoS/policy discussed in {{metadata-req}}.
-
-The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.
-
-~~~~~~~~aasvg
-+--------------+          +-----------------+
-| +---+ +---+  |          | +-------------+ |
-| |A1 | |A2 |  |          | | QoS, Policy | |
-| +-+-+ +-+-+  |          | +---+----+----+ |       +------+
-|   |     |    |  Network |     |    |      |       |srv-A2|
-|   |     |    |attachment|     v    |      |       +--+---+
-|   |     |  .------------------+-.  |      |          |
-|   |     +-+------- flow-x2 ------+-|------|----------+
-|   +-------+------- flow-x1 ------+-|------|------------+
-|            '--------------------'  |      |            |
-|              |          |          |      |            |
-+--------------+          |          |      |         +--+---+
-  Client-1                |          |      |         |srv-A1|
-                          |          |      |         +--+---+
-+--------------+  Network |          |      |            |
-|              |attachment|          v      |            |
-| +----+  .--------------------------+-.    |            |
-| | A1 +-+----------- flow-x3 ----------+----------------+
-| +----+  '----------------------------'    |
-|              |          |                 |
-+--------------+          +-----------------+
-  Client-2                  Router
 ~~~~~~~~
-{: #Figure-conn-flow title=”E2E transport flows and connection session”}
+                     
+             (A)Application signaling (client – server) 
+        +---------------------------------------------------+
+       /                                                     \
+   +--+---+              +----------+                       +--+---+
+   |      |    (C)H2N    |          |                       |      |
+   |      |<------------>|+---- ---+|                       |      |
+   |      |              || Network||  downstream packet    |      |
+   |      |<==============+ Shaper <========================|      |
+   |      |<^^^^^^^^^^^^^^+--------+^^^^^^^^^^^^^^^^^^^^^^^^|      |
+   |      |              |          |(B)on-path S2N metadata|      |
+   +------+              +----------+                       +------+
+    Client                  Router                           Server
 
-{{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
-"Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
-The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
+~~~~~~~~
+{: #Figure-netshaper title=”Metadata and Network Shaping”}
+
+{{Figure-netshaper}} provides an outline of the interaction of application packets with network layer entities. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
+Congestion control algorithms are generally conservative and settle to a steady rate that avoids excessive packet loss.
+In networks where link conditions (between Client and Router) vary significantly at timescales well below the RTT, this results in unused (wasted) bandwidth at short timescales.
+There is some research {{5G-Octopus}} to indicate that media applications can obtain better QoE when sending at a higher rate (less conservative than current CCA) and the media application is willing to tolerate some packet loss or delay of low priority packets.
+Packet priority and tolerance to delay of packets in such a case would be provided on-path in a side channel associated to the downstream packet (B – in figure).
+The requirements for this server-to-network (S2N) metadata are described in {{server-network}}.
 
 In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
@@ -619,65 +606,53 @@ Use cases:
 
 ## Server-Network Metadata {#server-network}
 
-### Identification of Media Frames and Streams {#mdu-stream-id}
+Application flows (UDP 4-tuple) for live media, eXtended Reality (XR) and gaming require both high bandwidth and low latency and would as such benefit from being able to use the bandwidth available for the flow.
+In wireless networks, some of the bandwidth available for the flow is not possible to schedule using the feedback based rate control (due to the significant link variations at sub-RTT timescales).
+In such networks where variations in link quality is well below RTT, congestion control algorithms settle to a steady rate that avoids excessive packet loss.
+Feedback via ECN/L4S {{?RFC9331}} provides an accurate signal but is also on an RTT timescale and thus does not provide finer resolution information of instantaneous bandwidth available.
 
-Feedback provided by ECN/L4S to the server (UDP sender) is not fast enough to adjust the sending rate when available wireless capacity changes significantly in very short periods of time (~ 1 millisecond).
-Differentiating using multiple DSCP codes does not provide the resolution required to classify media frames or streams and adapt to changes in coding due to dynamic content or resulting from network conditions.
+If application packets can either tolerate delay or some loss of lower priority packets, the network traffic shaper and scheduler can use this information to provide a higher application quality of service.
+For example, video streams contain the occasional key frame ("I-frame") containing a full video frame that is necessary to rebuild receiver state after loss of delta frames.
+The key frames are therefore more critical to deliver to the receiver than delta frames.
+There is some research {{5G-Octopus}} to indicate that media applications can obtain better measured application quality when sending at a higher rate (less conservative than current CCA) and allowing the network to delay or drop low priority packets.
 
-Relative priority and tolerance to delay of media frames or streams can be used to optimize traffic shaping at the wireless router.
-The application can provide information to detect the start, end and set of packets that belong to a media frame.
-Alternatively, the application may provide information to identify one stream of the flow from another.
-The application provides information to identify either media frames or streams in a flow but not both.
+The metadata in {{relative-priority}} and {{delay}} should also satisfy constraints identified in {{operational}}.
+Privacy ({{privacy}}) requires that metadata should not provide additional information to identify the application or the user.
+The application server can decide on the metadata values that provide the best handling for the packets of the flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis.
+This metadata is advisory in nature and network traffic policy ({{policy}}) that restricts its use would not result in additional issues.
+Other constraints including scale ({{scalability}}) and continuity ({{continuity}}) are required for {{relative-priority}} and {{delay}}.
 
-In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
+Realizing the additional bandwidth potential with these metadata may require a higher sending rate for the transport flow.
+This requires work that is not specified in this document. Similarly, the assumption is that network shapers and schedulers can use the metadata in {{relative-priority}} and {{delay}} but further details are out of scope.
+
+Previous work in {{TR.23.700-70-3GPP}} has identified the general problem in this section.
+However, the solution in {{TS.23.501-3GPP}} is specific to a 5G network.
+The metadata sent from a (dedicated 5G) application server identifies PDU set information and end-of-burst signals which are not understood by non-3GPP systems such as Wi-Fi or DOCSIS.
+Further, 3GPP functions and policy configurations are required since this is a 5G specific solution.
+The metadata disclosed in the 5G solution also identifies frame boundaries and does not fully conform to the constraints for privacy or minimality of data identified in {{operational}}.
+
+### Packet Priority {#relative-priority}
+
+Per-packet priority information provides the priority level of one packet relative to other packets within a transport flow (UDP 4-tuple).
+The application server can decide on the priority or importance values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis.
+For example, when the application determines that congestion is very low, it may decide to mark all (or most) packets as high priority and when conditions change the server may mark more packets at a lower priority so as to maximize application performance and allowing a shaper to drop lower priority packets.
+When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across all streams of the flow.
+
+Per-packet priority or importance determines the drop priority of a packet.
 
 Requirements:
 
-REQ-FRAME-ASSOCIATED:
-: Identify all packets belonging to the same media frame, so they can receive equal drop/forward treatment.
-
-### Identification of Traffic Type without Disclosure of the Application {#TrafficType}
-
-Different nature/types of traffic can be part of the same 5-tuple flow. This could be reliable/loss-tolerant {{?RFC9221}}, bulk/interactive traffic. The type of traffic can be used to prioritize/buffer packets as needed and deprioritize/discard appropriate packets during reactive events, thereby optimizing performance. The application may provide information to identify the type of traffic in per-packet metadata.
-
-Requirements: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in {{mixed-traffic}}.
-
-### Relative Priority {#relative-priority}
-
-Relative importance of a media frame provides the priority level of one media frame over another media frame within a stream.
-The application server determines the importance based on the media encoded in the media frame (e.g., a base layer video I-frame has higher priority than an enhanced layer P-frame).
-Importance may be used to determine drop priority of a media frame in cases of extreme congestion in the wireless network.
-
-Relative importance of a media stream  is the priority level of one media stream over another stream in the flow (with the same IP 5-tuple).
-As with media frames, importance may be used to determine drop priority in cases of extreme congestion in the wireless network.
-
-There is no requirement associated with this use case.
+REQ-PACKET-PRIORITY: Packet priority relative to other packets in the transport flow (UDP 4-tuple).
 
 ### Tolerance to Delay {#delay}
 
-Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay).
 Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
-ams may be able to tolerate more delay over the wire than others (e.g., a stream carrying a background image for augmented reality may be delivered with more delay tolerance).
-Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
-
-If the application can indicate that a media frame or stream can tolerate high delay the wireless router can opt to delay packets rather than drop during transient congestion periods.
+As with per-packet priority in {{relative-priority}}, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.
 
 Requirements:
 
-REQ-DELAY-TOLERANCE: REQ-PACKET-RELIABILITY, REQ-PACKET-NATURE as defined in {{mixed-traffic}}.
-
-### Burst Indication {#burst}
-
-Media flows can have large and unexpected variations in packet bursts due to dynamic changes in content, server estimation of network conditions and pacing behavior.
-Encoding of live video, and multimodal media can only increase the burst size that a server has to contend with sending out in a relative smoothed out manner.
-The burst size is observable on the wire, but can only be determined by the end of the burst of packets.
-Wireless networks on the other hand cannot reserve resources for the maximum burst size allowed as that will likely lead to poor utilization of radio resources or tail drops.
-
-The server may provide burst size at the beginning of the burst to allow the scheduler to reserve sufficient resources (and avoid having too few resources that may lead to a tail drop).
-The server may also signal end of burst that provides information for the radio to go into sleep mode (Connected Mode Discontinuous Reception, C-DRX) if there is no paging message.
-
-REQ-BURST-INDICATOR:
-: Client indicates this flow's maximum burst to the service provider network, and network agrees it can handle that burst size.
+REQ-DELAY-TOLERANCE: Metadata to indicate whether the packet can tolerate delay.
 
 
 # Non-Requirements {#non-req}
@@ -710,6 +685,46 @@ Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.
 : Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on host-to-network signaling.
-Thanks to Luis Miguel Contreras and Colin Kahn for their review and comments.
+Thanks to Luis Miguel Contreras, Colin Kahn, Marcus Ilhar and Tianji Jiang for their review and comments.
 
 --- back
+
+
+# Network Attachment {#net-attach}
+
+A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.
+
+A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
+Transport flows over a network attachment may consist of multiple streams such as video or audio. {{Figure-conn-flow}} shows a high level view of network attachments, flows, and QoS/policy discussed in {{metadata-req}}.
+
+The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.
+
+~~~~~~~~aasvg
++--------------+          +-----------------+
+| +---+ +---+  |          | +-------------+ |
+| |A1 | |A2 |  |          | | QoS, Policy | |
+| +-+-+ +-+-+  |          | +---+----+----+ |       +------+
+|   |     |    |  Network |     |    |      |       |srv-A2|
+|   |     |    |attachment|     v    |      |       +--+---+
+|   |     |  .------------------+-.  |      |          |
+|   |     +-+------- flow-x2 ------+-|------|----------+
+|   +-------+------- flow-x1 ------+-|------|------------+
+|            '--------------------'  |      |            |
+|              |          |          |      |            |
++--------------+          |          |      |         +--+---+
+  Client-1                |          |      |         |srv-A1|
+                          |          |      |         +--+---+
++--------------+  Network |          |      |            |
+|              |attachment|          v      |            |
+| +----+  .--------------------------+-.    |            |
+| | A1 +-+----------- flow-x3 ----------+----------------+
+| +----+  '----------------------------'    |
+|              |          |                 |
++--------------+          +-----------------+
+  Client-2                  Router
+~~~~~~~~
+{: #Figure-conn-flow title=”E2E transport flows and connection session”}
+
+{{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
+"Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
+The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
