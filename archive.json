@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-01T01:37:28.674439+00:00",
+  "timestamp": "2024-09-03T01:18:17.366839+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -539,6 +539,22 @@
       "createdAt": "2024-06-29T08:30:32Z",
       "updatedAt": "2024-07-19T15:40:36Z",
       "closedAt": "2024-07-19T15:40:36Z",
+      "comments": []
+    },
+    {
+      "number": 66,
+      "id": "I_kwDOL0HpzM6VF1Eo",
+      "title": "Add e2e model for metadata transfer, revise s2n requirements in 5.2, and miscellaneous (incl. gaps that requirements address)",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/66",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "a) E2E model of how the server-2-network and host-2-network metadata exchange takes place and the dependencies are not explicit. \r\nThis includes the behavior expected in the network (i.e., shaping). Revise in section 1 (Introduction) to address.\r\nb) Server-2-network requirement simplification: uplevel the requirements to state what the network shaper should act on (i.e., priority and tolerance to delay). Remove bursts, periodicity as behavior can be different across different access networks like WiFi and 5G. \r\nc) Add an Appendix section to identify what the state-of-the-art is for h2n and s2n is and what is missing. Focus on per-packet prioritization (in intro section also), and state why per-flow mechanisms like DSCP and reactive mechanisms like congestion control, ECN/L4S at a flow level are not sufficient.\r\nd) Move \"Network Attachment\" details to an Appendix section as this is not a primary aspect of this draft.",
+      "createdAt": "2024-09-02T16:49:18Z",
+      "updatedAt": "2024-09-02T16:49:18Z",
+      "closedAt": null,
       "comments": []
     }
   ],
