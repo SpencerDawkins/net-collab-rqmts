@@ -97,7 +97,8 @@ informative:
 
 --- abstract
 
-Wireless networks like 5G and WLAN) experience significant but transient variations in link quality that affect user experience.
+Wireless networks experience significant but transient variations in link quality that affect user experience.
+
 Collaborative signaling from host-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, host-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server / host and the network.
 
 This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both host-to-network and server-to-network. The document focuses on intra-flow or flows bound to the same user.
@@ -155,8 +156,8 @@ When a bottleneck exists temporarily, the network has no choice but to discard o
 In this document, this is termed 'reactive policy'.
 
 ~~~~~~~~
-                     
-             (A)Application signaling (client – server) 
+
+             (A)Application signaling (client – server)
         +---------------------------------------------------+
        /                                                     \
    +--+---+              +----------+                       +--+---+
@@ -647,7 +648,7 @@ REQ-PACKET-PRIORITY: Packet priority relative to other packets in the transport 
 ### Tolerance to Delay {#delay}
 
 Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay).
-Similarly, some media streams can tolerate more delay over the wire than others (e.g., a stream carrying a background image may tolerate more delay).
+
 As with per-packet priority in {{relative-priority}}, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.
 
 Requirements:
@@ -728,3 +729,4 @@ The requirements in {{metadata-req}} apply to data units like frames within a fl
 {{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate  connection policy (e.g., QoS) and other aspects like mobility handling, charging applied to flows in that network attachment.
 "Client-1" has "flow-x1" and "flow-x2" over its network attachment while "Client-2" has "flow-x3".
 The requirements in this document focuses on on-path collaboration signals that apply to data units such as media frames within flows like "flow-x1/x2/x3" but not between them.
+
