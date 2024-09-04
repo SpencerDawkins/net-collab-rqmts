@@ -636,8 +636,7 @@ The metadata disclosed in the 5G solution also identifies frame boundaries and d
 
 Per-packet priority information provides the priority level of one packet relative to other packets within a transport flow (UDP 4-tuple).
 The application server can decide on the priority or importance values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis.
-For example, when the application determines that congestion is very low, it may decide to mark all (or most) packets as high priority and when conditions change the server may mark more packets at a lower priority so as to maximize application performance and allowing a shaper to drop lower priority packets.
-When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across all streams of the flow.
+When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across the different streams of the flow.
 
 Per-packet priority or importance determines the drop priority of a packet.
 
