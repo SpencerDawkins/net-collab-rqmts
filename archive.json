@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T01:18:17.366839+00:00",
+  "timestamp": "2024-09-05T01:19:41.205680+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -546,15 +546,15 @@
       "id": "I_kwDOL0HpzM6VF1Eo",
       "title": "Add e2e model for metadata transfer, revise s2n requirements in 5.2, and miscellaneous (incl. gaps that requirements address)",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "a) E2E model of how the server-2-network and host-2-network metadata exchange takes place and the dependencies are not explicit. \r\nThis includes the behavior expected in the network (i.e., shaping). Revise in section 1 (Introduction) to address.\r\nb) Server-2-network requirement simplification: uplevel the requirements to state what the network shaper should act on (i.e., priority and tolerance to delay). Remove bursts, periodicity as behavior can be different across different access networks like WiFi and 5G. \r\nc) Add an Appendix section to identify what the state-of-the-art is for h2n and s2n is and what is missing. Focus on per-packet prioritization (in intro section also), and state why per-flow mechanisms like DSCP and reactive mechanisms like congestion control, ECN/L4S at a flow level are not sufficient.\r\nd) Move \"Network Attachment\" details to an Appendix section as this is not a primary aspect of this draft.",
       "createdAt": "2024-09-02T16:49:18Z",
-      "updatedAt": "2024-09-02T16:49:18Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-04T21:09:29Z",
+      "closedAt": "2024-09-04T21:09:29Z",
       "comments": []
     }
   ],
@@ -3792,6 +3792,121 @@
               "updatedAt": "2024-08-05T06:23:19Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOL0HpzM56T3lL",
+      "title": "updates for issue#66",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/67",
+      "state": "MERGED",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Revised draft to address points identified in this issue.",
+      "createdAt": "2024-09-03T20:42:22Z",
+      "updatedAt": "2024-09-04T21:09:29Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "7249974e94208d0536bdf3daa245bbc7f4c4b47a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "66-add-e2e-model-for-metadata-transfer-revise-s2n-requirements-in-52-and-miscellaneous-incl-gaps-that-requirements-address",
+      "headRefOid": "1a97b939faefc84c528b73136d9230e43a585d9b",
+      "closedAt": "2024-09-04T21:09:29Z",
+      "mergedAt": "2024-09-04T21:09:29Z",
+      "mergedBy": "John-Kaippallimalil",
+      "mergeCommit": {
+        "oid": "9ff0cf39a51c029f32947aed011d86b77b7d6766"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6H0LkX",
+          "commit": {
+            "abbreviatedOid": "0286aa0"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-03T22:07:00Z",
+          "updatedAt": "2024-09-03T22:07:00Z",
+          "comments": [
+            {
+              "originalPosition": 196,
+              "body": "Erm, I don't agree this would be a good example.  This would require more than one round trip for server to notice the changed congestion level after the client complains about loss or excessive ECN-marked packets received, requiring the client to then signal the server (via HTTP, updated SDP, or similar).   Why not have the server send packets marked differently the whole time?  Doing so would allow the network to drop less-important packets or forward important packets without suffering the greater-than-one-round-trip (*) delay.\r\n\r\n(*) greater than one round trip because a reasonable client will not react to a single packet loss or single ECN-marked packet, but rather to several.\r\n\r\n\r\nI suggest simply deleting this paragraph starting with \"For example, when the application determines\"\r\n",
+              "createdAt": "2024-09-03T22:07:00Z",
+              "updatedAt": "2024-09-03T22:08:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6H53cX",
+          "commit": {
+            "abbreviatedOid": "0286aa0"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-04T12:52:27Z",
+          "updatedAt": "2024-09-04T12:52:27Z",
+          "comments": [
+            {
+              "originalPosition": 196,
+              "body": "I agree that the example is not too good, but wanted to convey what the intention with \"application server can decide on the priority\" was.  The aim with using some dynamic process to determine priority marking was that different flows with the same content, to different users would be marked differently.\r\nAnd I agree that the idea is not well developed and  it may be better to just delete it.",
+              "createdAt": "2024-09-04T12:52:27Z",
+              "updatedAt": "2024-09-04T12:52:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6H57PE",
+          "commit": {
+            "abbreviatedOid": "0286aa0"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-04T12:57:00Z",
+          "updatedAt": "2024-09-04T12:57:01Z",
+          "comments": [
+            {
+              "originalPosition": 196,
+              "body": "Updated the revision to remove the text as suggested.",
+              "createdAt": "2024-09-04T12:57:00Z",
+              "updatedAt": "2024-09-04T12:57:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6H6AzM",
+          "commit": {
+            "abbreviatedOid": "1a97b93"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "The changes look good to me.",
+          "createdAt": "2024-09-04T13:03:11Z",
+          "updatedAt": "2024-09-04T13:03:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6H98t0",
+          "commit": {
+            "abbreviatedOid": "1a97b93"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-04T20:20:51Z",
+          "updatedAt": "2024-09-04T20:20:51Z",
+          "comments": []
         }
       ]
     }
