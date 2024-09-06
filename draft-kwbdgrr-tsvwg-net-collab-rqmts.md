@@ -173,12 +173,16 @@ In this document, this is termed 'reactive policy'.
 ~~~~~~~~
 {: #Figure-netshaper title=”Metadata and Network Shaping”}
 
-{{Figure-netshaper}} provides an outline of the interaction of application packets with network layer entities. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
+{{Figure-netshaper}} shows a bottleneck (access) Router on the path of packets from Server to Client. 
+A network shaper in the Router manages QoS of flows of multiple users and can buffer (delay), discard or apply other flow control rules. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
 Congestion control algorithms are generally conservative and settle to a steady rate that avoids excessive packet loss.
 In networks where link conditions (between Client and Router) vary significantly at timescales well below the RTT, this results in unused (wasted) bandwidth at short timescales.
 There is some research {{5G-Octopus}} to indicate that media applications can obtain better QoE when sending at a higher rate (less conservative than current CCA) and the media application is willing to tolerate some packet loss or delay of low priority packets.
 Packet priority and tolerance to delay of packets in such a case would be provided on-path in a side channel associated to the downstream packet (B – in figure).
 The requirements for this server-to-network (S2N) metadata are described in {{server-network}}.
+Network shapers observe flows and apply policies to maximize performance but is not aware if there is a preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU session. See {{net-attach}} for more details).
+The client can provide the (access) Router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in figure).
+The client may also provide information to the (access) Router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment. 
 
 In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
@@ -206,121 +210,50 @@ Traffic shaping:
 
 # Use Cases {#uc}
 
-## Media Streaming {#uc-streaming}
+## Streaming and Interactive Media {#uc-media}
 
-Streaming video contains the occasional key frame ("I-frame") containing a full video frame.
+Streaming media packets carry audio or video between server and client.
+Video packets carry the occasional key frame ("I-frame") containing a full video frame.
 These frames are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
-
-Streaming video also contains audio frames which can be encoded
-separately and, thus, can be signaled separately (requirement:
-REQ-MEDIA-KEYFRAME).
-
-Audio is more critical than video for many applications, but its
-importance (relative to other packets in the flow) is still an
-application decision (requirements: REQ-MEDIA-AV-SEPARATE,
-REQ-MEDIA-CLIENT-DECIDES). For example, the ability of the receiver to change the priority by communicating to the network -- without cooperation of the sender -- gives a hearing-impaired user the ability to adjust video above audio.
-
-Especially with media over QUIC, the server (or relay) sends the same
-stream to many receivers, including the same metadata.  Thus, when a
-client needs different prioritization (e.g., video over audio or the other way around), this
-is only achievable by signaling that priority inversion from the
-client to the ISP router (requirement: REQ-CLIENT-DECIDES).
-
-Examples: live broadcast, on-demand video streaming
-
-Requirements:
-
-  REQ-MEDIA-KEYFRAME:
-  : Video contains partial frames and full frames, which need to be distinguished so that
-full frames can be indicated to the network.
-
-  REQ-MEDIA-AV-SEPARATE:
-  :  Audio can be prioritized differently than video.
-
-Use cases:
-
-  1. In loss-prone networks or during reactive policy events, retransmissions cause long delays. All packets being treated the same can have challenges in efficiently handling/forwarding data. Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
-
-  2. Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).  Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
-
-## Interactive Media {#uc-interactive}
+Audio is more critical than video for many applications, but its importance (relative to other packets in the flow) is still an application decision.
+Examples include live broadcast and on-demand video streaming.
 
 Interactive media includes content that a user can actively engage with and results in input and response actions that can be highly delay-sensitive.
+Examples include VoIP (Peer-to-Peer (P2P), group conferencing), gaming and eXtended Reality (XR).
 
-Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, eXtended Reality (XR).
+During congestion or other reactive policy events, retransmissions cause long delays.
+All packets being treated the same can have challenges in efficiently handling/forwarding data.
+Today, there is no way to identify packets which are less important and/or loss-tolerant to prioritize packets in challenging networks and/or during reactive events.
+Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
+Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.
 
 Requirements:
 
-  REQ-PACKET-NATURE:
-  : The receiver indicates that a flow can be allowed to be delayed/buffered (bulk data transfer) or not (interactive traffic) and requests that the network honors the incoming flow's per-packet signals, which prevents denial of service of mis-marked incoming flows.
+REQ-PACKET-PRIORITY: Packet priority relative to other packets in the transport flow (UDP 4-tuple).
+REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
-Use cases:
+## Mixed-Traffic and User Preferences {#uc-preferences}
 
-  1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
+Some content is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience.
+For example, an on-going file copy operation flow (UDP 4-tuple) a remote desktop user can tolerate more delay than the flow carrying graphics updates.
+Or, a user application flow downloading software updates in the background can tolerate more delay than a foreground application flow.
 
-## Accommodate-Delay Traffic {#uc-accommodate-delay}
+This applies only when data is sent in different flows (UDP 4-tuples) that belong to the same network attachment (see {{net-attach}} for details).
 
-Accommodate-Delay traffic includes content that is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience. It is least sensitive to buffer bloating.
+Requirements: 
 
-Requirement: REQ-PACKET-NATURE as defined previously.
+  REQ-FLOW-DELAY: The receiving client determines tolerance to delay of flows (UDP-4 tuple) within the same network attachment.
 
-Use cases:
-
-  1. A remote desktop user prioritizes graphics update over an on-going file copy operation.
-  2. User application in foreground is given priority over downloading software updates.
-
-## User Preferences {#uc-preferences}
-
-A game or VoIP application may want to signal different metadata for the same type of packet in each direction.
+In other cases, a game or VoIP application may want to signal priority of one flow (UDP 4-tuple) over another flow.
 For example, for a game, video in the server-to-client direction might be more important than audio, whereas input devices (e.g., keystrokes) might be more important than audio.  Each user can have varied preferences for the same type of data originating from the server.
 
-Determination of such preferences is outside of the scope of this document.
+This applies only when data is sent in different flows (UDP 4-tuples) that belong to the same network attachment (see {{net-attach}} for details).
 
 Requirements:
 
-  REQ-CLIENT-DECIDES:
-  : The receiving client determines importance of packets it receives, as the client may have changing needs over time.
+  REQ-FLOW-PRIORITY: The receiving client determines importance of flows (UDP-4 tuple) within the same network attachment.
 
-Use cases:
-
-  1. Dynamic changes to priority based on user activity is not possible today. For example, audio packets having the same priority when a user mutes the audio locally, or change in priority during times of emergency where video streaming applications share the same priority as SOS signals.
-
-  2. A user prioritizing video over audio while playing an interactive game.
-
-  3. User's foreground application should receive priority over background tasks. For example, a user is typing in a document while playing a media in the background within the same session.
-
-## Mixed Traffic {#mixed-traffic}
-
-Mixed traffic can contain multiple types of data flowing through the same 5-tuple connection. They may include digital models of the real world, multimedia content, virtualized desktop/apps, and interactive engagement.
-
-In cases where the wireless network has to drop or delay processing, all packets of the media frame or stream are treated in the same manner.
-
-Requirements:
-
-  REQ-PACKET-RELIABILITY:
-  : Indicate if a packet is treated as reliable or unreliable by the application.
-
-  REQ-PACKET-NATURE:
-  : Indicate if a packet belongs to bulk traffic or interactive traffic.
-
-Examples: Virtual Apps and Desktops.
-
-Use cases:
-
-  1. Document being printed/saved while being edited. The interactive traffic has higher priority over bulk traffic).
-
-  2. File download while intearacting with the webpage. With QUIC, this could occur with the same webserver. Interactive activity performed with the webpage higher priority over file download.
-
-  3. In graphics remoting, Critical Glyphs (Reliable) has more priority over Smoothing Glyphs (unreliable) during reactive events.
-
-  4. During reactive policy events, the network can choose to drop the packets marked unreliable by the application, thereby prioritizing reliable packets to avoid retransmissions and performance degradation.
-
-## Honoring of Metadata for Servers Behind a Gateway
-
-In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.
-
-Requirement: REQ-CLIENT-DECIDES as defined previously.
 
 # Operational Considerations {#operational}
 
@@ -413,10 +346,9 @@ Requirement:
 
 ## Exposure Handling {#exposure-handling}
 
-Signaling to the network ({{host-network}}, {{server-network}}) and consuming the signals from the network ({{network-host}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  The API framework is required even if one single channel is used so that any application can consume the signals.
+Signaling to the network ({{host-network}}, {{server-network}}) will need to be facilitated by Application Programming Interfaces (APIs) for any application to use them. Signaling and retrieval of the signals may not be performed at a single layer (although not encouraged). Hence, a framework is required to abstract the underlying protocol(s) and allow the application(s) to retrieve/send signals using a single or a set of API(s) independent of the channels that are used to convey the signals.  The API framework is required even if one single channel is used so that any application can consume the signals.
 
 There might be many channels to signal the metadata such as (non-exhaustive list):
-
 
    * Application layer
    * TCP options {{?RFC9293}}
@@ -517,13 +449,6 @@ Some use cases benefit from server – network metadata exchanges ({{server-netw
 
 For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
 
-Requirement:
-
-  REQ-PACKET-SELF:
-  : Packet importance is indicated by the packet itself.
-
-Note REQ-PACKET-SELF should meet the requirements of {{privacy}} especially REQ-PRIVACY-ADDITIONAL.
-
 ## Host-Network Metadata {#host-network}
 
 ### Priority between Flows (Inter-flow) {#interflow-priority}
@@ -532,6 +457,7 @@ Certain flows being received by a host (or by an application on a host) are less
 For example, a host downloading a software update is generally considered less important than another host doing interactive audio/video or gaming.
 
 By signaling the relative importance of flows to a network element, the network element can (de-)prioritize those flows to best accommodate the needs of the various applications on a same host.
+It should be noted that these "flows" are identified by UDP 4-tuples and belong to the same network attachment of a user.
 
 Without a signaling in place between a receiving host and its network, remote peers are able to mark packets that interfere with the desires of the receiving host -- making their flows more important than what the receiving host considers more important.
 This eventually causes all flows to be marked as important, or -- more likely -- such priority markings to be ignored.
@@ -546,64 +472,15 @@ Taking into account these challenges, and despite the use case is described in t
 
 > Future versions of the document may re-consider this conclusion as a function of the comments received from the TSVWG.
 
+Requirements: REQ-FLOW-PRIORITY in {{uc-preferences}} applies here.
 
-### Priority within a Flow (Intra-Flow) {#intra-flow-priority}
+### Delay Tolerance between Flows (Inter-flow) {#interflow-delay}
 
-Interactive Audio/Video has long been using {{?RFC3550}} which runs over UDP.  As described in Section 2.3.7.2 of {{?RFC7478}}, there is value in differentiating between voice, video and data.
-Today's video streaming is exclusively over TCP but will migrate to QUIC and eventually is likely to support unreliable transport ({{?RFC9221}}, {{?I-D.ietf-moq-transport}}).  With unreliable transport of video in RTP or QUIC, it is beneficial to differentiate the important video keyframes from other video frames.
+Some flows are more resilient to buffering and delays (e.g., file copy, file download) than others(e.g., interactive traffic). This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience.
+For example, an on-going file copy operation flow (UDP 4-tuple) a remote desktop user can tolerate more delay than the flow carrying graphics updates.
 
-Other applications, as mentioned in {{uc}}, such as gaming and remote desktop also benefit from differentiating their packets to the network.
+Requirements: REQ-FLOW-DELAY in {{uc-preferences}} applies here.
 
-Many of these flows do not originate from a content provider's network -- rather, they originate from a peer (e.g., VoIP, interactive video, peer-to-peer gaming, Remote Desktop, and CDN). Thus, the flows originate from an IP address that is not known before connection establishment, so there needs to be a way for the client to authorize the network elements to receive and hopefully to honor the metadata of those packets from a remote peer.
-
-Without a signaling in place between a receiving host and its network, remote peers are able to mark every packet of a flow as important, causing much the same problem as the previous use case.
-Eventually, when all packets of every flow are marked as important, there is no differentiation between packets within a flow, rendering the network unable to improve reactive policy decisions.
-
-Requirements: The requirements vary based on use case and user preference. The requirements listed in {{uc}} are applicable here.
-
-## Network-Host Metadata {#network-host}
-
-### Assisted Offload
-
-There are cases (crisis) where "normal" network resources cannot be
-used at maximum and, thus, a network would seek to reduce or offload
-some of the traffic during these events -- often called 'reactive
-traffic policy'.  An example of such use case is cellular networks
-that are overly used (and radio resources exhausted) such as a large
-collection of people (e.g., parade, sporting event), or such as a
-partial radio network outage (e.g., tower power outage).  During such
-a condition, an alternative network attachment may be available to
-the host (e.g., Wi-Fi).
-
-Network-to-host signals are useful to put in place adequate traffic
-distribution policies on the host (e.g., prefer the use of alternate paths,
-offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
-
-### Network Bandwidth & Network Rate Limiting Policies {#nrlp}
-
-Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.
-
-Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
-
-Requirements:
-
-REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
-
-REQ-NRLP:
-: The network shall inform the host of the Rate limiting policies
-
-Use cases:
-
-  1. Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., {{app-measurement}}) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion.
-
-  2. Dynamic Adaptation: When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate.
-
-  3. Efficient Resource Utilization: Knowing available bandwidth helps the host allocate resources efficiently.
-
-  4. Auto-Scaling Applications: Cloud-based applications can auto-scale based on available bandwidth.
-
-  5. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
 
 ## Server-Network Metadata {#server-network}
 
@@ -652,7 +529,7 @@ As with per-packet priority in {{relative-priority}}, the application server can
 
 Requirements:
 
-REQ-DELAY-TOLERANCE: Metadata to indicate whether the packet can tolerate delay.
+REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
 
 # Non-Requirements {#non-req}
