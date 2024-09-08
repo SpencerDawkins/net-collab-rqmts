@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-05T01:19:41.205680+00:00",
+  "timestamp": "2024-09-08T01:25:28.368891+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -556,6 +556,32 @@
       "updatedAt": "2024-09-04T21:09:29Z",
       "closedAt": "2024-09-04T21:09:29Z",
       "comments": []
+    },
+    {
+      "number": 68,
+      "id": "I_kwDOL0HpzM6VgU0N",
+      "title": "Consolidate and merge use cases, revise h2n sections",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/68",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "John-Kaippallimalil"
+      ],
+      "labels": [],
+      "body": "The following aspects are considered here:\r\na) use cases in section 3 need to be consolidated (to address the tsvwg comments)\r\n    Media streaming (3.1) and Interactive media (3.2) can be combined. \r\n    Accommodate-Delay Traffic (3.3) and User Preferences (3.4) combined --> this can represent a traffic management option for flow control (i.e., the user prefers to prioritize flow 1 (UDP 4-tuple) over flow 2 belonging to the user.\r\n    Remove 3.5 and 3.6 \r\nb) Add the \"flow control\" description above to the Traffic Shaping/management in section 1.\r\nc) Revise h2n section 5.1 to match the revision for flow preference (in b) and/or s2n metadata.\r\nd) clarify \"intra-flow\". With the revisions in s2n (5.2), only priority of packet is visible and intra-flow (audio, video, etc) is not.\r\n    On the other hand, a user may have multiple flows that are shaped and have preferences on that (see b above)",
+      "createdAt": "2024-09-05T16:43:42Z",
+      "updatedAt": "2024-09-06T00:38:41Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Revised the following:\r\na) consolidated use cases as noted above, and renamed requirements to REQ-FLOW-PRIORITY and REQ-FLOW-DELAY (flow being a UDP 4-tuple of a network attachment.\r\nb) added aspects of network shaping/flow handling/network attachment in section 1\r\nc) basic revision of h2n. \r\nd) intra-flow was removed as the network shaper has no visibility into a UDP 4-tuple flow that is encrypted.",
+          "createdAt": "2024-09-06T00:38:40Z",
+          "updatedAt": "2024-09-06T00:38:40Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3909,6 +3935,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOL0HpzM56mVRm",
+      "title": "updates for issue#68",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/69",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-06T00:44:13Z",
+      "updatedAt": "2024-09-06T00:44:14Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "9ff0cf39a51c029f32947aed011d86b77b7d6766",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "68-consolidate-and-merge-use-cases-revise-h2n-sections",
+      "headRefOid": "16b5a9e8d0fc97de1ce4c9d5aff95ab290365388",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
