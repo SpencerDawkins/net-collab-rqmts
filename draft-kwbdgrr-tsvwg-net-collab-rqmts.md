@@ -173,7 +173,7 @@ In this document, this is termed 'reactive policy'.
 ~~~~~~~~
 {: #Figure-netshaper title=”Metadata and Network Shaping”}
 
-{{Figure-netshaper}} shows a bottleneck (access) Router on the path of packets from Server to Client. 
+{{Figure-netshaper}} shows a bottleneck (access) Router on the path of packets from Server to Client.
 A network shaper in the Router manages QoS of flows of multiple users and can buffer (delay), discard or apply other flow control rules. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
 Congestion control algorithms are generally conservative and settle to a steady rate that avoids excessive packet loss.
 In networks where link conditions (between Client and Router) vary significantly at timescales well below the RTT, this results in unused (wasted) bandwidth at short timescales.
@@ -182,7 +182,7 @@ Packet priority and tolerance to delay of packets in such a case would be provid
 The requirements for this server-to-network (S2N) metadata are described in {{server-network}}.
 Network shapers observe flows and apply policies to maximize performance but is not aware if there is a preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU session. See {{net-attach}} for more details).
 The client can provide the (access) Router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in figure).
-The client may also provide information to the (access) Router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment. 
+The client may also provide information to the (access) Router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment.
 
 In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
@@ -241,7 +241,7 @@ Or, a user application flow downloading software updates in the background can t
 
 This applies only when data is sent in different flows (UDP 4-tuples) that belong to the same network attachment (see {{net-attach}} for details).
 
-Requirements: 
+Requirements:
 
   REQ-FLOW-DELAY: The receiving client determines tolerance to delay of flows (UDP-4 tuple) within the same network attachment.
 
