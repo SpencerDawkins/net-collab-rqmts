@@ -99,7 +99,7 @@ informative:
 
 Wireless networks experience significant but transient variations in link quality that affect user experience.
 
-Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network.
+Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that the client and server are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network.
 
 This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both client-to-network and server-to-network. The document focuses on intra-flow or flows bound to the same user.
 
@@ -299,7 +299,7 @@ In enterprise networks and remote desktop use case, a server can host multiple c
 
 There are various approaches for collaborative signaling between the server/client and network including out-of-band signaling, client-centric metadata sharing and proxied connections. The requirements here focus on proxied metadata connections on path with the data traffic.
 
-The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in {{?RFC9419}} and {{?RFC8558}}. Leveraging previous experience ({{?RFC9049}}), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client(host)-to-server encrypted payload.
+The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in {{?RFC9419}} and {{?RFC8558}}. Leveraging previous experience ({{?RFC9049}}), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client-to-server encrypted payload.
 
 The metadata connections may be between server and network (in either direction) or between client and network (in either direction).
 
@@ -353,7 +353,7 @@ This section focuses on operational constraints that impact  server–network, a
 
 ## Policy Enforcement {#policy}
 
-Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user.
+Some metadata requires the network to share some hints with the client/server to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user.
 
 Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).
 
@@ -386,7 +386,7 @@ To avoid this kind of frequency analysis, media sent by the server would need to
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or completely dropping he packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames as unimportant, but such changes are detectable by the receiver.
 
-It is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
+It is recommended to encrypt or obfuscate the metadata information so it is only available to the server, client and authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst client, server and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
 
     Requirements:
 
@@ -450,7 +450,7 @@ T. Reddy contributed text and ideas to this document.
 Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
 : Xavier De Foy and the authors of this draft have discussed the similarities and differences of this draft with the MoQ draft for carrying media metadata.
 : The authors wish to thank Mike Heard, Sebastian Moeller and Tom Herbert for discussions on metadata fields, fragmentation and various transport aspects.
-: The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
+: The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various client/server to network signaling when possible.
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.
 : Ingemar Johansson's suggestions on fast fading (which L4S handles) and dramatic drops in wireless accesses have been helpful to identify the issues.
 Thanks to Hang Shi for the review and comments on client-to-network signaling.
@@ -461,12 +461,12 @@ Thanks to Luis Miguel Contreras, Colin Kahn, Marcus Ilhar and Tianji Jiang for t
 
 # Network Attachment {#net-attach}
 
-A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.
+A network attachment represents the communication link between clients and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.
 
 A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
 Transport flows over a network attachment may consist of multiple streams such as video or audio. {{Figure-conn-flow}} shows a high level view of network attachments, flows, and QoS/policy discussed in {{metadata-req}}.
 
-The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.
+The requirements in {{metadata-req}} apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct clients/users.
 
 ~~~~~~~~aasvg
 +--------------+          +-----------------+
@@ -502,9 +502,9 @@ The requirements in {{metadata-req}} apply to data units like frames within a fl
 
 ## Assisted Offload
 
-There are cases (crisis) where "normal" network resources cannot be used at maximum and, thus, a network would seek to reduce or offload some of the traffic during these events -- often called 'reactive traffic policy'. An example of such use case is cellular networks that are overly used (and radio resources exhausted) such as a large collection of people (e.g., parade, sporting event), or such as a partial radio network outage (e.g., tower power outage).  During such a condition, an alternative network attachment may be available to the host (e.g., Wi-Fi).
+There are cases (crisis) where "normal" network resources cannot be used at maximum and, thus, a network would seek to reduce or offload some of the traffic during these events -- often called 'reactive traffic policy'. An example of such use case is cellular networks that are overly used (and radio resources exhausted) such as a large collection of people (e.g., parade, sporting event), or such as a partial radio network outage (e.g., tower power outage).  During such a condition, an alternative network attachment may be available to the client (e.g., Wi-Fi).
 
-Network-to-host signals are useful to put in place adequate traffic distribution policies on the host (e.g., prefer the use of alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+Network-to-client signals are useful to put in place adequate traffic distribution policies on the client (e.g., prefer the use of alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
 ## Network Bandwidth & Network Rate Limiting Policies {#nrlp}
 
@@ -515,14 +515,14 @@ Also, traffic exchanged over a network attachment may be subject to rate-limit p
     Requirements:
 
     REQ-NETWORK-THROUGHPUT:
-    :  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+    :  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
 
     REQ-NRLP:
-    : The network shall inform the host of the Rate limiting policies
+    : The network shall inform the endpoint of the Rate limiting policies
 
 Use cases:
 
-  1. Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., {{app-measurement}}) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion. When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate. Knowing available bandwidth helps the host allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.
+  1. Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., {{app-measurement}}) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows endpoints to avoid contributing to network congestion. When the network informs the endpoint about available bandwidth, the endpoint can dynamically adjust its data transmission rate. Knowing available bandwidth helps the endpoint allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.
 
   2. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
 
@@ -538,7 +538,7 @@ Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire
 
 ## Application Interference {#app-interference}
 
-Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.
+Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the client that runs the applications.
 
 This is challenging for home networks where multiple clients may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
@@ -549,7 +549,7 @@ This is challenging for home networks where multiple clients may be running behi
 
 ## Redundant Functions and Classification Complications {#classification}
 
-If distinct channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
+If distinct channels are used to share the metadata between a client and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.
 
 Likewise, the network will require to implement redundant functions; for each signaling interface.
 
@@ -568,7 +568,7 @@ The general trend in wireless networks is to deploy the wireless router closer t
 
 ## Multiple Bottlenecks
 
-Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/host collaboration.
+Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/client collaboration.
 
     Requirement:
 
