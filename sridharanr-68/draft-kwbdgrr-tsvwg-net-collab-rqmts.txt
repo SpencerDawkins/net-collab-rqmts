@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 14 March 2025                              Cloud Software Group
+Expires: 15 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 14 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       10 September 2024
+                                                       11 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -29,13 +29,13 @@ Abstract
    can improve the user experience by informing the network about the
    nature and relative importance of packets (frames, streams, etc.)
    without having to disclose the content of the packets.  Moreover, the
-   collaborative signalling may be enabled so that hosts are aware of
-   the network's treatment of incoming packets.  Also, client-to-network
-   collaboration can be put in place without revealing the identity of
-   the remote servers.  This collaboration allows for differentiated
-   services at the network (e.g., packet discard preference), the sender
-   (e.g., adaptive transmission), or through cooperation of server/
-   client and the network.
+   collaborative signalling may be enabled so that the client and server
+   are aware of the network's treatment of incoming packets.  Also,
+   client-to-network collaboration can be put in place without revealing
+   the identity of the remote servers.  This collaboration allows for
+   differentiated services at the network (e.g., packet discard
+   preference), the sender (e.g., adaptive transmission), or through
+   cooperation of server/client and the network.
 
    This document lists some use cases that illustrate the need for a
    mechanism to share metadata and outlines requirements for both
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 March 2025.
+   This Internet-Draft will expire on 15 March 2025.
 
 Copyright Notice
 
@@ -455,8 +455,7 @@ Table of Contents
    impact as described in [RFC9419] and [RFC8558].  Leveraging previous
    experience ([RFC9049]), the metadata signals does not need
    application identity, application cause (or 'reason'), server
-   identity or the inspection of client(host)-to-server encrypted
-   payload.
+   identity or the inspection of client-to-server encrypted payload.
 
    The metadata connections may be between server and network (in either
    direction) or between client and network (in either direction).
@@ -595,10 +594,10 @@ Table of Contents
 
 6.1.  Policy Enforcement
 
-   Some metadata requires the network to share some hints with a host to
-   adjust its behavior for some specific flows.  However, that metadata
-   may have a dependency on the service offering that is subscribed by a
-   user.
+   Some metadata requires the network to share some hints with the
+   client/server to adjust its behavior for some specific flows.
+   However, that metadata may have a dependency on the service offering
+   that is subscribed by a user.
 
    Let us consider the example of a bitrate for an optimized video
    delivery. _Such bitrate may not be computed system-wide_ given that
@@ -676,15 +675,16 @@ Table of Contents
    detectable by the receiver.
 
    It is recommended to encrypt or obfuscate the metadata information so
-   it is only available to hosts and to authorized network elements.
-   The method of encryption or obfuscation is not described in this
-   document but rather in other documents describing how this metadata
-   is encoded and exchanged amongst hosts and network elements.  The
-   privacy implications of revealing metadata to network elements need
-   to be thoroughly analyzed.  This analysis should ensure that any
-   exposure of metadata does not compromise user privacy or allow
-   unauthorized entities to infer sensitive information about the data
-   being transmitted while maintaining minimal resource consumption.
+   it is only available to the server, client and authorized network
+   elements.  The method of encryption or obfuscation is not described
+   in this document but rather in other documents describing how this
+   metadata is encoded and exchanged amongst client, server and network
+   elements.  The privacy implications of revealing metadata to network
+   elements need to be thoroughly analyzed.  This analysis should ensure
+   that any exposure of metadata does not compromise user privacy or
+   allow unauthorized entities to infer sensitive information about the
+   data being transmitted while maintaining minimal resource
+   consumption.
 
 Requirements:
 
@@ -772,10 +772,10 @@ Acknowledgments
 
       The authors appreciate input from Marcus Ilhar and Magnus
       Westerlund on the need to address privacy in general and Dan Druta
-      to consider a common transport across various host to network
-      signaling when possible.  Ruediger Geib suggested that limiting
-      the amount of state information that a wireless router has to keep
-      for a flow should be minimized.
+      to consider a common transport across various client/server to
+      network signaling when possible.  Ruediger Geib suggested that
+      limiting the amount of state information that a wireless router
+      has to keep for a flow should be minimized.
 
       Ingemar Johansson's suggestions on fast fading (which L4S handles)
       and dramatic drops in wireless accesses have been helpful to
@@ -908,8 +908,8 @@ Informative References
 
 Appendix A.  Network Attachment
 
-   A network attachment represents the communication link between hosts
-   (client) and network (router) over which a connection policy
+   A network attachment represents the communication link between
+   clients and network (router) over which a connection policy
    (including QoS) is applied to flows within that network attachment.
 
    A network attachment may be established using control plane signaling
@@ -921,7 +921,7 @@ Appendix A.  Network Attachment
 
    The requirements in Section 5 apply to data units like frames within
    a flow, but not between flows.  Specifically, this document does not
-   discuss flows of distinct hosts/users.
+   discuss flows of distinct clients/users.
 
    +--------------+          +-----------------+
    | +---+ +---+  |          | +-------------+ |
@@ -968,11 +968,11 @@ B.1.  Assisted Offload
    collection of people (e.g., parade, sporting event), or such as a
    partial radio network outage (e.g., tower power outage).  During such
    a condition, an alternative network attachment may be available to
-   the host (e.g., Wi-Fi).
+   the client (e.g., Wi-Fi).
 
-   Network-to-host signals are useful to put in place adequate traffic
-   distribution policies on the host (e.g., prefer the use of alternate
-   paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
+   Network-to-client signals are useful to put in place adequate traffic
+   distribution policies on the client (e.g., prefer the use of
+   alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
 B.2.  Network Bandwidth & Network Rate Limiting Policies
 
@@ -990,10 +990,10 @@ B.2.  Network Bandwidth & Network Rate Limiting Policies
 Requirements:
 
 REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+:  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
 
 REQ-NRLP:
-: The network shall inform the host of the Rate limiting policies
+: The network shall inform the endpoint of the Rate limiting policies
 
    Use cases:
 
@@ -1002,11 +1002,11 @@ REQ-NRLP:
        the content is accessed to using ABR.  Complementing or replacing
        these measurements with explicit signals will improve overall
        network performance and can help optimize the data transfer.
-       Signaling bandwidth availability allows hosts to avoid
+       Signaling bandwidth availability allows endpoints to avoid
        contributing to network congestion.  When the network informs the
-       host about available bandwidth, the host can dynamically adjust
-       its data transmission rate.  Knowing available bandwidth helps
-       the host allocate resources efficiently.  Cloud-based
+       endpoint about available bandwidth, the endpoint can dynamically
+       adjust its data transmission rate.  Knowing available bandwidth
+       helps the endpoint allocate resources efficiently.  Cloud-based
        applications can auto-scale based on available bandwidth.
 
    2.  Rate Limiting: Monthly data quotas on cellular networks can be
@@ -1038,7 +1038,7 @@ C.1.  Application Interference
    Applications that have access to a resource-quota information may
    adopt an aggressive behavior (compared to those that don't have
    access) if they assumed that a resource-quota like metadata is for
-   the application, not for the host that runs the applications.
+   the application, not for the client that runs the applications.
 
    This is challenging for home networks where multiple clients may be
    running behind the same CPE, with each of them running a video
@@ -1051,7 +1051,7 @@ Requirement:
 
 C.2.  Redundant Functions and Classification Complications
 
-   If distinct channels are used to share the metadata between a host
+   If distinct channels are used to share the metadata between a client
    and a network, a network that engages in the collaborative signaling
    approach will require sophisticated features to classify flows and
    decide which channel is used to share metadata so that it can consume
@@ -1085,7 +1085,8 @@ C.4.  Multiple Bottlenecks
    Whereas models often show a single bottleneck, there are frequently
    two (or more) bottlenecks: the ISP network and within the subscriber
    network (e.g., Wi-Fi link).  As such, all bottlenecks near the
-   subscriber should be able to benefit from network/host collaboration.
+   subscriber should be able to benefit from network/client
+   collaboration.
 
    Requirement:
 

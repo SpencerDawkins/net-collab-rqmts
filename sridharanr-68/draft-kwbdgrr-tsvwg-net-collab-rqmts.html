@@ -13,7 +13,7 @@
 <meta content="Mohamed Boucadair" name="author">
 <meta content="
        Wireless networks experience significant but transient variations in link quality that affect user experience. 
-       Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network. 
+       Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that the client and server are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network. 
        This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both client-to-network and server-to-network. The document focuses on intra-flow or flows bound to the same user. 
     " name="description">
 <meta content="xml2rfc 3.23.0" name="generator">
@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 14 March 2025</td>
+<td class="center">Expires 15 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-10" class="published">10 September 2024</time>
+<time datetime="2024-09-11" class="published">11 September 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-14">14 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-15">15 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1092,7 +1092,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">Wireless networks experience significant but transient variations in link quality that affect user experience.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that hosts are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">Collaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signalling may be enabled so that the client and server are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <p id="section-abstract-3">This document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both client-to-network and server-to-network. The document focuses on intra-flow or flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1127,7 +1127,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1688,7 +1688,7 @@ Requirement: REQ-CLIENT-DECIDES.
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-on-path-metadata-requiremen" class="section-name selfRef">On-path Metadata Requirements</a>
       </h2>
 <p id="section-5-1">There are various approaches for collaborative signaling between the server/client and network including out-of-band signaling, client-centric metadata sharing and proxied connections. The requirements here focus on proxied metadata connections on path with the data traffic.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>. Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client(host)-to-server encrypted payload.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">The path signals below should follow the principles of intentional distribution, protection of information, minimization and limiting impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>. Leveraging previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not need application identity, application cause (or 'reason'), server identity or the inspection of client-to-server encrypted payload.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The metadata connections may be between server and network (in either direction) or between client and network (in either direction).<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">Some use cases benefit from server – network metadata exchanges (<a href="#server-network" class="auto internal xref">Section 5.2</a>) and others need client involvement (<a href="#client-network" class="auto internal xref">Section 5.1</a>).<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.<a href="#section-5-5" class="pilcrow">¶</a></p>
@@ -1763,7 +1763,7 @@ This section focuses on operational constraints that impact  server–network, a
         <h3 id="name-policy-enforcement">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-policy-enforcement" class="section-name selfRef">Policy Enforcement</a>
         </h3>
-<p id="section-6.1-1">Some metadata requires the network to share some hints with a host to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">Some metadata requires the network to share some hints with the client/server to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.1-3">
 <pre>
@@ -1818,7 +1818,7 @@ Requirement:
 It should, however, be noted that media flows (e.g., encrypted video payloads in SRTP) exhibit a pattern of bursts and intervals that amounts to a signature and is vulnerable to frequency analysis.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">To avoid this kind of frequency analysis, media sent by the server would need to be scheduled or multiplexed differently to each user/recipient. This may be possible in transports like QUIC which allows flexibility in scheduling each stream. Transports like QUIC also fully encrypt the entire stream and, therefore, no media headers are observable on-path either. The security aspects of the media payload / transport are not in the scope of this document and is described here only to provide context for metadata privacy.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or completely dropping he packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames as unimportant, but such changes are detectable by the receiver.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<p id="section-6.3-4">It is recommended to encrypt or obfuscate the metadata information so it is only available to hosts and to authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst hosts and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-4">It is recommended to encrypt or obfuscate the metadata information so it is only available to the server, client and authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst client, server and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3-5">
 <pre>
 Requirements:
@@ -1922,7 +1922,7 @@ The principles outlined in <span>[<a href="#RFC8558" class="cite xref">RFC8558</
         <dd class="break"></dd>
 <dt id="section-10-3.5"></dt>
         <dd style="margin-left: 1.5em" id="section-10-3.6">
-          <p id="section-10-3.6.1">The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various host to network signaling when possible.
+          <p id="section-10-3.6.1">The authors appreciate input from Marcus Ilhar and Magnus Westerlund on the need to address privacy in general and Dan Druta to consider a common transport across various client/server to network signaling when possible.
 Ruediger Geib suggested that limiting the amount of state information that a wireless router has to keep for a flow should be minimized.<a href="#section-10-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -2034,10 +2034,10 @@ Thanks to Luis Miguel Contreras, Colin Kahn, Marcus Ilhar and Tianji Jiang for t
       <h2 id="name-network-attachment">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-network-attachment" class="section-name selfRef">Network Attachment</a>
       </h2>
-<p id="appendix-A-1">A network attachment represents the communication link between hosts (client) and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">A network attachment represents the communication link between clients and network (router) over which a connection policy (including QoS) is applied to flows within that network attachment.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">A network attachment may be established using control plane signaling between the client and the network (access) router and is out of scope of this document.
 Transport flows over a network attachment may consist of multiple streams such as video or audio. <a href="#Figure-conn-flow" class="auto internal xref">Figure 3</a> shows a high level view of network attachments, flows, and QoS/policy discussed in <a href="#metadata-req" class="auto internal xref">Section 5</a>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct hosts/users.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames within a flow, but not between flows. Specifically, this document does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <div id="Figure-conn-flow">
 <figure id="figure-3">
         <div id="appendix-A-4.1">
@@ -2156,8 +2156,8 @@ Transport flows over a network attachment may consist of multiple streams such a
         <h3 id="name-assisted-offload">
 <a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
         </h3>
-<p id="appendix-B.1-1">There are cases (crisis) where "normal" network resources cannot be used at maximum and, thus, a network would seek to reduce or offload some of the traffic during these events -- often called 'reactive traffic policy'. An example of such use case is cellular networks that are overly used (and radio resources exhausted) such as a large collection of people (e.g., parade, sporting event), or such as a partial radio network outage (e.g., tower power outage).  During such a condition, an alternative network attachment may be available to the host (e.g., Wi-Fi).<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-2">Network-to-host signals are useful to put in place adequate traffic distribution policies on the host (e.g., prefer the use of alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-B.1-1">There are cases (crisis) where "normal" network resources cannot be used at maximum and, thus, a network would seek to reduce or offload some of the traffic during these events -- often called 'reactive traffic policy'. An example of such use case is cellular networks that are overly used (and radio resources exhausted) such as a large collection of people (e.g., parade, sporting event), or such as a partial radio network outage (e.g., tower power outage).  During such a condition, an alternative network attachment may be available to the client (e.g., Wi-Fi).<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.1-2">Network-to-client signals are useful to put in place adequate traffic distribution policies on the client (e.g., prefer the use of alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="nrlp">
@@ -2172,16 +2172,16 @@ Transport flows over a network attachment may consist of multiple streams such a
 Requirements:
 
 REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested hosts, including changes to throughput.
+:  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
 
 REQ-NRLP:
-: The network shall inform the host of the Rate limiting policies
+: The network shall inform the endpoint of the Rate limiting policies
 </pre><a href="#appendix-B.2-3" class="pilcrow">¶</a>
 </div>
 <p id="appendix-B.2-4">Use cases:<a href="#appendix-B.2-4" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="appendix-B.2-5">
 <li id="appendix-B.2-5.1">
-            <p id="appendix-B.2-5.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows hosts to avoid contributing to network congestion. When the network informs the host about available bandwidth, the host can dynamically adjust its data transmission rate. Knowing available bandwidth helps the host allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.<a href="#appendix-B.2-5.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.2-5.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows endpoints to avoid contributing to network congestion. When the network informs the endpoint about available bandwidth, the endpoint can dynamically adjust its data transmission rate. Knowing available bandwidth helps the endpoint allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.<a href="#appendix-B.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="appendix-B.2-5.2">
             <p id="appendix-B.2-5.2.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#appendix-B.2-5.2.1" class="pilcrow">¶</a></p>
@@ -2216,7 +2216,7 @@ REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
         <h3 id="name-application-interference">
 <a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-application-interference" class="section-name selfRef">Application Interference</a>
         </h3>
-<p id="appendix-C.1-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the host that runs the applications.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the client that runs the applications.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-2">This is challenging for home networks where multiple clients may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.1-3">
 <pre>
@@ -2233,7 +2233,7 @@ Requirement:
         <h3 id="name-redundant-functions-and-cla">
 <a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-redundant-functions-and-cla" class="section-name selfRef">Redundant Functions and Classification Complications</a>
         </h3>
-<p id="appendix-C.2-1">If distinct channels are used to share the metadata between a host and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-1">If distinct channels are used to share the metadata between a client and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-2">Likewise, the network will require to implement redundant functions; for each signaling interface.<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-3"><em>As such, application- and protocol-specific signaling channels are suboptimal.</em> (REQ-SINGLE-CHANNEL)<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-4">
@@ -2264,7 +2264,7 @@ REQ-CONTINUITY:
         <h3 id="name-multiple-bottlenecks">
 <a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-multiple-bottlenecks" class="section-name selfRef">Multiple Bottlenecks</a>
         </h3>
-<p id="appendix-C.4-1">Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/host collaboration.<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-1">Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/client collaboration.<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.4-2">
 <pre>
 Requirement:
