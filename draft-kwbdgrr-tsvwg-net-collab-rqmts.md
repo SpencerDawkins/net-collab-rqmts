@@ -391,7 +391,23 @@ To avoid this kind of frequency analysis, media sent by the server would need to
 
 Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or completely dropping he packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames as unimportant, but such changes are detectable by the receiver.
 
-It is recommended to encrypt or obfuscate the metadata information so it is only available to the server, client and authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst client, server and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
+It is recommended to encrypt or obfuscate the metadata information so
+it is only available to the server, client and authorized network
+elements. The method of encryption or obfuscation is not described in
+this document but rather in other documents describing how this
+metadata is encoded and exchanged amongst client, server and network
+elements. The privacy implications of revealing metadata to network
+elements need to be thoroughly analyzed. This analysis should ensure
+that any exposure of metadata does not compromise user privacy or
+allow unauthorized entities to infer sensitive information about the
+data being transmitted while maintaining minimal resource
+consumption. There is a tension between resource consumption of such
+encryption and the user's privacy and this tension depends on the threat
+model; the threat of a network provider building a subscriber profile of viewed video content
+is different from the threat of an interactive voice or video call. To
+mitigate traffic analysis, the sender might purposefully mis-mark
+metadata in some packets.
+
 
     Requirements:
 
