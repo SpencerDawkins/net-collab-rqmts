@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-10T01:20:23.537911+00:00",
+  "timestamp": "2024-09-12T01:19:57.212069+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -3948,19 +3948,73 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-09-06T00:44:13Z",
-      "updatedAt": "2024-09-06T00:44:14Z",
+      "updatedAt": "2024-09-11T23:42:46Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "9ff0cf39a51c029f32947aed011d86b77b7d6766",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "68-consolidate-and-merge-use-cases-revise-h2n-sections",
-      "headRefOid": "16b5a9e8d0fc97de1ce4c9d5aff95ab290365388",
+      "headRefOid": "beb2ed93cee18f3aeaf1f466adc669a25dc3af8c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JB0hM",
+          "commit": {
+            "abbreviatedOid": "16b5a9e"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-11T23:38:43Z",
+          "updatedAt": "2024-09-11T23:38:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOL0HpzM57DuIE",
+      "title": "reworking the doc to make it more focused. Moving some parts to exten\u2026",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/70",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026ded section in the appendix",
+      "createdAt": "2024-09-10T21:06:19Z",
+      "updatedAt": "2024-09-11T23:38:00Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "68-consolidate-and-merge-use-cases-revise-h2n-sections",
+      "baseRefOid": "16b5a9e8d0fc97de1ce4c9d5aff95ab290365388",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr-68",
+      "headRefOid": "104888d1f59ee4cb895caa9fb923583e1f0d0b4a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JB0YE",
+          "commit": {
+            "abbreviatedOid": "104888d"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-11T23:38:00Z",
+          "updatedAt": "2024-09-11T23:38:00Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
