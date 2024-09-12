@@ -216,7 +216,7 @@ Examples: Packet Priority, Type of media frame
 
 # Use Cases {#uc}
 
-## Use Case Requirements Definition {#uc-requirements}
+Use Case Requirements Definition
 
 REQ-MEDIA-AV-SEPARATE:
 :  Audio can be prioritized differently than video. This is a per-flow metadata requirement.
@@ -339,9 +339,7 @@ Per-packet priority information provides the priority level of one packet relati
 
 Per-packet priority or importance determines the drop priority of a packet.
 
-    Requirements:
-
-    REQ-PACKET-PRIORITY: Defined in {{uc-requirements}}.
+    Requirements: REQ-PACKET-PRIORITY.
 
 ### Tolerance to Delay {#delay}
 
@@ -364,7 +362,7 @@ Some metadata requires the network to share some hints with the client/server to
 
 Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).
 
-    Requirement:  REQ-METADATA-ACCURACY.
+    Requirement: REQ-METADATA-ACCURACY.
 
 ## Exposure Handling {#exposure-handling}
 
