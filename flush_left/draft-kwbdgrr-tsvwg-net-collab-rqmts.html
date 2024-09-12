@@ -1567,41 +1567,25 @@ The key frames are therefore more critical to deliver to the receiver than delta
             <p id="section-4.1-3.1.1">Audio is more critical than video for many applications and should be prioritized differently than video.<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.1-4">
-<pre>
-Requirements: REQ-MEDIA-AV-SEPARATE.
-</pre><a href="#section-4.1-4" class="pilcrow">¶</a>
-</div>
+<p id="section-4.1-4">Requirement: REQ-MEDIA-AV-SEPARATE.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-5">
 <li id="section-4.1-5.1">
             <p id="section-4.1-5.1.1">The server (or relay) sends the same stream to many receivers, including the same metadata (especially with media over QUIC). A Client's need to differentiate priorities (e.g., video over audio or the other way around) is only achievable by signaling that priority inversion from the client to the ISP router (Audio is more critical for many applications but video takes priority in some cases).<a href="#section-4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.1-6">
-<pre>
-Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
-</pre><a href="#section-4.1-6" class="pilcrow">¶</a>
-</div>
+<p id="section-4.1-6">Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-7">
 <li id="section-4.1-7.1">
             <p id="section-4.1-7.1.1">Video contains partial frames and full frames, which need to be distinguished so that full frames can be indicated to the network.<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.1-8">
-<pre>
-Requirement: REQ-MEDIA-KEYFRAME.
-</pre><a href="#section-4.1-8" class="pilcrow">¶</a>
-</div>
+<p id="section-4.1-8">Requirement: REQ-MEDIA-KEYFRAME.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-9">
 <li id="section-4.1-9.1">
             <p id="section-4.1-9.1.1">In loss-prone networks or during reactive policy events, all packets being treated the same can have challenges in efficiently handling/forwarding data (retransmissions are expensive). There is no way to identify packets which can be dropped, with little impact to performance.<a href="#section-4.1-9.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.1-10">
-<pre>
-Requirement: REQ-PACKET-PRIORITY.
-</pre><a href="#section-4.1-10" class="pilcrow">¶</a>
-</div>
+<p id="section-4.1-10">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
 <p id="section-4.1-11">Examples: live broadcast, on-demand video streaming.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1617,51 +1601,31 @@ Requirement: REQ-PACKET-PRIORITY.
             <p id="section-4.2-3.1.1">A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.<a href="#section-4.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.2-4">
-<pre>
-Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
-</pre><a href="#section-4.2-4" class="pilcrow">¶</a>
-</div>
+<p id="section-4.2-4">Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.2-5">
 <li id="section-4.2-5.1">
             <p id="section-4.2-5.1.1">A remote desktop user prioritizes graphics updates over an on-going file copy operation.<a href="#section-4.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.2-6">
-<pre>
-Requirement: REQ-PACKET-PRIORITY.
-</pre><a href="#section-4.2-6" class="pilcrow">¶</a>
-</div>
+<p id="section-4.2-6">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.2-7">
 <li id="section-4.2-7.1">
             <p id="section-4.2-7.1.1">A user types in/interacts with a document/file after triggering a save file operation, while save operation is on-going.<a href="#section-4.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.2-8">
-<pre>
-Requirement: REQ-PACKET-PRIORITY.
-</pre><a href="#section-4.2-8" class="pilcrow">¶</a>
-</div>
+<p id="section-4.2-8">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.2-9">
 <li id="section-4.2-9.1">
             <p id="section-4.2-9.1.1">A game or VoIP application may want to signal different metadata for the same type of packet in each direction. One user, in a VoIP conference call, wants to prioritize the slide deck being shared while the other wants to prioritize audio and other wants to prioritize video of the speaker. Each user's varied preferences can be catered with same type of metadata originating from the server.<a href="#section-4.2-9.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.2-10">
-<pre>
-Requirement: REQ-PAYLOAD-CLIENT-DECIDES
-</pre><a href="#section-4.2-10" class="pilcrow">¶</a>
-</div>
+<p id="section-4.2-10">Requirement: REQ-PAYLOAD-CLIENT-DECIDES<a href="#section-4.2-10" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.2-11">
 <li id="section-4.2-11.1">
             <p id="section-4.2-11.1.1">A network glitch while user is in a eXtended Reality application. The traffic comprises of haptic, video, audio, graphics update and keystrokes. During such reactive event, some packets need to be deprioritized/dropped to maintain interactivity.<a href="#section-4.2-11.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<div class="alignLeft art-text artwork" id="section-4.2-12">
-<pre>
-Requirement: REQ-PACKET-PRIORITY.
-</pre><a href="#section-4.2-12" class="pilcrow">¶</a>
-</div>
+<p id="section-4.2-12">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-12" class="pilcrow">¶</a></p>
 <p id="section-4.2-13">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, Remote Desktop Virtualization, eXtended Reality (XR).<a href="#section-4.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1671,11 +1635,7 @@ Requirement: REQ-PACKET-PRIORITY.
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-honoring-of-metadata-for-se" class="section-name selfRef">Honoring of Metadata for Servers Behind a Gateway</a>
         </h3>
 <p id="section-4.3-1">In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.3-2">
-<pre>
-Requirement: REQ-CLIENT-DECIDES.
-</pre><a href="#section-4.3-2" class="pilcrow">¶</a>
-</div>
+<p id="section-4.3-2">Requirement: REQ-CLIENT-DECIDES.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1735,11 +1695,7 @@ Requirement: REQ-CLIENT-DECIDES.
           </h4>
 <p id="section-5.2.1-1">Per-packet priority information provides the priority level of one packet relative to other packets within a transport flow (UDP 4-tuple). When a packet is marked with high priority, the expectation is that the network will give high importance to forwarding the packet and when a packet is marked with lower priority, the network will drop the packet in the presence of severe congestion or limited bandwidth. The application server can decide on the priority or importance values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis. When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across the different streams of the flow.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">Per-packet priority or importance determines the drop priority of a packet.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.2.1-3">
-<pre>
-Requirements: REQ-PACKET-PRIORITY.
-</pre><a href="#section-5.2.1-3" class="pilcrow">¶</a>
-</div>
+<p id="section-5.2.1-3">Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delay">
@@ -1748,13 +1704,8 @@ Requirements: REQ-PACKET-PRIORITY.
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
           </h4>
 <p id="section-5.2.2-1">Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay). The objective of this metadata is to indicate that these packets can tolerate a limited amount of delay when there is severe congestion or limited bandwidth. Similar to the LE PHB <span>[<a href="#RFC8622" class="cite xref">RFC8622</a>]</span> for flows, the expectation is that in this case, each packet marked with this metadata is dropped only when there is excessive delay. As with per-packet priority in <a href="#relative-priority" class="auto internal xref">Section 5.2.1</a>, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.2.2-2">
-<pre>
-Requirements:
-
-REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
-</pre><a href="#section-5.2.2-2" class="pilcrow">¶</a>
-</div>
+<p id="section-5.2.2-2">Requirement:<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1776,11 +1727,7 @@ This section focuses on operational constraints that impact  server–network, a
         </h3>
 <p id="section-6.1-1">Some metadata requires the network to share some hints with the client/server to adjust its behavior for some specific flows. However, that metadata may have a dependency on the service offering that is subscribed by a user.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">Let us consider the example of a bitrate for an optimized video delivery. <em>Such bitrate may not be computed system-wide</em> given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.1-3">
-<pre>
-Requirement: REQ-METADATA-ACCURACY.
-</pre><a href="#section-6.1-3" class="pilcrow">¶</a>
-</div>
+<p id="section-6.1-3">Requirement: REQ-METADATA-ACCURACY.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="exposure-handling">
@@ -1830,11 +1777,7 @@ It should, however, be noted that media flows (e.g., encrypted video payloads in
 <p id="section-6.3-2">To avoid this kind of frequency analysis, media sent by the server would need to be scheduled or multiplexed differently to each user/recipient. This may be possible in transports like QUIC which allows flexibility in scheduling each stream. Transports like QUIC also fully encrypt the entire stream and, therefore, no media headers are observable on-path either. The security aspects of the media payload / transport are not in the scope of this document and is described here only to provide context for metadata privacy.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">Some metadata (e.g., the size of a burst of packets, sequence number, and timestamp) can be readily observed or inferred by entities along the network path. However, it is essential to recognize that while sequence numbers and timestamps are typically visible in the clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are not directly observable in encrypted protocols such as QUIC. All metadata sent from the server to the network, including these elements and others, are vulnerable to modification while in transit. Only an on-path attacker can modify on-path metadata. Such an attacker could engage in other malicious activities, like corrupting the checksum or completely dropping he packet. For instance, an active attacker could alter the metadata to mislabel packets containing video key-frames as unimportant, but such changes are detectable by the receiver.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">It is recommended to encrypt or obfuscate the metadata information so it is only available to the server, client and authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst client, server and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-5">
-<pre>
-Requirements:
-</pre><a href="#section-6.3-5" class="pilcrow">¶</a>
-</div>
+<p id="section-6.3-5">Requirements:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.3-6">
           <dt id="section-6.3-6.1">REQ-PRIVACY-ADDITIONAL:</dt>
           <dd style="margin-left: 1.5em" id="section-6.3-6.2">
@@ -1844,14 +1787,20 @@ Requirements:
 <dt id="section-6.3-6.3">REQ-SIGNALING-AVOIDANCE:</dt>
           <dd style="margin-left: 1.5em" id="section-6.3-6.4">
             <p id="section-6.3-6.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the folliwing is not required to make use of the collaborative signaling:<a href="#section-6.3-6.4.1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-6.4.2">
-<pre>
- * Reveal the application identity.
- * Expose the application cause (or 'reason') to signal metadata.
- * Reveal server identity.
- * Inspect client-to-server encrypted payload by network elements.
-</pre><a href="#section-6.3-6.4.2" class="pilcrow">¶</a>
-</div>
+<ul class="normal">
+<li class="normal" id="section-6.3-6.4.2.1">
+                <p id="section-6.3-6.4.2.1.1">Reveal the application identity.<a href="#section-6.3-6.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3-6.4.2.2">
+                <p id="section-6.3-6.4.2.2.1">Expose the application cause (or 'reason') to signal metadata.<a href="#section-6.3-6.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3-6.4.2.3">
+                <p id="section-6.3-6.4.2.3.1">Reveal server identity.<a href="#section-6.3-6.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3-6.4.2.4">
+                <p id="section-6.3-6.4.2.4.1">Inspect client-to-server encrypted payload by network elements.<a href="#section-6.3-6.4.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1863,11 +1812,7 @@ Requirements:
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
         </h3>
 <p id="section-6.4-1">There may be a large number of media flows handled by the server and wireless/access router. Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases. The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.4-2">
-<pre>
-Requirement:
-</pre><a href="#section-6.4-2" class="pilcrow">¶</a>
-</div>
+<p id="section-6.4-2">Requirement:<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.4-3">
           <dt id="section-6.4-3.1">REQ-ISP-SCALE:</dt>
           <dd style="margin-left: 1.5em" id="section-6.4-3.2">
@@ -1884,11 +1829,7 @@ Requirement:
         </h3>
 <p id="section-6.5-1">It is important that not every flow be prioritized; otherwise, the network devolves into the best-effort network that existed prior to metadata signaling. It is a requirement that mechanisms exist to prevent this occurrence.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.5-2">Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.5-3">
-<pre>
-Requirements:
-</pre><a href="#section-6.5-3" class="pilcrow">¶</a>
-</div>
+<p id="section-6.5-3">Requirements:<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.5-4">
           <dt id="section-6.5-4.1">REQ-SIGNAL-VALIDATION:</dt>
           <dd style="margin-left: 1.5em" id="section-6.5-4.2">
@@ -2201,11 +2142,7 @@ Transport flows over a network attachment may consist of multiple streams such a
         </h3>
 <p id="appendix-B.2-1">Bandwidth constraints exist most predominantly at the access network. This can be constraints in the network itself or a result of rate limiting due to various reasons.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
 <p id="appendix-B.2-2">Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).<a href="#appendix-B.2-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-B.2-3">
-<pre>
-Requirements:
-</pre><a href="#appendix-B.2-3" class="pilcrow">¶</a>
-</div>
+<p id="appendix-B.2-3">Requirements:<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="appendix-B.2-4">
           <dt id="appendix-B.2-4.1">REQ-NETWORK-THROUGHPUT:</dt>
           <dd style="margin-left: 1.5em" id="appendix-B.2-4.2">
