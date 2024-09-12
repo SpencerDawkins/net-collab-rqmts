@@ -243,19 +243,19 @@ Use cases:
 
   1. Audio is more critical than video for many applications and should be prioritized differently than video.
 
-    Requirements: REQ-MEDIA-AV-SEPARATE.
+Requirement: REQ-MEDIA-AV-SEPARATE.
 
   2. The server (or relay) sends the same stream to many receivers, including the same metadata (especially with media over QUIC). A Client's need to differentiate priorities (e.g., video over audio or the other way around) is only achievable by signaling that priority inversion from the client to the ISP router (Audio is more critical for many applications but video takes priority in some cases).
 
-    Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
   3. Video contains partial frames and full frames, which need to be distinguished so that full frames can be indicated to the network.
 
-    Requirement: REQ-MEDIA-KEYFRAME.
+Requirement: REQ-MEDIA-KEYFRAME.
 
   4. In loss-prone networks or during reactive policy events, all packets being treated the same can have challenges in efficiently handling/forwarding data (retransmissions are expensive). There is no way to identify packets which can be dropped, with little impact to performance.
 
-    Requirement: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
 Examples: live broadcast, on-demand video streaming.
 
@@ -268,23 +268,23 @@ Use cases:
 
   1. A mobile/roaming user prioritizes audio over video during a VoIP call to have a seamless meeting experience.
 
-    Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
   2. A remote desktop user prioritizes graphics updates over an on-going file copy operation.
 
-    Requirement: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
   3. A user types in/interacts with a document/file after triggering a save file operation, while save operation is on-going.
 
-    Requirement: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
   4. A game or VoIP application may want to signal different metadata for the same type of packet in each direction. One user, in a VoIP conference call, wants to prioritize the slide deck being shared while the other wants to prioritize audio and other wants to prioritize video of the speaker. Each user's varied preferences can be catered with same type of metadata originating from the server.
 
-    Requirement: REQ-PAYLOAD-CLIENT-DECIDES
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES
 
   5. A network glitch while user is in a eXtended Reality application. The traffic comprises of haptic, video, audio, graphics update and keystrokes. During such reactive event, some packets need to be deprioritized/dropped to maintain interactivity.
 
-    Requirement: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
 Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, Remote Desktop Virtualization, eXtended Reality (XR).
 
@@ -292,7 +292,7 @@ Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming, Remote Desktop 
 
 In enterprise networks and remote desktop use case, a server can host multiple connections with varying type of traffic. These servers are often exposed to the Internet through some sort of a gateway-proxy and the signaling (like DSCP bits) from these servers are often ignored by the access/transit networks.
 
-    Requirement: REQ-CLIENT-DECIDES.
+Requirement: REQ-CLIENT-DECIDES.
 
 
 # On-path Metadata Requirements {#metadata-req}
@@ -339,15 +339,15 @@ Per-packet priority information provides the priority level of one packet relati
 
 Per-packet priority or importance determines the drop priority of a packet.
 
-    Requirements: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
 ### Tolerance to Delay {#delay}
 
 Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay). The objective of this metadata is to indicate that these packets can tolerate a limited amount of delay when there is severe congestion or limited bandwidth. Similar to the LE PHB {{?RFC8622}} for flows, the expectation is that in this case, each packet marked with this metadata is dropped only when there is excessive delay. As with per-packet priority in {{relative-priority}}, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.
 
-    Requirements:
+Requirement:
 
-    REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
+REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
 # Operational Considerations {#operational}
 
@@ -362,7 +362,7 @@ Some metadata requires the network to share some hints with the client/server to
 
 Let us consider the example of a bitrate for an optimized video delivery. *Such bitrate may not be computed system-wide* given that flows from users with distinct service offerings (and connectivity SLOs) may be serviced by the same network nodes. Instead, the network needs to dynamically adjust the bitrate based on each user's service package and connectivity SLOs to ensure optimal delivery for all users (REQ-METADATA-ACCURACY).
 
-    Requirement: REQ-METADATA-ACCURACY.
+Requirement: REQ-METADATA-ACCURACY.
 
 ## Exposure Handling {#exposure-handling}
 
@@ -393,7 +393,7 @@ Some metadata (e.g., the size of a burst of packets, sequence number, and timest
 
 It is recommended to encrypt or obfuscate the metadata information so it is only available to the server, client and authorized network elements. The method of encryption or obfuscation is not described in this document but rather in other documents describing how this metadata is encoded and exchanged amongst client, server and network elements. The privacy implications of revealing metadata to network elements need to be thoroughly analyzed. This analysis should ensure that any exposure of metadata does not compromise user privacy or allow unauthorized entities to infer sensitive information about the data being transmitted while maintaining minimal resource consumption.
 
-    Requirements:
+Requirements:
 
 REQ-PRIVACY-ADDITIONAL:
 : An on-path observer obtains no additional information about the IP packet.
@@ -401,16 +401,16 @@ REQ-PRIVACY-ADDITIONAL:
 REQ-SIGNALING-AVOIDANCE:
 : Leveraging previous experience {{?RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
 
-       * Reveal the application identity.
-       * Expose the application cause (or 'reason') to signal metadata.
-       * Reveal server identity.
-       * Inspect client-to-server encrypted payload by network elements.
+  * Reveal the application identity.
+  * Expose the application cause (or 'reason') to signal metadata.
+  * Reveal server identity.
+  * Inspect client-to-server encrypted payload by network elements.
 
 ## Scalability {#scalability}
 
 There may be a large number of media flows handled by the server and wireless/access router. Per flow information (state) at a wireless router for optimizing the flow can negate the advantages offered as the number of flows handled increases. The metadata and other state information that a router has to maintain for each additional media flow it handles should be kept to a minimum or eliminated altogether.
 
-    Requirement:
+Requirement:
 
 REQ-ISP-SCALE:
 : The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
@@ -421,7 +421,7 @@ It is important that not every flow be prioritized; otherwise, the network devol
 
 Such a mechanism might be simple, for example, a cellular network might allow one flow from a subscriber to declare itself as important; other flows with that subscriber are denied attempts to prioritize themselves. However, the network cannot identify whether the prioritized flow is legitimate or malicious.
 
-    Requirements:
+Requirements:
 
 REQ-SIGNAL-VALIDATION:
 : The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
@@ -517,7 +517,7 @@ Bandwidth constraints exist most predominantly at the access network. This can b
 
 Also, traffic exchanged over a network attachment may be subject to rate-limit policies. These policies may be intentional policies (e.g., enforced as part of the activation of the network attachment and typically agreed upon service subscription) or be reactive policies (e.g., enforced temporarily to manage an overload or during a DDoS attack mitigation).
 
-    Requirements:
+Requirements:
 
 REQ-NETWORK-THROUGHPUT:
 :  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
