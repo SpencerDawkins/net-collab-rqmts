@@ -377,10 +377,10 @@ There might be many channels to signal the metadata such as (non-exhaustive list
    * QUIC CID mapping
    * ICMP messages
 
-    Requirement:
+Requirement:
 
-      REQ-API-FRAMEWORK:
-      : API framework to facilitate signaling for applications.
+REQ-API-FRAMEWORK:
+: API framework to facilitate signaling for applications.
 
 ## Privacy Considerations {#privacy}
 
@@ -395,11 +395,11 @@ It is recommended to encrypt or obfuscate the metadata information so it is only
 
     Requirements:
 
-    REQ-PRIVACY-ADDITIONAL:
-    : An on-path observer obtains no additional information about the IP packet.
+REQ-PRIVACY-ADDITIONAL:
+: An on-path observer obtains no additional information about the IP packet.
 
-    REQ-SIGNALING-AVOIDANCE:
-    : Leveraging previous experience {{?RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
+REQ-SIGNALING-AVOIDANCE:
+: Leveraging previous experience {{?RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
 
        * Reveal the application identity.
        * Expose the application cause (or 'reason') to signal metadata.
@@ -412,8 +412,8 @@ There may be a large number of media flows handled by the server and wireless/ac
 
     Requirement:
 
-    REQ-ISP-SCALE:
-    : The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
+REQ-ISP-SCALE:
+: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
 
 ## Abuse and Constraints {#abuse}
 
@@ -423,11 +423,11 @@ Such a mechanism might be simple, for example, a cellular network might allow on
 
     Requirements:
 
-    REQ-SIGNAL-VALIDATION:
-    : The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
+REQ-SIGNAL-VALIDATION:
+: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
 
-    REQ-CLIENT-VALIDATION:
-    : The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
+REQ-CLIENT-VALIDATION:
+: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
 
 # Non-Requirements {#non-req}
 
@@ -519,11 +519,11 @@ Also, traffic exchanged over a network attachment may be subject to rate-limit p
 
     Requirements:
 
-    REQ-NETWORK-THROUGHPUT:
-    :  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
+REQ-NETWORK-THROUGHPUT:
+:  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
 
-    REQ-NRLP:
-    : The network shall inform the endpoint of the Rate limiting policies
+REQ-NRLP:
+: The network shall inform the endpoint of the Rate limiting policies
 
 Use cases:
 
@@ -540,10 +540,10 @@ Applications that have access to a resource-quota information may adopt an aggre
 
 This is challenging for home networks where multiple clients may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.
 
-    Requirement:
+Requirement:
 
-      REQ-SIGNAL-EXPOSURE-FAIRNESS:
-      : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
+REQ-SIGNAL-EXPOSURE-FAIRNESS:
+: Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
 
 ## Redundant Functions and Classification Complications {#classification}
 
@@ -553,24 +553,24 @@ Likewise, the network will require to implement redundant functions; for each si
 
 *As such, application- and protocol-specific signaling channels are suboptimal.* (REQ-SINGLE-CHANNEL)
 
-    Requirement:  REQ-SINGLE-CHANNEL is preferred.
+Requirement:  REQ-SINGLE-CHANNEL is preferred.
 
 ## Session Continuity {#continuity}
 
 The general trend in wireless networks is to deploy the wireless router closer to the user. This can help with low link latency but can result in more frequent handovers as the user moves between routers. The frequency of handovers increases when a user moves faster or when the media session lasts longer. During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.
 
-    Requirement:
+Requirement:
 
-    REQ-CONTINUITY:
-    : Handover from one radio or router to another should continue to provide same service level.
+REQ-CONTINUITY:
+: Handover from one radio or router to another should continue to provide same service level.
 
 ## Multiple Bottlenecks
 
 Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/client collaboration.
 
-    Requirement:
+Requirement:
 
-      REQ-MULTIPLE-BOTTLENECKS should be supported.
+REQ-MULTIPLE-BOTTLENECKS should be supported.
 
 ## Metadata Scope {#metadata-scope}
 
@@ -582,7 +582,7 @@ Most importantly, the metadata can be used by the network to prioritize traffic 
 
 It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.
 
-    Requirement:
+Requirement:
 
-      REQ-SCOPED-METADATA:
-      : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
+REQ-SCOPED-METADATA:
+: Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
