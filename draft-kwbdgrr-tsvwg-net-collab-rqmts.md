@@ -173,16 +173,16 @@ In this document, this is termed 'reactive policy'.
 ~~~~~~~~
 {: #Figure-netshaper title=”Metadata and Network Shaping”}
 
-{{Figure-netshaper}} shows a bottleneck (access) Router on the path of packets from Server to Client.
-A network shaper in the Router manages QoS of flows of multiple users and can buffer (delay), discard or apply other flow control rules. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
+{{Figure-netshaper}} shows a bottleneck (access) router on the path of packets from Server to Client.
+A network shaper in the router manages QoS of flows of multiple users and can buffer (delay), discard, or apply other flow control rules. Application layer signaling and feedback between Client – Server (A – in the figure) adjust transmission rate over a period of several RTTs using feedback and congestion control algorithms.
 Congestion control algorithms are generally conservative and settle to a steady rate that avoids excessive packet loss.
 In networks where link conditions (between Client and Router) vary significantly at timescales well below the RTT, this results in unused (wasted) bandwidth at short timescales.
 There is some research {{5G-Octopus}} to indicate that media applications can obtain better QoE when sending at a higher rate (less conservative than current CCA) and the media application is willing to tolerate some packet loss or delay of low priority packets.
 Packet priority and tolerance to delay of packets in such a case would be provided on-path in a side channel associated to the downstream packet (B – in figure).
 The requirements for this server-to-network (S2N) metadata are described in {{server-network}}.
-Network shapers observe flows and apply policies to maximize performance but is not aware if there is a preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU session. See {{net-attach}} for more details).
-The client can provide the (access) Router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in figure).
-The client may also provide information to the (access) Router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment.
+Network shapers observe flows and apply policies to maximize performance but are not aware whether  there is a high preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU Session. See {{net-attach}} for more details).
+Clients may provide an (access) router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in Figure).
+Clients may also provide information to an (access) router to drop, when resources are congested,  'lower priority'-marked packets of a flow (UDP 4-tuple) temporarily which can in turn allocate bandwidth to other flows of that same network attachment.
 
 In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. {{uc}} outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.
 
@@ -212,7 +212,7 @@ Traffic shaping:
 
 ## Streaming and Interactive Media {#uc-media}
 
-Streaming media packets carry audio or video between server and client.
+Streaming media packets carry audio or video between servers and clients.
 Video packets carry the occasional key frame ("I-frame") containing a full video frame.
 These frames are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
@@ -230,13 +230,13 @@ Even when the media payload is not encrypted, the network has no means to distin
 
 Requirements:
 
-REQ-PACKET-PRIORITY: Packet priority relative to other packets in the transport flow (UDP 4-tuple).
-REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
+REQ-PACKET-PRIORITY: Packet priority relative to other packets within the same transport flow (UDP 4-tuple).
+REQ-PACKET-DELAY: Metadata to indicate whether a packet can tolerate delay.
 
 ## Mixed-Traffic and User Preferences {#uc-preferences}
 
 Some content is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience.
-For example, an on-going file copy operation flow (UDP 4-tuple) a remote desktop user can tolerate more delay than the flow carrying graphics updates.
+For example, an on-going file copy operation flow (UDP 4-tuple) of a remote desktop user can tolerate more delay than the flow carrying graphics updates.
 Or, a user application flow downloading software updates in the background can tolerate more delay than a foreground application flow.
 
 This applies only when data is sent in different flows (UDP 4-tuples) that belong to the same network attachment (see {{net-attach}} for details).
