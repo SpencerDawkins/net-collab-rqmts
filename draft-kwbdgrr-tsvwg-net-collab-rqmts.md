@@ -307,7 +307,7 @@ Some use cases benefit from server – network metadata exchanges ({{server-netw
 
 For the requirements that follow, the assumption is that the client agrees to the exchange of metadata between the server and network, or between the client and network.
 
-## client-Network Metadata {#client-network}
+## Client-Network Metadata {#client-network}
 
 ### Priority between Flows (Inter-flow) {#interflow-priority}
 
@@ -335,7 +335,7 @@ Previous work in {{TR.23.700-70-3GPP}} has identified the general problem in thi
 
 ### Packet Priority {#relative-priority}
 
-Per-packet priority information provides the priority level of one packet relative to other packets within a transport flow (UDP 4-tuple). The application server can decide on the priority or importance values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis. When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across the different streams of the flow.
+Per-packet priority information provides the priority level of one packet relative to other packets within a transport flow (UDP 4-tuple). When a packet is marked with high priority, the expectation is that the network will give high importance to forwarding the packet and when a packet is marked with lower priority, the network will drop the packet in the presence of severe congestion or limited bandwidth. The application server can decide on the priority or importance values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact priority values that allow an on-path observer to perform traffic analysis. When more than one application stream (e.g., video, audio) is sent on the same transport flow, the application server decides the best allocation of priority values across the different streams of the flow.
 
 Per-packet priority or importance determines the drop priority of a packet.
 
@@ -343,6 +343,13 @@ Per-packet priority or importance determines the drop priority of a packet.
 
     REQ-PACKET-PRIORITY: Defined in {{uc-requirements}}.
 
+### Tolerance to Delay {#delay}
+
+Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay). The objective of this metadata is to indicate that these packets can tolerate a limited amount of delay when there is severe congestion or limited bandwidth. Similar to the LE PHB {{RFC8622}} for flows, the expectation is that in this case, each packet marked with this metadata is dropped only when there is excessive delay. As with per-packet priority in {{relative-priority}}, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.
+
+    Requirements:
+
+    REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
 # Operational Considerations {#operational}
 
@@ -526,13 +533,6 @@ Use cases:
 
   2. Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.
 
-## Tolerance to Delay {#delay}
-
-Some packets of a media flow (UDP 4-tuple) can tolerate more delay over the wire than others (e.g., packets carrying live media frames require very low latency while packets carrying a background image for augmented reality can tolerate more delay). As with per-packet priority in {{relative-priority}}, the application server can decide on the metadata values that provide the best handling for the packets of the transport flow and may not necessarily reflect the exact delay tolerance values that allow an on-path observer to perform traffic analysis.
-
-    Requirements:
-
-    REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
 # Extended Operational Considerations
 
