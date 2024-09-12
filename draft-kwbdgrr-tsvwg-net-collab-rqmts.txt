@@ -668,8 +668,8 @@ REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
 
    Requirement:
 
-     REQ-API-FRAMEWORK:
-     : API framework to facilitate signaling for applications.
+   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
+      applications.
 
 6.3.  Privacy Considerations
 
@@ -716,18 +716,19 @@ REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
    data being transmitted while maintaining minimal resource
    consumption.
 
-Requirements:
+   Requirements:
 
-REQ-PRIVACY-ADDITIONAL:
-: An on-path observer obtains no additional information about the IP packet.
+   REQ-PRIVACY-ADDITIONAL:  An on-path observer obtains no additional
+      information about the IP packet.
 
-REQ-SIGNALING-AVOIDANCE:
-: Leveraging previous experience {{RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
+   REQ-SIGNALING-AVOIDANCE:  Leveraging previous experience [RFC9049],
+      the folliwing is not required to make use of the collaborative
+      signaling:
 
-   * Reveal the application identity.
-   * Expose the application cause (or 'reason') to signal metadata.
-   * Reveal server identity.
-   * Inspect client-to-server encrypted payload by network elements.
+       * Reveal the application identity.
+       * Expose the application cause (or 'reason') to signal metadata.
+       * Reveal server identity.
+       * Inspect client-to-server encrypted payload by network elements.
 
 6.4.  Scalability
 
@@ -738,10 +739,11 @@ REQ-SIGNALING-AVOIDANCE:
    information that a router has to maintain for each additional media
    flow it handles should be kept to a minimum or eliminated altogether.
 
-Requirement:
+   Requirement:
 
-REQ-ISP-SCALE:
-: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
+   REQ-ISP-SCALE:  The metadata other state information that a wireless
+      router has to maintain for each additional media flow it handles
+      should be very low or none.
 
 6.5.  Abuse and Constraints
 
@@ -756,13 +758,18 @@ REQ-ISP-SCALE:
    prioritize themselves.  However, the network cannot identify whether
    the prioritized flow is legitimate or malicious.
 
-Requirements:
+   Requirements:
 
-REQ-SIGNAL-VALIDATION:
-: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
+   REQ-SIGNAL-VALIDATION:  The network/OS needs to ensure that the user/
+      client signaling of priority (if any) does not associate the same
+      priority level with all traffic types within the same flow,
+      thereby avoiding prioritizing of all the streams/traffic the same
+      way.
 
-REQ-CLIENT-VALIDATION:
-: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
+   REQ-CLIENT-VALIDATION:  The network needs to ensure the signal is
+      coming from the same user/client that is part of the 5-tuple flow.
+      This is to ensure no other application influences the priority of
+      another application's flow.
 
 7.  Non-Requirements
 
@@ -1021,13 +1028,13 @@ B.2.  Network Bandwidth & Network Rate Limiting Policies
    policies (e.g., enforced temporarily to manage an overload or during
    a DDoS attack mitigation).
 
-Requirements:
+   Requirements:
 
-REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
+   REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network
+      throughput to interested clients, including changes to throughput.
 
-REQ-NRLP:
-: The network shall inform the endpoint of the Rate limiting policies
+   REQ-NRLP:  The network shall inform the endpoint of the Rate limiting
+      policies
 
    Use cases:
 
@@ -1062,10 +1069,11 @@ C.1.  Application Interference
    running behind the same CPE, with each of them running a video
    application.  The same challenge may apply when tethering is enabled.
 
-Requirement:
+   Requirement:
 
-  REQ-SIGNAL-EXPOSURE-FAIRNESS:
-  : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
+   REQ-SIGNAL-EXPOSURE-FAIRNESS:  Means to expose the signal independent
+      of the application should be considered.  An example of such
+      exposure is OS APIs.
 
 C.2.  Redundant Functions and Classification Complications
 
@@ -1081,7 +1089,7 @@ C.2.  Redundant Functions and Classification Complications
    _As such, application- and protocol-specific signaling channels are
    suboptimal._ (REQ-SINGLE-CHANNEL)
 
-   Requirement:  REQ-SINGLE-CHANNEL is preferred.
+   Requirement: REQ-SINGLE-CHANNEL is preferred.
 
 C.3.  Session Continuity
 
@@ -1093,10 +1101,10 @@ C.3.  Session Continuity
    there should be minimal delay incurred during handover in
    configuring/setting up the metadata of a media session in progress.
 
-Requirement:
+   Requirement:
 
-REQ-CONTINUITY:
-: Handover from one radio or router to another should continue to provide same service level.
+   REQ-CONTINUITY:  Handover from one radio or router to another should
+      continue to provide same service level.
 
 C.4.  Multiple Bottlenecks
 
@@ -1108,7 +1116,7 @@ C.4.  Multiple Bottlenecks
 
    Requirement:
 
-     REQ-MULTIPLE-BOTTLENECKS should be supported.
+   REQ-MULTIPLE-BOTTLENECKS should be supported.
 
 C.5.  Metadata Scope
 
@@ -1132,10 +1140,11 @@ C.5.  Metadata Scope
    PDU Sessions) where network attachments with Guaranteed Bit Rate
    (GBR) for specific flows is provided.
 
-Requirement:
+   Requirement:
 
-  REQ-SCOPED-METADATA:
-  : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
+   REQ-SCOPED-METADATA:  Means to characterize the scope of a shared
+      metadata for the sake of better interoperability should be
+      supported.
 
 Authors' Addresses
 

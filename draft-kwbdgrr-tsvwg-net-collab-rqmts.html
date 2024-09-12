@@ -1810,14 +1810,14 @@ Requirement: REQ-METADATA-ACCURACY.
             <p id="section-6.2-3.6.1">ICMP messages<a href="#section-6.2-3.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<div class="alignLeft art-text artwork" id="section-6.2-4">
-<pre>
-Requirement:
-
-  REQ-API-FRAMEWORK:
-  : API framework to facilitate signaling for applications.
-</pre><a href="#section-6.2-4" class="pilcrow">¶</a>
-</div>
+<p id="section-6.2-4">Requirement:<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-6.2-5">
+          <dt id="section-6.2-5.1">REQ-API-FRAMEWORK:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.2-5.2">
+            <p id="section-6.2-5.2.1">API framework to facilitate signaling for applications.<a href="#section-6.2-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="privacy">
@@ -1833,19 +1833,28 @@ It should, however, be noted that media flows (e.g., encrypted video payloads in
 <div class="alignLeft art-text artwork" id="section-6.3-5">
 <pre>
 Requirements:
-
-REQ-PRIVACY-ADDITIONAL:
-: An on-path observer obtains no additional information about the IP packet.
-
-REQ-SIGNALING-AVOIDANCE:
-: Leveraging previous experience {{RFC9049}}, the folliwing is not required to make use of the collaborative signaling:
-
-   * Reveal the application identity.
-   * Expose the application cause (or 'reason') to signal metadata.
-   * Reveal server identity.
-   * Inspect client-to-server encrypted payload by network elements.
 </pre><a href="#section-6.3-5" class="pilcrow">¶</a>
 </div>
+<span class="break"></span><dl class="dlParallel" id="section-6.3-6">
+          <dt id="section-6.3-6.1">REQ-PRIVACY-ADDITIONAL:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.3-6.2">
+            <p id="section-6.3-6.2.1">An on-path observer obtains no additional information about the IP packet.<a href="#section-6.3-6.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.3-6.3">REQ-SIGNALING-AVOIDANCE:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.3-6.4">
+            <p id="section-6.3-6.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the folliwing is not required to make use of the collaborative signaling:<a href="#section-6.3-6.4.1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-6.4.2">
+<pre>
+ * Reveal the application identity.
+ * Expose the application cause (or 'reason') to signal metadata.
+ * Reveal server identity.
+ * Inspect client-to-server encrypted payload by network elements.
+</pre><a href="#section-6.3-6.4.2" class="pilcrow">¶</a>
+</div>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="scalability">
@@ -1857,11 +1866,15 @@ REQ-SIGNALING-AVOIDANCE:
 <div class="alignLeft art-text artwork" id="section-6.4-2">
 <pre>
 Requirement:
-
-REQ-ISP-SCALE:
-: The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.
 </pre><a href="#section-6.4-2" class="pilcrow">¶</a>
 </div>
+<span class="break"></span><dl class="dlParallel" id="section-6.4-3">
+          <dt id="section-6.4-3.1">REQ-ISP-SCALE:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.4-3.2">
+            <p id="section-6.4-3.2.1">The metadata other state information that a wireless router has to maintain for each additional media flow it handles should be very low or none.<a href="#section-6.4-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="abuse">
@@ -1874,14 +1887,20 @@ REQ-ISP-SCALE:
 <div class="alignLeft art-text artwork" id="section-6.5-3">
 <pre>
 Requirements:
-
-REQ-SIGNAL-VALIDATION:
-: The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.
-
-REQ-CLIENT-VALIDATION:
-: The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.
 </pre><a href="#section-6.5-3" class="pilcrow">¶</a>
 </div>
+<span class="break"></span><dl class="dlParallel" id="section-6.5-4">
+          <dt id="section-6.5-4.1">REQ-SIGNAL-VALIDATION:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.5-4.2">
+            <p id="section-6.5-4.2.1">The network/OS needs to ensure that the user/client signaling of priority (if any) does not associate the same priority level with all traffic types within the same flow, thereby avoiding prioritizing of all the streams/traffic the same way.<a href="#section-6.5-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.5-4.3">REQ-CLIENT-VALIDATION:</dt>
+          <dd style="margin-left: 1.5em" id="section-6.5-4.4">
+            <p id="section-6.5-4.4.1">The network needs to ensure the signal is coming from the same user/client that is part of the 5-tuple flow. This is to ensure no other application influences the priority of another application's flow.<a href="#section-6.5-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 </section>
@@ -2185,21 +2204,27 @@ Transport flows over a network attachment may consist of multiple streams such a
 <div class="alignLeft art-text artwork" id="appendix-B.2-3">
 <pre>
 Requirements:
-
-REQ-NETWORK-THROUGHPUT:
-:  A mechanism to signal the available network throughput to interested clients, including changes to throughput.
-
-REQ-NRLP:
-: The network shall inform the endpoint of the Rate limiting policies
 </pre><a href="#appendix-B.2-3" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B.2-4">Use cases:<a href="#appendix-B.2-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.2-5">
-<li id="appendix-B.2-5.1">
-            <p id="appendix-B.2-5.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows endpoints to avoid contributing to network congestion. When the network informs the endpoint about available bandwidth, the endpoint can dynamically adjust its data transmission rate. Knowing available bandwidth helps the endpoint allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.<a href="#appendix-B.2-5.1.1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-B.2-4">
+          <dt id="appendix-B.2-4.1">REQ-NETWORK-THROUGHPUT:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-B.2-4.2">
+            <p id="appendix-B.2-4.2.1">A mechanism to signal the available network throughput to interested clients, including changes to throughput.<a href="#appendix-B.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="appendix-B.2-4.3">REQ-NRLP:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-B.2-4.4">
+            <p id="appendix-B.2-4.4.1">The network shall inform the endpoint of the Rate limiting policies<a href="#appendix-B.2-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="appendix-B.2-5">Use cases:<a href="#appendix-B.2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-B.2-6">
+<li id="appendix-B.2-6.1">
+            <p id="appendix-B.2-6.1.1">Performance Optimization: Some applications support some forms of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed how the content is accessed to using ABR. Complementing or replacing these measurements with explicit signals will improve overall network performance and can help optimize the data transfer. Signaling bandwidth availability allows endpoints to avoid contributing to network congestion. When the network informs the endpoint about available bandwidth, the endpoint can dynamically adjust its data transmission rate. Knowing available bandwidth helps the endpoint allocate resources efficiently. Cloud-based applications can auto-scale based on available bandwidth.<a href="#appendix-B.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="appendix-B.2-5.2">
-            <p id="appendix-B.2-5.2.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#appendix-B.2-5.2.1" class="pilcrow">¶</a></p>
+          <li id="appendix-B.2-6.2">
+            <p id="appendix-B.2-6.2.1">Rate Limiting: Monthly data quotas on cellular networks can be easily exceeded by video streaming, in particular, if the client chooses excessively high quality or routinely abandons watching videos that were downloaded. The network can assist the client by informing the client of the network's bandwidth policy.<a href="#appendix-B.2-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
@@ -2218,14 +2243,14 @@ REQ-NRLP:
         </h3>
 <p id="appendix-C.1-1">Applications that have access to a resource-quota information may adopt an aggressive behavior (compared to those that don't have access) if they assumed that a resource-quota like metadata is for the application, not for the client that runs the applications.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-2">This is challenging for home networks where multiple clients may be running behind the same CPE, with each of them running a video application. The same challenge may apply when tethering is enabled.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.1-3">
-<pre>
-Requirement:
-
-  REQ-SIGNAL-EXPOSURE-FAIRNESS:
-  : Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.
-</pre><a href="#appendix-C.1-3" class="pilcrow">¶</a>
-</div>
+<p id="appendix-C.1-3">Requirement:<a href="#appendix-C.1-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-C.1-4">
+          <dt id="appendix-C.1-4.1">REQ-SIGNAL-EXPOSURE-FAIRNESS:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-C.1-4.2">
+            <p id="appendix-C.1-4.2.1">Means to expose the signal independent of the application should be considered. An example of such exposure is OS APIs.<a href="#appendix-C.1-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="classification">
@@ -2236,11 +2261,7 @@ Requirement:
 <p id="appendix-C.2-1">If distinct channels are used to share the metadata between a client and a network, a network that engages in the collaborative signaling approach will require sophisticated features to classify flows and decide which channel is used to share metadata so that it can consume that information.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-2">Likewise, the network will require to implement redundant functions; for each signaling interface.<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-3"><em>As such, application- and protocol-specific signaling channels are suboptimal.</em> (REQ-SINGLE-CHANNEL)<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.2-4">
-<pre>
-Requirement:  REQ-SINGLE-CHANNEL is preferred.
-</pre><a href="#appendix-C.2-4" class="pilcrow">¶</a>
-</div>
+<p id="appendix-C.2-4">Requirement:  REQ-SINGLE-CHANNEL is preferred.<a href="#appendix-C.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="continuity">
@@ -2249,14 +2270,14 @@ Requirement:  REQ-SINGLE-CHANNEL is preferred.
 <a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-session-continuity" class="section-name selfRef">Session Continuity</a>
         </h3>
 <p id="appendix-C.3-1">The general trend in wireless networks is to deploy the wireless router closer to the user. This can help with low link latency but can result in more frequent handovers as the user moves between routers. The frequency of handovers increases when a user moves faster or when the media session lasts longer. During handovers, there should be minimal delay incurred during handover in configuring/setting up the metadata of a media session in progress.<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.3-2">
-<pre>
-Requirement:
-
-REQ-CONTINUITY:
-: Handover from one radio or router to another should continue to provide same service level.
-</pre><a href="#appendix-C.3-2" class="pilcrow">¶</a>
-</div>
+<p id="appendix-C.3-2">Requirement:<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-C.3-3">
+          <dt id="appendix-C.3-3.1">REQ-CONTINUITY:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-C.3-3.2">
+            <p id="appendix-C.3-3.2.1">Handover from one radio or router to another should continue to provide same service level.<a href="#appendix-C.3-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="multiple-bottlenecks">
@@ -2265,13 +2286,8 @@ REQ-CONTINUITY:
 <a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-multiple-bottlenecks" class="section-name selfRef">Multiple Bottlenecks</a>
         </h3>
 <p id="appendix-C.4-1">Whereas models often show a single bottleneck, there are frequently two (or more) bottlenecks: the ISP network and within the subscriber network (e.g., Wi-Fi link). As such, all bottlenecks near the subscriber should be able to benefit from network/client collaboration.<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.4-2">
-<pre>
-Requirement:
-
-  REQ-MULTIPLE-BOTTLENECKS should be supported.
-</pre><a href="#appendix-C.4-2" class="pilcrow">¶</a>
-</div>
+<p id="appendix-C.4-2">Requirement:<a href="#appendix-C.4-2" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-3">REQ-MULTIPLE-BOTTLENECKS should be supported.<a href="#appendix-C.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="metadata-scope">
@@ -2283,14 +2299,14 @@ Requirement:
 <p id="appendix-C.5-2">As such, hints about resource-like metadata is bound by default to the overall network attachment, not specific to a given application or flow.<a href="#appendix-C.5-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-3">Most importantly, the metadata can be used by the network to prioritize traffic within a single 5-tuple connection and metadata cannot be leveraged for prioritization between different flows.<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-4">It is out of the scope of this document to discuss setups (e.g., 3GPP PDU Sessions) where network attachments with Guaranteed Bit Rate (GBR) for specific flows is provided.<a href="#appendix-C.5-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.5-5">
-<pre>
-Requirement:
-
-  REQ-SCOPED-METADATA:
-  : Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.
-</pre><a href="#appendix-C.5-5" class="pilcrow">¶</a>
-</div>
+<p id="appendix-C.5-5">Requirement:<a href="#appendix-C.5-5" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-C.5-6">
+          <dt id="appendix-C.5-6.1">REQ-SCOPED-METADATA:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-C.5-6.2">
+            <p id="appendix-C.5-6.2.1">Means to characterize the scope of a shared metadata for the sake of better interoperability should be supported.<a href="#appendix-C.5-6.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
 </section>
