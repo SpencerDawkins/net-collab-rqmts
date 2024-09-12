@@ -1040,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 15 March 2025</td>
+<td class="center">Expires 16 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-11" class="published">11 September 2024</time>
+<time datetime="2024-09-12" class="published">12 September 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-15">15 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-16">16 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1127,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1445,16 +1445,16 @@ In this document, this is termed 'reactive policy'.<a href="#section-1-6" class=
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
 </div>
-<p id="section-1-8"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) Router on the path of packets from Server to Client.
-A network shaper in the Router manages QoS of flows of multiple users and can buffer (delay), discard or apply other flow control rules. Application layer signaling and feedback between client – server (A – in figure) adjusts rate over a period of several RTTs using feedback and congestion control algorithms.
+<p id="section-1-8"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path of packets from Server to Client.
+A network shaper in the router manages QoS of flows of multiple users and can buffer (delay), discard, or apply other flow control rules. Application layer signaling and feedback between Client – Server (A – in the figure) adjust transmission rate over a period of several RTTs using feedback and congestion control algorithms.
 Congestion control algorithms are generally conservative and settle to a steady rate that avoids excessive packet loss.
 In networks where link conditions (between Client and Router) vary significantly at timescales well below the RTT, this results in unused (wasted) bandwidth at short timescales.
 There is some research <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> to indicate that media applications can obtain better QoE when sending at a higher rate (less conservative than current CCA) and the media application is willing to tolerate some packet loss or delay of low priority packets.
 Packet priority and tolerance to delay of packets in such a case would be provided on-path in a side channel associated to the downstream packet (B – in figure).
 The requirements for this server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 5.2</a>.
-Network shapers observe flows and apply policies to maximize performance but is not aware if there is a preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU session. See <a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).
-The client can provide the (access) Router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in figure).
-The client may also provide information to the (access) Router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment.<a href="#section-1-8" class="pilcrow">¶</a></p>
+Network shapers observe flows and apply policies to maximize performance but are not aware whether  there is a high preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU Session. See <a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).
+Clients may provide an (access) router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in Figure).
+Clients may also provide information to an (access) router to drop, when resources are congested,  'lower priority'-marked packets of a flow (UDP 4-tuple) temporarily which can in turn allocate bandwidth to other flows of that same network attachment.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <p id="section-1-9">In summary, the rapid variation of wireless link quality and/or bandwidth limitations in networks along with interactive applications that demand low latency and high throughput can lead to suboptimal user experience. <a href="#uc" class="auto internal xref">Section 3</a> outlines use cases to illustrate the issues and the need for additional information per flow to allow the network to optimize its handling.<a href="#section-1-9" class="pilcrow">¶</a></p>
 <p id="section-1-10">Some of the complications that are induced by the phenomena discussed above may be eliminated by
    adequate dimensioning and upgrades.  However, such upgrades may not
@@ -1502,7 +1502,7 @@ The client may also provide information to the (access) Router to drop lower pri
         <h3 id="name-streaming-and-interactive-m">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-streaming-and-interactive-m" class="section-name selfRef">Streaming and Interactive Media</a>
         </h3>
-<p id="section-3.1-1">Streaming media packets carry audio or video between server and client.
+<p id="section-3.1-1">Streaming media packets carry audio or video between servers and clients.
 Video packets carry the occasional key frame ("I-frame") containing a full video frame.
 These frames are necessary to rebuild receiver state after loss of delta frames.
 The key frames are therefore more critical to deliver to the receiver than delta frames.
@@ -1516,8 +1516,8 @@ Today, there is no way to identify packets which are less important and/or loss-
 Some media frames may be able to tolerate more delay over the wire than others (e.g., live media frames require very low latency while a background image for augmented reality may be delivered with more delay tolerance).
 Even when the media payload is not encrypted, the network has no means to distinguish these different requirements.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">Requirements:<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">REQ-PACKET-PRIORITY: Packet priority relative to other packets in the transport flow (UDP 4-tuple).
-REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">REQ-PACKET-PRIORITY: Packet priority relative to other packets within the same transport flow (UDP 4-tuple).
+REQ-PACKET-DELAY: Metadata to indicate whether a packet can tolerate delay.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uc-preferences">
@@ -1526,7 +1526,7 @@ REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.<a 
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-mixed-traffic-and-user-pref" class="section-name selfRef">Mixed-Traffic and User Preferences</a>
         </h3>
 <p id="section-3.2-1">Some content is more resilient to buffering and delays (e.g., file copy, file download) compared to interactive traffic. This traffic can be buffered in favor of improved interactivity, without significant impact to the user experience.
-For example, an on-going file copy operation flow (UDP 4-tuple) a remote desktop user can tolerate more delay than the flow carrying graphics updates.
+For example, an on-going file copy operation flow (UDP 4-tuple) of a remote desktop user can tolerate more delay than the flow carrying graphics updates.
 Or, a user application flow downloading software updates in the background can tolerate more delay than a foreground application flow.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">This applies only when data is sent in different flows (UDP 4-tuples) that belong to the same network attachment (see <a href="#net-attach" class="auto internal xref">Appendix A</a> for details).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">Requirements:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
