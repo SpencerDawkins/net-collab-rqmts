@@ -610,7 +610,7 @@ perform traffic analysis.
 
 Requirement:
 
-REQ-PACKET-DELAY: 
+REQ-PACKET-DELAY:
 : Metadata to indicate whether the packet can tolerate delay.
 
 # Operational Considerations {#operational}
