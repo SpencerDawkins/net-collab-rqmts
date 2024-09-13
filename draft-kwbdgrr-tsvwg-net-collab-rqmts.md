@@ -403,7 +403,7 @@ allow unauthorized entities to infer sensitive information about the
 data being transmitted while maintaining minimal resource
 consumption. There is a tension between resource consumption (and thus efficiency) of such
 encryption and the user's privacy and this tension depends on the threat
-model ({{Section 7.4 of RFC6973}}); the threat of a network provider building a subscriber profile of viewed video content
+model ({{Section 7.4 of ?RFC6973}}); the threat of a network provider building a subscriber profile of viewed video content
 is different from the threat of an interactive voice or video call. To
 mitigate traffic analysis, the sender might, for example, purposefully mis-mark
 metadata in some packets.
