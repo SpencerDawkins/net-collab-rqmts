@@ -720,7 +720,8 @@ REQ-PACKET-DELAY: Metadata to indicate whether the packet can tolerate delay.
    threat of a network provider building a subscriber profile of viewed
    video content is different from the threat of an interactive voice or
    video call.  To mitigate traffic analysis, the sender might, for
-   example, purposefully mis-mark metadata in some packets.
+   example, purposefully mis-mark metadata in some packets, add some
+   randomness to avoid recurrent traffic patterns, etc.
 
    Requirements:
 
