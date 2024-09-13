@@ -406,7 +406,7 @@ encryption and the user's privacy and this tension depends on the threat
 model ({{Section 7.4 of ?RFC6973}}); the threat of a network provider building a subscriber profile of viewed video content
 is different from the threat of an interactive voice or video call. To
 mitigate traffic analysis, the sender might, for example, purposefully mis-mark
-metadata in some packets.
+metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.
 
 
     Requirements:
