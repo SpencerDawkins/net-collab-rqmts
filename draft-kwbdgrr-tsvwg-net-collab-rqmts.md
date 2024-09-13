@@ -371,7 +371,7 @@ Use cases:
 1. Audio is more critical than video for many applications and should
 be prioritized differently than video.
 
-Requirements: REQ-MEDIA-AV-SEPARATE.
+Requirement: REQ-MEDIA-AV-SEPARATE.
 
 2. The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC). A
@@ -589,7 +589,7 @@ of the flow.
 Per-packet priority or importance determines the drop priority of
 a packet.
 
-    Requirements: REQ-PACKET-PRIORITY.
+Requirement: REQ-PACKET-PRIORITY.
 
 ### Tolerance to Delay {#delay}
 
@@ -608,10 +608,10 @@ for the packets of the transport flow and may not necessarily reflect
 the exact delay tolerance values that allow an on-path observer to
 perform traffic analysis.
 
-    Requirements:
+Requirement:
 
-    REQ-PACKET-DELAY: Metadata to indicate whether the packet can
-    tolerate delay.
+REQ-PACKET-DELAY: 
+: Metadata to indicate whether the packet can tolerate delay.
 
 # Operational Considerations {#operational}
 
@@ -642,7 +642,7 @@ needs to dynamically adjust the bitrate based on each user's service
 package and connectivity SLOs to ensure optimal delivery for all
 users (REQ-METADATA-ACCURACY).
 
-    Requirement: REQ-METADATA-ACCURACY.
+Requirement: REQ-METADATA-ACCURACY.
 
 ## Exposure Handling {#exposure-handling}
 
@@ -729,7 +729,6 @@ threat of an interactive voice or video call. To mitigate traffic
 analysis, the sender might purposefully mis-mark metadata in some
 packets.
 
-
 Requirements:
 
 REQ-PRIVACY-ADDITIONAL:
@@ -740,10 +739,10 @@ REQ-SIGNALING-AVOIDANCE:
 : Leveraging previous experience {{?RFC9049}}, the folliwing is not
 required to make use of the collaborative signaling:
 
-       * Reveal the application identity.
-       * Expose the application cause (or 'reason') to signal metadata.
-       * Reveal server identity.
-       * Inspect client-to-server encrypted payload by network elements.
+  * Reveal the application identity.
+  * Expose the application cause (or 'reason') to signal metadata.
+  * Reveal server identity.
+  * Inspect client-to-server encrypted payload by network elements.
 
 ## Scalability {#scalability}
 
@@ -775,7 +774,7 @@ other flows with that subscriber are denied attempts to prioritize
 themselves. However, the network cannot identify whether the
 prioritized flow is legitimate or malicious.
 
-    Requirements:
+Requirements:
 
 REQ-SIGNAL-VALIDATION:
 : The network/OS needs to ensure that the user/client signaling of
