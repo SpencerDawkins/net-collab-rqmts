@@ -368,7 +368,7 @@ Table of Contents
    1.  Audio is more critical than video for many applications and
        should be prioritized differently than video.
 
-   Requirements: REQ-MEDIA-AV-SEPARATE.
+   Requirement: REQ-MEDIA-AV-SEPARATE.
 
    1.  The server (or relay) sends the same stream to many receivers,
        including the same metadata (especially with media over QUIC).  A
@@ -586,7 +586,7 @@ Table of Contents
    Per-packet priority or importance determines the drop priority of a
    packet.
 
-   Requirements: REQ-PACKET-PRIORITY.
+   Requirement: REQ-PACKET-PRIORITY.
 
 5.2.2.  Tolerance to Delay
 
@@ -605,10 +605,10 @@ Table of Contents
    tolerance values that allow an on-path observer to perform traffic
    analysis.
 
-   Requirements:
+   Requirement:
 
-   REQ-PACKET-DELAY: Metadata to indicate whether the packet can
-   tolerate delay.
+   REQ-PACKET-DELAY:  Metadata to indicate whether the packet can
+      tolerate delay.
 
 6.  Operational Considerations
 
@@ -732,10 +732,13 @@ Table of Contents
       the folliwing is not required to make use of the collaborative
       signaling:
 
-       * Reveal the application identity.
-       * Expose the application cause (or 'reason') to signal metadata.
-       * Reveal server identity.
-       * Inspect client-to-server encrypted payload by network elements.
+      *  Reveal the application identity.
+
+      *  Expose the application cause (or 'reason') to signal metadata.
+
+      *  Reveal server identity.
+
+      *  Inspect client-to-server encrypted payload by network elements.
 
 6.4.  Scalability
 
