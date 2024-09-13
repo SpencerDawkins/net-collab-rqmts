@@ -248,7 +248,7 @@ applications can obtain better QoE when sending at a higher rate
 willing to tolerate some packet loss or delay of low priority
 packets.  Packet priority and tolerance to delay of packets in such
 a case would be provided on-path in a side channel associated to
-the downstream packet (B – in figure).  The requirements for this
+the downstream packet (B – in the figure).  The requirements for this
 server-to-network (S2N) metadata are described in {{server-network}}.
 The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
@@ -261,7 +261,7 @@ attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
 {{net-attach}} for more details).  Clients may provide an (access)
 router with preferences of which flow (UDP 4-tuple) has relative
 priority among flows of that network attachment using H2N (C - in
-Figure).  Clients may also provide information to an (access) router
+the figure).  Clients may also provide information to an (access) router
 to drop, when resources are congested,  'lower priority'-marked
 packets of a flow (UDP 4-tuple) temporarily which can in turn
 allocate bandwidth to other flows of that same network attachment.
@@ -304,8 +304,8 @@ protection polices under attacks, with very short to very long
 durations (e.g., varying wireless and mobile air interface conditions).
 
 Traffic shaping:
-: Refers in this document to QoS management at the
-wireless/access router to delay or discard packets of lower priority
+: Refers in this document to QoS management at an
+access router to delay or discard packets of lower priority
 to achieve bounded latency and high throughput.
 
 
@@ -883,12 +883,12 @@ does not discuss flows of distinct clients/users.
 {: #Figure-conn-flow title=”E2E transport flows and connection session”}
 
 
-{{Figure-conn-flow}} shows "Client-1" and "Client-2" that negotiate
+{{Figure-conn-flow}} shows "Client-1" and "Client-2" which negotiate
 connection policy (e.g., QoS) and other aspects like mobility
 handling, charging applied to flows in that network attachment.
 "Client-1" has "flow-x1" and "flow-x2" over its network attachment
 while "Client-2" has "flow-x3".  **The requirements in this document
-focuses on on-path collaboration signals that apply to data units
+focus on on-path collaboration signals that apply to data units
 such as media frames within flows like "flow-x1/x2/x3" but not
 between them.**
 
