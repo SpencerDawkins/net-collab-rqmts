@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-12T01:19:57.212069+00:00",
+  "timestamp": "2024-09-15T01:34:56.465648+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -562,7 +562,7 @@
       "id": "I_kwDOL0HpzM6VgU0N",
       "title": "Consolidate and merge use cases, revise h2n sections",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -571,8 +571,8 @@
       "labels": [],
       "body": "The following aspects are considered here:\r\na) use cases in section 3 need to be consolidated (to address the tsvwg comments)\r\n    Media streaming (3.1) and Interactive media (3.2) can be combined. \r\n    Accommodate-Delay Traffic (3.3) and User Preferences (3.4) combined --> this can represent a traffic management option for flow control (i.e., the user prefers to prioritize flow 1 (UDP 4-tuple) over flow 2 belonging to the user.\r\n    Remove 3.5 and 3.6 \r\nb) Add the \"flow control\" description above to the Traffic Shaping/management in section 1.\r\nc) Revise h2n section 5.1 to match the revision for flow preference (in b) and/or s2n metadata.\r\nd) clarify \"intra-flow\". With the revisions in s2n (5.2), only priority of packet is visible and intra-flow (audio, video, etc) is not.\r\n    On the other hand, a user may have multiple flows that are shaped and have preferences on that (see b above)",
       "createdAt": "2024-09-05T16:43:42Z",
-      "updatedAt": "2024-09-06T00:38:41Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-12T19:50:10Z",
+      "closedAt": "2024-09-12T19:50:10Z",
       "comments": [
         {
           "author": "John-Kaippallimalil",
@@ -3941,25 +3941,35 @@
       "id": "PR_kwDOL0HpzM56mVRm",
       "title": "updates for issue#68",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/69",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-06T00:44:13Z",
-      "updatedAt": "2024-09-11T23:42:46Z",
+      "updatedAt": "2024-09-12T19:50:09Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "9ff0cf39a51c029f32947aed011d86b77b7d6766",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "68-consolidate-and-merge-use-cases-revise-h2n-sections",
-      "headRefOid": "beb2ed93cee18f3aeaf1f466adc669a25dc3af8c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "867d9631677b6cc84aa8cfa3dec04ff5219febf8",
+      "closedAt": "2024-09-12T19:50:09Z",
+      "mergedAt": "2024-09-12T19:50:09Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "228c03080b7759e8e8b4ac5f53573572e4867007"
+      },
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Incorporated via #70.",
+          "createdAt": "2024-09-12T19:32:52Z",
+          "updatedAt": "2024-09-12T19:32:52Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOL0HpzM6JB0hM",
@@ -3973,6 +3983,138 @@
           "createdAt": "2024-09-11T23:38:43Z",
           "updatedAt": "2024-09-11T23:38:43Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JDr4w",
+          "commit": {
+            "abbreviatedOid": "beb2ed9"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-12T07:31:48Z",
+          "updatedAt": "2024-09-12T07:41:22Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n{{Figure-netshaper}} shows a bottleneck (access) router on the path of packets from Server to Client.\r\n```",
+              "createdAt": "2024-09-12T07:31:48Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nA network shaper in the router manages QoS of flows of multiple users and can buffer (delay), discard, or apply other flow control rules. Application layer signaling and feedback between Client \u2013 Server (A \u2013 in the figure) adjust transmission rate over a period of several RTTs using feedback and congestion control algorithms.\r\n```",
+              "createdAt": "2024-09-12T07:33:27Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\nNetwork shapers observe flows and apply policies to maximize performance but are not aware whether  there is a high preference for one flow (UDP 4-tuple) over another flow belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU Session. See {{net-attach}} for more details).\r\n```",
+              "createdAt": "2024-09-12T07:34:34Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nClients may provide an (access) router with preferences of which flow (UDP 4-tuple) has relative priority among flows of that network attachment using H2N (C - in Figure).\r\n```",
+              "createdAt": "2024-09-12T07:35:19Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nClients may also provide information to an (access) router to drop, when resources are congested,  'lower priority'-marked packets of a flow (UDP 4-tuple) temporarily which can in turn allocate bandwidth to other flows of that same network attachment.\r\n```",
+              "createdAt": "2024-09-12T07:37:17Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nStreaming media packets carry audio or video between servers and clients.\r\n```",
+              "createdAt": "2024-09-12T07:37:34Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 96,
+              "body": "```suggestion\r\nREQ-PACKET-PRIORITY: Packet priority relative to other packets within the same transport flow (UDP 4-tuple).\r\n```",
+              "createdAt": "2024-09-12T07:38:34Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 97,
+              "body": "```suggestion\r\nREQ-PACKET-DELAY: Metadata to indicate whether a packet can tolerate delay.\r\n```",
+              "createdAt": "2024-09-12T07:38:47Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\nFor example, an on-going file copy operation flow (UDP 4-tuple) of a remote desktop user can tolerate more delay than the flow carrying graphics updates.\r\n```",
+              "createdAt": "2024-09-12T07:39:43Z",
+              "updatedAt": "2024-09-12T07:41:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JI82a",
+          "commit": {
+            "abbreviatedOid": "836e93e"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-12T16:14:25Z",
+          "updatedAt": "2024-09-12T16:14:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JJv6N",
+          "commit": {
+            "abbreviatedOid": "836e93e"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-12T17:56:07Z",
+          "updatedAt": "2024-09-12T17:56:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6IjUAR",
+          "commit": {
+            "abbreviatedOid": "867d963"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-09T21:12:16Z",
+          "updatedAt": "2024-09-12T19:31:41Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Are we delving into inter-flow priorities, outside of the same UDP 4-tuple? I thought we mindfully wanted to move away due to a lot of complexities.",
+              "createdAt": "2024-09-09T21:12:16Z",
+              "updatedAt": "2024-09-12T19:31:41Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "IMHO, Even if the requirements are overlapping, Streaming and Interactive Media should be separate items, given they are 2 big use cases that comprise of most of the internet traffic. On the other hand, we can merge interactive media, accommodate delay and mixed traffic into one.",
+              "createdAt": "2024-09-09T21:37:28Z",
+              "updatedAt": "2024-09-12T19:31:41Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "User Preference might not belong here given that is agnostic of the traffic type but is an end user option. I am not sure if combining these 2 makes sense",
+              "createdAt": "2024-09-09T21:56:47Z",
+              "updatedAt": "2024-09-12T19:31:41Z"
+            },
+            {
+              "originalPosition": 255,
+              "body": "Again, we should refrain from any inter-flow discussions IMO.",
+              "createdAt": "2024-09-09T21:58:09Z",
+              "updatedAt": "2024-09-12T19:31:41Z"
+            }
+          ]
         }
       ]
     },
@@ -3981,24 +4123,26 @@
       "id": "PR_kwDOL0HpzM57DuIE",
       "title": "reworking the doc to make it more focused. Moving some parts to exten\u2026",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/70",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026ded section in the appendix",
       "createdAt": "2024-09-10T21:06:19Z",
-      "updatedAt": "2024-09-11T23:38:00Z",
+      "updatedAt": "2024-09-12T19:30:36Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "68-consolidate-and-merge-use-cases-revise-h2n-sections",
-      "baseRefOid": "16b5a9e8d0fc97de1ce4c9d5aff95ab290365388",
+      "baseRefOid": "836e93e7b2c88f36eddb27a08d5cae085be67c79",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr-68",
-      "headRefOid": "104888d1f59ee4cb895caa9fb923583e1f0d0b4a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b95ac6ab3605959b22c8ba65285d1af4ecfa0998",
+      "closedAt": "2024-09-12T19:30:35Z",
+      "mergedAt": "2024-09-12T19:30:35Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "867d9631677b6cc84aa8cfa3dec04ff5219febf8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4012,6 +4156,346 @@
           "body": "",
           "createdAt": "2024-09-11T23:38:00Z",
           "updatedAt": "2024-09-11T23:38:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JDyWf",
+          "commit": {
+            "abbreviatedOid": "104888d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-12T07:42:53Z",
+          "updatedAt": "2024-09-12T07:48:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nCollaborative signaling from client-to-network and server-to-network can improve the user experience by informing the network about the nature and relative importance of packets (frames, streams, etc.) without having to disclose the content of the packets. Moreover, the collaborative signaling may be enabled so that clients and servers are aware of the network's treatment of incoming packets. Also, client-to-network collaboration can be put in place without revealing the identity of the remote servers. This collaboration allows for differentiated services at the network (e.g., packet discard preference), the sender (e.g., adaptive transmission), or through cooperation of server/client and the network.\r\n```",
+              "createdAt": "2024-09-12T07:42:53Z",
+              "updatedAt": "2024-09-12T07:48:13Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nThis document lists some use cases that illustrate the need for a mechanism to share metadata and outlines requirements for both client-to-network and server-to-network. The document focuses on flows bound to the same user.\r\n```",
+              "createdAt": "2024-09-12T07:43:42Z",
+              "updatedAt": "2024-09-12T07:48:13Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\nWireless networks including 5G and WLAN inherently experience large variations in link quality over sub-RTT intervals and on the other hand applications such as interactive media demand both low latency and high bandwidth. Maximizing network utilization and end user experience under such conditions is challenging. Factors that affect wireless networks include change in channel conditions, interference between proximate cells, and end user mobility. These variations in link quality can be in the order of a millisecond or less {{5G-Lumos}} while congestion control takes several tens of milliseconds (more than one round-trip time (RTT)) to estimate data rate. Similarly, application servers that encode and serve live or interactive media take time to adjust the encoding level and other processes to match the network rate. End-to-end congestion control algorithms are far from being optimal when the link quality is highly variable in sub-RTT timeframes and the application demands both low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}). In these conditions, applications settle for a lower throughput when latency is prioritized, or for higher throughput at the expense of much higher delays.\r\n```",
+              "createdAt": "2024-09-12T07:44:53Z",
+              "updatedAt": "2024-09-12T07:48:13Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nWhile rate control based on feedback for a flow (UDP 4-tuple) is evidently not able adapt for sub-RTT changes in available wireless channel resources, an application server can provide information on a per-packet basis that a network shaper may use to allocate the available resources more effectively. {{5G-Octopus}} has shown for volumetric video packets and a rate controller that errs on the side of overestimation, that the network shaper can drop low priority frames of a group of pictures (corresponding to transient wireless link bandwidth drops) and still achieve significantly better performance than state-of-the-art based on feedback. With not fully encrypted packets, networks may use heuristics to build an \"implicit signal\" gleaned from a packet to prioritize or otherwise shape flows. However, implicit signals are not desirable as they lead to ossification of protocols as result of introducing unintended dependencies {{?RFC9419}}. When packet contents are encrypted, the approach of using implicit signals is no longer viable.\r\n```",
+              "createdAt": "2024-09-12T07:45:54Z",
+              "updatedAt": "2024-09-12T07:48:13Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\r\nThe requirements for this server-to-network (S2N) metadata are described in {{server-network}}. The client may provide information to an (access) router to drop lower priority marked packets of a flow (UDP 4-tuple) temporarily which can in turn redirect bandwidth to other flows of that network attachment, especially during a reactive event.\r\n```",
+              "createdAt": "2024-09-12T07:47:31Z",
+              "updatedAt": "2024-09-12T07:48:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JIrBu",
+          "commit": {
+            "abbreviatedOid": "b395ed0"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Revised 5.2 based on discussions yesterday. \r\nThe revisions here are a good baseline for implementing the other aspects (the required set of requirements and the desired set of requirements. And revision of Operational to System Considerations).",
+          "createdAt": "2024-09-12T15:49:00Z",
+          "updatedAt": "2024-09-12T15:49:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JKRqc",
+          "commit": {
+            "abbreviatedOid": "074167b"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-12T19:07:19Z",
+          "updatedAt": "2024-09-12T19:07:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOL0HpzM57WcEF",
+      "title": "flush-right lines beginning with ':' to improve Markdown handling of those lines",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/71",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-12T20:05:45Z",
+      "updatedAt": "2024-09-12T20:43:50Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "228c03080b7759e8e8b4ac5f53573572e4867007",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "flush_left",
+      "headRefOid": "f492c9f02fc8610a320618b3ee49aaa96da88c4b",
+      "closedAt": "2024-09-12T20:43:49Z",
+      "mergedAt": "2024-09-12T20:43:49Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "30e027bffccd27d11f8e62255e01d2aff896145d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JLAEJ",
+          "commit": {
+            "abbreviatedOid": "f492c9f"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-12T20:33:13Z",
+          "updatedAt": "2024-09-12T20:33:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOL0HpzM57XI9Z",
+      "title": "moved more stuff to be left-flush, to avoid Markdown thinking it is p\u2026",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/72",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026re-formatted code.",
+      "createdAt": "2024-09-12T22:23:48Z",
+      "updatedAt": "2024-09-12T22:55:23Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "30e027bffccd27d11f8e62255e01d2aff896145d",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "flush_left",
+      "headRefOid": "5a329637ebbca3f130c5d8d2b04baad9d76ddfe7",
+      "closedAt": "2024-09-12T22:55:23Z",
+      "mergedAt": "2024-09-12T22:55:23Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "93df1f5faa49fc2e4f7ed1d0c77159081e8c960c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JLsvF",
+          "commit": {
+            "abbreviatedOid": "5a32963"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-12T22:45:46Z",
+          "updatedAt": "2024-09-12T22:45:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOL0HpzM57XPro",
+      "title": "describe mis-marking metadata as a mitigation for traffic analysis, and that there are different threat models. Unfortunately the line needed to be wrapped, so 'diff' is awkward",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/73",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-12T22:55:01Z",
+      "updatedAt": "2024-09-13T19:06:21Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "30e027bffccd27d11f8e62255e01d2aff896145d",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "mis_mark",
+      "headRefOid": "728f19658dd86de1121323ccb8ba6eeae6c9f193",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JPI2Z",
+          "commit": {
+            "abbreviatedOid": "93268be"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-13T08:18:07Z",
+          "updatedAt": "2024-09-13T08:25:04Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nit is only available to the server, client, and authorized network\r\n```",
+              "createdAt": "2024-09-13T08:18:07Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nthis document but rather in other documents that specify how this\r\n```",
+              "createdAt": "2024-09-13T08:18:37Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nmetadata is encoded and exchanged amongst client, server, and network\r\n```",
+              "createdAt": "2024-09-13T08:18:53Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nmetadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.\r\n```",
+              "createdAt": "2024-09-13T08:21:23Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nmitigate traffic analysis, the sender might, for example, purposefully mis-mark\r\n```",
+              "createdAt": "2024-09-13T08:21:56Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nconsumption. There is a tension between resource consumption (and thus efficiency) of such\r\n```",
+              "createdAt": "2024-09-13T08:24:02Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nmodel ({{Section 7.4 of RFC6973}}); the threat of a network provider building a subscriber profile of viewed video content\r\n```",
+              "createdAt": "2024-09-13T08:24:38Z",
+              "updatedAt": "2024-09-13T08:25:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JSy9x",
+          "commit": {
+            "abbreviatedOid": "93268be"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-13T15:14:02Z",
+          "updatedAt": "2024-09-13T15:14:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOL0HpzM57XbLb",
+      "title": "fold long lines so our subsequent diffs are more sensible",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/74",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-13T00:01:31Z",
+      "updatedAt": "2024-09-13T19:07:58Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "93df1f5faa49fc2e4f7ed1d0c77159081e8c960c",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "fold_lines",
+      "headRefOid": "dce361a7333161e0e4b41f75d896a6522758081d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JPOgq",
+          "commit": {
+            "abbreviatedOid": "f3746d2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-13T08:26:56Z",
+          "updatedAt": "2024-09-13T08:31:46Z",
+          "comments": [
+            {
+              "originalPosition": 229,
+              "body": "```suggestion\r\naccess router to delay or discard packets of lower priority\r\n```",
+              "createdAt": "2024-09-13T08:26:56Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            },
+            {
+              "originalPosition": 228,
+              "body": "```suggestion\r\n: Refers in this document to QoS management at an\r\n```",
+              "createdAt": "2024-09-13T08:27:03Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            },
+            {
+              "originalPosition": 168,
+              "body": "```suggestion\r\nthe downstream packet (B \u2013 in the figure).  The requirements for this\r\n```",
+              "createdAt": "2024-09-13T08:28:04Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "```suggestion\r\nthe figure).  Clients may also provide information to an (access) router\r\n```",
+              "createdAt": "2024-09-13T08:28:45Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            },
+            {
+              "originalPosition": 890,
+              "body": "```suggestion\r\n{{Figure-conn-flow}} shows \"Client-1\" and \"Client-2\" which negotiate\r\n```",
+              "createdAt": "2024-09-13T08:29:56Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            },
+            {
+              "originalPosition": 895,
+              "body": "```suggestion\r\nfocus on on-path collaboration signals that apply to data units\r\n```",
+              "createdAt": "2024-09-13T08:30:17Z",
+              "updatedAt": "2024-09-13T08:31:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JSy3i",
+          "commit": {
+            "abbreviatedOid": "f3746d2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-13T15:13:51Z",
+          "updatedAt": "2024-09-13T15:13:51Z",
           "comments": []
         }
       ]
