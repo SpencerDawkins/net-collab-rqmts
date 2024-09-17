@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 16 March 2025                              Cloud Software Group
+Expires: 21 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 16 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       12 September 2024
+                                                       17 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 March 2025.
+   This Internet-Draft will expire on 21 March 2025.
 
 Copyright Notice
 
@@ -252,22 +252,23 @@ Table of Contents
    packet loss or delay of low priority packets.  Packet priority and
    tolerance to delay of packets in such a case would be provided on-
    path in a side channel associated to the downstream packet (B – in
-   figure).  The requirements for this server-to-network (S2N) metadata
-   are described in Section 5.2.  The client may provide information to
-   an (access) router to drop lower priority marked packets of a flow
-   (UDP 4-tuple) temporarily which can in turn redirect bandwidth to
-   other flows of that network attachment, especially during a reactive
-   event.  Network shapers observe flows and apply policies to maximize
-   performance but are not aware whether there is a high preference for
-   one flow (UDP 4-tuple) over another flow belonging to the same user
-   and network attachment (e.g., a subscriber connection, a 3GPP PDU
-   Session.  See Appendix A for more details).  Clients may provide an
-   (access) router with preferences of which flow (UDP 4-tuple) has
-   relative priority among flows of that network attachment using H2N (C
-   - in Figure).  Clients may also provide information to an (access)
-   router to drop, when resources are congested, 'lower priority'-marked
+   the figure).  The requirements for this server-to-network (S2N)
+   metadata are described in Section 5.2.  The client may provide
+   information to an (access) router to drop lower priority marked
    packets of a flow (UDP 4-tuple) temporarily which can in turn
-   allocate bandwidth to other flows of that same network attachment.
+   redirect bandwidth to other flows of that network attachment,
+   especially during a reactive event.  Network shapers observe flows
+   and apply policies to maximize performance but are not aware whether
+   there is a high preference for one flow (UDP 4-tuple) over another
+   flow belonging to the same user and network attachment (e.g., a
+   subscriber connection, a 3GPP PDU Session.  See Appendix A for more
+   details).  Clients may provide an (access) router with preferences of
+   which flow (UDP 4-tuple) has relative priority among flows of that
+   network attachment using H2N (C - in the figure).  Clients may also
+   provide information to an (access) router to drop, when resources are
+   congested, 'lower priority'-marked packets of a flow (UDP 4-tuple)
+   temporarily which can in turn allocate bandwidth to other flows of
+   that same network attachment.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -304,9 +305,9 @@ Table of Contents
       durations (e.g., varying wireless and mobile air interface
       conditions).
 
-   Traffic shaping:  Refers in this document to QoS management at the
-      wireless/access router to delay or discard packets of lower
-      priority to achieve bounded latency and high throughput.
+   Traffic shaping:  Refers in this document to QoS management at an
+      access router to delay or discard packets of lower priority to
+      achieve bounded latency and high throughput.
 
 3.  Types of Metdata Requirement
 
@@ -606,8 +607,8 @@ Table of Contents
 
    Requirement:
 
-   REQ-PACKET-DELAY: Metadata to indicate whether the packet can
-   tolerate delay.
+   REQ-PACKET-DELAY:  Metadata to indicate whether the packet can
+      tolerate delay.
 
 6.  Operational Considerations
 
@@ -715,7 +716,12 @@ Table of Contents
    that any exposure of metadata does not compromise user privacy or
    allow unauthorized entities to infer sensitive information about the
    data being transmitted while maintaining minimal resource
-   consumption.
+   consumption.  There is a tension between resource consumption of such
+   encryption and the user's privacy and this tension depends on the
+   threat model; the threat of a network provider building a subscriber
+   profile of viewed video content is different from the threat of an
+   interactive voice or video call.  To mitigate traffic analysis, the
+   sender might purposefully mis-mark metadata in some packets.
 
    Requirements:
 
@@ -844,9 +850,9 @@ Informative References
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D. and C. M. Heard, "Transport Options for UDP",
               Work in Progress, Internet-Draft, draft-ietf-tsvwg-udp-
-              options-33, 4 September 2024,
+              options-34, 16 September 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-
-              udp-options-33>.
+              udp-options-34>.
 
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
@@ -993,11 +999,11 @@ Appendix A.  Network Attachment
 
                                   Figure 3
 
-   Figure 3 shows "Client-1" and "Client-2" that negotiate connection
+   Figure 3 shows "Client-1" and "Client-2" which negotiate connection
    policy (e.g., QoS) and other aspects like mobility handling, charging
    applied to flows in that network attachment.  "Client-1" has "flow-
    x1" and "flow-x2" over its network attachment while "Client-2" has
-   "flow-x3". *The requirements in this document focuses on on-path
+   "flow-x3".  *The requirements in this document focus on on-path
    collaboration signals that apply to data units such as media frames
    within flows like "flow-x1/x2/x3" but not between them.*
 
@@ -1120,7 +1126,7 @@ C.4.  Multiple Bottlenecks
 
    Requirement:
 
-   REQ-MULTIPLE-BOTTLENECKS should be supported.
+   REQ-MULTIPLE-BOTTLENECKS: should be supported.
 
 C.5.  Metadata Scope
 
