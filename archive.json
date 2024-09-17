@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-15T01:34:56.465648+00:00",
+  "timestamp": "2024-09-17T01:07:25.000360+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -4326,13 +4326,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-09-12T22:55:01Z",
-      "updatedAt": "2024-09-13T19:06:21Z",
+      "updatedAt": "2024-09-17T00:16:26Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
-      "baseRefOid": "30e027bffccd27d11f8e62255e01d2aff896145d",
+      "baseRefOid": "13f432ae28b57136d8ce68a8068fad9fb9b62df3",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "mis_mark",
-      "headRefOid": "728f19658dd86de1121323ccb8ba6eeae6c9f193",
+      "headRefOid": "a082cdf31ab83adcc13c058cd5d518f6122be2f5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4407,6 +4407,19 @@
           "createdAt": "2024-09-13T15:14:02Z",
           "updatedAt": "2024-09-13T15:14:02Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Jb280",
+          "commit": {
+            "abbreviatedOid": "728f196"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T05:55:34Z",
+          "updatedAt": "2024-09-16T05:55:34Z",
+          "comments": []
         }
       ]
     },
@@ -4415,24 +4428,26 @@
       "id": "PR_kwDOL0HpzM57XbLb",
       "title": "fold long lines so our subsequent diffs are more sensible",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-13T00:01:31Z",
-      "updatedAt": "2024-09-13T19:07:58Z",
+      "updatedAt": "2024-09-17T00:15:20Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "93df1f5faa49fc2e4f7ed1d0c77159081e8c960c",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "fold_lines",
       "headRefOid": "dce361a7333161e0e4b41f75d896a6522758081d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-17T00:15:20Z",
+      "mergedAt": "2024-09-17T00:15:20Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "13f432ae28b57136d8ce68a8068fad9fb9b62df3"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4496,6 +4511,19 @@
           "body": "",
           "createdAt": "2024-09-13T15:13:51Z",
           "updatedAt": "2024-09-13T15:13:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Jb3n7",
+          "commit": {
+            "abbreviatedOid": "dce361a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T05:57:49Z",
+          "updatedAt": "2024-09-16T05:57:49Z",
           "comments": []
         }
       ]
