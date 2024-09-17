@@ -674,23 +674,6 @@ There might be many channels to signal the metadata such as
 
 Requirement:
 
-It is recommended to encrypt or obfuscate the metadata information so
-it is only available to the server, client, and authorized network
-elements. The method of encryption or obfuscation is not described in
-this document but rather in other documents that specify how this
-metadata is encoded and exchanged amongst client, server, and network
-elements. The privacy implications of revealing metadata to network
-elements need to be thoroughly analyzed. This analysis should ensure
-that any exposure of metadata does not compromise user privacy or
-allow unauthorized entities to infer sensitive information about the
-data being transmitted while maintaining minimal resource
-consumption. There is a tension between resource consumption (and thus efficiency) of such
-encryption and the user's privacy and this tension depends on the threat
-model ({{Section 7.4 of ?RFC6973}}); the threat of a network provider building a subscriber profile of viewed video content
-is different from the threat of an interactive voice or video call. To
-mitigate traffic analysis, the sender might, for example, purposefully mis-mark
-metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.
-
 REQ-API-FRAMEWORK:
 : API framework to facilitate signaling for applications.
 
@@ -727,23 +710,23 @@ active attacker could alter the metadata to mislabel packets
 containing video key-frames as unimportant, but such changes are
 detectable by the receiver.
 
-It is recommended to encrypt or obfuscate the metadata information
-so it is only available to the server, client and authorized network
-elements. The method of encryption or obfuscation is not described
-in this document but rather in other documents describing how this
-metadata is encoded and exchanged amongst client, server and network
+It is recommended to encrypt or obfuscate the metadata information so
+it is only available to the server, client, and authorized network
+elements. The method of encryption or obfuscation is not described in
+this document but rather in other documents that specify how this
+metadata is encoded and exchanged amongst client, server, and network
 elements. The privacy implications of revealing metadata to network
 elements need to be thoroughly analyzed. This analysis should ensure
 that any exposure of metadata does not compromise user privacy or
-allow unauthorized entities to infer sensitive information about
-the data being transmitted while maintaining minimal resource
-consumption. There is a tension between resource consumption of
-such encryption and the user's privacy and this tension depends on
-the threat model; the threat of a network provider building a
-subscriber profile of viewed video content is different from the
-threat of an interactive voice or video call. To mitigate traffic
-analysis, the sender might purposefully mis-mark metadata in some
-packets.
+allow unauthorized entities to infer sensitive information about the
+data being transmitted while maintaining minimal resource
+consumption. There is a tension between resource consumption (and thus efficiency) of such
+encryption and the user's privacy and this tension depends on the threat
+model ({{Section 7.4 of ?RFC6973}}); the threat of a network provider
+building a subscriber profile of viewed video content
+is different from the threat of an interactive voice or video call. To
+mitigate traffic analysis, the sender might, for example, purposefully mis-mark
+metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.
 
 Requirements:
 
