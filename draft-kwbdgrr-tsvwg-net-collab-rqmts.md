@@ -505,7 +505,7 @@ REQ-CLIENT-DECIDES:
        | my Network Collaboration capabilities             |
        |                                                   |
        |-------------------------------------------------->|
-       | Network Collaboration signals                     |
+       | Server will mark packets using "method #4"        |
        |                                                   |
        |<--------------------------------------------------|
        | ok                                                |
