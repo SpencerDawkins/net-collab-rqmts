@@ -214,22 +214,20 @@ network has no choice but to discard or delay packets -- which can
 harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.
 
+~~~~~~~~aasvg
+            (A) Application signaling (client - server)
+     +--------------------------------------------------------+
+    /                                                          \
++--+---+              +------------+                         +--+---+
+|      |   (C) C2N    |            |                         |      |
+|      |<------------>| +--------+ |                         |      |
+|      |              | | Network| |  downstream packet      |      |
+|      |<=============+=+ Shaper +<+=========================+      |
+|      |              | +--------+ | (B) on-path S2N metadata|      |
++------+              +------------+                         +------+
+ Client                   Router                              Server
 ~~~~~~~~
-
-             (A)Application signaling (client - server)
-        +---------------------------------------------------+
-       /                                                     \
-   +--+---+              +----------+                       +--+---+
-   |      |    (C)H2N    |          |                       |      |
-   |      |<------------>|+---- ---+|                       |      |
-   |      |              || Network||  downstream packet    |      |
-   |      |<==============+ Shaper <========================|      |
-   |      |<^^^^^^^^^^^^^^+--------+^^^^^^^^^^^^^^^^^^^^^^^^|      |
-   |      |              |          |(B)on-path S2N metadata|      |
-   +------+              +----------+                       +------+
-    Client                  Router                           Server
-~~~~~~~~
-{: #Figure-netshaper title="Metadata and Network Shaping"}
+{: #Figure-netshaper align="center" title="Metadata and Network Shaping"}
 
 {{Figure-netshaper}} shows a bottleneck (access) router on the path
 of packets from Server to Client.  A network shaper in the router
