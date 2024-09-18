@@ -299,7 +299,7 @@ Intentional Management:
 quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
 
 Reactive Management:
-: network policies which react to congestion events with very short to very long
+: Network management actions that are undertaken as a reaction to unplanned overload events. Concretely, this includes policies which react to congestion events with very short to very long durations (e.g., varying wireless and mobile air interface conditions) or protection policies to soften the impact of ongoing attacks.
 durations (e.g., varying wireless and mobile air interface conditions).
 
 Traffic shaping:
