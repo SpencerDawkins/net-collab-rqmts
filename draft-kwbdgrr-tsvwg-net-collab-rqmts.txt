@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 21 March 2025                              Cloud Software Group
+Expires: 22 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 21 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       17 September 2024
+                                                       18 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2025.
+   This Internet-Draft will expire on 22 March 2025.
 
 Copyright Notice
 
@@ -99,7 +99,6 @@ Table of Contents
      4.3.  Honoring of Metadata for Servers Behind a Gateway
    5.  On-path Metadata Requirements
      5.1.  Client-Network Metadata
-       5.1.1.  Priority between Flows (Inter-flow)
      5.2.  Server-Network Metadata
        5.2.1.  Packet Priority
        5.2.2.  Tolerance to Delay
@@ -477,38 +476,7 @@ Table of Contents
 
 5.1.  Client-Network Metadata
 
-5.1.1.  Priority between Flows (Inter-flow)
-
-   Certain flows being received by a client (or by an application on a
-   client) are less or more important than other flows of _the same
-   client_. By signaling the relative importance of flows to a network
-   element, the network element can (de-)prioritize those flows to best
-   accommodate the needs of the various applications on a same client.
-   It should be noted that these "flows" are identified by UDP 4-tuples
-   and belong to the same network attachment of a user.
-
-   Prioritizing between flows, even for the same user/subscriber,
-   presents the following challenges:
-
-   1.  Identification and authentication of legitimate applications on
-       the client.  The remote peers can also be malicious and benign.
-
-   2.  Identifying whether the traffic belongs to a single user or
-       multiple users from a single network attachment (e.g., tethering
-       or LAN connected to a CPE).  The network will enforce per-
-       subscriber policies, not per-client.
-
-   3.  Enforcing fairness to all the flows belonging to a single client.
-       For example, it is a challenge to prevent a platform from marking
-       certain flows as low priority at platform layer, bypassing the
-       application, to (de)prioritize certain applications over all the
-       other applications on the same client.  Such unfairness can be
-       revealed during certification or public benchmark efforts,
-       though.
-
-   Taking into account these challenges, and despite the use case is
-   described in the document, *inter-flow (de)prioritization
-   requirements are out of the scope of this document*.
+   PLACEHOLDER for relevant content.
 
 5.2.  Server-Network Metadata
 
