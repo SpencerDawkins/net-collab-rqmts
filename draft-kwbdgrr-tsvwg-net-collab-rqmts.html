@@ -1505,25 +1505,66 @@ and WLAN/ISP networks.  When a bottleneck exists temporarily, the
 network has no choice but to discard or delay packets -- which can
 harm certain flows and, thus, lead to suboptimal perceived experience.
 In this document, this is termed 'reactive policy'.<a href="#section-1-8" class="pilcrow">¶</a></p>
-<div id="Figure-netshaper">
+<span id="name-metadata-and-network-shapin"></span><div id="Figure-netshaper">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-1-9.1">
-<pre>
-             (A)Application signaling (client – server)
-        +---------------------------------------------------+
-       /                                                     \
-   +--+---+              +----------+                       +--+---+
-   |      |    (C)H2N    |          |                       |      |
-   |      |&lt;------------&gt;|+---- ---+|                       |      |
-   |      |              || Network||  downstream packet    |      |
-   |      |&lt;==============+ Shaper &lt;========================|      |
-   |      |&lt;^^^^^^^^^^^^^^+--------+^^^^^^^^^^^^^^^^^^^^^^^^|      |
-   |      |              |          |(B)on-path S2N metadata|      |
-   +------+              +----------+                       +------+
-    Client                  Router                           Server
-</pre>
+        <div id="section-1-9.1">
+          <div class="alignCenter art-svg artwork" id="section-1-9.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="560" viewBox="0 0 560 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,80 L 8,176" fill="none" stroke="black"></path>
+              <path d="M 64,80 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 184,176" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 200,160" fill="none" stroke="black"></path>
+              <path d="M 272,112 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 288,80 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 496,176" fill="none" stroke="black"></path>
+              <path d="M 552,80 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 48,48 L 504,48" fill="none" stroke="black"></path>
+              <path d="M 8,80 L 64,80" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 288,80" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 552,80" fill="none" stroke="black"></path>
+              <path d="M 72,112 L 176,112" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 272,112" fill="none" stroke="black"></path>
+              <path d="M 72,142 L 200,142" fill="none" stroke="black"></path>
+              <path d="M 72,146 L 200,146" fill="none" stroke="black"></path>
+              <path d="M 280,142 L 496,142" fill="none" stroke="black"></path>
+              <path d="M 280,146 L 496,146" fill="none" stroke="black"></path>
+              <path d="M 200,160 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,176 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 504,48 L 520,80" fill="none" stroke="black"></path>
+              <path d="M 32,80 L 48,48" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="288,144 276,138.4 276,149.6" fill="black" transform="rotate(180,280,144)"></polygon>
+              <polygon class="arrowhead" points="184,112 172,106.4 172,117.6" fill="black" transform="rotate(0,176,112)"></polygon>
+              <polygon class="arrowhead" points="80,144 68,138.4 68,149.6" fill="black" transform="rotate(180,72,144)"></polygon>
+              <polygon class="arrowhead" points="80,112 68,106.4 68,117.6" fill="black" transform="rotate(180,72,112)"></polygon>
+              <g class="text">
+                <text x="112" y="36">(A)</text>
+                <text x="176" y="36">Application</text>
+                <text x="264" y="36">signaling</text>
+                <text x="336" y="36">(client</text>
+                <text x="376" y="36">-</text>
+                <text x="416" y="36">server)</text>
+                <text x="104" y="100">(C)</text>
+                <text x="136" y="100">C2N</text>
+                <text x="240" y="132">Network</text>
+                <text x="348" y="132">downstream</text>
+                <text x="420" y="132">packet</text>
+                <text x="236" y="148">Shaper</text>
+                <text x="312" y="164">(B)</text>
+                <text x="360" y="164">on-path</text>
+                <text x="408" y="164">S2N</text>
+                <text x="460" y="164">metadata</text>
+                <text x="36" y="196">Client</text>
+                <text x="236" y="196">Router</text>
+                <text x="524" y="196">Server</text>
+              </g>
+            </svg><a href="#section-1-9.1.1" class="pilcrow">¶</a>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-metadata-and-network-shapin" class="selfRef">Metadata and Network Shaping</a>
+        </figcaption></figure>
 </div>
 <p id="section-1-10"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path
 of packets from Server to Client.  A network shaper in the router

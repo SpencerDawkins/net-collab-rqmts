@@ -219,20 +219,19 @@ Table of Contents
    certain flows and, thus, lead to suboptimal perceived experience.  In
    this document, this is termed 'reactive policy'.
 
-                (A)Application signaling (client – server)
-           +---------------------------------------------------+
-          /                                                     \
-      +--+---+              +----------+                       +--+---+
-      |      |    (C)H2N    |          |                       |      |
-      |      |<------------>|+---- ---+|                       |      |
-      |      |              || Network||  downstream packet    |      |
-      |      |<==============+ Shaper <========================|      |
-      |      |<^^^^^^^^^^^^^^+--------+^^^^^^^^^^^^^^^^^^^^^^^^|      |
-      |      |              |          |(B)on-path S2N metadata|      |
-      +------+              +----------+                       +------+
-       Client                  Router                           Server
+               (A) Application signaling (client - server)
+        +--------------------------------------------------------+
+       /                                                          \
+   +--+---+              +------------+                         +--+---+
+   |      |   (C) C2N    |            |                         |      |
+   |      |<------------>| +--------+ |                         |      |
+   |      |              | | Network| |  downstream packet      |      |
+   |      |<=============+=+ Shaper +<+=========================+      |
+   |      |              | +--------+ | (B) on-path S2N metadata|      |
+   +------+              +------------+                         +------+
+    Client                   Router                              Server
 
-                                  Figure 2
+                   Figure 2: Metadata and Network Shaping
 
    Figure 2 shows a bottleneck (access) router on the path of packets
    from Server to Client.  A network shaper in the router manages QoS of
