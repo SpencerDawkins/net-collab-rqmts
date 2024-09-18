@@ -441,15 +441,79 @@ Requirement: REQ-PACKET-PRIORITY.
 Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
 Remote Desktop Virtualization, eXtended Reality (XR).
 
-## Honoring of Metadata for Servers Behind a Gateway
+## Client Negotiating Metadata Support
 
-In enterprise networks and remote desktop use case, a server can
-host multiple connections with varying type of traffic. These servers
-are often exposed to the Internet through some sort of a gateway-proxy
-and the signaling (like DSCP bits) from these servers are often
-ignored by the access/transit networks.
+Currently, some flows are granted higher priority over other flows
+because of a contractual agreement between the ISP and the content
+provider. These contracts could be extended to also allow per-packet
+prioritization within a single UDP 4-tuple, as desired by this
+document.  However, extending these contracts would disadvantage
+content providers and other servers that cannot obtain such a contract
+or have traffic that is difficult or impossible for the ISP to
+identify and provide such service.
 
-Requirement: REQ-CLIENT-DECIDES.
+For such applications to benefit from per-packet prioritization within
+a single UDP 4-tuple, the client needs to determine which per-packet
+markings are supported by the ISP (e.g., encoded into IPv6 Flow Label,
+UDP Option, DSCP).  Then it can indicate to the ISP that a
+certain UDP 4-tuple will have those markings.
+
+This is achieved through two requirements described below,
+REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+
+Signaling to the network ({{client-network}}, {{server-network}})
+will need to be facilitated by Application Programming Interfaces
+(APIs) for any application to use them. Signaling and retrieval of
+the signals may not be performed at a single layer (although not
+encouraged). Hence, a framework is required to abstract the underlying
+protocol(s) and allow the application(s) to retrieve/send signals
+using a single or a set of API(s) independent of the channels that
+are used to convey the signals.  The API framework is required even
+if one single channel is used so that any application can consume
+the signals.
+
+There might be many channels to signal the metadata such as
+(non-exhaustive list):
+
+* Application layer
+
+* TCP options {{?RFC9293}}
+
+* UDP Options {{?I-D.ietf-tsvwg-udp-options}}
+
+* IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
+
+* QUIC CID mapping
+
+* ICMP messages
+
+Requirement:
+
+REQ-API-FRAMEWORK:
+: API framework to facilitate signaling for applications.
+
+REQ-CLIENT-DECIDES:
+: Client signals upstream networks about incoming packet metadata markings
+
+~~~~~aasvg
+     Client                                           ISP router
+       |                                                   |
+       |-------------------------------------------------->|
+       | Network Collaboration Capabilites?                |
+       |                                                   |
+       |<--------------------------------------------------|
+       | my Network Collaboration capabilities             |
+       |                                                   |
+       |-------------------------------------------------->|
+       | Network Collaboration signaled in IPv6 Hop-by-Hop |
+       |                                                   |
+       |<--------------------------------------------------|
+       | ok                                                |
+
+~~~~~
+{: #client-learn artwork-align="center" title="API Framework: Client
+learns ISP capabilities and signals how incoming IP packets will
+signal network collaboration"}
 
 
 # On-path Metadata Requirements {#metadata-req}
@@ -613,39 +677,6 @@ package and connectivity SLOs to ensure optimal delivery for all
 users (REQ-METADATA-ACCURACY).
 
 Requirement: REQ-METADATA-ACCURACY.
-
-## Exposure Handling {#exposure-handling}
-
-Signaling to the network ({{client-network}}, {{server-network}})
-will need to be facilitated by Application Programming Interfaces
-(APIs) for any application to use them. Signaling and retrieval of
-the signals may not be performed at a single layer (although not
-encouraged). Hence, a framework is required to abstract the underlying
-protocol(s) and allow the application(s) to retrieve/send signals
-using a single or a set of API(s) independent of the channels that
-are used to convey the signals.  The API framework is required even
-if one single channel is used so that any application can consume
-the signals.
-
-There might be many channels to signal the metadata such as
-(non-exhaustive list):
-
-* Application layer
-
-* TCP options {{?RFC9293}}
-
-* UDP Options {{?I-D.ietf-tsvwg-udp-options}}
-
-* IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
-
-* QUIC CID mapping
-
-* ICMP messages
-
-Requirement:
-
-REQ-API-FRAMEWORK:
-: API framework to facilitate signaling for applications.
 
 ## Privacy Considerations {#privacy}
 
