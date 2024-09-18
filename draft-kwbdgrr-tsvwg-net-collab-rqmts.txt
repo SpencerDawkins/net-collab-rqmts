@@ -196,7 +196,7 @@ Table of Contents
           3GPP/mobile network
    +--------------------:----------------------+
    | +------+           :   +-----+    +-----+ |
-   | |client+-----------B---+radio+----+ CN | |
+   | |client+-----------B---+radio+----+  CN | |
    | +------+           :   +-----+    +--+--+ |
    +--------------------:-----------------|----+
                         :                 |
@@ -210,7 +210,7 @@ Table of Contents
                         :                      : Transit  :  Content
     User device/Network :    MNO/ISP Network   : Network  :  Network
 
-                                  Figure 1
+                   Figure 1: E2E Media Transport Overview
 
    Figure 1 shows where such bandwidth and performance constraints
    usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and
@@ -237,7 +237,7 @@ Table of Contents
    from Server to Client.  A network shaper in the router manages QoS of
    flows of multiple users and can buffer (delay), discard, or apply
    other flow control rules.  Application layer signaling and feedback
-   between Client – Server (A – in the figure) adjust transmission rate
+   between Client - Server (A - in the figure) adjust transmission rate
    over a period of several RTTs using feedback and congestion control
    algorithms.  Congestion control algorithms are generally conservative
    and settle to a steady rate that avoids excessive packet loss.  In
@@ -249,7 +249,7 @@ Table of Contents
    current CCA) and the media application is willing to tolerate some
    packet loss or delay of low priority packets.  Packet priority and
    tolerance to delay of packets in such a case would be provided on-
-   path in a side channel associated to the downstream packet (B – in
+   path in a side channel associated to the downstream packet (B - in
    the figure).  The requirements for this server-to-network (S2N)
    metadata are described in Section 5.2.  The client may provide
    information to an (access) router to drop lower priority marked
@@ -466,7 +466,7 @@ Table of Contents
    The metadata connections may be between server and network (in either
    direction) or between client and network (in either direction).
 
-   Some use cases benefit from server – network metadata exchanges
+   Some use cases benefit from server - network metadata exchanges
    (Section 5.2) and others need client involvement (Section 5.1).
 
    For the requirements that follow, the assumption is that the client
@@ -589,7 +589,7 @@ Table of Contents
 
    The entire set of operations to manage traffic is beyond the scope of
    this document.  This section focuses on operational constraints that
-   impact server–network, and client–network modes of sending metadata.
+   impact server-network, and client-network modes of sending metadata.
 
 6.1.  Policy Enforcement
 
@@ -966,13 +966,13 @@ Appendix A.  Network Attachment
    +--------------+  Network |          |      |            |
    |              |attachment|          v      |            |
    | +----+  .--------------------------+-.    |            |
-   | | A1 +-+----------- flow-x3 ----------+----------------+
+   | | A1 +-+----------- flow-x3 ----------+---|------------+
    | +----+  '----------------------------'    |
    |              |          |                 |
    +--------------+          +-----------------+
      Client-2                  Router
 
-                                  Figure 3
+            Figure 3: E2E transport flows and connection session
 
    Figure 3 shows "Client-1" and "Client-2" which negotiate connection
    policy (e.g., QoS) and other aspects like mobility handling, charging

@@ -1373,7 +1373,7 @@ header extensions and Contributing sources (CSRCs). Furthermore, a
 full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
 any media header information that on-path network elements can use
 for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<div id="Figure-e2e">
+<span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
 <figure id="figure-1">
         <div id="section-1-7.1">
           <div class="alignLeft art-svg artwork" id="section-1-7.1.1">
@@ -1395,10 +1395,9 @@ for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
               <path d="M 288,192 L 288,224" fill="none" stroke="black"></path>
               <path d="M 296,80 L 296,112" fill="none" stroke="black"></path>
               <path d="M 320,112 L 320,192" fill="none" stroke="black"></path>
-              <path d="M 336,88 L 336,104" fill="none" stroke="black"></path>
+              <path d="M 344,80 L 344,112" fill="none" stroke="black"></path>
               <path d="M 344,192 L 344,224" fill="none" stroke="black"></path>
-              <path d="M 360,64 L 360,80" fill="none" stroke="black"></path>
-              <path d="M 360,112 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 360,64 L 360,128" fill="none" stroke="black"></path>
               <path d="M 376,192 L 376,224" fill="none" stroke="black"></path>
               <path d="M 432,192 L 432,224" fill="none" stroke="black"></path>
               <path d="M 464,192 L 464,224" fill="none" stroke="black"></path>
@@ -1407,13 +1406,13 @@ for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
               <path d="M 184,64 L 360,64" fill="none" stroke="black"></path>
               <path d="M 24,80 L 80,80" fill="none" stroke="black"></path>
               <path d="M 208,80 L 256,80" fill="none" stroke="black"></path>
-              <path d="M 296,80 L 336,80" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 344,80" fill="none" stroke="black"></path>
               <path d="M 80,96 L 168,96" fill="none" stroke="black"></path>
               <path d="M 184,96 L 208,96" fill="none" stroke="black"></path>
               <path d="M 256,96 L 296,96" fill="none" stroke="black"></path>
               <path d="M 24,112 L 80,112" fill="none" stroke="black"></path>
               <path d="M 208,112 L 256,112" fill="none" stroke="black"></path>
-              <path d="M 296,112 L 336,112" fill="none" stroke="black"></path>
+              <path d="M 296,112 L 344,112" fill="none" stroke="black"></path>
               <path d="M 8,128 L 168,128" fill="none" stroke="black"></path>
               <path d="M 184,128 L 312,128" fill="none" stroke="black"></path>
               <path d="M 328,128 L 360,128" fill="none" stroke="black"></path>
@@ -1438,8 +1437,6 @@ for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
               <path d="M 464,224 L 520,224" fill="none" stroke="black"></path>
               <path d="M 8,240 L 168,240" fill="none" stroke="black"></path>
               <path d="M 184,240 L 272,240" fill="none" stroke="black"></path>
-              <path d="M 336,80 C 344.83064,80 352,87.16936 352,96" fill="none" stroke="black"></path>
-              <path d="M 336,112 C 344.83064,112 352,104.83064 352,96" fill="none" stroke="black"></path>
               <g class="text">
                 <text x="176" y="36">:</text>
                 <text x="104" y="52">3GPP/mobile</text>
@@ -1449,7 +1446,7 @@ for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
                 <text x="52" y="100">client</text>
                 <text x="176" y="100">B</text>
                 <text x="232" y="100">radio</text>
-                <text x="316" y="100">CN</text>
+                <text x="324" y="100">CN</text>
                 <text x="176" y="116">:</text>
                 <text x="176" y="132">:</text>
                 <text x="176" y="148">:</text>
@@ -1497,7 +1494,9 @@ for forwarding decisions.<a href="#section-1-6" class="pilcrow">¶</a></p>
             </svg><a href="#section-1-7.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-e2e-media-transport-overvie" class="selfRef">E2E Media Transport Overview</a>
+        </figcaption></figure>
 </div>
 <p id="section-1-8"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints
 usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
@@ -1570,7 +1569,7 @@ In this document, this is termed 'reactive policy'.<a href="#section-1-8" class=
 of packets from Server to Client.  A network shaper in the router
 manages QoS of flows of multiple users and can buffer (delay),
 discard, or apply other flow control rules. Application layer
-signaling and feedback between Client – Server (A – in the figure)
+signaling and feedback between Client - Server (A - in the figure)
 adjust transmission rate over a period of several RTTs using feedback
 and congestion control algorithms.  Congestion control algorithms
 are generally conservative and settle to a steady rate that avoids
@@ -1583,7 +1582,7 @@ applications can obtain better QoE when sending at a higher rate
 willing to tolerate some packet loss or delay of low priority
 packets.  Packet priority and tolerance to delay of packets in such
 a case would be provided on-path in a side channel associated to
-the downstream packet (B – in the figure).  The requirements for this
+the downstream packet (B - in the figure).  The requirements for this
 server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 5.2</a>.
 The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
@@ -1864,7 +1863,7 @@ need application identity, application cause (or 'reason'), server
 identity or the inspection of client-to-server encrypted payload.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The metadata connections may be between server and network (in
 either direction) or between client and network (in either direction).<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Some use cases benefit from server – network metadata exchanges
+<p id="section-5-4">Some use cases benefit from server - network metadata exchanges
 (<a href="#server-network" class="auto internal xref">Section 5.2</a>) and others need client involvement
 (<a href="#client-network" class="auto internal xref">Section 5.1</a>).<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">For the requirements that follow, the assumption is that the client
@@ -2003,7 +2002,7 @@ Effort Per-Domain Behavior (LE PDB) <span>[<a href="#RFC3662" class="cite xref">
 among others. The exact behavior is policy-based and deployment-specific.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The entire set of operations to manage traffic is beyond the scope
 of this document.  This section focuses on operational constraints
-that impact  server–network, and client–network modes of sending
+that impact  server-network, and client-network modes of sending
 metadata.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="policy">
 <section id="section-6.1">
@@ -2406,7 +2405,7 @@ flows, and QoS/policy discussed in <a href="#metadata-req" class="auto internal 
 <p id="appendix-A-3">The requirements in <a href="#metadata-req" class="auto internal xref">Section 5</a> apply to data units like frames
 within a flow, but not between flows. Specifically, this document
 does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
-<div id="Figure-conn-flow">
+<span id="name-e2e-transport-flows-and-con"></span><div id="Figure-conn-flow">
 <figure id="figure-3">
         <div id="appendix-A-4.1">
           <div class="alignLeft art-svg artwork" id="appendix-A-4.1.1">
@@ -2434,8 +2433,7 @@ does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="
               <path d="M 288,144 L 288,160" fill="none" stroke="black"></path>
               <path d="M 304,80 L 304,280" fill="none" stroke="black"></path>
               <path d="M 344,48 L 344,80" fill="none" stroke="black"></path>
-              <path d="M 360,32 L 360,296" fill="none" stroke="black"></path>
-              <path d="M 360,312 L 360,352" fill="none" stroke="black"></path>
+              <path d="M 360,32 L 360,352" fill="none" stroke="black"></path>
               <path d="M 424,80 L 424,112" fill="none" stroke="black"></path>
               <path d="M 440,208 L 440,240" fill="none" stroke="black"></path>
               <path d="M 448,112 L 448,144" fill="none" stroke="black"></path>
@@ -2470,7 +2468,8 @@ does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="
               <path d="M 24,288 L 64,288" fill="none" stroke="black"></path>
               <path d="M 96,288 L 312,288" fill="none" stroke="black"></path>
               <path d="M 64,304 L 168,304" fill="none" stroke="black"></path>
-              <path d="M 248,304 L 464,304" fill="none" stroke="black"></path>
+              <path d="M 248,304 L 352,304" fill="none" stroke="black"></path>
+              <path d="M 368,304 L 464,304" fill="none" stroke="black"></path>
               <path d="M 24,320 L 64,320" fill="none" stroke="black"></path>
               <path d="M 96,320 L 312,320" fill="none" stroke="black"></path>
               <path d="M 8,352 L 128,352" fill="none" stroke="black"></path>
@@ -2507,7 +2506,9 @@ does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="
             </svg><a href="#appendix-A-4.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a></figcaption></figure>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-e2e-transport-flows-and-con" class="selfRef">E2E transport flows and connection session</a>
+        </figcaption></figure>
 </div>
 <p id="appendix-A-5"><a href="#Figure-conn-flow" class="auto internal xref">Figure 3</a> shows "Client-1" and "Client-2" which negotiate
 connection policy (e.g., QoS) and other aspects like mobility
