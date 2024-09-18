@@ -505,7 +505,7 @@ REQ-CLIENT-DECIDES:
        | my Network Collaboration capabilities             |
        |                                                   |
        |-------------------------------------------------->|
-       | Network Collaboration signaled in IPv6 Hop-by-Hop |
+       | Network Collaboration signals                     |
        |                                                   |
        |<--------------------------------------------------|
        | ok                                                |
