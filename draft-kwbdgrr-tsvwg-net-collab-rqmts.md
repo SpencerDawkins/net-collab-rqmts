@@ -480,37 +480,7 @@ or between the client and network.
 
 ## Client-Network Metadata {#client-network}
 
-### Priority between Flows (Inter-flow) {#interflow-priority}
-
-Certain flows being received by a client (or by an application on
-a client) are less or more important than other flows of *the same
-client*. By signaling the relative importance of flows to a network
-element, the network element can (de-)prioritize those flows to
-best accommodate the needs of the various applications on a same
-client. It should be noted that these "flows" are identified by UDP
-4-tuples and belong to the same network attachment of a user.
-
-Prioritizing between flows, even for the same user/subscriber,
-presents the following challenges:
-
-  1. Identification and authentication of legitimate applications
-  on the client. The remote peers can also be malicious and benign.
-
-  2. Identifying whether the traffic belongs to a single user or
-  multiple users from a single network attachment (e.g., tethering or
-  LAN connected to a CPE). The network will enforce per-subscriber
-  policies, not per-client.
-
-  3. Enforcing fairness to all the flows belonging to a single
-  client. For example, it is a challenge to prevent a platform from
-  marking certain flows as low priority at platform layer, bypassing
-  the application, to (de)prioritize certain applications over all the
-  other applications on the same client. Such unfairness can be
-  revealed during certification or public benchmark efforts, though.
-
-Taking into account these challenges, and despite the use case is
-described in the document, **inter-flow (de)prioritization requirements
-are out of the scope of this document**.
+PLACEHOLDER for relevant content.
 
 ## Server-Network Metadata {#server-network}
 
