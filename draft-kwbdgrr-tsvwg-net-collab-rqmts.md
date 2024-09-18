@@ -212,7 +212,7 @@ usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
 and WLAN/ISP networks.  When a bottleneck exists temporarily, the
 network has no choice but to discard or delay packets -- which can
 harm certain flows and, thus, lead to suboptimal perceived experience.
-In this document, this is termed 'reactive policy'.
+In this document, this is termed 'Reactive Management'.
 
 ~~~~~~~~
 
@@ -299,8 +299,7 @@ Intentional Management:
 quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
 
 Reactive Management:
-: Network reactions to congestion events or
-protection polices under attacks, with very short to very long
+: network policies which react to congestion events with very short to very long
 durations (e.g., varying wireless and mobile air interface conditions).
 
 Traffic shaping:
@@ -387,7 +386,7 @@ distinguished so that full frames can be indicated to the network.
 
 Requirement: REQ-MEDIA-KEYFRAME.
 
-4. In loss-prone networks or during reactive policy events, all
+4. In loss-prone networks or during Reactive Management events, all
 packets being treated the same can have challenges in efficiently
 handling/forwarding data (retransmissions are expensive). There is no
 way to identify packets which can be dropped, with little impact to
