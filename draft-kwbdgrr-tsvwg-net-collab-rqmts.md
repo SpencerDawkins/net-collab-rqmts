@@ -191,7 +191,7 @@ for forwarding decisions.
        3GPP/mobile network
 +--------------------:----------------------+
 | +------+           :   +-----+    +-----+ |
-| |client+-----------B---+radio+----+ CN | |
+| |client+-----------B---+radio+----+  CN | |
 | +------+           :   +-----+    +--+--+ |
 +--------------------:-----------------|----+
                      :                 |
@@ -205,7 +205,7 @@ for forwarding decisions.
                      :                      : Transit  :  Content
  User device/Network :    MNO/ISP Network   : Network  :  Network
 ~~~~~~~~
-{: #Figure-e2e title=”E2E Media Transport Overview”}
+{: #Figure-e2e title="E2E Media Transport Overview"}
 
 {{Figure-e2e}} shows where such bandwidth and performance constraints
 usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
@@ -233,7 +233,7 @@ In this document, this is termed 'reactive policy'.
 of packets from Server to Client.  A network shaper in the router
 manages QoS of flows of multiple users and can buffer (delay),
 discard, or apply other flow control rules. Application layer
-signaling and feedback between Client – Server (A – in the figure)
+signaling and feedback between Client - Server (A - in the figure)
 adjust transmission rate over a period of several RTTs using feedback
 and congestion control algorithms.  Congestion control algorithms
 are generally conservative and settle to a steady rate that avoids
@@ -246,7 +246,7 @@ applications can obtain better QoE when sending at a higher rate
 willing to tolerate some packet loss or delay of low priority
 packets.  Packet priority and tolerance to delay of packets in such
 a case would be provided on-path in a side channel associated to
-the downstream packet (B – in the figure).  The requirements for this
+the downstream packet (B - in the figure).  The requirements for this
 server-to-network (S2N) metadata are described in {{server-network}}.
 The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
@@ -468,7 +468,7 @@ identity or the inspection of client-to-server encrypted payload.
 The metadata connections may be between server and network (in
 either direction) or between client and network (in either direction).
 
-Some use cases benefit from server – network metadata exchanges
+Some use cases benefit from server - network metadata exchanges
 ({{server-network}}) and others need client involvement
 ({{client-network}}).
 
@@ -592,7 +592,7 @@ among others. The exact behavior is policy-based and deployment-specific.
 
 The entire set of operations to manage traffic is beyond the scope
 of this document.  This section focuses on operational constraints
-that impact  server–network, and client–network modes of sending
+that impact  server-network, and client-network modes of sending
 metadata.
 
 ## Policy Enforcement {#policy}
@@ -840,13 +840,13 @@ does not discuss flows of distinct clients/users.
 +--------------+  Network |          |      |            |
 |              |attachment|          v      |            |
 | +----+  .--------------------------+-.    |            |
-| | A1 +-+----------- flow-x3 ----------+----------------+
+| | A1 +-+----------- flow-x3 ----------+---|------------+
 | +----+  '----------------------------'    |
 |              |          |                 |
 +--------------+          +-----------------+
   Client-2                  Router
 ~~~~~~~~
-{: #Figure-conn-flow title=”E2E transport flows and connection session”}
+{: #Figure-conn-flow title="E2E transport flows and connection session"}
 
 
 {{Figure-conn-flow}} shows "Client-1" and "Client-2" which negotiate
