@@ -566,7 +566,7 @@ application or the user. The application server can decide on the
 metadata values that provide the best handling for the packets of
 the flow and may not necessarily reflect the exact priority values
 that allow an on-path observer to perform traffic analysis. This
-metadata is advisory in nature and network traffic policy ({{policy}})
+metadata is advisory in nature and network traffic policy
 that restricts its use would not result in additional issues. Other
 constraints including scale ({{scalability}}) and continuity
 ({{continuity}}) are required for {{relative-priority}}.
@@ -646,23 +646,6 @@ The entire set of operations to manage traffic is beyond the scope
 of this document.  This section focuses on operational constraints
 that impact  server-network, and client-network modes of sending
 metadata.
-
-## Policy Enforcement {#policy}
-
-Some metadata requires the network to share some hints with the
-client/server to adjust its behavior for some specific flows.
-However, that metadata may have a dependency on the service offering
-that is subscribed by a user.
-
-Let us consider the example of a bitrate for an optimized video
-delivery. *Such bitrate may not be computed system-wide* given that
-flows from users with distinct service offerings (and connectivity
-SLOs) may be serviced by the same network nodes. Instead, the network
-needs to dynamically adjust the bitrate based on each user's service
-package and connectivity SLOs to ensure optimal delivery for all
-users (REQ-METADATA-ACCURACY).
-
-Requirement: REQ-METADATA-ACCURACY.
 
 ## Privacy Considerations {#privacy}
 
