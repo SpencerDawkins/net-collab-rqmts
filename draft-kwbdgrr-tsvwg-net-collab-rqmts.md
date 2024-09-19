@@ -455,7 +455,7 @@ identify and provide such service.
 For such applications to benefit from per-packet prioritization within
 a single UDP 4-tuple, the client needs to determine which per-packet
 markings are supported by the ISP (e.g., encoded into IPv6 Flow Label,
-UDP Option, DSCP).  Then it can indicate to the ISP that a
+UDP Option, or DSCP).  Then it can indicate to the ISP's network that a
 certain UDP 4-tuple will have those markings.
 
 This is achieved through two requirements described below,
@@ -467,9 +467,9 @@ will need to be facilitated by Application Programming Interfaces
 the signals may not be performed at a single layer (although not
 encouraged). Hence, a framework is required to abstract the underlying
 protocol(s) and allow the application(s) to retrieve/send signals
-using a single or a set of API(s) independent of the channels that
+using a single or a set of APIs independent of the channels that
 are used to convey the signals.  The API framework is required even
-if one single channel is used so that any application can consume
+if one single channel is used so that any application on a client can consume
 the signals.
 
 There might be many channels to signal the metadata such as
