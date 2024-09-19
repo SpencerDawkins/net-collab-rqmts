@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 22 March 2025                              Cloud Software Group
+Expires: 23 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 22 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       18 September 2024
+                                                       19 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2025.
+   This Internet-Draft will expire on 23 March 2025.
 
 Copyright Notice
 
@@ -217,7 +217,7 @@ Table of Contents
    WLAN/ISP networks.  When a bottleneck exists temporarily, the network
    has no choice but to discard or delay packets -- which can harm
    certain flows and, thus, lead to suboptimal perceived experience.  In
-   this document, this is termed 'reactive policy'.
+   this document, this is termed 'Reactive Management'.
 
                (A) Application signaling (client - server)
         +--------------------------------------------------------+
@@ -298,10 +298,12 @@ Table of Contents
       quota or bandwidth limit, or quality (delay and/or jitter))
       assurances.
 
-   Reactive Management:  Network reactions to congestion events or
-      protection polices under attacks, with very short to very long
-      durations (e.g., varying wireless and mobile air interface
-      conditions).
+   Reactive Management:  Network management actions that are undertaken
+      as a reaction to unplanned overload events.  Concretely, this
+      includes policies which react to congestion events with very short
+      to very long durations (e.g., varying wireless and mobile air
+      interface conditions) or protection policies to soften the impact
+      of ongoing attacks.
 
    Traffic shaping:  Refers in this document to QoS management at an
       access router to delay or discard packets of lower priority to
@@ -384,7 +386,7 @@ Table of Contents
 
    Requirement: REQ-MEDIA-KEYFRAME.
 
-   1.  In loss-prone networks or during reactive policy events, all
+   1.  In loss-prone networks or during Reactive Management events, all
        packets being treated the same can have challenges in efficiently
        handling/forwarding data (retransmissions are expensive).  There
        is no way to identify packets which can be dropped, with little
