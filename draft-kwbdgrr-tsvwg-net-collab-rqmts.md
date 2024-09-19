@@ -330,14 +330,14 @@ Use Case Requirements Definition
 REQ-MEDIA-AV-SEPARATE:
 : Audio can be prioritized differently than video.
 : This requirement may be generalized to non-media packet types.
-:This is a per-flow metadata requirement. 
+: This is a per-flow metadata requirement.
 
 REQ-PAYLOAD-CLIENT-DECIDES:
 : The ability of the receiver to change the priority by communicating
 to the network to prioritize one payload(metadata) over another within
 the flow -- without cooperation of the sender. Gives the sender the
 ability to have same metadata for all the connections without having
-to change based on the user preference, aids in scalability. 
+to change based on the user preference, aids in scalability.
 : This is a per-flow metadata requirement.
 
 REQ-MEDIA-KEYFRAME:
