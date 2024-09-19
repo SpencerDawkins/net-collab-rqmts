@@ -309,14 +309,14 @@ access router to delay or discard packets of lower priority
 to achieve bounded latency and high throughput.
 
 
-# Types of Metdata Requirement
+# Types of Metadata Requirement
 
 ## Per Flow Metadata {#md-perflow}
 
 Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed.
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.
 
-Examples: Bitrate, Burst size.
+Examples: client request to honor per-packet metadata, preferences.
 
 ## Per Packet Metadata
 
@@ -324,44 +324,33 @@ Refers to metadata that varies packet to packet within the same flow, often capt
 the nature and characteristics of the traffic each packet carries.
 This needs to be communicated on a per packet basis.
 
-Examples: Packet Priority, Type of media frame
+Examples: Packet Priority, tolerance to delay
 
 
 # Use Cases {#uc}
 
-Use Case Requirements Definition
+Requirements:
 
-REQ-MEDIA-AV-SEPARATE:
-: Audio can be prioritized differently than video.
-: This requirement may be generalized to non-media packet types.
+REQ-CLIENT-DECIDES:
+: User/Client requests the network to honor the application's
+metadata signaling.
 : This is a per-flow metadata requirement.
 
 REQ-PAYLOAD-CLIENT-DECIDES:
-: The ability of the receiver to change the priority by communicating
-to the network to prioritize one payload(metadata) over another within
-the flow -- without cooperation of the sender. Gives the sender the
-ability to have same metadata for all the connections without having
-to change based on the user preference, aids in scalability.
+: The user/client requests the network to prioritize one payload (metadata values) over another within the flow (UDP 4-tuple).
+: Allows the server to send the same metadata to all downstream connections without having to change based on user preference.
 : This is a per-flow metadata requirement.
 
-REQ-MEDIA-KEYFRAME:
-: Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the
-network.
-: This is a per-packet metadata requirement.
-
 REQ-PACKET-PRIORITY:
-: Indicates the imporance of a packet within a flow, which helps intermediaries
+: Server indicates the importance of a packet within a flow. This allows the network
 to prioritize based on requirement and during reactive events. This
-priority value also can be used to indicate loss tolerance and the
-network elements can drop loss tolerant packets during reactive
+priority value may also be used to indicate loss tolerance and the
+network elements may drop loss tolerant packets during reactive
 events.
 : This is a per-packet metadata requirement.
 
-REQ-CLIENT-DECIDES:
-: User/Client indicating to the network to honor the application's
-metadata signaling.
-: This is a per-flow metadata requirement.
+
+
 
 ## Media Streaming {#uc-streaming}
 
@@ -370,36 +359,31 @@ containing a full video frame.  These frames are necessary to rebuild
 receiver state after loss of delta frames.  The key frames are
 therefore more critical to deliver to the receiver than delta frames.
 
-Use cases:
+Examples:
 
 1. Audio is more critical than video for many applications and should
 be prioritized differently than video.
-
-Requirement: REQ-MEDIA-AV-SEPARATE.
+The client may indicate this preference to the network by selecting the importance value of audio packets as the highest priority.<br>
+<br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
 2. The server (or relay) sends the same stream to many receivers,
-including the same metadata (especially with media over QUIC). A
-Client's need to differentiate priorities (e.g., video over audio or
-the other way around) is only achievable by signaling that priority
-inversion from the client to the ISP router (Audio is more critical
-for many applications but video takes priority in some cases).
-
+including the same metadata (especially with media over QUIC).
+Some clients prefer video over audio and others audio over video based on local network conditions.
+This results in priority inversion in some cases.<br>
+<br>
 Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
 3. Video contains partial frames and full frames, which need to be
 distinguished so that full frames can be indicated to the network.
-
-Requirement: REQ-MEDIA-KEYFRAME.
-
-4. In loss-prone networks or during Reactive Management events, all
-packets being treated the same can have challenges in efficiently
-handling/forwarding data (retransmissions are expensive). There is no
-way to identify packets which can be dropped, with little impact to
-performance.
-
+The application may, for example, mark all packets of key frames with the highest priority to indicate that they should not be dropped.<br>
+<br>
 Requirement: REQ-PACKET-PRIORITY.
 
-Examples: live broadcast, on-demand video streaming.
+4. In loss-prone networks or during Reactive Management events, if all packets of an application flow (UDP 4-tuple) such as live broadcast or on-demand video streaming are treated the same, it limits the ability to maximize network utilization and use the transiently available bandwidth.
+Dropping or delaying of (media) packets randomly is likely to lower network utilization and application performance.<br>
+<br>
+Requirement: REQ-PACKET-PRIORITY.
 
 
 ## Interactive Media {#uc-interactive}
@@ -412,18 +396,18 @@ user activity and interaction.
 Use cases:
 
 1. A mobile/roaming user prioritizes audio over video during a VoIP
-call to have a seamless meeting experience.
-
+call to have a seamless meeting experience.<br>
+<br>
 Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
 2. A remote desktop user prioritizes graphics updates over an on-going
-file copy operation.
-
-Requirement: REQ-PACKET-PRIORITY.
+file copy operation.<br>
+<br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
 3. A user types in/interacts with a document/file after triggering a
-save file operation, while save operation is on-going.
-
+save file operation, while save operation is on-going.<br>
+<br>
 Requirement: REQ-PACKET-PRIORITY.
 
 4. A game or VoIP application may want to signal different metadata
@@ -431,19 +415,17 @@ for the same type of packet in each direction. One user, in a VoIP
 conference call, wants to prioritize the slide deck being shared while
 the other wants to prioritize audio and other wants to prioritize
 video of the speaker. Each user's varied preferences can be catered
-with same type of metadata originating from the server.
-
+with same type of metadata originating from the server.<br>
+<br>
 Requirement: REQ-PAYLOAD-CLIENT-DECIDES
 
-5. A network glitch while user is in a eXtended Reality application.
+5. A network glitch mid-session in an eXtended Reality application or others such as VoIP (Peer-to-Peer (P2P), group conferencing), gaming, Remote Desktop Virtualization.
 The traffic comprises of haptic, video, audio, graphics update and
 keystrokes. During such reactive event, some packets need to be
-deprioritized/dropped to maintain interactivity.
-
+deprioritized/dropped to maintain interactivity.<br>
+<br>
 Requirement: REQ-PACKET-PRIORITY.
 
-Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
-Remote Desktop Virtualization, eXtended Reality (XR).
 
 ## Client Negotiating Metadata Support
 
@@ -896,6 +878,36 @@ such as media frames within flows like "flow-x1/x2/x3" but not
 between them.**
 
 # Extended Use-Cases
+
+Requirements:
+
+REQ-MEDIA-AV-SEPARATE:
+: Audio can be prioritized differently than video. This is a per-flow
+metadata requirement.
+
+REQ-MEDIA-KEYFRAME:
+: Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the
+network. This is a per-packet metadata requirement.
+
+## Media Streaming Extended
+
+Streaming video contains the occasional key frame ("I-frame")
+containing a full video frame.  These frames are necessary to rebuild
+receiver state after loss of delta frames.  The key frames are
+therefore more critical to deliver to the receiver than delta frames.
+
+Examples:
+
+1. Audio is more critical than video for many applications and should
+be prioritized differently than video.
+
+Requirement: REQ-MEDIA-AV-SEPARATE.
+
+2. Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.
+
+Requirement: REQ-MEDIA-KEYFRAME.
 
 ## Assisted Offload
 
