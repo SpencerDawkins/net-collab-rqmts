@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T01:07:25.000360+00:00",
+  "timestamp": "2024-09-19T01:21:42.020385+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -582,6 +582,24 @@
           "updatedAt": "2024-09-06T00:38:40Z"
         }
       ]
+    },
+    {
+      "number": 76,
+      "id": "I_kwDOL0HpzM6W7S63",
+      "title": "Client-Network metadata updates and Use case/requirements consolidation",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/76",
+      "state": "OPEN",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "John-Kaippallimalil"
+      ],
+      "labels": [],
+      "body": "1. Revise use case 4.3 to \"Client Negotiating Metadata Support\"\r\n\r\n2. Client-network metadata updates:\r\na) remove section \u201cPriority between flows\u201d (5.1.1). \r\nb) Add new section on how the network is made aware of the transport by which metadata is sent (new 5.1.1 ?)\r\n    Move 6.2 \u201cExposure Handling\u201d to this section.  Would the title \u201cTransport for Metadata Exposure\u201d be clearer for the reader'\r\n\r\n3. a) Rename section \"Operational Considerations\" -> \"System Considerations\"\r\n    b) Move 6.1 to Appendix (as it is related to SconePro)",
+      "createdAt": "2024-09-17T20:47:10Z",
+      "updatedAt": "2024-09-17T20:47:28Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -4319,25 +4337,35 @@
       "id": "PR_kwDOL0HpzM57XPro",
       "title": "describe mis-marking metadata as a mitigation for traffic analysis, and that there are different threat models. Unfortunately the line needed to be wrapped, so 'diff' is awkward",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/73",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-12T22:55:01Z",
-      "updatedAt": "2024-09-17T00:16:26Z",
+      "updatedAt": "2024-09-17T18:50:36Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "13f432ae28b57136d8ce68a8068fad9fb9b62df3",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "mis_mark",
-      "headRefOid": "a082cdf31ab83adcc13c058cd5d518f6122be2f5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "ee61d710a87d0f3cd17fcdf1beb332ab99f7a302",
+      "closedAt": "2024-09-17T18:50:36Z",
+      "mergedAt": "2024-09-17T18:50:36Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "f801ce19f00bb69903914891bbb4de9485493869"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "There is redundant text from various merges. Please see #75. Thanks.",
+          "createdAt": "2024-09-17T05:32:50Z",
+          "updatedAt": "2024-09-17T05:32:50Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOL0HpzM6JPI2Z",
@@ -4524,6 +4552,389 @@
           "body": "",
           "createdAt": "2024-09-16T05:57:49Z",
           "updatedAt": "2024-09-16T05:57:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOL0HpzM57tH88",
+      "title": "remove redundant text",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/75",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-17T05:30:46Z",
+      "updatedAt": "2024-09-17T17:50:27Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "mis_mark",
+      "baseRefOid": "a082cdf31ab83adcc13c058cd5d518f6122be2f5",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "redundant-text-from-mis_mark",
+      "headRefOid": "b1213c25a36010e622bdc336a38194768b48398c",
+      "closedAt": "2024-09-17T17:50:27Z",
+      "mergedAt": "2024-09-17T17:50:27Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "ee61d710a87d0f3cd17fcdf1beb332ab99f7a302"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JrdNO",
+          "commit": {
+            "abbreviatedOid": "b1213c2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-17T14:04:18Z",
+          "updatedAt": "2024-09-17T14:04:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOL0HpzM571VYP",
+      "title": "align Reactive Management definition with ATIS's ...",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/77",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "document ATIS-I-0000096, 'Content Classification for Traffic Optimization', available at https://atis.org/whitepapers/white-papers-a-z",
+      "createdAt": "2024-09-18T01:06:54Z",
+      "updatedAt": "2024-09-18T17:59:50Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "f801ce19f00bb69903914891bbb4de9485493869",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "reactive_definition",
+      "headRefOid": "109b33fd8dd9ff73d40602db8ad0d7c47bb4f4d3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6JxW5L",
+          "commit": {
+            "abbreviatedOid": "db2986a"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T01:13:56Z",
+          "updatedAt": "2024-09-18T01:13:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6JyKSX",
+          "commit": {
+            "abbreviatedOid": "db2986a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-18T05:18:36Z",
+          "updatedAt": "2024-09-18T05:20:36Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n: Network management actions that are undertaken as a reaction to unplanned overload events. Concretely, this includes policies which react to congestion events with very short to very long durations (e.g., varying wireless and mobile air interface conditions) or protection policies to soften the impact of ongoing attacks.\r\n```",
+              "createdAt": "2024-09-18T05:18:36Z",
+              "updatedAt": "2024-09-18T05:20:36Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-09-18T05:18:44Z",
+              "updatedAt": "2024-09-18T05:20:36Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "Dan's def is restrictive, IMO hence the proposed revised text.",
+              "createdAt": "2024-09-18T05:20:19Z",
+              "updatedAt": "2024-09-18T05:20:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6J30z5",
+          "commit": {
+            "abbreviatedOid": "db2986a"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T15:43:30Z",
+          "updatedAt": "2024-09-18T15:43:31Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Med's revision is clear.",
+              "createdAt": "2024-09-18T15:43:31Z",
+              "updatedAt": "2024-09-18T15:43:31Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOL0HpzM572TXJ",
+      "title": "Remove inter-flow section",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/78",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-18T05:32:32Z",
+      "updatedAt": "2024-09-18T18:01:00Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "f801ce19f00bb69903914891bbb4de9485493869",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "Remove-inter-flow",
+      "headRefOid": "da0f059c6e9fec67a24b295270bcbcc9dd703b75",
+      "closedAt": "2024-09-18T18:01:00Z",
+      "mergedAt": "2024-09-18T18:01:00Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "3e2cbe3a2e9863557331ac946c169cd6cd1b33ab"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6J3vsJ",
+          "commit": {
+            "abbreviatedOid": "da0f059"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good.",
+          "createdAt": "2024-09-18T15:35:08Z",
+          "updatedAt": "2024-09-18T15:35:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6J4D4T",
+          "commit": {
+            "abbreviatedOid": "da0f059"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T16:08:52Z",
+          "updatedAt": "2024-09-18T16:08:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6J46o7",
+          "commit": {
+            "abbreviatedOid": "da0f059"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T18:00:47Z",
+          "updatedAt": "2024-09-18T18:00:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOL0HpzM578GJY",
+      "title": "My attempt at issue #76: client signals and API requirement",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/79",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-18T18:45:39Z",
+      "updatedAt": "2024-09-19T00:47:31Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "3e2cbe3a2e9863557331ac946c169cd6cd1b33ab",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "dwing_issue_76",
+      "headRefOid": "75e810f98646645bdc7b162beb73e464cab68a9f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Updates to the use case address my offline comments on 4.3 ",
+          "createdAt": "2024-09-18T20:04:32Z",
+          "updatedAt": "2024-09-18T20:04:32Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Updates to the use case address my offline comments on 4.3\r\n\r\nIf this fixes #76, please close #76.",
+          "createdAt": "2024-09-19T00:47:11Z",
+          "updatedAt": "2024-09-19T00:47:11Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6J6O8K",
+          "commit": {
+            "abbreviatedOid": "ba12470"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "On line 508 \"Network Collaboration signaled in IPv6 Hop-by-Hop\", it may be better to not indicate IPv6 HbH as it is a solution.",
+          "createdAt": "2024-09-18T20:33:26Z",
+          "updatedAt": "2024-09-18T20:33:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOL0HpzM578IS-",
+      "title": "remove smartquotes and smartdash, replace with ASCII",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/80",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-18T18:51:43Z",
+      "updatedAt": "2024-09-18T19:55:38Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "f01c33b072970d156119e9448dd96c8e5221098a",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "fix_ascii_issues",
+      "headRefOid": "f7a4944cbef2235beb56d3a33cd9f26a1fc61e4f",
+      "closedAt": "2024-09-18T19:55:38Z",
+      "mergedAt": "2024-09-18T19:55:38Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "075c8c9ee8e4fc48f4228dd1285420446c34a1e9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6J5cfi",
+          "commit": {
+            "abbreviatedOid": "c8d5b0a"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T19:04:28Z",
+          "updatedAt": "2024-09-18T19:04:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "id": "PR_kwDOL0HpzM578Lxt",
+      "title": "convert another Figure to AASVG",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/81",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-18T19:01:24Z",
+      "updatedAt": "2024-09-18T19:31:47Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "3e2cbe3a2e9863557331ac946c169cd6cd1b33ab",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "aasvg_another",
+      "headRefOid": "bdc64a8722b603041f697c0c655ea5d480aa2ae4",
+      "closedAt": "2024-09-18T19:31:47Z",
+      "mergedAt": "2024-09-18T19:31:47Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "f01c33b072970d156119e9448dd96c8e5221098a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6J5cM_",
+          "commit": {
+            "abbreviatedOid": "bdc64a8"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T19:03:50Z",
+          "updatedAt": "2024-09-18T19:03:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 82,
+      "id": "PR_kwDOL0HpzM578v63",
+      "title": "Update draft-kwbdgrr-tsvwg-net-collab-rqmts.md",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/82",
+      "state": "MERGED",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Revision to Use Case Requirements (attempt is to minimize number of requirements) and Use Case sections \"Media Streaming\" and \"Interactive Media\".  \r\n\r\nNote: I've added <br> for the list to be numbered correctly and it does so well in the text revision that IETF sees.",
+      "createdAt": "2024-09-18T20:22:27Z",
+      "updatedAt": "2024-09-18T21:09:46Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "76-client-network-metadata-updates-and-use-caserequirements-consolidation",
+      "baseRefOid": "3e2cbe3a2e9863557331ac946c169cd6cd1b33ab",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "John-Kaippallimalil-patch-1",
+      "headRefOid": "083ccff7b14bf274d2ba309fb2b623009313e518",
+      "closedAt": "2024-09-18T21:09:45Z",
+      "mergedAt": "2024-09-18T21:09:45Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "a11c2fc9d1a538cbfac81a0738964867bb19b662"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6J6Vol",
+          "commit": {
+            "abbreviatedOid": "083ccff"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T20:48:17Z",
+          "updatedAt": "2024-09-18T20:48:17Z",
           "comments": []
         }
       ]
