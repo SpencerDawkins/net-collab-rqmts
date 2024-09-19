@@ -235,11 +235,12 @@ manages QoS of flows of multiple users and can buffer (delay),
 discard, or apply other flow control rules. Application layer
 signaling and feedback between Client - Server (A - in the figure)
 adjust transmission rate over a period of several RTTs using feedback
-and congestion control algorithms.  Congestion control algorithms
+and congestion control algorithms.  Congestion control algorithms (CCAs)
 are generally conservative and settle to a steady rate that avoids
 excessive packet loss.  In networks where link conditions (between
 Client and Router) vary significantly at timescales well below the
 RTT, this results in unused (wasted) bandwidth at short timescales.
+
 There is some research {{5G-Octopus}} to indicate that media
 applications can obtain better QoE when sending at a higher rate
 (less conservative than current CCA) and the media application is
@@ -248,10 +249,13 @@ packets.  Packet priority and tolerance to delay of packets in such
 a case would be provided on-path in a side channel associated to
 the downstream packet (B - in the figure).  The requirements for this
 server-to-network (S2N) metadata are described in {{server-network}}.
+
 The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
-which can in turn redirect bandwidth to other flows of that network
-attachment, especially during a reactive event.  Network shapers
+which can in turn allocate available bandwidth to other flows of that network
+attachment, especially during a reactive management event.
+
+Network shapers
 observe flows and apply policies to maximize performance but are
 not aware whether  there is a high preference for one flow (UDP
 4-tuple) over another flow belonging to the same user and network
