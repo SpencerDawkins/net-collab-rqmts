@@ -314,9 +314,9 @@ of a connection and thus can be exchanged once or as needed.
 
 Examples: Bitrate, Burst size.
 
-## Per Packet Metadata:
+## Per Packet Metadata
 
-Refers to metadata that varies packet to packet, often capturing
+Refers to metadata that varies packet to packet within the same flow, often capturing
 the nature and characteristics of the traffic each packet carries.
 This needs to be communicated on a per packet basis.
 
@@ -328,32 +328,36 @@ Examples: Packet Priority, Type of media frame
 Use Case Requirements Definition
 
 REQ-MEDIA-AV-SEPARATE:
-: Audio can be prioritized differently than video. This is a per-flow
-metadata requirement.
+: Audio can be prioritized differently than video.
+: This requirement may be generalized to non-media packet types.
+:This is a per-flow metadata requirement. 
 
 REQ-PAYLOAD-CLIENT-DECIDES:
 : The ability of the receiver to change the priority by communicating
 to the network to prioritize one payload(metadata) over another within
 the flow -- without cooperation of the sender. Gives the sender the
 ability to have same metadata for all the connections without having
-to change based on user preference, aids in scalability. This is a
-per-flow metadata requirement.
+to change based on the user preference, aids in scalability. 
+: This is a per-flow metadata requirement.
 
 REQ-MEDIA-KEYFRAME:
 : Video contains partial frames and full frames, which need to be
 distinguished so that full frames can be indicated to the
-network. This is a per-packet metadata requirement.
+network.
+: This is a per-packet metadata requirement.
 
 REQ-PACKET-PRIORITY:
-: Indicates the imporance of a packet, which helps the intermediaries
+: Indicates the imporance of a packet within a flow, which helps intermediaries
 to prioritize based on requirement and during reactive events. This
 priority value also can be used to indicate loss tolerance and the
 network elements can drop loss tolerant packets during reactive
 events.
+: This is a per-packet metadata requirement.
 
 REQ-CLIENT-DECIDES:
 : User/Client indicating to the network to honor the application's
-metadata signaling. This is a per-flow metadata requirement.
+metadata signaling.
+: This is a per-flow metadata requirement.
 
 ## Media Streaming {#uc-streaming}
 
