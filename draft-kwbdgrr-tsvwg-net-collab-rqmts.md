@@ -454,7 +454,7 @@ identify and provide such service.
 
 For such applications to benefit from per-packet prioritization within
 a single UDP 4-tuple, the client needs to determine which per-packet
-markings are supported by the ISP (e.g., encoded into IPv6 Flow Label,
+markings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,
 UDP Option, or DSCP).  Then it can indicate to the ISP's network that a
 certain UDP 4-tuple will have those markings.
 
