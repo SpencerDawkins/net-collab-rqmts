@@ -1849,47 +1849,39 @@ prioritized accordingly while maintaining scalability on the server.<a href="#se
 <ol start="1" type="1" class="normal type-1" id="section-5.2-6">
 <li id="section-5.2-6.1">
             <p id="section-5.2-6.1.1">A remote desktop user prioritizes graphics updates over an on-going
-file copy operation.<a href="#section-5.2-6.1.1" class="pilcrow">¶</a></p>
+file copy operation. A user types in/interacts with a document/file after triggering a
+save file operation, while save operation is on-going.<a href="#section-5.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <p id="section-5.2-7">Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.2-7" class="pilcrow">¶</a></p>
-<p id="section-5.2-8">Impact: By prioritizing graphic updates/interactive traffic over file copy, user's
-interactive experience is improved with lesser jitter.<a href="#section-5.2-8" class="pilcrow">¶</a></p>
+<p id="section-5.2-8">Impact: By prioritizing graphic updates/interactive traffic, user
+interactivity is improved with lesser jitter.<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.2-9">
 <li id="section-5.2-9.1">
-            <p id="section-5.2-9.1.1">A user types in/interacts with a document/file after triggering a
-save file operation, while save operation is on-going.<a href="#section-5.2-9.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-5.2-10">Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.2-10" class="pilcrow">¶</a></p>
-<p id="section-5.2-11">Impact: By prioritizing graphic updates/interactive traffic over file save, user's
-interactive experience is improved with lesser jitter.<a href="#section-5.2-11" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5.2-12">
-<li id="section-5.2-12.1">
-            <p id="section-5.2-12.1.1">A game or VoIP application may want to signal different metadata
+            <p id="section-5.2-9.1.1">A game or VoIP application may want to signal different metadata
 for the same type of packet in each direction. One user, in a VoIP
 conference call, wants to prioritize the slide deck being shared while
 the other wants to prioritize audio and other wants to prioritize
 video of the speaker. Each user's varied preferences can be catered
-with same type of metadata originating from the server.<a href="#section-5.2-12.1.1" class="pilcrow">¶</a></p>
+with same type of metadata originating from the server.<a href="#section-5.2-9.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-5.2-13">Requirement: REQ-PAYLOAD-CLIENT-DECIDES<a href="#section-5.2-13" class="pilcrow">¶</a></p>
-<p id="section-5.2-14">Impact: With the above requirement met, each client/user preferences are
-prioritized accordingly while maintaining scalability on the server.<a href="#section-5.2-14" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5.2-15">
-<li id="section-5.2-15.1">
-            <p id="section-5.2-15.1.1">A network glitch while user is in a eXtended Reality application.
+<p id="section-5.2-10">Requirement: REQ-PAYLOAD-CLIENT-DECIDES<a href="#section-5.2-10" class="pilcrow">¶</a></p>
+<p id="section-5.2-11">Impact: With the above requirement met, each client/user preferences are
+prioritized accordingly while maintaining scalability on the server.<a href="#section-5.2-11" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.2-12">
+<li id="section-5.2-12.1">
+            <p id="section-5.2-12.1.1">A network glitch while user is in a eXtended Reality application.
 The traffic comprises of haptic, video, audio, graphics update and
 keystrokes. During such reactive event, some packets need to be
-deprioritized/dropped to maintain interactivity.<a href="#section-5.2-15.1.1" class="pilcrow">¶</a></p>
+deprioritized/dropped to maintain interactivity.<a href="#section-5.2-12.1.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-5.2-16">Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.2-16" class="pilcrow">¶</a></p>
-<p id="section-5.2-17">Impact: By prioritizing high priority traffic, user's
-interactive experience is improved with lesser jitter.<a href="#section-5.2-17" class="pilcrow">¶</a></p>
-<p id="section-5.2-18">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
-Remote Desktop Virtualization, eXtended Reality (XR).<a href="#section-5.2-18" class="pilcrow">¶</a></p>
+<p id="section-5.2-13">Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.2-13" class="pilcrow">¶</a></p>
+<p id="section-5.2-14">Impact: By prioritizing high priority traffic, user's
+interactive experience is improved with lesser jitter.<a href="#section-5.2-14" class="pilcrow">¶</a></p>
+<p id="section-5.2-15">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
+Remote Desktop Virtualization, eXtended Reality (XR).<a href="#section-5.2-15" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="honoring-of-metadata-for-servers-behind-a-gateway">

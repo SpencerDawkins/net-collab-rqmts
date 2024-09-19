@@ -448,20 +448,14 @@ Table of Contents
    server.
 
    1.  A remote desktop user prioritizes graphics updates over an on-
-       going file copy operation.
+       going file copy operation.  A user types in/interacts with a
+       document/file after triggering a save file operation, while save
+       operation is on-going.
 
    Requirement: REQ-PACKET-PRIORITY.
 
-   Impact: By prioritizing graphic updates/interactive traffic over file
-   copy, user's interactive experience is improved with lesser jitter.
-
-   1.  A user types in/interacts with a document/file after triggering a
-       save file operation, while save operation is on-going.
-
-   Requirement: REQ-PACKET-PRIORITY.
-
-   Impact: By prioritizing graphic updates/interactive traffic over file
-   save, user's interactive experience is improved with lesser jitter.
+   Impact: By prioritizing graphic updates/interactive traffic, user
+   interactivity is improved with lesser jitter.
 
    1.  A game or VoIP application may want to signal different metadata
        for the same type of packet in each direction.  One user, in a
