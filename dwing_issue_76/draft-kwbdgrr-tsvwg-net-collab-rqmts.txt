@@ -451,9 +451,10 @@ Table of Contents
 
    For such applications to benefit from per-packet prioritization
    within a single UDP 4-tuple, the client needs to determine which per-
-   packet markings are supported by the ISP (e.g., encoded into IPv6
-   Flow Label, UDP Option, or DSCP).  Then it can indicate to the ISP's
-   network that a certain UDP 4-tuple will have those markings.
+   packet markings are supported by the ISP's network (e.g., encoded
+   into IPv6 Flow Label, UDP Option, or DSCP).  Then it can indicate to
+   the ISP's network that a certain UDP 4-tuple will have those
+   markings.
 
    This is achieved through two requirements described below, REQ-API-
    FRAMEWORK and REQ-CLIENT-DECIDES.
