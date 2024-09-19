@@ -99,7 +99,6 @@ Table of Contents
      4.3.  Honoring of Metadata for Servers Behind a Gateway
    5.  On-path Metadata Requirements
      5.1.  Client-Network Metadata
-       5.1.1.  Priority between Flows (Inter-flow)
      5.2.  Server-Network Metadata
        5.2.1.  Packet Priority
        5.2.2.  Tolerance to Delay
@@ -197,7 +196,7 @@ Table of Contents
           3GPP/mobile network
    +--------------------:----------------------+
    | +------+           :   +-----+    +-----+ |
-   | |client+-----------B---+radio+----+ CN | |
+   | |client+-----------B---+radio+----+  CN | |
    | +------+           :   +-----+    +--+--+ |
    +--------------------:-----------------|----+
                         :                 |
@@ -211,7 +210,7 @@ Table of Contents
                         :                      : Transit  :  Content
     User device/Network :    MNO/ISP Network   : Network  :  Network
 
-                                  Figure 1
+                   Figure 1: E2E Media Transport Overview
 
    Figure 1 shows where such bandwidth and performance constraints
    usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks and
@@ -220,26 +219,25 @@ Table of Contents
    certain flows and, thus, lead to suboptimal perceived experience.  In
    this document, this is termed 'reactive policy'.
 
-                (A)Application signaling (client – server)
-           +---------------------------------------------------+
-          /                                                     \
-      +--+---+              +----------+                       +--+---+
-      |      |    (C)H2N    |          |                       |      |
-      |      |<------------>|+---- ---+|                       |      |
-      |      |              || Network||  downstream packet    |      |
-      |      |<==============+ Shaper <========================|      |
-      |      |<^^^^^^^^^^^^^^+--------+^^^^^^^^^^^^^^^^^^^^^^^^|      |
-      |      |              |          |(B)on-path S2N metadata|      |
-      +------+              +----------+                       +------+
-       Client                  Router                           Server
+               (A) Application signaling (client - server)
+        +--------------------------------------------------------+
+       /                                                          \
+   +--+---+              +------------+                         +--+---+
+   |      |   (C) C2N    |            |                         |      |
+   |      |<------------>| +--------+ |                         |      |
+   |      |              | | Network| |  downstream packet      |      |
+   |      |<=============+=+ Shaper +<+=========================+      |
+   |      |              | +--------+ | (B) on-path S2N metadata|      |
+   +------+              +------------+                         +------+
+    Client                   Router                              Server
 
-                                  Figure 2
+                   Figure 2: Metadata and Network Shaping
 
    Figure 2 shows a bottleneck (access) router on the path of packets
    from Server to Client.  A network shaper in the router manages QoS of
    flows of multiple users and can buffer (delay), discard, or apply
    other flow control rules.  Application layer signaling and feedback
-   between Client – Server (A – in the figure) adjust transmission rate
+   between Client - Server (A - in the figure) adjust transmission rate
    over a period of several RTTs using feedback and congestion control
    algorithms.  Congestion control algorithms are generally conservative
    and settle to a steady rate that avoids excessive packet loss.  In
@@ -251,23 +249,24 @@ Table of Contents
    current CCA) and the media application is willing to tolerate some
    packet loss or delay of low priority packets.  Packet priority and
    tolerance to delay of packets in such a case would be provided on-
-   path in a side channel associated to the downstream packet (B – in
-   figure).  The requirements for this server-to-network (S2N) metadata
-   are described in Section 5.2.  The client may provide information to
-   an (access) router to drop lower priority marked packets of a flow
-   (UDP 4-tuple) temporarily which can in turn redirect bandwidth to
-   other flows of that network attachment, especially during a reactive
-   event.  Network shapers observe flows and apply policies to maximize
-   performance but are not aware whether there is a high preference for
-   one flow (UDP 4-tuple) over another flow belonging to the same user
-   and network attachment (e.g., a subscriber connection, a 3GPP PDU
-   Session.  See Appendix A for more details).  Clients may provide an
-   (access) router with preferences of which flow (UDP 4-tuple) has
-   relative priority among flows of that network attachment using H2N (C
-   - in Figure).  Clients may also provide information to an (access)
-   router to drop, when resources are congested, 'lower priority'-marked
+   path in a side channel associated to the downstream packet (B - in
+   the figure).  The requirements for this server-to-network (S2N)
+   metadata are described in Section 5.2.  The client may provide
+   information to an (access) router to drop lower priority marked
    packets of a flow (UDP 4-tuple) temporarily which can in turn
-   allocate bandwidth to other flows of that same network attachment.
+   redirect bandwidth to other flows of that network attachment,
+   especially during a reactive event.  Network shapers observe flows
+   and apply policies to maximize performance but are not aware whether
+   there is a high preference for one flow (UDP 4-tuple) over another
+   flow belonging to the same user and network attachment (e.g., a
+   subscriber connection, a 3GPP PDU Session.  See Appendix A for more
+   details).  Clients may provide an (access) router with preferences of
+   which flow (UDP 4-tuple) has relative priority among flows of that
+   network attachment using H2N (C - in the figure).  Clients may also
+   provide information to an (access) router to drop, when resources are
+   congested, 'lower priority'-marked packets of a flow (UDP 4-tuple)
+   temporarily which can in turn allocate bandwidth to other flows of
+   that same network attachment.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -304,9 +303,9 @@ Table of Contents
       durations (e.g., varying wireless and mobile air interface
       conditions).
 
-   Traffic shaping:  Refers in this document to QoS management at the
-      wireless/access router to delay or discard packets of lower
-      priority to achieve bounded latency and high throughput.
+   Traffic shaping:  Refers in this document to QoS management at an
+      access router to delay or discard packets of lower priority to
+      achieve bounded latency and high throughput.
 
 3.  Types of Metdata Requirement
 
@@ -467,7 +466,7 @@ Table of Contents
    The metadata connections may be between server and network (in either
    direction) or between client and network (in either direction).
 
-   Some use cases benefit from server – network metadata exchanges
+   Some use cases benefit from server - network metadata exchanges
    (Section 5.2) and others need client involvement (Section 5.1).
 
    For the requirements that follow, the assumption is that the client
@@ -476,38 +475,7 @@ Table of Contents
 
 5.1.  Client-Network Metadata
 
-5.1.1.  Priority between Flows (Inter-flow)
-
-   Certain flows being received by a client (or by an application on a
-   client) are less or more important than other flows of _the same
-   client_. By signaling the relative importance of flows to a network
-   element, the network element can (de-)prioritize those flows to best
-   accommodate the needs of the various applications on a same client.
-   It should be noted that these "flows" are identified by UDP 4-tuples
-   and belong to the same network attachment of a user.
-
-   Prioritizing between flows, even for the same user/subscriber,
-   presents the following challenges:
-
-   1.  Identification and authentication of legitimate applications on
-       the client.  The remote peers can also be malicious and benign.
-
-   2.  Identifying whether the traffic belongs to a single user or
-       multiple users from a single network attachment (e.g., tethering
-       or LAN connected to a CPE).  The network will enforce per-
-       subscriber policies, not per-client.
-
-   3.  Enforcing fairness to all the flows belonging to a single client.
-       For example, it is a challenge to prevent a platform from marking
-       certain flows as low priority at platform layer, bypassing the
-       application, to (de)prioritize certain applications over all the
-       other applications on the same client.  Such unfairness can be
-       revealed during certification or public benchmark efforts,
-       though.
-
-   Taking into account these challenges, and despite the use case is
-   described in the document, *inter-flow (de)prioritization
-   requirements are out of the scope of this document*.
+   PLACEHOLDER for relevant content.
 
 5.2.  Server-Network Metadata
 
@@ -606,8 +574,8 @@ Table of Contents
 
    Requirement:
 
-   REQ-PACKET-DELAY: Metadata to indicate whether the packet can
-   tolerate delay.
+   REQ-PACKET-DELAY:  Metadata to indicate whether the packet can
+      tolerate delay.
 
 6.  Operational Considerations
 
@@ -621,7 +589,7 @@ Table of Contents
 
    The entire set of operations to manage traffic is beyond the scope of
    this document.  This section focuses on operational constraints that
-   impact server–network, and client–network modes of sending metadata.
+   impact server-network, and client-network modes of sending metadata.
 
 6.1.  Policy Enforcement
 
@@ -706,16 +674,23 @@ Table of Contents
    detectable by the receiver.
 
    It is recommended to encrypt or obfuscate the metadata information so
-   it is only available to the server, client and authorized network
+   it is only available to the server, client, and authorized network
    elements.  The method of encryption or obfuscation is not described
-   in this document but rather in other documents describing how this
-   metadata is encoded and exchanged amongst client, server and network
+   in this document but rather in other documents that specify how this
+   metadata is encoded and exchanged amongst client, server, and network
    elements.  The privacy implications of revealing metadata to network
    elements need to be thoroughly analyzed.  This analysis should ensure
    that any exposure of metadata does not compromise user privacy or
    allow unauthorized entities to infer sensitive information about the
    data being transmitted while maintaining minimal resource
-   consumption.
+   consumption.  There is a tension between resource consumption (and
+   thus efficiency) of such encryption and the user's privacy and this
+   tension depends on the threat model (Section 7.4 of [RFC6973]); the
+   threat of a network provider building a subscriber profile of viewed
+   video content is different from the threat of an interactive voice or
+   video call.  To mitigate traffic analysis, the sender might, for
+   example, purposefully mis-mark metadata in some packets, add some
+   randomness to avoid recurrent traffic patterns, etc.
 
    Requirements:
 
@@ -879,6 +854,12 @@ Informative References
               Control", RFC 6077, DOI 10.17487/RFC6077, February 2011,
               <https://www.rfc-editor.org/rfc/rfc6077>.
 
+   [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
+              Morris, J., Hansen, M., and R. Smith, "Privacy
+              Considerations for Internet Protocols", RFC 6973,
+              DOI 10.17487/RFC6973, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6973>.
+
    [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
               (IPv6) Specification", STD 86, RFC 8200,
               DOI 10.17487/RFC8200, July 2017,
@@ -985,19 +966,19 @@ Appendix A.  Network Attachment
    +--------------+  Network |          |      |            |
    |              |attachment|          v      |            |
    | +----+  .--------------------------+-.    |            |
-   | | A1 +-+----------- flow-x3 ----------+----------------+
+   | | A1 +-+----------- flow-x3 ----------+---|------------+
    | +----+  '----------------------------'    |
    |              |          |                 |
    +--------------+          +-----------------+
      Client-2                  Router
 
-                                  Figure 3
+            Figure 3: E2E transport flows and connection session
 
-   Figure 3 shows "Client-1" and "Client-2" that negotiate connection
+   Figure 3 shows "Client-1" and "Client-2" which negotiate connection
    policy (e.g., QoS) and other aspects like mobility handling, charging
    applied to flows in that network attachment.  "Client-1" has "flow-
    x1" and "flow-x2" over its network attachment while "Client-2" has
-   "flow-x3". *The requirements in this document focuses on on-path
+   "flow-x3".  *The requirements in this document focus on on-path
    collaboration signals that apply to data units such as media frames
    within flows like "flow-x1/x2/x3" but not between them.*
 
@@ -1120,7 +1101,7 @@ C.4.  Multiple Bottlenecks
 
    Requirement:
 
-   REQ-MULTIPLE-BOTTLENECKS should be supported.
+   REQ-MULTIPLE-BOTTLENECKS: should be supported.
 
 C.5.  Metadata Scope
 
