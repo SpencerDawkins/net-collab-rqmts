@@ -1191,7 +1191,7 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-definitions" class="internal xref">Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-types-of-metdata-requiremen" class="internal xref">Types of Metdata Requirement</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-types-of-metadata-requireme" class="internal xref">Types of Metadata Requirement</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-per-flow-metadata" class="internal xref">Per Flow Metadata</a></p>
@@ -1273,10 +1273,13 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
             <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-extended-use-cases" class="internal xref">Extended Use-Cases</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-media-streaming-extended" class="internal xref">Media Streaming Extended</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-network-bandwidth-network-r" class="internal xref">Network Bandwidth &amp; Network Rate Limiting Policies</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-network-bandwidth-network-r" class="internal xref">Network Bandwidth &amp; Network Rate Limiting Policies</a></p>
 </li>
             </ul>
 </li>
@@ -1649,10 +1652,10 @@ to achieve bounded latency and high throughput.<a href="#section-2-2.8.1" class=
 </dl>
 </section>
 </div>
-<div id="types-of-metdata-requirement">
+<div id="types-of-metadata-requirement">
 <section id="section-3">
-      <h2 id="name-types-of-metdata-requiremen">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-types-of-metdata-requiremen" class="section-name selfRef">Types of Metdata Requirement</a>
+      <h2 id="name-types-of-metadata-requireme">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-types-of-metadata-requireme" class="section-name selfRef">Types of Metadata Requirement</a>
       </h2>
 <div id="md-perflow">
 <section id="section-3.1">
@@ -1660,8 +1663,8 @@ to achieve bounded latency and high throughput.<a href="#section-2-2.8.1" class=
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-per-flow-metadata" class="section-name selfRef">Per Flow Metadata</a>
         </h3>
 <p id="section-3.1-1">Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Examples: Bitrate, Burst size.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Examples: client request to honor per-packet metadata, preferences.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="per-packet-metadata">
@@ -1672,7 +1675,7 @@ of a connection and thus can be exchanged once or as needed.<a href="#section-3.
 <p id="section-3.2-1">Refers to metadata that varies packet to packet within the same flow, often capturing
 the nature and characteristics of the traffic each packet carries.
 This needs to be communicated on a per packet basis.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Examples: Packet Priority, Type of media frame<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Examples: Packet Priority, tolerance to delay<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1682,30 +1685,27 @@ This needs to be communicated on a per packet basis.<a href="#section-3.2-1" cla
       <h2 id="name-use-cases">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
       </h2>
-<p id="section-4-1">Use Case Requirements Definition<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Requirements:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4-2">
-        <dt id="section-4-2.1">REQ-MEDIA-AV-SEPARATE:</dt>
+        <dt id="section-4-2.1">REQ-CLIENT-DECIDES:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.2">
-          <p id="section-4-2.2.1">Audio can be prioritized differently than video.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.2.1">User/Client requests the network to honor the application's
+metadata signaling.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-2.3"></dt>
         <dd style="margin-left: 1.5em" id="section-4-2.4">
-          <p id="section-4-2.4.1">This requirement may be generalized to non-media packet types.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.4.1">This is a per-flow metadata requirement.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.5"></dt>
+<dt id="section-4-2.5">REQ-PAYLOAD-CLIENT-DECIDES:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.6">
-          <p id="section-4-2.6.1">This is a per-flow metadata requirement.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.6.1">The user/client requests the network to prioritize one payload (metadata values) over another within the flow (UDP 4-tuple).<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.7">REQ-PAYLOAD-CLIENT-DECIDES:</dt>
+<dt id="section-4-2.7"></dt>
         <dd style="margin-left: 1.5em" id="section-4-2.8">
-          <p id="section-4-2.8.1">The ability of the receiver to change the priority by communicating
-to the network to prioritize one payload(metadata) over another within
-the flow -- without cooperation of the sender. Gives the sender the
-ability to have same metadata for all the connections without having
-to change based on the user preference, aids in scalability.<a href="#section-4-2.8.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.8.1">Allows the server to send the same metadata to all downstream connections without having to change based on user preference.<a href="#section-4-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-2.9"></dt>
@@ -1713,41 +1713,18 @@ to change based on the user preference, aids in scalability.<a href="#section-4-
           <p id="section-4-2.10.1">This is a per-flow metadata requirement.<a href="#section-4-2.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.11">REQ-MEDIA-KEYFRAME:</dt>
+<dt id="section-4-2.11">REQ-PACKET-PRIORITY:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.12">
-          <p id="section-4-2.12.1">Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the
-network.<a href="#section-4-2.12.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.12.1">Server indicates the importance of a packet within a flow. This allows the network
+to prioritize based on requirement and during reactive events. This
+priority value may also be used to indicate loss tolerance and the
+network elements may drop loss tolerant packets during reactive
+events.<a href="#section-4-2.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-2.13"></dt>
         <dd style="margin-left: 1.5em" id="section-4-2.14">
           <p id="section-4-2.14.1">This is a per-packet metadata requirement.<a href="#section-4-2.14.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.15">REQ-PACKET-PRIORITY:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.16">
-          <p id="section-4-2.16.1">Indicates the imporance of a packet within a flow, which helps intermediaries
-to prioritize based on requirement and during reactive events. This
-priority value also can be used to indicate loss tolerance and the
-network elements can drop loss tolerant packets during reactive
-events.<a href="#section-4-2.16.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.17"></dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.18">
-          <p id="section-4-2.18.1">This is a per-packet metadata requirement.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.19">REQ-CLIENT-DECIDES:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.20">
-          <p id="section-4-2.20.1">User/Client indicating to the network to honor the application's
-metadata signaling.<a href="#section-4-2.20.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.21"></dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.22">
-          <p id="section-4-2.22.1">This is a per-flow metadata requirement.<a href="#section-4-2.22.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1760,43 +1737,37 @@ metadata signaling.<a href="#section-4-2.20.1" class="pilcrow">¶</a></p>
 containing a full video frame.  These frames are necessary to rebuild
 receiver state after loss of delta frames.  The key frames are
 therefore more critical to deliver to the receiver than delta frames.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Use cases:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Examples:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-3">
 <li id="section-4.1-3.1">
             <p id="section-4.1-3.1.1">Audio is more critical than video for many applications and should
-be prioritized differently than video.<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+be prioritized differently than video.
+The client may indicate this preference to the network by selecting the importance value of audio packets as the highest priority.<br>
+              <br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.1-3.2">
+            <p id="section-4.1-3.2.1">The server (or relay) sends the same stream to many receivers,
+including the same metadata (especially with media over QUIC).
+Some clients prefer video over audio and others audio over video based on local network conditions.
+This results in priority inversion in some cases.<br>
+              <br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.1-3.3">
+            <p id="section-4.1-3.3.1">Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.
+The application may, for example, mark all packets of key frames with the highest priority to indicate that they should not be dropped.<br>
+              <br>
+Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.1-3.4">
+            <p id="section-4.1-3.4.1">In loss-prone networks or during Reactive Management events, if all packets of an application flow (UDP 4-tuple) such as live broadcast or on-demand video streaming are treated the same, it limits the ability to maximize network utilization and use the transiently available bandwidth.
+Dropping or delaying of (media) packets randomly is likely to lower network utilization and application performance.<br>
+              <br>
+Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-4.1-4">Requirement: REQ-MEDIA-AV-SEPARATE.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.1-5">
-<li id="section-4.1-5.1">
-            <p id="section-4.1-5.1.1">The server (or relay) sends the same stream to many receivers,
-including the same metadata (especially with media over QUIC). A
-Client's need to differentiate priorities (e.g., video over audio or
-the other way around) is only achievable by signaling that priority
-inversion from the client to the ISP router (Audio is more critical
-for many applications but video takes priority in some cases).<a href="#section-4.1-5.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-4.1-6">Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.1-7">
-<li id="section-4.1-7.1">
-            <p id="section-4.1-7.1.1">Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the network.<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-4.1-8">Requirement: REQ-MEDIA-KEYFRAME.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.1-9">
-<li id="section-4.1-9.1">
-            <p id="section-4.1-9.1.1">In loss-prone networks or during Reactive Management events, all
-packets being treated the same can have challenges in efficiently
-handling/forwarding data (retransmissions are expensive). There is no
-way to identify packets which can be dropped, with little impact to
-performance.<a href="#section-4.1-9.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ol>
-<p id="section-4.1-10">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
-<p id="section-4.1-11">Examples: live broadcast, on-demand video streaming.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uc-interactive">
@@ -1812,46 +1783,41 @@ user activity and interaction.<a href="#section-4.2-1" class="pilcrow">¶</a></p
 <ol start="1" type="1" class="normal type-1" id="section-4.2-3">
 <li id="section-4.2-3.1">
             <p id="section-4.2-3.1.1">A mobile/roaming user prioritizes audio over video during a VoIP
-call to have a seamless meeting experience.<a href="#section-4.2-3.1.1" class="pilcrow">¶</a></p>
+call to have a seamless meeting experience.<br>
+              <br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        </ol>
-<p id="section-4.2-4">Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.2-5">
-<li id="section-4.2-5.1">
-            <p id="section-4.2-5.1.1">A remote desktop user prioritizes graphics updates over an on-going
-file copy operation.<a href="#section-4.2-5.1.1" class="pilcrow">¶</a></p>
+          <li id="section-4.2-3.2">
+            <p id="section-4.2-3.2.1">A remote desktop user prioritizes graphics updates over an on-going
+file copy operation.<br>
+              <br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-4.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        </ol>
-<p id="section-4.2-6">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.2-7">
-<li id="section-4.2-7.1">
-            <p id="section-4.2-7.1.1">A user types in/interacts with a document/file after triggering a
-save file operation, while save operation is on-going.<a href="#section-4.2-7.1.1" class="pilcrow">¶</a></p>
+          <li id="section-4.2-3.3">
+            <p id="section-4.2-3.3.1">A user types in/interacts with a document/file after triggering a
+save file operation, while save operation is on-going.<br>
+              <br>
+Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
-        </ol>
-<p id="section-4.2-8">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.2-9">
-<li id="section-4.2-9.1">
-            <p id="section-4.2-9.1.1">A game or VoIP application may want to signal different metadata
+          <li id="section-4.2-3.4">
+            <p id="section-4.2-3.4.1">A game or VoIP application may want to signal different metadata
 for the same type of packet in each direction. One user, in a VoIP
 conference call, wants to prioritize the slide deck being shared while
 the other wants to prioritize audio and other wants to prioritize
 video of the speaker. Each user's varied preferences can be catered
-with same type of metadata originating from the server.<a href="#section-4.2-9.1.1" class="pilcrow">¶</a></p>
+with same type of metadata originating from the server.<br>
+              <br>
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES<a href="#section-4.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
-        </ol>
-<p id="section-4.2-10">Requirement: REQ-PAYLOAD-CLIENT-DECIDES<a href="#section-4.2-10" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.2-11">
-<li id="section-4.2-11.1">
-            <p id="section-4.2-11.1.1">A network glitch while user is in a eXtended Reality application.
+          <li id="section-4.2-3.5">
+            <p id="section-4.2-3.5.1">A network glitch mid-session in an eXtended Reality application or others such as VoIP (Peer-to-Peer (P2P), group conferencing), gaming, Remote Desktop Virtualization.
 The traffic comprises of haptic, video, audio, graphics update and
 keystrokes. During such reactive event, some packets need to be
-deprioritized/dropped to maintain interactivity.<a href="#section-4.2-11.1.1" class="pilcrow">¶</a></p>
+deprioritized/dropped to maintain interactivity.<br>
+              <br>
+Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-3.5.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-4.2-12">Requirement: REQ-PACKET-PRIORITY.<a href="#section-4.2-12" class="pilcrow">¶</a></p>
-<p id="section-4.2-13">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
-Remote Desktop Virtualization, eXtended Reality (XR).<a href="#section-4.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="client-negotiating-metadata-support">
@@ -2598,12 +2564,54 @@ between them.</strong><a href="#appendix-A-5" class="pilcrow">¶</a></p>
       <h2 id="name-extended-use-cases">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-extended-use-cases" class="section-name selfRef">Extended Use-Cases</a>
       </h2>
-<div id="assisted-offload">
+<p id="appendix-B-1">Requirements:<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-B-2">
+        <dt id="appendix-B-2.1">REQ-MEDIA-AV-SEPARATE:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-2.2">
+          <p id="appendix-B-2.2.1">Audio can be prioritized differently than video. This is a per-flow
+metadata requirement.<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-2.3">REQ-MEDIA-KEYFRAME:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-2.4">
+          <p id="appendix-B-2.4.1">Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the
+network. This is a per-packet metadata requirement.<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<div id="media-streaming-extended">
 <section id="appendix-B.1">
-        <h3 id="name-assisted-offload">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
+        <h3 id="name-media-streaming-extended">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-media-streaming-extended" class="section-name selfRef">Media Streaming Extended</a>
         </h3>
-<p id="appendix-B.1-1">There are cases (crisis) where "normal" network resources cannot
+<p id="appendix-B.1-1">Streaming video contains the occasional key frame ("I-frame")
+containing a full video frame.  These frames are necessary to rebuild
+receiver state after loss of delta frames.  The key frames are
+therefore more critical to deliver to the receiver than delta frames.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.1-2">Examples:<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-B.1-3">
+<li id="appendix-B.1-3.1">
+            <p id="appendix-B.1-3.1.1">Audio is more critical than video for many applications and should
+be prioritized differently than video.<a href="#appendix-B.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="appendix-B.1-4">Requirement: REQ-MEDIA-AV-SEPARATE.<a href="#appendix-B.1-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-B.1-5">
+<li id="appendix-B.1-5.1">
+            <p id="appendix-B.1-5.1.1">Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.<a href="#appendix-B.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="appendix-B.1-6">Requirement: REQ-MEDIA-KEYFRAME.<a href="#appendix-B.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="assisted-offload">
+<section id="appendix-B.2">
+        <h3 id="name-assisted-offload">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
+        </h3>
+<p id="appendix-B.2-1">There are cases (crisis) where "normal" network resources cannot
 be used at maximum and, thus, a network would seek to reduce or
 offload some of the traffic during these events -- often called
 'reactive traffic policy'. An example of such use case is cellular
@@ -2611,44 +2619,44 @@ networks that are overly used (and radio resources exhausted) such
 as a large collection of people (e.g., parade, sporting event), or
 such as a partial radio network outage (e.g., tower power outage).
 During such a condition, an alternative network attachment may be
-available to the client (e.g., Wi-Fi).<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-2">Network-to-client signals are useful to put in place adequate traffic
+available to the client (e.g., Wi-Fi).<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.2-2">Network-to-client signals are useful to put in place adequate traffic
 distribution policies on the client (e.g., prefer the use of alternate
-paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
+paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).<a href="#appendix-B.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="nrlp">
-<section id="appendix-B.2">
+<section id="appendix-B.3">
         <h3 id="name-network-bandwidth-network-r">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-network-bandwidth-network-r" class="section-name selfRef">Network Bandwidth &amp; Network Rate Limiting Policies</a>
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-network-bandwidth-network-r" class="section-name selfRef">Network Bandwidth &amp; Network Rate Limiting Policies</a>
         </h3>
-<p id="appendix-B.2-1">Bandwidth constraints exist most predominantly at the access network.
+<p id="appendix-B.3-1">Bandwidth constraints exist most predominantly at the access network.
 This can be constraints in the network itself or a result of rate
-limiting due to various reasons.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
-<p id="appendix-B.2-2">Also, traffic exchanged over a network attachment may be subject
+limiting due to various reasons.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.3-2">Also, traffic exchanged over a network attachment may be subject
 to rate-limit policies. These policies may be intentional policies
 (e.g., enforced as part of the activation of the network attachment
 and typically agreed upon service subscription) or be reactive
 policies (e.g., enforced temporarily to manage an overload or during
-a DDoS attack mitigation).<a href="#appendix-B.2-2" class="pilcrow">¶</a></p>
-<p id="appendix-B.2-3">Requirements:<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="appendix-B.2-4">
-          <dt id="appendix-B.2-4.1">REQ-NETWORK-THROUGHPUT:</dt>
-          <dd style="margin-left: 1.5em" id="appendix-B.2-4.2">
-            <p id="appendix-B.2-4.2.1">A mechanism to signal the available network throughput to interested
-clients, including changes to throughput.<a href="#appendix-B.2-4.2.1" class="pilcrow">¶</a></p>
+a DDoS attack mitigation).<a href="#appendix-B.3-2" class="pilcrow">¶</a></p>
+<p id="appendix-B.3-3">Requirements:<a href="#appendix-B.3-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-B.3-4">
+          <dt id="appendix-B.3-4.1">REQ-NETWORK-THROUGHPUT:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-B.3-4.2">
+            <p id="appendix-B.3-4.2.1">A mechanism to signal the available network throughput to interested
+clients, including changes to throughput.<a href="#appendix-B.3-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="appendix-B.2-4.3">REQ-NRLP:</dt>
-          <dd style="margin-left: 1.5em" id="appendix-B.2-4.4">
-            <p id="appendix-B.2-4.4.1">The network shall inform the endpoint of the Rate limiting policies<a href="#appendix-B.2-4.4.1" class="pilcrow">¶</a></p>
+<dt id="appendix-B.3-4.3">REQ-NRLP:</dt>
+          <dd style="margin-left: 1.5em" id="appendix-B.3-4.4">
+            <p id="appendix-B.3-4.4.1">The network shall inform the endpoint of the Rate limiting policies<a href="#appendix-B.3-4.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="appendix-B.2-5">Use cases:<a href="#appendix-B.2-5" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.2-6">
-<li id="appendix-B.2-6.1">
-            <p id="appendix-B.2-6.1.1">Performance Optimization: Some applications support some forms
+<p id="appendix-B.3-5">Use cases:<a href="#appendix-B.3-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-B.3-6">
+<li id="appendix-B.3-6.1">
+            <p id="appendix-B.3-6.1.1">Performance Optimization: Some applications support some forms
   of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed
   how the content is accessed to using ABR. Complementing or replacing
   these measurements with explicit signals will improve overall
@@ -2658,14 +2666,14 @@ clients, including changes to throughput.<a href="#appendix-B.2-4.2.1" class="pi
   endpoint about available bandwidth, the endpoint can dynamically
   adjust its data transmission rate. Knowing available bandwidth
   helps the endpoint allocate resources efficiently. Cloud-based
-  applications can auto-scale based on available bandwidth.<a href="#appendix-B.2-6.1.1" class="pilcrow">¶</a></p>
+  applications can auto-scale based on available bandwidth.<a href="#appendix-B.3-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="appendix-B.2-6.2">
-            <p id="appendix-B.2-6.2.1">Rate Limiting: Monthly data quotas on cellular networks can
+          <li id="appendix-B.3-6.2">
+            <p id="appendix-B.3-6.2.1">Rate Limiting: Monthly data quotas on cellular networks can
   be easily exceeded by video streaming, in particular, if the
   client chooses excessively high quality or routinely abandons
   watching videos that were downloaded. The network can assist the
-  client by informing the client of the network's bandwidth policy.<a href="#appendix-B.2-6.2.1" class="pilcrow">¶</a></p>
+  client by informing the client of the network's bandwidth policy.<a href="#appendix-B.3-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
