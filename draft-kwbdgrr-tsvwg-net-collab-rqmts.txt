@@ -92,7 +92,7 @@ Table of Contents
    2.  Definitions
    3.  Types of Metdata Requirement
      3.1.  Per Flow Metadata
-     3.2.  Per Packet Metadata:
+     3.2.  Per Packet Metadata
    4.  Use Cases
      4.1.  Media Streaming
      4.2.  Interactive Media
@@ -238,34 +238,38 @@ Table of Contents
    other flow control rules.  Application layer signaling and feedback
    between Client - Server (A - in the figure) adjust transmission rate
    over a period of several RTTs using feedback and congestion control
-   algorithms.  Congestion control algorithms are generally conservative
-   and settle to a steady rate that avoids excessive packet loss.  In
-   networks where link conditions (between Client and Router) vary
-   significantly at timescales well below the RTT, this results in
-   unused (wasted) bandwidth at short timescales.  There is some
-   research [_5G-Octopus] to indicate that media applications can obtain
-   better QoE when sending at a higher rate (less conservative than
-   current CCA) and the media application is willing to tolerate some
-   packet loss or delay of low priority packets.  Packet priority and
-   tolerance to delay of packets in such a case would be provided on-
-   path in a side channel associated to the downstream packet (B - in
-   the figure).  The requirements for this server-to-network (S2N)
-   metadata are described in Section 5.2.  The client may provide
-   information to an (access) router to drop lower priority marked
-   packets of a flow (UDP 4-tuple) temporarily which can in turn
-   redirect bandwidth to other flows of that network attachment,
-   especially during a reactive event.  Network shapers observe flows
-   and apply policies to maximize performance but are not aware whether
-   there is a high preference for one flow (UDP 4-tuple) over another
-   flow belonging to the same user and network attachment (e.g., a
-   subscriber connection, a 3GPP PDU Session.  See Appendix A for more
-   details).  Clients may provide an (access) router with preferences of
-   which flow (UDP 4-tuple) has relative priority among flows of that
-   network attachment using H2N (C - in the figure).  Clients may also
-   provide information to an (access) router to drop, when resources are
-   congested, 'lower priority'-marked packets of a flow (UDP 4-tuple)
-   temporarily which can in turn allocate bandwidth to other flows of
-   that same network attachment.
+   algorithms.  Congestion control algorithms (CCAs) are generally
+   conservative and settle to a steady rate that avoids excessive packet
+   loss.  In networks where link conditions (between Client and Router)
+   vary significantly at timescales well below the RTT, this results in
+   unused (wasted) bandwidth at short timescales.
+
+   There is some research [_5G-Octopus] to indicate that media
+   applications can obtain better QoE when sending at a higher rate
+   (less conservative than current CCA) and the media application is
+   willing to tolerate some packet loss or delay of low priority
+   packets.  Packet priority and tolerance to delay of packets in such a
+   case would be provided on-path in a side channel associated to the
+   downstream packet (B - in the figure).  The requirements for this
+   server-to-network (S2N) metadata are described in Section 5.2.
+
+   The client may provide information to an (access) router to drop
+   lower priority marked packets of a flow (UDP 4-tuple) temporarily
+   which can in turn allocate available bandwidth to other flows of that
+   network attachment, especially during a reactive management event.
+
+   Network shapers observe flows and apply policies to maximize
+   performance but are not aware whether there is a high preference for
+   one flow (UDP 4-tuple) over another flow belonging to the same user
+   and network attachment (e.g., a subscriber connection, a 3GPP PDU
+   Session.  See Appendix A for more details).  Clients may provide an
+   (access) router with preferences of which flow (UDP 4-tuple) has
+   relative priority among flows of that network attachment using H2N (C
+   - in the figure).  Clients may also provide information to an
+   (access) router to drop, when resources are congested, 'lower
+   priority'-marked packets of a flow (UDP 4-tuple) temporarily which
+   can in turn allocate bandwidth to other flows of that same network
+   attachment.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -317,11 +321,11 @@ Table of Contents
 
    Examples: Bitrate, Burst size.
 
-3.2.  Per Packet Metadata:
+3.2.  Per Packet Metadata
 
-   Refers to metadata that varies packet to packet, often capturing the
-   nature and characteristics of the traffic each packet carries.  This
-   needs to be communicated on a per packet basis.
+   Refers to metadata that varies packet to packet within the same flow,
+   often capturing the nature and characteristics of the traffic each
+   packet carries.  This needs to be communicated on a per packet basis.
 
    Examples: Packet Priority, Type of media frame
 
@@ -330,30 +334,39 @@ Table of Contents
    Use Case Requirements Definition
 
    REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
-      video.  This is a per-flow metadata requirement.
+      video.
+
+      This requirement may be generalized to non-media packet types.
+
+      This is a per-flow metadata requirement.
 
    REQ-PAYLOAD-CLIENT-DECIDES:  The ability of the receiver to change
       the priority by communicating to the network to prioritize one
       payload(metadata) over another within the flow -- without
       cooperation of the sender.  Gives the sender the ability to have
       same metadata for all the connections without having to change
-      based on user preference, aids in scalability.  This is a per-flow
-      metadata requirement.
+      based on the user preference, aids in scalability.
+
+      This is a per-flow metadata requirement.
 
    REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
       which need to be distinguished so that full frames can be
-      indicated to the network.  This is a per-packet metadata
-      requirement.
+      indicated to the network.
 
-   REQ-PACKET-PRIORITY:  Indicates the imporance of a packet, which
-      helps the intermediaries to prioritize based on requirement and
-      during reactive events.  This priority value also can be used to
-      indicate loss tolerance and the network elements can drop loss
-      tolerant packets during reactive events.
+      This is a per-packet metadata requirement.
+
+   REQ-PACKET-PRIORITY:  Indicates the imporance of a packet within a
+      flow, which helps intermediaries to prioritize based on
+      requirement and during reactive events.  This priority value also
+      can be used to indicate loss tolerance and the network elements
+      can drop loss tolerant packets during reactive events.
+
+      This is a per-packet metadata requirement.
 
    REQ-CLIENT-DECIDES:  User/Client indicating to the network to honor
-      the application's metadata signaling.  This is a per-flow metadata
-      requirement.
+      the application's metadata signaling.
+
+      This is a per-flow metadata requirement.
 
 4.1.  Media Streaming
 

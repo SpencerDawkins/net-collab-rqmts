@@ -1197,7 +1197,7 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-per-flow-metadata" class="internal xref">Per Flow Metadata</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-per-packet-metadata" class="internal xref">Per Packet Metadata:</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-per-packet-metadata" class="internal xref">Per Packet Metadata</a></p>
 </li>
             </ul>
 </li>
@@ -1568,23 +1568,24 @@ manages QoS of flows of multiple users and can buffer (delay),
 discard, or apply other flow control rules. Application layer
 signaling and feedback between Client - Server (A - in the figure)
 adjust transmission rate over a period of several RTTs using feedback
-and congestion control algorithms.  Congestion control algorithms
+and congestion control algorithms.  Congestion control algorithms (CCAs)
 are generally conservative and settle to a steady rate that avoids
 excessive packet loss.  In networks where link conditions (between
 Client and Router) vary significantly at timescales well below the
-RTT, this results in unused (wasted) bandwidth at short timescales.
-There is some research <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> to indicate that media
+RTT, this results in unused (wasted) bandwidth at short timescales.<a href="#section-1-10" class="pilcrow">¶</a></p>
+<p id="section-1-11">There is some research <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> to indicate that media
 applications can obtain better QoE when sending at a higher rate
 (less conservative than current CCA) and the media application is
 willing to tolerate some packet loss or delay of low priority
 packets.  Packet priority and tolerance to delay of packets in such
 a case would be provided on-path in a side channel associated to
 the downstream packet (B - in the figure).  The requirements for this
-server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 5.2</a>.
-The client may provide information to an (access) router to drop
+server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 5.2</a>.<a href="#section-1-11" class="pilcrow">¶</a></p>
+<p id="section-1-12">The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
-which can in turn redirect bandwidth to other flows of that network
-attachment, especially during a reactive event.  Network shapers
+which can in turn allocate available bandwidth to other flows of that network
+attachment, especially during a reactive management event.<a href="#section-1-12" class="pilcrow">¶</a></p>
+<p id="section-1-13">Network shapers
 observe flows and apply policies to maximize performance but are
 not aware whether  there is a high preference for one flow (UDP
 4-tuple) over another flow belonging to the same user and network
@@ -1595,22 +1596,22 @@ priority among flows of that network attachment using H2N (C - in
 the figure).  Clients may also provide information to an (access) router
 to drop, when resources are congested,  'lower priority'-marked
 packets of a flow (UDP 4-tuple) temporarily which can in turn
-allocate bandwidth to other flows of that same network attachment.<a href="#section-1-10" class="pilcrow">¶</a></p>
-<p id="section-1-11">In summary, the rapid variation of wireless link quality and/or
+allocate bandwidth to other flows of that same network attachment.<a href="#section-1-13" class="pilcrow">¶</a></p>
+<p id="section-1-14">In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
 that demand low latency and high throughput can lead to suboptimal
 user experience. <a href="#uc" class="auto internal xref">Section 4</a> outlines use cases to illustrate the issues
 and the need for additional information per flow to allow the network
-to optimize its handling.<a href="#section-1-11" class="pilcrow">¶</a></p>
-<p id="section-1-12">Some of the complications that are induced by the phenomena discussed
+to optimize its handling.<a href="#section-1-14" class="pilcrow">¶</a></p>
+<p id="section-1-15">Some of the complications that are induced by the phenomena discussed
 above may be eliminated by adequate dimensioning and upgrades.
 However, such upgrades may not be always (immediately) possible or
 justified. Complementary mitigations are thus needed to soften these
 complications by introducing some collaboration between endpoints and
-networks to adjust their behaviors.<a href="#section-1-12" class="pilcrow">¶</a></p>
-<p id="section-1-13"><a href="#operational" class="auto internal xref">Section 6</a> provides operational constraints in the network and
+networks to adjust their behaviors.<a href="#section-1-15" class="pilcrow">¶</a></p>
+<p id="section-1-16"><a href="#operational" class="auto internal xref">Section 6</a> provides operational constraints in the network and
 <a href="#metadata-req" class="auto internal xref">Section 5</a> describes the requirements for on-path media
-collaboration signals.<a href="#section-1-13" class="pilcrow">¶</a></p>
+collaboration signals.<a href="#section-1-16" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="definitions">
@@ -1666,9 +1667,9 @@ of a connection and thus can be exchanged once or as needed.<a href="#section-3.
 <div id="per-packet-metadata">
 <section id="section-3.2">
         <h3 id="name-per-packet-metadata">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-per-packet-metadata" class="section-name selfRef">Per Packet Metadata:</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-per-packet-metadata" class="section-name selfRef">Per Packet Metadata</a>
         </h3>
-<p id="section-3.2-1">Refers to metadata that varies packet to packet, often capturing
+<p id="section-3.2-1">Refers to metadata that varies packet to packet within the same flow, often capturing
 the nature and characteristics of the traffic each packet carries.
 This needs to be communicated on a per packet basis.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Examples: Packet Priority, Type of media frame<a href="#section-3.2-2" class="pilcrow">¶</a></p>
@@ -1685,40 +1686,68 @@ This needs to be communicated on a per packet basis.<a href="#section-3.2-1" cla
 <span class="break"></span><dl class="dlParallel" id="section-4-2">
         <dt id="section-4-2.1">REQ-MEDIA-AV-SEPARATE:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.2">
-          <p id="section-4-2.2.1">Audio can be prioritized differently than video. This is a per-flow
-metadata requirement.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.2.1">Audio can be prioritized differently than video.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.3">REQ-PAYLOAD-CLIENT-DECIDES:</dt>
+<dt id="section-4-2.3"></dt>
         <dd style="margin-left: 1.5em" id="section-4-2.4">
-          <p id="section-4-2.4.1">The ability of the receiver to change the priority by communicating
+          <p id="section-4-2.4.1">This requirement may be generalized to non-media packet types.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.5"></dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.6">
+          <p id="section-4-2.6.1">This is a per-flow metadata requirement.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.7">REQ-PAYLOAD-CLIENT-DECIDES:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.8">
+          <p id="section-4-2.8.1">The ability of the receiver to change the priority by communicating
 to the network to prioritize one payload(metadata) over another within
 the flow -- without cooperation of the sender. Gives the sender the
 ability to have same metadata for all the connections without having
-to change based on user preference, aids in scalability. This is a
-per-flow metadata requirement.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+to change based on the user preference, aids in scalability.<a href="#section-4-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.5">REQ-MEDIA-KEYFRAME:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.6">
-          <p id="section-4-2.6.1">Video contains partial frames and full frames, which need to be
+<dt id="section-4-2.9"></dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.10">
+          <p id="section-4-2.10.1">This is a per-flow metadata requirement.<a href="#section-4-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.11">REQ-MEDIA-KEYFRAME:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.12">
+          <p id="section-4-2.12.1">Video contains partial frames and full frames, which need to be
 distinguished so that full frames can be indicated to the
-network. This is a per-packet metadata requirement.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
+network.<a href="#section-4-2.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.7">REQ-PACKET-PRIORITY:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.8">
-          <p id="section-4-2.8.1">Indicates the imporance of a packet, which helps the intermediaries
+<dt id="section-4-2.13"></dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.14">
+          <p id="section-4-2.14.1">This is a per-packet metadata requirement.<a href="#section-4-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.15">REQ-PACKET-PRIORITY:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.16">
+          <p id="section-4-2.16.1">Indicates the imporance of a packet within a flow, which helps intermediaries
 to prioritize based on requirement and during reactive events. This
 priority value also can be used to indicate loss tolerance and the
 network elements can drop loss tolerant packets during reactive
-events.<a href="#section-4-2.8.1" class="pilcrow">¶</a></p>
+events.<a href="#section-4-2.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-2.9">REQ-CLIENT-DECIDES:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.10">
-          <p id="section-4-2.10.1">User/Client indicating to the network to honor the application's
-metadata signaling. This is a per-flow metadata requirement.<a href="#section-4-2.10.1" class="pilcrow">¶</a></p>
+<dt id="section-4-2.17"></dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.18">
+          <p id="section-4-2.18.1">This is a per-packet metadata requirement.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.19">REQ-CLIENT-DECIDES:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.20">
+          <p id="section-4-2.20.1">User/Client indicating to the network to honor the application's
+metadata signaling.<a href="#section-4-2.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.21"></dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.22">
+          <p id="section-4-2.22.1">This is a per-flow metadata requirement.<a href="#section-4-2.22.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
