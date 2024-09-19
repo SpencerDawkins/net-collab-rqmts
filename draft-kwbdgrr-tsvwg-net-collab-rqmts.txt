@@ -96,7 +96,7 @@ Table of Contents
    4.  Use Cases
      4.1.  Media Streaming
      4.2.  Interactive Media
-     4.3.  Honoring of Metadata for Servers Behind a Gateway
+     4.3.  Client Negotiating Metadata Support
    5.  On-path Metadata Requirements
      5.1.  Client-Network Metadata
      5.2.  Server-Network Metadata
@@ -104,10 +104,9 @@ Table of Contents
        5.2.2.  Tolerance to Delay
    6.  Operational Considerations
      6.1.  Policy Enforcement
-     6.2.  Exposure Handling
-     6.3.  Privacy Considerations
-     6.4.  Scalability
-     6.5.  Abuse and Constraints
+     6.2.  Privacy Considerations
+     6.3.  Scalability
+     6.4.  Abuse and Constraints
    7.  Non-Requirements
    8.  IANA Considerations
    9.  Security Considerations
@@ -440,15 +439,76 @@ Table of Contents
    Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
    Remote Desktop Virtualization, eXtended Reality (XR).
 
-4.3.  Honoring of Metadata for Servers Behind a Gateway
+4.3.  Client Negotiating Metadata Support
 
-   In enterprise networks and remote desktop use case, a server can host
-   multiple connections with varying type of traffic.  These servers are
-   often exposed to the Internet through some sort of a gateway-proxy
-   and the signaling (like DSCP bits) from these servers are often
-   ignored by the access/transit networks.
+   Currently, some flows are granted higher priority over other flows
+   because of a contractual agreement between the ISP and the content
+   provider.  These contracts could be extended to also allow per-packet
+   prioritization within a single UDP 4-tuple, as desired by this
+   document.  However, extending these contracts would disadvantage
+   content providers and other servers that cannot obtain such a
+   contract or have traffic that is difficult or impossible for the ISP
+   to identify and provide such service.
 
-   Requirement: REQ-CLIENT-DECIDES.
+   For such applications to benefit from per-packet prioritization
+   within a single UDP 4-tuple, the client needs to determine which per-
+   packet markings are supported by the ISP's network (e.g., encoded
+   into IPv6 Flow Label, UDP Option, or DSCP).  Then it can indicate to
+   the ISP's network that a certain UDP 4-tuple will have those
+   markings.
+
+   This is achieved through two requirements described below, REQ-API-
+   FRAMEWORK and REQ-CLIENT-DECIDES.
+
+   Signaling to the network (Section 5.1, Section 5.2) will need to be
+   facilitated by Application Programming Interfaces (APIs) for any
+   application to use them.  Signaling and retrieval of the signals may
+   not be performed at a single layer (although not encouraged).  Hence,
+   a framework is required to abstract the underlying protocol(s) and
+   allow the application(s) to retrieve/send signals using a single or a
+   set of APIs independent of the channels that are used to convey the
+   signals.  The API framework is required even if one single channel is
+   used so that any application on a client can consume the signals.
+
+   There might be many channels to signal the metadata such as (non-
+   exhaustive list):
+
+   *  Application layer
+
+   *  TCP options [RFC9293]
+
+   *  UDP Options [I-D.ietf-tsvwg-udp-options]
+
+   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
+
+   *  QUIC CID mapping
+
+   *  ICMP messages
+
+   Requirement:
+
+   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
+      applications.
+
+   REQ-CLIENT-DECIDES:  Client signals upstream networks about incoming
+      packet metadata markings
+
+          Client                                           ISP router
+            |                                                   |
+            |-------------------------------------------------->|
+            | Network Collaboration Capabilites?                |
+            |                                                   |
+            |<--------------------------------------------------|
+            | my Network Collaboration capabilities             |
+            |                                                   |
+            |-------------------------------------------------->|
+            | Server will mark packets using "method #4"        |
+            |                                                   |
+            |<--------------------------------------------------|
+            | ok                                                |
+
+        Figure 3: API Framework: Client learns ISP capabilities and
+     signals how incoming IP packets will signal network collaboration
 
 5.  On-path Metadata Requirements
 
@@ -507,7 +567,7 @@ Table of Contents
    allowing the network to delay or drop low priority packets.
 
    The metadata in Section 5.2.1 should also satisfy constraints
-   identified in Section 6.  Privacy (Section 6.3) requires that
+   identified in Section 6.  Privacy (Section 6.2) requires that
    metadata should not provide additional information to identify the
    application or the user.  The application server can decide on the
    metadata values that provide the best handling for the packets of the
@@ -515,7 +575,7 @@ Table of Contents
    allow an on-path observer to perform traffic analysis.  This metadata
    is advisory in nature and network traffic policy (Section 6.1) that
    restricts its use would not result in additional issues.  Other
-   constraints including scale (Section 6.4) and continuity
+   constraints including scale (Section 6.3) and continuity
    (Appendix C.3) are required for Section 5.2.1.
 
    Realizing the additional bandwidth potential with these metadata may
@@ -610,39 +670,7 @@ Table of Contents
 
    Requirement: REQ-METADATA-ACCURACY.
 
-6.2.  Exposure Handling
-
-   Signaling to the network (Section 5.1, Section 5.2) will need to be
-   facilitated by Application Programming Interfaces (APIs) for any
-   application to use them.  Signaling and retrieval of the signals may
-   not be performed at a single layer (although not encouraged).  Hence,
-   a framework is required to abstract the underlying protocol(s) and
-   allow the application(s) to retrieve/send signals using a single or a
-   set of API(s) independent of the channels that are used to convey the
-   signals.  The API framework is required even if one single channel is
-   used so that any application can consume the signals.
-
-   There might be many channels to signal the metadata such as (non-
-   exhaustive list):
-
-   *  Application layer
-
-   *  TCP options [RFC9293]
-
-   *  UDP Options [I-D.ietf-tsvwg-udp-options]
-
-   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
-
-   *  QUIC CID mapping
-
-   *  ICMP messages
-
-   Requirement:
-
-   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
-      applications.
-
-6.3.  Privacy Considerations
+6.2.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -711,7 +739,7 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-6.4.  Scalability
+6.3.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.  Per flow information (state) at a wireless
@@ -726,7 +754,7 @@ Table of Contents
       router has to maintain for each additional media flow it handles
       should be very low or none.
 
-6.5.  Abuse and Constraints
+6.4.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -765,7 +793,7 @@ Table of Contents
 
 9.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 6.3.  The
+   Security aspects for the metadata are discussed in Section 6.2.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 5.
 
@@ -943,7 +971,7 @@ Appendix A.  Network Attachment
    A network attachment may be established using control plane signaling
    between the client and the network (access) router and is out of
    scope of this document.  Transport flows over a network attachment
-   may consist of multiple streams such as video or audio.  Figure 3
+   may consist of multiple streams such as video or audio.  Figure 4
    shows a high level view of network attachments, flows, and QoS/policy
    discussed in Section 5.
 
@@ -974,9 +1002,9 @@ Appendix A.  Network Attachment
    +--------------+          +-----------------+
      Client-2                  Router
 
-            Figure 3: E2E transport flows and connection session
+            Figure 4: E2E transport flows and connection session
 
-   Figure 3 shows "Client-1" and "Client-2" which negotiate connection
+   Figure 4 shows "Client-1" and "Client-2" which negotiate connection
    policy (e.g., QoS) and other aspects like mobility handling, charging
    applied to flows in that network attachment.  "Client-1" has "flow-
    x1" and "flow-x2" over its network attachment while "Client-2" has
