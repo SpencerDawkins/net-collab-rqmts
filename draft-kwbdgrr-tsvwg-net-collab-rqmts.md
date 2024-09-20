@@ -173,10 +173,16 @@ throughput and low latency and, in some cases, carry different
 streams (e.g., audio and video) in a single transport connection
 (e.g., WebRTC {{?RFC8825}}).
 
-There may be preferences that an application may wish to convey,
-such as a higher priority for audio over video (or the opposite)
-in congested networks or importance of certain packets (e.g., video
-key frames).
+Superior service during adverse network events can be achieved by the
+sender conveying packet behavior preferences to the network for
+packets within a single UDP 4-tuple.  During adverse network events
+this allows the network to be informed about the least-impactful
+packets to drop (or delay) in the same UDP 4-tuple.  Without such
+signaling the network can only indiscriminately drop (or delay)
+packets.  With such capability loss-tolerant and delay-tolerant
+transport protocols such as RTP, QUIC {{?RFC9000}}, and Unreliable
+QUIC {{?RFC9221}} can inform the network and provide a superior end
+user experience.
 
 With RTP {{?RFC3550}}, the media type could be examined and used
 as an implicit signal for determining relative priority. However,
