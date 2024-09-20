@@ -443,16 +443,7 @@ Table of Contents
 
        Impact: With the above requirement met, audio clarity could be
        maintained better in resource-constrained networks and during
-       reactive events ensuring better user experience.  REQ-PACKET-
-       PRIORITY is the basic requirement with default priority values
-       provided from server-to-network.  MEDIA-AV-SEPARATE is an
-       enhanced requirement that requires e2e application layer
-       signaling (out of scope here) to identify of frame boundaries and
-       may not be suitable in cases which are sensitive to traffic
-       analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).  If the
-       application provides frame boundaries (MEDIA-AV-SEPARATE), the
-       client signals the enhanced application priority values in REQ-
-       PAYLOAD-CLIENT-DECIDES (also an enhanced requirement).
+       reactive events ensuring better user experience.
 
    2.  The server (or relay) sends the same stream to many receivers,
        including the same metadata (especially with media over QUIC).
@@ -479,7 +470,11 @@ Table of Contents
 
        Impact: Streaming continuity is improved with lesser impact to
        continuity/quality of service by prioritizing full frames during
-       reactive events and in challenging networks.
+       reactive events and in challenging networks.  REQ-MEDIA-KEYFRAME
+       is an enhanced requirement that requires e2e application layer
+       signaling (out of scope here) to identify of frame boundaries and
+       may not be suitable in cases which are sensitive to traffic
+       analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).
 
    4.  In loss-prone networks or during Reactive Management events, if
        all packets of an application flow (UDP 4-tuple) such as live
@@ -1067,6 +1062,14 @@ Appendix B.  Extended Requirements Definition
 
       This requirement may be generalized to non-media packet types.
 
+      This is an enhanced requirement that requires e2e application
+      layer signaling (out of scope here) to identify of frame
+      boundaries and may not be suitable in cases which are sensitive to
+      traffic analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).  If
+      the application provides frame boundaries, the client signals the
+      enhanced application priority values in REQ-PAYLOAD-CLIENT-DECIDES
+      (also an enhanced requirement).
+
       This is a per-flow metadata requirement.
 
    REQ-PAYLOAD-CLIENT-DECIDES:  The ability of the receiver to change
@@ -1081,6 +1084,14 @@ Appendix B.  Extended Requirements Definition
    REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
       which need to be distinguished so that full frames can be
       indicated to the network.
+
+      This is an enhanced requirement that requires e2e application
+      layer signaling (out of scope here) to identify of frame
+      boundaries and may not be suitable in cases which are sensitive to
+      traffic analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).  If
+      the application provides frame boundaries, the client signals the
+      enhanced application priority values in REQ-PAYLOAD-CLIENT-DECIDES
+      (also an enhanced requirement).
 
       This is a per-packet metadata requirement.
 
