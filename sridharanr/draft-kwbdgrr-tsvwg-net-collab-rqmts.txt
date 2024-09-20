@@ -470,11 +470,7 @@ Table of Contents
 
        Impact: Streaming continuity is improved with lesser impact to
        continuity/quality of service by prioritizing full frames during
-       reactive events and in challenging networks.  REQ-MEDIA-KEYFRAME
-       is an enhanced requirement that requires e2e application layer
-       signaling (out of scope here) to identify of frame boundaries and
-       may not be suitable in cases which are sensitive to traffic
-       analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).
+       reactive events and in challenging networks.
 
    4.  In loss-prone networks or during Reactive Management events, if
        all packets of an application flow (UDP 4-tuple) such as live
