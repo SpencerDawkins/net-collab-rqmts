@@ -432,13 +432,14 @@ the importance value of audio packets as the highest priority.
 
 2. The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC).
-Some clients prefer video over audio and others audio over video based on local network conditions.
-This results in priority inversion in some cases.
+Different clients have different priorities for different types of traffic. This would result
+in change in priorities for the same type of traffic a single server sends, based on the user/client.
 
     Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
     Impact: With the above requirement met, each client/user preferences are
-    prioritized accordingly while maintaining scalability on the server.
+    prioritized accordingly while maintaining scalability on the server, since
+    the metadata the server sends still remains the same for all the connections.
 
 3. Video contains partial frames and full frames, which need to be
 distinguished so that full frames can be indicated to the network.
