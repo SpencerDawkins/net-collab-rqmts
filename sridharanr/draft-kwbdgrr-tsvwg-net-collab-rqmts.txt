@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 23 March 2025                              Cloud Software Group
+Expires: 24 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 23 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       19 September 2024
+                                                       20 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 March 2025.
+   This Internet-Draft will expire on 24 March 2025.
 
 Copyright Notice
 
@@ -94,20 +94,24 @@ Table of Contents
      3.1.  Per Flow Metadata
      3.2.  Per Packet Metadata
    4.  Requirements Definition
+     4.1.  Server-to-Network
+     4.2.  Client-to-Network
+     4.3.  API
+     4.4.  System Considerations
    5.  Use Cases
      5.1.  Media Streaming
      5.2.  Interactive Media
      5.3.  Client Negotiating Metadata Support
    6.  On-path Metadata Requirements
      6.1.  Client-Network Metadata
+       6.1.1.  Client Authorization of Signal
      6.2.  Server-Network Metadata
        6.2.1.  Packet Priority
        6.2.2.  Tolerance to Delay
-   7.  Operational Considerations
-     7.1.  Policy Enforcement
-     7.2.  Privacy Considerations
-     7.3.  Scalability
-     7.4.  Abuse and Constraints
+   7.  System Considerations
+     7.1.  Privacy Considerations
+     7.2.  Scalability
+     7.3.  Abuse and Constraints
    8.  Non-Requirements
    9.  IANA Considerations
    10. Security Considerations
@@ -333,6 +337,8 @@ Table of Contents
 
 4.  Requirements Definition
 
+4.1.  Server-to-Network
+
    REQ-PACKET-PRIORITY:  Indicates the imporance of a packet within a
       flow, which helps intermediaries to prioritize based on
       requirement and during reactive events.  This priority value also
@@ -341,13 +347,48 @@ Table of Contents
 
       This is a per-packet metadata requirement.
 
+   REQ-PACKET-DELAY:  Metadata to indicate whether the packet can
+      tolerate delay.
+
+      This is a per-packet metadata requirement.
+
+4.2.  Client-to-Network
+
    REQ-CLIENT-DECIDES:  User/Client indicating to the network to honor
       the application's metadata signaling.
 
       This is a per-flow metadata requirement.
 
+4.3.  API
+
    REQ-API-FRAMEWORK:  API framework to facilitate signaling for
       applications.
+
+      Signaling to the network (Section 6.1, Section 6.2) will need to
+      be facilitated by Application Programming Interfaces (APIs) for
+      any application to use them.  Signaling and retrieval of the
+      signals may not be performed at a single layer (although not
+      encouraged).  Hence, a framework is required to abstract the
+      underlying protocol(s) and allow the application(s) to retrieve/
+      send signals using a single or a set of APIs independent of the
+      channels that are used to convey the signals.  The API framework
+      is required even if one single channel is used so that any
+      application on a client can consume the signals.
+
+      There might be many channels to signal the metadata such as (non-
+      exhaustive list):
+
+      *  TCP options [RFC9293]
+
+      *  UDP Options [I-D.ietf-tsvwg-udp-options]
+
+      *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
+
+      *  QUIC CID mapping
+
+      *  ICMP messages
+
+4.4.  System Considerations
 
    REQ-PRIVACY-ADDITIONAL:  An on-path observer obtains no additional
       information about the IP packet.
@@ -498,10 +539,7 @@ Table of Contents
    because of a contractual agreement between the ISP and the content
    provider.  These contracts could be extended to also allow per-packet
    prioritization within a single UDP 4-tuple, as desired by this
-   document.  However, extending these contracts would disadvantage
-   content providers and other servers that cannot obtain such a
-   contract or have traffic that is difficult or impossible for the ISP
-   to identify and provide such service.
+   document.
 
    For such applications to benefit from per-packet prioritization
    within a single UDP 4-tuple, the client needs to determine which per-
@@ -510,39 +548,7 @@ Table of Contents
    the ISP's network that a certain UDP 4-tuple will have those
    markings.
 
-   This is achieved through two requirements described below, REQ-API-
-   FRAMEWORK and REQ-CLIENT-DECIDES.
-
-   Signaling to the network (Section 6.1, Section 6.2) will need to be
-   facilitated by Application Programming Interfaces (APIs) for any
-   application to use them.  Signaling and retrieval of the signals may
-   not be performed at a single layer (although not encouraged).  Hence,
-   a framework is required to abstract the underlying protocol(s) and
-   allow the application(s) to retrieve/send signals using a single or a
-   set of APIs independent of the channels that are used to convey the
-   signals.  The API framework is required even if one single channel is
-   used so that any application on a client can consume the signals.
-
-   There might be many channels to signal the metadata such as (non-
-   exhaustive list):
-
-   *  TCP options [RFC9293]
-
-   *  UDP Options [I-D.ietf-tsvwg-udp-options]
-
-   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
-
-   *  QUIC CID mapping
-
-   *  ICMP messages
-
-   Requirement:
-
-   REQ-API-FRAMEWORK:  API framework to facilitate signaling for
-      applications.
-
-   REQ-CLIENT-DECIDES:  Client signals upstream networks about incoming
-      packet metadata markings
+   Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
 
           Client                                           ISP router
             |                                                   |
@@ -560,6 +566,12 @@ Table of Contents
 
         Figure 3: API Framework: Client learns ISP capabilities and
      signals how incoming IP packets will signal network collaboration
+
+   Impact: By signaling ISPs to honor the metadata for a particular
+   flow, the client facilitates in the identification of traffic to
+   prioritize for the ISPs.  This would enable the ISPs to extend
+   contracts to servers that cannot be identified by using IP addresses,
+   thereby opening up such contracts to more content providers.
 
 6.  On-path Metadata Requirements
 
@@ -588,7 +600,21 @@ Table of Contents
 
 6.1.  Client-Network Metadata
 
-   PLACEHOLDER for relevant content.
+   Due to contractual agreements (mentioned in Section 4 under REQ-
+   CLIENT-DECIDES) between content providers and ISPs, not all the
+   content providers' signals are honored.  However, extending these
+   contracts would disadvantage content providers and other servers that
+   cannot obtain such a contract or have traffic that is difficult or
+   impossible for the ISP to identify and provide such service.  This
+   drawback can be overcome using metadata defined in Section 6.1.1.
+
+6.1.1.  Client Authorization of Signal
+
+   Client authorization signal provides information on whether the ISP
+   should honor the signals sent by the current flow and the medium of
+   transmission of the signal (as discussed in Section 5.3).  This would
+   enable the ISP to identify servers, which are difficult or impossible
+   to identify by other available methods today.
 
 6.2.  Server-Network Metadata
 
@@ -618,16 +644,16 @@ Table of Contents
    allowing the network to delay or drop low priority packets.
 
    The metadata in Section 6.2.1 should also satisfy constraints
-   identified in Section 7.  Privacy (Section 7.2) requires that
+   identified in Section 7.  Privacy (Section 7.1) requires that
    metadata should not provide additional information to identify the
    application or the user.  The application server can decide on the
    metadata values that provide the best handling for the packets of the
    flow and may not necessarily reflect the exact priority values that
    allow an on-path observer to perform traffic analysis.  This metadata
-   is advisory in nature and network traffic policy (Section 7.1) that
-   restricts its use would not result in additional issues.  Other
-   constraints including scale (Section 7.3) and continuity
-   (Appendix D.3) are required for Section 6.2.1.
+   is advisory in nature and network traffic policy that restricts its
+   use would not result in additional issues.  Other constraints
+   including scale (Section 7.2) and continuity (Appendix D.3) are
+   required for Section 6.2.1.
 
    Realizing the additional bandwidth potential with these metadata may
    require a higher sending rate for the transport flow.  This requires
@@ -687,7 +713,7 @@ Table of Contents
 
    Requirement: REQ-PACKET-DELAY.
 
-7.  Operational Considerations
+7.  System Considerations
 
    Traffic policing and shaping are enforced in ingress/egress network
    points for various reasons (protect the network against attacks,
@@ -701,24 +727,7 @@ Table of Contents
    this document.  This section focuses on operational constraints that
    impact server-network, and client-network modes of sending metadata.
 
-7.1.  Policy Enforcement
-
-   Some metadata requires the network to share some hints with the
-   client/server to adjust its behavior for some specific flows.
-   However, that metadata may have a dependency on the service offering
-   that is subscribed by a user.
-
-   Let us consider the example of a bitrate for an optimized video
-   delivery. _Such bitrate may not be computed system-wide_ given that
-   flows from users with distinct service offerings (and connectivity
-   SLOs) may be serviced by the same network nodes.  Instead, the
-   network needs to dynamically adjust the bitrate based on each user's
-   service package and connectivity SLOs to ensure optimal delivery for
-   all users (REQ-METADATA-ACCURACY).
-
-   Requirement: REQ-METADATA-ACCURACY.
-
-7.2.  Privacy Considerations
+7.1.  Privacy Considerations
 
    Encrypted media payloads along with temporary IPv6 addresses between
    a server and user (client) provide a measure of privacy for the
@@ -772,7 +781,7 @@ Table of Contents
 
    Requirements: REQ-PRIVACY-ADDITIONAL, REQ-SIGNALING-AVOIDANCE
 
-7.3.  Scalability
+7.2.  Scalability
 
    There may be a large number of media flows handled by the server and
    wireless/access router.  Per flow information (state) at a wireless
@@ -783,7 +792,7 @@ Table of Contents
 
    Requirement: REQ-ISP-SCALE.
 
-7.4.  Abuse and Constraints
+7.3.  Abuse and Constraints
 
    It is important that not every flow be prioritized; otherwise, the
    network devolves into the best-effort network that existed prior to
@@ -811,7 +820,7 @@ Table of Contents
 
 10.  Security Considerations
 
-   Security aspects for the metadata are discussed in Section 7.2.  The
+   Security aspects for the metadata are discussed in Section 7.1.  The
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 6.
 
