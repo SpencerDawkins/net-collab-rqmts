@@ -556,12 +556,13 @@ Table of Contents
    the ISP's network that a certain UDP 4-tuple will have those
    markings.
 
-Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+   Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
 
-Impact: By signaling ISPs to honor the metadata for a particular flow, the client
-facilitates in the identification of traffic to prioritize for the ISPs.
-This would enable the ISPs to extend contracts to servers that cannot be identified
-by using IP addresses, thereby opening up such contracts to more content providers.
+   Impact: By signaling ISPs to honor the metadata for a particular
+   flow, the client facilitates in the identification of traffic to
+   prioritize for the ISPs.  This would enable the ISPs to extend
+   contracts to servers that cannot be identified by using IP addresses,
+   thereby opening up such contracts to more content providers.
 
           Client                                           ISP router
             |                                                   |

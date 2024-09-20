@@ -2014,20 +2014,15 @@ a single UDP 4-tuple, the client needs to determine which per-packet
 markings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,
 UDP Option, or DSCP). Then it can indicate to the ISP's network that a
 certain UDP 4-tuple will have those markings.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.3-3">
-<pre>
-Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
-
-Impact: By signaling ISPs to honor the metadata for a particular flow, the client
-facilitates in the identification of traffic to prioritize for the ISPs.
-This would enable the ISPs to extend contracts to servers that cannot be identified
-by using IP addresses, thereby opening up such contracts to more content providers.
-</pre><a href="#section-5.3-3" class="pilcrow">¶</a>
-</div>
+<p id="section-5.3-3">Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">Impact: By signaling ISPs to honor the metadata for a particular flow, the client
+  facilitates in the identification of traffic to prioritize for the ISPs.
+  This would enable the ISPs to extend contracts to servers that cannot be identified
+  by using IP addresses, thereby opening up such contracts to more content providers.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <span id="name-api-framework-client-learns"></span><div id="client-learn">
 <figure id="figure-3">
-          <div id="section-5.3-4.1">
-            <div class="alignCenter art-svg artwork" id="section-5.3-4.1.1">
+          <div id="section-5.3-5.1">
+            <div class="alignCenter art-svg artwork" id="section-5.3-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="272" width="480" viewBox="0 0 480 272" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 24,48 L 24,224" fill="none" stroke="black"></path>
                 <path d="M 440,48 L 440,224" fill="none" stroke="black"></path>
@@ -2059,7 +2054,7 @@ by using IP addresses, thereby opening up such contracts to more content provide
                   <text x="360" y="180">#4"</text>
                   <text x="44" y="228">ok</text>
                 </g>
-              </svg><a href="#section-5.3-4.1.1" class="pilcrow">¶</a>
+              </svg><a href="#section-5.3-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
