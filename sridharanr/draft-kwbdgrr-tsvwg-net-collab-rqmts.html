@@ -1905,13 +1905,14 @@ Impact: With the above requirement met, audio clarity could be maintained
           <li id="section-5.1-3.2">
             <p id="section-5.1-3.2.1">The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC).
-Some clients prefer video over audio and others audio over video based on local network conditions.
-This results in priority inversion in some cases.<a href="#section-5.1-3.2.1" class="pilcrow">¶</a></p>
+Different clients have different priorities for different types of traffic. This would result
+in change in priorities for the same type of traffic a single server sends, based on the user/client.<a href="#section-5.1-3.2.1" class="pilcrow">¶</a></p>
 <p id="section-5.1-3.2.2">
 Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-5.1-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3.2.3">
 Impact: With the above requirement met, each client/user preferences are
- prioritized accordingly while maintaining scalability on the server.<a href="#section-5.1-3.2.3" class="pilcrow">¶</a></p>
+ prioritized accordingly while maintaining scalability on the server, since
+ the metadata the server sends still remains the same for all the connections.<a href="#section-5.1-3.2.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-3.3">
             <p id="section-5.1-3.3.1">Video contains partial frames and full frames, which need to be
