@@ -97,7 +97,7 @@ Table of Contents
      4.1.  Server-to-Network
      4.2.  Client-to-Network
      4.3.  API
-     4.4.  System Considerations
+     4.4.  System-Considerations
    5.  Use Cases
      5.1.  Media Streaming
      5.2.  Interactive Media
@@ -390,7 +390,7 @@ Table of Contents
 
       *  ICMP messages
 
-4.4.  System Considerations
+4.4.  System-Considerations
 
    REQ-PRIVACY-ADDITIONAL:  An on-path observer obtains no additional
       information about the IP packet.
@@ -438,39 +438,39 @@ Table of Contents
        indicate this preference to the network by selecting the
        importance value of audio packets as the highest priority.
 
-   Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE, REQ-PAYLOAD-
-   CLIENT-DECIDES (defined in Appendix B).
+       Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE, REQ-
+       PAYLOAD-CLIENT-DECIDES (defined in Appendix B).
 
-   Impact: With the above requirement met, audio clarity could be
-   maintained better in challenging network and during reactive events
-   ensuring better user experience.
+       Impact: With the above requirement met, audio clarity could be
+       maintained better in challenging network and during reactive
+       events ensuring better user experience.
 
-   1.  The server (or relay) sends the same stream to many receivers,
+   2.  The server (or relay) sends the same stream to many receivers,
        including the same metadata (especially with media over QUIC).
        Some clients prefer video over audio and others audio over video
        based on local network conditions.  This results in priority
        inversion in some cases.
 
-   Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
+       Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
-   Impact: With the above requirement met, each client/user preferences
-   are prioritized accordingly while maintaining scalability on the
-   server.
+       Impact: With the above requirement met, each client/user
+       preferences are prioritized accordingly while maintaining
+       scalability on the server.
 
-   1.  Video contains partial frames and full frames, which need to be
+   3.  Video contains partial frames and full frames, which need to be
        distinguished so that full frames can be indicated to the
        network.  The application may, for example, mark all packets of
        key frames with the highest priority to indicate that they should
        not be dropped.
 
-   Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-KEYFRAME (defined in
-   Appendix B).
+       Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-KEYFRAME (defined in
+       Appendix B).
 
-   Impact: Streaming continuity is improved with lesser impact to
-   continuity/quality of service by prioritizing full frames during
-   reactive events and in challenging networks.
+       Impact: Streaming continuity is improved with lesser impact to
+       continuity/quality of service by prioritizing full frames during
+       reactive events and in challenging networks.
 
-   1.  In loss-prone networks or during Reactive Management events, if
+   4.  In loss-prone networks or during Reactive Management events, if
        all packets of an application flow (UDP 4-tuple) such as live
        broadcast or on-demand video streaming are treated the same, it
        limits the ability to maximize network utilization and use the
@@ -478,10 +478,11 @@ Table of Contents
        packets randomly is likely to lower network utilization and
        application performance.
 
-   Requirement: REQ-PACKET-PRIORITY.
+       Requirement: REQ-PACKET-PRIORITY.
 
-   Impact: By identifying packets that can be dropped, congestion can be
-   reduced leading to improved performance/quality of service.
+       Impact: By identifying packets that can be dropped, congestion
+       can be reduced leading to improved performance/quality of
+       service.
 
    Examples: live broadcast, on-demand video streaming.
 
@@ -497,23 +498,23 @@ Table of Contents
    1.  A mobile/roaming user prioritizes audio over video during a VoIP
        call to have a seamless meeting experience.
 
-   Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
+       Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
-   Impact: With the above requirement met, each client/user preferences
-   are prioritized accordingly while maintaining scalability on the
-   server.
+       Impact: With the above requirement met, each client/user
+       preferences are prioritized accordingly while maintaining
+       scalability on the server.
 
-   1.  A remote desktop user prioritizes graphics updates over an on-
+   2.  A remote desktop user prioritizes graphics updates over an on-
        going file copy operation.  A user types in/interacts with a
        document/file after triggering a save file operation, while save
        operation is on-going.
 
-   Requirement: REQ-PACKET-PRIORITY.
+       Requirement: REQ-PACKET-PRIORITY.
 
-   Impact: By prioritizing graphic updates/interactive traffic, user
-   interactivity is improved with lesser jitter.
+       Impact: By prioritizing graphic updates/interactive traffic, user
+       interactivity is improved with lesser jitter.
 
-   1.  A game or VoIP application may want to signal different metadata
+   3.  A game or VoIP application may want to signal different metadata
        for the same type of packet in each direction.  One user, in a
        VoIP conference call, wants to prioritize the slide deck being
        shared while the other wants to prioritize audio and other wants
@@ -521,21 +522,21 @@ Table of Contents
        preferences can be catered with same type of metadata originating
        from the server.
 
-   Requirement: REQ-PAYLOAD-CLIENT-DECIDES
+       Requirement: REQ-PAYLOAD-CLIENT-DECIDES
 
-   Impact: With the above requirement met, each client/user preferences
-   are prioritized accordingly while maintaining scalability on the
-   server.
+       Impact: With the above requirement met, each client/user
+       preferences are prioritized accordingly while maintaining
+       scalability on the server.
 
-   1.  A network glitch while user is in a eXtended Reality application.
+   4.  A network glitch while user is in a eXtended Reality application.
        The traffic comprises of haptic, video, audio, graphics update
        and keystrokes.  During such reactive event, some packets need to
        be deprioritized/dropped to maintain interactivity.
 
-   Requirement: REQ-PACKET-PRIORITY.
+       Requirement: REQ-PACKET-PRIORITY.
 
-   Impact: By prioritizing high priority traffic, user's interactive
-   experience is improved with lesser jitter.
+       Impact: By prioritizing high priority traffic, user's interactive
+       experience is improved with lesser jitter.
 
    Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
    Remote Desktop Virtualization, eXtended Reality (XR).
@@ -555,7 +556,12 @@ Table of Contents
    the ISP's network that a certain UDP 4-tuple will have those
    markings.
 
-   Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+
+Impact: By signaling ISPs to honor the metadata for a particular flow, the client
+facilitates in the identification of traffic to prioritize for the ISPs.
+This would enable the ISPs to extend contracts to servers that cannot be identified
+by using IP addresses, thereby opening up such contracts to more content providers.
 
           Client                                           ISP router
             |                                                   |
@@ -573,12 +579,6 @@ Table of Contents
 
         Figure 3: API Framework: Client learns ISP capabilities and
      signals how incoming IP packets will signal network collaboration
-
-   Impact: By signaling ISPs to honor the metadata for a particular
-   flow, the client facilitates in the identification of traffic to
-   prioritize for the ISPs.  This would enable the ISPs to extend
-   contracts to servers that cannot be identified by using IP addresses,
-   thereby opening up such contracts to more content providers.
 
 6.  On-path Metadata Requirements
 
@@ -618,10 +618,16 @@ Table of Contents
 6.1.1.  Client Authorization of Signal
 
    Client authorization signal provides information on whether the ISP
-   should honor the signals sent by the current flow and the medium of
-   transmission of the signal (as discussed in Section 5.3).  This would
-   enable the ISP to identify servers, which are difficult or impossible
-   to identify by other available methods today.
+   should honor the signals sent by the current flow.  This would enable
+   the ISP to identify servers, which are difficult or impossible to
+   identify by other available methods today.
+
+   This signal also serves as the medium to initiate the negotiation
+   discussed in Section 5.3).
+
+   Encrypting/Obfuscating metadata information is recommended
+   Section 7.1.  The client authorization signal provides the means to
+   convey the key needed by the ISP to decrypt the metadata.
 
 6.2.  Server-Network Metadata
 
@@ -641,11 +647,7 @@ Table of Contents
    If application packets can either tolerate delay or some loss of
    lower priority packets, the network traffic shaper and scheduler can
    use this information to provide a higher application quality of
-   service.  For example, video streams contain the occasional key frame
-   ("I-frame") containing a full video frame that is necessary to
-   rebuild receiver state after loss of delta frames.  The key frames
-   are therefore more critical to deliver to the receiver than delta
-   frames.  There is some research [_5G-Octopus] to indicate that media
+   service.  There is some research [_5G-Octopus] to indicate that media
    applications can obtain better measured application quality when
    sending at a higher rate (less conservative than current CCA) and
    allowing the network to delay or drop low priority packets.
