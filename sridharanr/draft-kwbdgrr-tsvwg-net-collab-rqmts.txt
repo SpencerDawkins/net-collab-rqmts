@@ -90,7 +90,7 @@ Table of Contents
 
    1.  Introduction
    2.  Definitions
-   3.  Types of Metdata Requirement
+   3.  Types of Metadata Requirement
      3.1.  Per Flow Metadata
      3.2.  Per Packet Metadata
    4.  Requirements Definition
@@ -120,8 +120,9 @@ Table of Contents
    Appendix A.  Network Attachment
    Appendix B.  Extended Requirements Definition
    Appendix C.  Extended Use-Cases
-     C.1.  Assisted Offload
-     C.2.  Network Bandwidth & Network Rate Limiting Policies
+     C.1.  Media Streaming Extended
+     C.2.  Assisted Offload
+     C.3.  Network Bandwidth & Network Rate Limiting Policies
    Appendix D.  Extended Operational Considerations
      D.1.  Application Interference
      D.2.  Redundant Functions and Classification Complications
@@ -318,14 +319,15 @@ Table of Contents
       access router to delay or discard packets of lower priority to
       achieve bounded latency and high throughput.
 
-3.  Types of Metdata Requirement
+3.  Types of Metadata Requirement
 
 3.1.  Per Flow Metadata
 
    Refers to metadata that doesn't change often during the lifetime of a
-   connection and thus can be exchanged once or as needed.
+   connection and thus can be exchanged once or as needed.  This is
+   communicated per flow (i.e., UDP 4-tuple) between client and network.
 
-   Examples: Bitrate, Burst size.
+   Examples: client request to honor per-packet metadata, preferences.
 
 3.2.  Per Packet Metadata
 
@@ -333,17 +335,17 @@ Table of Contents
    often capturing the nature and characteristics of the traffic each
    packet carries.  This needs to be communicated on a per packet basis.
 
-   Examples: Packet Priority, Type of media frame
+   Examples: Packet Priority, tolerance to delay
 
 4.  Requirements Definition
 
 4.1.  Server-to-Network
 
-   REQ-PACKET-PRIORITY:  Indicates the imporance of a packet within a
-      flow, which helps intermediaries to prioritize based on
-      requirement and during reactive events.  This priority value also
-      can be used to indicate loss tolerance and the network elements
-      can drop loss tolerant packets during reactive events.
+   REQ-PACKET-PRIORITY:  Server indicates the importance of a packet
+      within a flow.  This allows the network to prioritize based on
+      requirement and during reactive events.  This priority value may
+      also be used to indicate loss tolerance and the network elements
+      may drop loss tolerant packets during reactive events.
 
       This is a per-packet metadata requirement.
 
@@ -429,25 +431,25 @@ Table of Contents
    receiver state after loss of delta frames.  The key frames are
    therefore more critical to deliver to the receiver than delta frames.
 
-   Use cases:
+   Examples:
 
    1.  Audio is more critical than video for many applications and
-       should be prioritized differently than video.
+       should be prioritized differently than video.  The client may
+       indicate this preference to the network by selecting the
+       importance value of audio packets as the highest priority.
 
-   Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE (defined in
-   Appendix B).
+   Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE, REQ-PAYLOAD-
+   CLIENT-DECIDES (defined in Appendix B).
 
    Impact: With the above requirement met, audio clarity could be
    maintained better in challenging network and during reactive events
    ensuring better user experience.
 
    1.  The server (or relay) sends the same stream to many receivers,
-       including the same metadata (especially with media over QUIC).  A
-       Client's need to differentiate priorities (e.g., video over audio
-       or the other way around) is only achievable by signaling that
-       priority inversion from the client to the ISP router (Audio is
-       more critical for many applications but video takes priority in
-       some cases).
+       including the same metadata (especially with media over QUIC).
+       Some clients prefer video over audio and others audio over video
+       based on local network conditions.  This results in priority
+       inversion in some cases.
 
    Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
@@ -457,19 +459,24 @@ Table of Contents
 
    1.  Video contains partial frames and full frames, which need to be
        distinguished so that full frames can be indicated to the
-       network.
+       network.  The application may, for example, mark all packets of
+       key frames with the highest priority to indicate that they should
+       not be dropped.
 
-   Requirement: REQ-MEDIA-KEYFRAME (defined in Appendix B).
+   Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-KEYFRAME (defined in
+   Appendix B).
 
    Impact: Streaming continuity is improved with lesser impact to
    continuity/quality of service by prioritizing full frames during
    reactive events and in challenging networks.
 
-   1.  In loss-prone networks or during Reactive Management events, all
-       packets being treated the same can have challenges in efficiently
-       handling/forwarding data (retransmissions are expensive).  There
-       is no way to identify packets which can be dropped, with little
-       impact to performance.
+   1.  In loss-prone networks or during Reactive Management events, if
+       all packets of an application flow (UDP 4-tuple) such as live
+       broadcast or on-demand video streaming are treated the same, it
+       limits the ability to maximize network utilization and use the
+       transiently available bandwidth.  Dropping or delaying of (media)
+       packets randomly is likely to lower network utilization and
+       application performance.
 
    Requirement: REQ-PACKET-PRIORITY.
 
@@ -1085,7 +1092,37 @@ Appendix B.  Extended Requirements Definition
 
 Appendix C.  Extended Use-Cases
 
-C.1.  Assisted Offload
+   Requirements:
+
+   REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
+      video.  This is a per-flow metadata requirement.
+
+   REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
+      which need to be distinguished so that full frames can be
+      indicated to the network.  This is a per-packet metadata
+      requirement.
+
+C.1.  Media Streaming Extended
+
+   Streaming video contains the occasional key frame ("I-frame")
+   containing a full video frame.  These frames are necessary to rebuild
+   receiver state after loss of delta frames.  The key frames are
+   therefore more critical to deliver to the receiver than delta frames.
+
+   Examples:
+
+   1.  Audio is more critical than video for many applications and
+       should be prioritized differently than video.
+
+   Requirement: REQ-MEDIA-AV-SEPARATE.
+
+   1.  Video contains partial frames and full frames, which need to be
+       distinguished so that full frames can be indicated to the
+       network.
+
+   Requirement: REQ-MEDIA-KEYFRAME.
+
+C.2.  Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
@@ -1101,7 +1138,7 @@ C.1.  Assisted Offload
    distribution policies on the client (e.g., prefer the use of
    alternate paths, offload a network) (REQ-NETWORK-SEEKS-LOAD-DOWN).
 
-C.2.  Network Bandwidth & Network Rate Limiting Policies
+C.3.  Network Bandwidth & Network Rate Limiting Policies
 
    Bandwidth constraints exist most predominantly at the access network.
    This can be constraints in the network itself or a result of rate
