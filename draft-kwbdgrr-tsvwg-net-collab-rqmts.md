@@ -353,6 +353,14 @@ REQ-CLIENT-DECIDES:
 metadata signaling.
 : This is a per-flow metadata requirement.
 
+REQ-PAYLOAD-CLIENT-DECIDES:
+: The ability of the receiver to change the priority by communicating
+to the network to prioritize one payload(metadata) over another within
+the flow -- without cooperation of the sender. Gives the sender the
+ability to have same metadata for all the connections without having
+to change based on the user preference, aids in scalability.
+: This is a per-flow metadata requirement.
+
 ## API
 
 REQ-API-FRAMEWORK:
@@ -396,12 +404,6 @@ REQ-ISP-SCALE:
 maintain for each additional flow it handles should be very low
 or none.
 
-REQ-SIGNAL-VALIDATION:
-: The network/OS needs to ensure that the user/client signaling of
-priority (if any) does not associate the same priority level with all
-traffic types within the same flow, thereby avoiding prioritizing of
-all the streams/traffic the same way.
-
 REQ-CLIENT-VALIDATION:
 : The network needs to ensure the signal is coming from the same
 user/client that is part of the 5-tuple flow.  This is to ensure no
@@ -417,23 +419,29 @@ containing a full video frame.  These frames are necessary to rebuild
 receiver state after loss of delta frames.  The key frames are
 therefore more critical to deliver to the receiver than delta frames.
 
+Examples: live broadcast, on-demand video streaming.
+
 Use cases:
 
-1. Audio is more critical than video for many applications and should
-be prioritized differently than video.
-The client may indicate this preference to a network by selecting
-the importance value of audio packets as the highest priority.
+1. Majority of streaming traffic is Audio and Video traffic.
+Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.
+Audio traffic is more critical than video for many applications.
+This differences in priority needs to be indicated to the network to
+ensure network (de)prioritizes (or even drop if deemed necessary)
+traffic appropriately.
 
-    Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE,
-    REQ-PAYLOAD-CLIENT-DECIDES (defined in {{x-req-def}}).
+    Requirement: REQ-PACKET-PRIORITY.
 
-    Impact: With the above requirement met, audio clarity could be maintained
-  better in resource-constrained networks and during reactive events ensuring better user experience.
+    Impact: With the above requirement met, better quality of service
+    could be maintained in resource-constrained networks and during
+    reactive events ensuring better user experience.
 
 2. The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC).
-Different clients have different priorities for different types of traffic. This would result
-in change in priorities for the same type of traffic that a single server sends, based on the user/client.
+Different clients have different priorities for different types of traffic.
+This would result in change in priorities for the same type of traffic
+that a single server sends, based on the user/client.
 
     Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
@@ -441,17 +449,7 @@ in change in priorities for the same type of traffic that a single server sends,
     prioritized accordingly while maintaining scalability on the server, since
     the metadata that the server sends still remains the same for all the connections.
 
-3. Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the network.
-The application may, for example, mark all packets of key frames with the
-highest priority to indicate that they should not be dropped.
-
-    Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-KEYFRAME (defined in {{x-req-def}}).
-
-    Impact: Streaming continuity is improved with lesser impact to continuity/quality
-    of service by prioritizing full frames during reactive events and in challenging networks.
-
-4. In loss-prone networks or during Reactive Management events, if all packets of an application
+3. In loss-prone networks or during Reactive Management events, if all packets of an application
 flow (UDP 4-tuple) such as live broadcast or on-demand video streaming are treated the same,
 it limits the ability to maximize network utilization and use the transiently available bandwidth.
 Dropping or delaying of (media) packets randomly is likely to lower network utilization
@@ -462,8 +460,6 @@ and application performance.
     Impact: By identifying packets that tolerate being dropped, congestion can be reduced leading
     to improved performance/quality of service.
 
-Examples: live broadcast, on-demand video streaming.
-
 
 ## Interactive Media {#uc-interactive}
 
@@ -471,6 +467,9 @@ Interactive media includes content that a user can actively engage
 with and results in input and response actions that can be highly
 delay-sensitive. This can also include mixed traffic based on the
 user activity and interaction.
+
+Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
+Remote Desktop Virtualization, eXtended Reality (XR).
 
 Use cases:
 
@@ -498,7 +497,7 @@ the other wants to prioritize audio and other wants to prioritize
 video of the speaker. Each user's varied preferences can be catered
 with same type of metadata originating from the server.
 
-    Requirement: REQ-PAYLOAD-CLIENT-DECIDES
+    Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
     Impact: With the above requirement met, each client/user preferences are
     prioritized accordingly while maintaining scalability on the server.
@@ -512,9 +511,6 @@ deprioritized/dropped to maintain interactivity.
 
     Impact: By prioritizing high priority traffic, user's
     interactive experience is improved with lesser jitter.
-
-Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
-Remote Desktop Virtualization, eXtended Reality (XR).
 
 ## Metadata Negotiation Support {#metadata-negotiation}
 
@@ -794,7 +790,7 @@ other flows with that subscriber are denied attempts to prioritize
 themselves. However, the network cannot identify whether the
 prioritized flow is legitimate or malicious.
 
-Requirements: REQ-SIGNAL-VALIDATION, REQ-CLIENT-VALIDATION.
+Requirements: REQ-CLIENT-VALIDATION.
 
 # Non-Requirements {#non-req}
 
@@ -909,15 +905,7 @@ signaling (out of scope here) to identify of frame boundaries and may
 not be suitable in cases which are sensitive to traffic analysis
 (see REQ-SIGNALING-AVOIDANCE and {{RFC9049}}). If the application
 provides frame boundaries, the client signals the enhanced application
-priority values in REQ-PAYLOAD-CLIENT-DECIDES (also an enhanced requirement).
-: This is a per-flow metadata requirement.
-
-REQ-PAYLOAD-CLIENT-DECIDES:
-: The ability of the receiver to change the priority by communicating
-to the network to prioritize one payload(metadata) over another within
-the flow -- without cooperation of the sender. Gives the sender the
-ability to have same metadata for all the connections without having
-to change based on the user preference, aids in scalability.
+priority values in REQ-PAYLOAD-CLIENT-DECIDES.
 : This is a per-flow metadata requirement.
 
 REQ-MEDIA-KEYFRAME:
@@ -929,7 +917,7 @@ signaling (out of scope here) to identify of frame boundaries and may
 not be suitable in cases which are sensitive to traffic analysis
 (see REQ-SIGNALING-AVOIDANCE and {{RFC9049}}). If the application
 provides frame boundaries, the client signals the enhanced application
-priority values in REQ-PAYLOAD-CLIENT-DECIDES (also an enhanced requirement).
+priority values in REQ-PAYLOAD-CLIENT-DECIDES.
 : This is a per-packet metadata requirement.
 
 REQ-NETWORK-THROUGHPUT:
