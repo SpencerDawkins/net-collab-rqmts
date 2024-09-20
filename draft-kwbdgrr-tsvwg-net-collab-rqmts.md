@@ -417,7 +417,7 @@ containing a full video frame.  These frames are necessary to rebuild
 receiver state after loss of delta frames.  The key frames are
 therefore more critical to deliver to the receiver than delta frames.
 
-Examples:
+Use cases:
 
 1. Audio is more critical than video for many applications and should
 be prioritized differently than video.
