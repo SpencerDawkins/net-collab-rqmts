@@ -101,7 +101,7 @@ Table of Contents
    5.  Use Cases
      5.1.  Media Streaming
      5.2.  Interactive Media
-     5.3.  Client Negotiating Metadata Support
+     5.3.  Metadata Negotiation Support
    6.  On-path Metadata Requirements
      6.1.  Client-Network Metadata
        6.1.1.  Client Flow Authorization
@@ -541,13 +541,13 @@ Table of Contents
    Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
    Remote Desktop Virtualization, eXtended Reality (XR).
 
-5.3.  Client Negotiating Metadata Support
+5.3.  Metadata Negotiation Support
 
    Currently, some flows are granted higher priority over other flows
    because of a contractual agreement between the ISP and the content
    provider.  These contracts could be extended to also allow per-packet
    prioritization within a single UDP 4-tuple, as desired by this
-   document.
+   document (Section 6.1 Section 6.1.1).
 
    For such applications to benefit from per-packet prioritization
    within a single UDP 4-tuple, the client needs to determine which per-
@@ -627,7 +627,7 @@ Table of Contents
    discussed in Section 5.3).
 
    Encrypting/Obfuscating metadata information is recommended
-   Section 7.1.  The client authorization signal provides the means to
+   (Section 7.1).  The client authorization signal provides the means to
    convey the key needed by the ISP to decrypt the metadata.
 
 6.2.  Server-Network Metadata
