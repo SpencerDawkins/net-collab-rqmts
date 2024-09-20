@@ -547,7 +547,7 @@ Table of Contents
    because of a contractual agreement between the ISP and the content
    provider.  These contracts could be extended to also allow per-packet
    prioritization within a single UDP 4-tuple, as desired by this
-   document (Section 6.1 Section 6.1.1).
+   document (Section 6.1 and Section 6.1.1).
 
    For such applications to benefit from per-packet prioritization
    within a single UDP 4-tuple, the client needs to determine which per-
