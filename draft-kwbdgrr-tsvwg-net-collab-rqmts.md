@@ -178,8 +178,8 @@ sender conveying packet behavior preferences to the network for
 packets within a single UDP 4-tuple.  During adverse network events
 this allows the network to be informed about the least-impactful
 packets to drop (or delay) in the same UDP 4-tuple.  Without such
-signaling the network can only indiscriminately drop (or delay)
-packets.  With such capability loss-tolerant and delay-tolerant
+signaling, the network can only indiscriminately drop (or delay)
+packets.  With such capability, loss-tolerant and delay-tolerant
 transport protocols such as RTP, QUIC {{?RFC9000}}, and Unreliable
 QUIC {{?RFC9221}} can inform the network and provide a superior end
 user experience.
