@@ -1900,7 +1900,10 @@ Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE,
  REQ-PAYLOAD-CLIENT-DECIDES (defined in <a href="#x-req-def" class="auto internal xref">Appendix B</a>).<a href="#section-5.1-3.1.2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3.1.3">
 Impact: With the above requirement met, audio clarity could be maintained
-  better in resource-constrained networks and during reactive events ensuring better user experience.<a href="#section-5.1-3.1.3" class="pilcrow">¶</a></p>
+  better in resource-constrained networks and during reactive events ensuring better user experience.
+REQ-PACKET-PRIORITY is the basic requirement with default priority values provided from server-to-network.
+MEDIA-AV-SEPARATE is an enhanced requirement that requires e2e application layer signaling (out of scope here) to identify of frame boundaries and may not be suitable in cases which are sensitive to traffic analysis (see REQ-SIGNALING-AVOIDANCE and <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>).
+If the application provides frame boundaries (MEDIA-AV-SEPARATE), the client signals the enhanced application priority values in REQ-PAYLOAD-CLIENT-DECIDES (also an enhanced requirement).<a href="#section-5.1-3.1.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-3.2">
             <p id="section-5.1-3.2.1">The server (or relay) sends the same stream to many receivers,

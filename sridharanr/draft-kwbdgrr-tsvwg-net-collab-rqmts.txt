@@ -443,7 +443,16 @@ Table of Contents
 
        Impact: With the above requirement met, audio clarity could be
        maintained better in resource-constrained networks and during
-       reactive events ensuring better user experience.
+       reactive events ensuring better user experience.  REQ-PACKET-
+       PRIORITY is the basic requirement with default priority values
+       provided from server-to-network.  MEDIA-AV-SEPARATE is an
+       enhanced requirement that requires e2e application layer
+       signaling (out of scope here) to identify of frame boundaries and
+       may not be suitable in cases which are sensitive to traffic
+       analysis (see REQ-SIGNALING-AVOIDANCE and [RFC9049]).  If the
+       application provides frame boundaries (MEDIA-AV-SEPARATE), the
+       client signals the enhanced application priority values in REQ-
+       PAYLOAD-CLIENT-DECIDES (also an enhanced requirement).
 
    2.  The server (or relay) sends the same stream to many receivers,
        including the same metadata (especially with media over QUIC).
