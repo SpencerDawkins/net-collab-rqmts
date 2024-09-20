@@ -376,24 +376,24 @@ consume the signals.
   * QUIC CID mapping
   * ICMP messages
 
-## System-Considerations
+## System Considerations
 
 REQ-PRIVACY-ADDITIONAL:
-: An on-path observer obtains no additional information about the IP
+: An on-path observer obtains (or gleans) no additional information about the IP
 packet.
 
 REQ-SIGNALING-AVOIDANCE:
-: Leveraging previous experience {{?RFC9049}}, the folliwing is not
+: Leveraging previous experience {{?RFC9049}}, the following is not
 required to make use of the collaborative signaling:
 
   * Reveal the application identity.
   * Expose the application cause (or 'reason') to signal metadata.
-  * Reveal server identity.
+  * Reveal the server identity.
   * Inspect client-to-server encrypted payload by network elements.
 
 REQ-ISP-SCALE:
-: The metadata other state information that a wireless router has to
-maintain for each additional media flow it handles should be very low
+: The metadata and any other related state information that a network element (router) has to
+maintain for each additional flow it handles should be very low
 or none.
 
 REQ-SIGNAL-VALIDATION:
@@ -406,7 +406,7 @@ REQ-CLIENT-VALIDATION:
 : The network needs to ensure the signal is coming from the same
 user/client that is part of the 5-tuple flow.  This is to ensure no
 other application influences the priority of another application's
-flow.
+flow from within the same host.
 
 # Use Cases {#uc}
 
@@ -421,25 +421,25 @@ Examples:
 
 1. Audio is more critical than video for many applications and should
 be prioritized differently than video.
-The client may indicate this preference to the network by selecting
+The client may indicate this preference to a network by selecting
 the importance value of audio packets as the highest priority.
 
     Requirement: REQ-PACKET-PRIORITY, REQ-MEDIA-AV-SEPARATE,
     REQ-PAYLOAD-CLIENT-DECIDES (defined in {{x-req-def}}).
 
     Impact: With the above requirement met, audio clarity could be maintained
-  better in challenging network and during reactive events ensuring better user experience.
+  better in resource-constrained networks and during reactive events ensuring better user experience.
 
 2. The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC).
 Different clients have different priorities for different types of traffic. This would result
-in change in priorities for the same type of traffic a single server sends, based on the user/client.
+in change in priorities for the same type of traffic that a single server sends, based on the user/client.
 
     Requirement: REQ-PAYLOAD-CLIENT-DECIDES.
 
     Impact: With the above requirement met, each client/user preferences are
     prioritized accordingly while maintaining scalability on the server, since
-    the metadata the server sends still remains the same for all the connections.
+    the metadata that the server sends still remains the same for all the connections.
 
 3. Video contains partial frames and full frames, which need to be
 distinguished so that full frames can be indicated to the network.
@@ -459,7 +459,7 @@ and application performance.
 
     Requirement: REQ-PACKET-PRIORITY.
 
-    Impact: By identifying packets that can be dropped, congestion can be reduced leading
+    Impact: By identifying packets that tolerate being dropped, congestion can be reduced leading
     to improved performance/quality of service.
 
 Examples: live broadcast, on-demand video streaming.
