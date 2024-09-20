@@ -104,7 +104,7 @@ Table of Contents
      5.3.  Client Negotiating Metadata Support
    6.  On-path Metadata Requirements
      6.1.  Client-Network Metadata
-       6.1.1.  Client Authorization of Signal
+       6.1.1.  Client Flow Authorization
      6.2.  Server-Network Metadata
        6.2.1.  Packet Priority
        6.2.2.  Tolerance to Delay
@@ -615,7 +615,7 @@ by using IP addresses, thereby opening up such contracts to more content provide
    impossible for the ISP to identify and provide such service.  This
    drawback can be overcome using metadata defined in Section 6.1.1.
 
-6.1.1.  Client Authorization of Signal
+6.1.1.  Client Flow Authorization
 
    Client authorization signal provides information on whether the ISP
    should honor the signals sent by the current flow.  This would enable
