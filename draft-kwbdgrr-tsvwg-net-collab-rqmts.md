@@ -454,8 +454,10 @@ highest priority to indicate that they should not be dropped.
 
     Impact: Streaming continuity is improved with lesser impact to continuity/quality
     of service by prioritizing full frames during reactive events and in challenging networks.
+   REQ-MEDIA-KEYFRAME is an enhanced requirement that requires e2e application layer signaling (out of scope here) to identify of frame boundaries and may not be suitable in cases which are sensitive to traffic analysis (see REQ-SIGNALING-AVOIDANCE and {{RFC9049}}).
+   
 
-5. In loss-prone networks or during Reactive Management events, if all packets of an application
+6. In loss-prone networks or during Reactive Management events, if all packets of an application
 flow (UDP 4-tuple) such as live broadcast or on-demand video streaming are treated the same,
 it limits the ability to maximize network utilization and use the transiently available bandwidth.
 Dropping or delaying of (media) packets randomly is likely to lower network utilization
@@ -506,8 +508,9 @@ with same type of metadata originating from the server.
 
     Impact: With the above requirement met, each client/user preferences are
     prioritized accordingly while maintaining scalability on the server.
+   REQ-PAYLOAD-CLIENT-DECIDES is an enhanced requirement that requires e2e application layer signaling (out of scope here) that signals explicit priority values for media streams and may not be suitable in cases which are sensitive to traffic analysis (see REQ-SIGNALING-AVOIDANCE and {{RFC9049}}).
 
-4. A network glitch while user is in a eXtended Reality application.
+5. A network glitch while user is in a eXtended Reality application.
 The traffic comprises of haptic, video, audio, graphics update and
 keystrokes. During such reactive event, some packets need to be
 deprioritized/dropped to maintain interactivity.
