@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-19T01:21:42.020385+00:00",
+  "timestamp": "2024-09-22T01:35:16.239373+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -588,7 +588,7 @@
       "id": "I_kwDOL0HpzM6W7S63",
       "title": "Client-Network metadata updates and Use case/requirements consolidation",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/76",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "John-Kaippallimalil",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -597,7 +597,31 @@
       "labels": [],
       "body": "1. Revise use case 4.3 to \"Client Negotiating Metadata Support\"\r\n\r\n2. Client-network metadata updates:\r\na) remove section \u201cPriority between flows\u201d (5.1.1). \r\nb) Add new section on how the network is made aware of the transport by which metadata is sent (new 5.1.1 ?)\r\n    Move 6.2 \u201cExposure Handling\u201d to this section.  Would the title \u201cTransport for Metadata Exposure\u201d be clearer for the reader'\r\n\r\n3. a) Rename section \"Operational Considerations\" -> \"System Considerations\"\r\n    b) Move 6.1 to Appendix (as it is related to SconePro)",
       "createdAt": "2024-09-17T20:47:10Z",
-      "updatedAt": "2024-09-17T20:47:28Z",
+      "updatedAt": "2024-09-19T16:05:07Z",
+      "closedAt": "2024-09-19T16:04:22Z",
+      "comments": [
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "issues in #76 are addressed.",
+          "createdAt": "2024-09-19T16:05:06Z",
+          "updatedAt": "2024-09-19T16:05:06Z"
+        }
+      ]
+    },
+    {
+      "number": 88,
+      "id": "I_kwDOL0HpzM6XX0tK",
+      "title": "introduction is really long",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/88",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Introduction would benefit from a diet, or at least breaking into sub-sections.  Some documents have a separate background section but existing text does not seem to talk a lot about existing systems.  Hm.  Suggestions?",
+      "createdAt": "2024-09-20T20:14:38Z",
+      "updatedAt": "2024-09-20T20:14:38Z",
       "closedAt": null,
       "comments": []
     }
@@ -4603,24 +4627,26 @@
       "id": "PR_kwDOL0HpzM571VYP",
       "title": "align Reactive Management definition with ATIS's ...",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/77",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "document ATIS-I-0000096, 'Content Classification for Traffic Optimization', available at https://atis.org/whitepapers/white-papers-a-z",
       "createdAt": "2024-09-18T01:06:54Z",
-      "updatedAt": "2024-09-18T17:59:50Z",
+      "updatedAt": "2024-09-19T05:30:55Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "f801ce19f00bb69903914891bbb4de9485493869",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "reactive_definition",
       "headRefOid": "109b33fd8dd9ff73d40602db8ad0d7c47bb4f4d3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-19T05:30:55Z",
+      "mergedAt": "2024-09-19T05:30:55Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "1c689281a2bd82079e153db6c2d97d7d90f5d3e4"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4687,6 +4713,19 @@
               "updatedAt": "2024-09-18T15:43:31Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6J84df",
+          "commit": {
+            "abbreviatedOid": "109b33f"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-19T05:30:49Z",
+          "updatedAt": "2024-09-19T05:30:49Z",
+          "comments": []
         }
       ]
     },
@@ -4763,24 +4802,26 @@
       "id": "PR_kwDOL0HpzM578GJY",
       "title": "My attempt at issue #76: client signals and API requirement",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/79",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-18T18:45:39Z",
-      "updatedAt": "2024-09-19T00:47:31Z",
+      "updatedAt": "2024-09-19T16:13:46Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "3e2cbe3a2e9863557331ac946c169cd6cd1b33ab",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "dwing_issue_76",
-      "headRefOid": "75e810f98646645bdc7b162beb73e464cab68a9f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "adb5a35ab8044a1c5e29c5d11b11bfb26349254e",
+      "closedAt": "2024-09-19T16:13:46Z",
+      "mergedAt": "2024-09-19T16:13:46Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "35215259d637f29a2cc59d7acb4c98b8932f0842"
+      },
       "comments": [
         {
           "author": "John-Kaippallimalil",
@@ -4809,6 +4850,70 @@
           "body": "On line 508 \"Network Collaboration signaled in IPv6 Hop-by-Hop\", it may be better to not indicate IPv6 HbH as it is a solution.",
           "createdAt": "2024-09-18T20:33:26Z",
           "updatedAt": "2024-09-18T20:33:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6J85Ff",
+          "commit": {
+            "abbreviatedOid": "75e810f"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Looks good. Only minor nits. thanks",
+          "createdAt": "2024-09-19T05:33:09Z",
+          "updatedAt": "2024-09-19T05:36:39Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\nmarkings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,\r\n```",
+              "createdAt": "2024-09-19T05:33:10Z",
+              "updatedAt": "2024-09-19T05:36:39Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nUDP Option, or DSCP).  Then it can indicate to the ISP's network that a\r\n```",
+              "createdAt": "2024-09-19T05:33:26Z",
+              "updatedAt": "2024-09-19T05:36:39Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\nusing a single or a set of APIs independent of the channels that\r\n```",
+              "createdAt": "2024-09-19T05:34:20Z",
+              "updatedAt": "2024-09-19T05:36:39Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\nif one single channel is used so that any application on a client can consume\r\n```",
+              "createdAt": "2024-09-19T05:35:14Z",
+              "updatedAt": "2024-09-19T05:36:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KBo-U",
+          "commit": {
+            "abbreviatedOid": "adb5a35"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Addresses the main aspects for use case 4.3 ",
+          "createdAt": "2024-09-19T14:13:22Z",
+          "updatedAt": "2024-09-19T14:13:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KC5G-",
+          "commit": {
+            "abbreviatedOid": "adb5a35"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-19T16:10:50Z",
+          "updatedAt": "2024-09-19T16:10:50Z",
           "comments": []
         }
       ]
@@ -4935,6 +5040,461 @@
           "body": "",
           "createdAt": "2024-09-18T20:48:17Z",
           "updatedAt": "2024-09-18T20:48:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 83,
+      "id": "PR_kwDOL0HpzM58EEql",
+      "title": "harmonize UC requirements",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/83",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-19T16:28:05Z",
+      "updatedAt": "2024-09-19T16:36:02Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "35215259d637f29a2cc59d7acb4c98b8932f0842",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-22",
+      "headRefOid": "0352a29f0f46a890cfdb242da567308f28c6fd1c",
+      "closedAt": "2024-09-19T16:36:02Z",
+      "mergedAt": "2024-09-19T16:36:02Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "c524cdd15f54705c1fd9ea0e38729bea688fbfe2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KDD4E",
+          "commit": {
+            "abbreviatedOid": "d3b4fec"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-19T16:29:39Z",
+          "updatedAt": "2024-09-19T16:29:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KDExv",
+          "commit": {
+            "abbreviatedOid": "0352a29"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "(trailing whitespace bites again!)",
+          "createdAt": "2024-09-19T16:30:30Z",
+          "updatedAt": "2024-09-19T16:30:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOL0HpzM58ELZ3",
+      "title": "split a very looooong para",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/84",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-19T16:38:40Z",
+      "updatedAt": "2024-09-19T17:13:07Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "c524cdd15f54705c1fd9ea0e38729bea688fbfe2",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "boucadair-patch-23",
+      "headRefOid": "2e3411c63efba7f63527b920e3f469e889a18b41",
+      "closedAt": "2024-09-19T17:13:06Z",
+      "mergedAt": "2024-09-19T17:13:06Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "9180f36508148998a6cfbc1f06c8f8e961f374af"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KDy8c",
+          "commit": {
+            "abbreviatedOid": "2e3411c"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-19T17:13:00Z",
+          "updatedAt": "2024-09-19T17:13:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "id": "PR_kwDOL0HpzM58F6Tn",
+      "title": "Update draft-kwbdgrr-tsvwg-net-collab-rqmts.md",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/85",
+      "state": "MERGED",
+      "author": "John-Kaippallimalil",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates in https://github.com/SpencerDawkins/net-collab-rqmts/pull/82/files  -- in Use cases section and Extended use cases in Appendix were overridden accidently.",
+      "createdAt": "2024-09-19T21:09:19Z",
+      "updatedAt": "2024-09-19T21:59:20Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "9180f36508148998a6cfbc1f06c8f8e961f374af",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "John-Kaippallimalil-patch-2",
+      "headRefOid": "c177434d76f17c595a22739d748c259590338b95",
+      "closedAt": "2024-09-19T21:59:20Z",
+      "mergedAt": "2024-09-19T21:59:20Z",
+      "mergedBy": "John-Kaippallimalil",
+      "mergeCommit": {
+        "oid": "69c5f551850e9f81b5c8744d0be90849a4551be4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KF2vX",
+          "commit": {
+            "abbreviatedOid": "c177434"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-19T21:32:42Z",
+          "updatedAt": "2024-09-19T21:32:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOL0HpzM58GY4D",
+      "title": "remove REQ-METADATA-ACCURACY",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/86",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I will wait for all co-authors to approve this change before commiting to Main.\n\n",
+      "createdAt": "2024-09-19T23:21:13Z",
+      "updatedAt": "2024-09-20T05:24:19Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "remove_metadata_accuracy",
+      "headRefOid": "089ff4b65738a259bd5d0ec38b540da1e0d0b6ec",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hey Dan, I've covered this in my PR too along with other text. Can we shelve this PR?\r\n",
+          "createdAt": "2024-09-20T00:59:39Z",
+          "updatedAt": "2024-09-20T00:59:39Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Let's have all co-authors agree to nuke this REQ, then we can close this PR and commit the change in your #87.",
+          "createdAt": "2024-09-20T01:20:35Z",
+          "updatedAt": "2024-09-20T01:20:35Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This REQ covers the ops complexity for network-originated metadata (scone-like). Now that we focus on H2N and S2N, I'm OK to delete this text or move to an appendix. Thanks",
+          "createdAt": "2024-09-20T05:24:18Z",
+          "updatedAt": "2024-09-20T05:24:18Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOL0HpzM58Gt7M",
+      "title": "Added Impact to the use cases to justify requirements.",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/87",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Created a section to define all requirements and link them in the use cases for easier read.\r\nReworded a few things",
+      "createdAt": "2024-09-20T00:57:13Z",
+      "updatedAt": "2024-09-20T20:28:35Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "e283e4382b58738c5526f2c08ada963eaa50a74a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks.\r\n\r\nFor \"REQ-METADATA-ACCURACY\", please see my comment to Dan at #86.",
+          "createdAt": "2024-09-20T14:26:36Z",
+          "updatedAt": "2024-09-20T14:26:36Z"
+        },
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The main body of the draft now refers to 3 requirements (REQ-MEDIA-AV-SEPARATE; REQ-PAYLOAD-CLIENT-DECIDES, REQ-MEDIA-KEYFRAME) that are in the Appendix. This blurs the line on what sections in the Appendix are normative and informative. As a partial remedy, I have made 2 updates  (see my commits above) to indicate that these requirements are \"enhanced\".",
+          "createdAt": "2024-09-20T16:09:35Z",
+          "updatedAt": "2024-09-20T16:09:35Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The main body of the draft now refers to 3 requirements (REQ-MEDIA-AV-SEPARATE; REQ-PAYLOAD-CLIENT-DECIDES, REQ-MEDIA-KEYFRAME) that are in the Appendix. This blurs the line on what sections in the Appendix are normative and informative. As a partial remedy, I have made 2 updates (see my commits above) to indicate that these requirements are \"enhanced\".\r\n\r\nHi John, thanks for the text. I agree with REQ-MEDIA-AV-SEPARATE and REQ-MEDIA-KEYFRAME but I doubt if REQ-PAYLOAD-CLIENT-DECIDES causes any issue with traffic analysis. I have moved the statements you have made into the requirements definition itself to keep the main body short and succinct while keeping the remedy in place as well.",
+          "createdAt": "2024-09-20T16:18:21Z",
+          "updatedAt": "2024-09-20T16:18:21Z"
+        },
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Sridhar, Re: traffic analysis comment may apply for QUIC - where a the sender may schedule packets in any order (RR, priority, deadline, or even mix multiple media types in different FRAMES of the same packet). Plus there is the option to add chaff packets or stuff packets to not be able to detect based on size/frequency. This enhanced metadata should obviously not be used where effort is being taken to mask it from middleboxes in the network. On the other hand RTP is different (except if it is RoQ).\r\n\r\nHaving this kind of dependency between Appendix and main body is not ideal in my view. The gist of the impact/effect on other parts of the main body should be described there, as otherwise its hard for a reader to figure out what the impact would be to realize that requirement. Its fine if the preference is to to keep more of the details in the Appendix.",
+          "createdAt": "2024-09-20T17:51:20Z",
+          "updatedAt": "2024-09-20T17:52:09Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Hi Sridhar, Re: traffic analysis comment may apply for QUIC - where a the sender may schedule packets in any order (RR, priority, deadline, or even mix multiple media types in different FRAMES of the same packet). Plus there is the option to add chaff packets or stuff packets to not be able to detect based on size/frequency. This enhanced metadata should obviously not be used where effort is being taken to mask it from middleboxes in the network. On the other hand RTP is different (except if it is RoQ).\r\n\r\nSeems best to discuss once in Security Considerations (or Privacy Considerations) section, which we already discuss at https://github.com/SpencerDawkins/net-collab-rqmts/blob/main/draft-kwbdgrr-tsvwg-net-collab-rqmts.md#privacy-considerations-privacy\r\n",
+          "createdAt": "2024-09-20T18:16:07Z",
+          "updatedAt": "2024-09-20T18:16:07Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The main body of the draft now refers to 3 requirements (REQ-MEDIA-AV-SEPARATE; REQ-PAYLOAD-CLIENT-DECIDES, REQ-MEDIA-KEYFRAME) that are in the Appendix. This blurs the line on what sections in the Appendix are normative and informative. As a partial remedy, I have made 2 updates (see my commits above) to indicate that these requirements are \"enhanced\".\r\n\r\nIf that's the case, then we can mention media streaming in extended use case as well, where we go little deeper into the use case and explain the extended requirements there while keeping the basic ones in the main section of the draft.\r\n\r\nWe can combine 1 and 3 in media streaming as just a way to prioritize different traffic differently and least priority ones can tolerate loss. We can then move 2 and add a use case where we can get into audio video separately as well as key frame there.\r\nAlternatively, we could move CLIENT-PAYLOAD-DECIDES to the main doc and keep 2 there. Given AV and KeyFrame requirements are not required for Client-payload-decides and doesn't have any traffic analysis complications, it could be a valuable client-to-network signal in the main doc too.",
+          "createdAt": "2024-09-20T19:27:05Z",
+          "updatedAt": "2024-09-20T19:27:05Z"
+        },
+        {
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@John-Kaippallimalil @danwing - Updated the text in the latest commit to keep extended use cases and requirements contained in the appendix.",
+          "createdAt": "2024-09-20T19:53:25Z",
+          "updatedAt": "2024-09-20T19:53:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KHxIE",
+          "commit": {
+            "abbreviatedOid": "c1082d3"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-20T05:25:13Z",
+          "updatedAt": "2024-09-20T05:36:16Z",
+          "comments": [
+            {
+              "originalPosition": 81,
+              "body": "```suggestion\r\n## System Considerations\r\n```",
+              "createdAt": "2024-09-20T05:25:13Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 84,
+              "body": "```suggestion\r\n: An on-path observer obtains (or gleans) no additional information about the IP\r\n```",
+              "createdAt": "2024-09-20T05:26:08Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "```suggestion\r\n: Leveraging previous experience {{?RFC9049}}, the following is not\r\n```",
+              "createdAt": "2024-09-20T05:26:22Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 93,
+              "body": "```suggestion\r\n  * Reveal the server identity.\r\n```",
+              "createdAt": "2024-09-20T05:26:41Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 97,
+              "body": "```suggestion\r\n: The metadata and any other related state information that a network element (router) has to\r\n```",
+              "createdAt": "2024-09-20T05:27:47Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 98,
+              "body": "```suggestion\r\nmaintain for each additional flow it handles should be very low\r\n```",
+              "createdAt": "2024-09-20T05:28:27Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 111,
+              "body": "```suggestion\r\nflow from within the same host.\r\n```",
+              "createdAt": "2024-09-20T05:29:26Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "```suggestion\r\nThe client may indicate this preference to a network by selecting\r\n```",
+              "createdAt": "2024-09-20T05:29:43Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "```suggestion\r\n  better in resource-constrained networks and during reactive events ensuring better user experience.\r\n```",
+              "createdAt": "2024-09-20T05:30:25Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 140,
+              "body": "```suggestion\r\nin change in priorities for the same type of traffic that a single server sends, based on the user/client.\r\n```",
+              "createdAt": "2024-09-20T05:31:04Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 146,
+              "body": "```suggestion\r\n    the metadata that the server sends still remains the same for all the connections.\r\n```",
+              "createdAt": "2024-09-20T05:31:45Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            },
+            {
+              "originalPosition": 173,
+              "body": "```suggestion\r\n    Impact: By identifying packets that tolerate being dropped, congestion can be reduced leading\r\n```",
+              "createdAt": "2024-09-20T05:32:44Z",
+              "updatedAt": "2024-09-20T05:36:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KPP5r",
+          "commit": {
+            "abbreviatedOid": "e283e43"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "HI Sridhar,\r\nThis revision looks great. Thanks for the updates.",
+          "createdAt": "2024-09-20T20:11:48Z",
+          "updatedAt": "2024-09-20T20:11:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KPS2M",
+          "commit": {
+            "abbreviatedOid": "e283e43"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-20T20:18:50Z",
+          "updatedAt": "2024-09-20T20:18:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KPXPi",
+          "commit": {
+            "abbreviatedOid": "e283e43"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good.",
+          "createdAt": "2024-09-20T20:28:35Z",
+          "updatedAt": "2024-09-20T20:28:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 89,
+      "id": "PR_kwDOL0HpzM58NhZX",
+      "title": "intro: remove audio/video in favor of just saying 'packet behavior preference', and include citation of unreliable QUIC which, like RTP, would benefit from this.  We had not previously cited unreliable QUIC.",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/89",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-20T20:16:55Z",
+      "updatedAt": "2024-09-20T21:03:18Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "intro_superior_service",
+      "headRefOid": "1b8b776252a87a4e6295ed5c9b0a57cabf79c11c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KPXR7",
+          "commit": {
+            "abbreviatedOid": "29605dd"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-20T20:28:43Z",
+          "updatedAt": "2024-09-20T20:29:51Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nsignaling, the network can only indiscriminately drop (or delay)\r\n```",
+              "createdAt": "2024-09-20T20:28:43Z",
+              "updatedAt": "2024-09-20T20:29:51Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\npackets.  With such capability, loss-tolerant and delay-tolerant\r\n```",
+              "createdAt": "2024-09-20T20:29:25Z",
+              "updatedAt": "2024-09-20T20:29:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KPnoF",
+          "commit": {
+            "abbreviatedOid": "1b8b776"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-20T21:03:18Z",
+          "updatedAt": "2024-09-20T21:03:18Z",
           "comments": []
         }
       ]
