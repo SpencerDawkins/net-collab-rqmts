@@ -765,7 +765,7 @@ is different from the threat of an interactive voice or video call. To
 mitigate traffic analysis, the sender might, for example, purposefully mis-mark
 metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.
 
-Requirements REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
+REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
 server identity and securing the metadata.
 
@@ -936,7 +936,7 @@ REQ-SIGNAL-EXPOSURE-FAIRNESS:
 considered. An example of such exposure is OS APIs.
 
 REQ-NETWORK-SEEKS-LOAD-DOWN:
-: During detected reactive event, the network must implement a
+: During detected reactive events, the network implements a
 reactive traffic policy to reduce or offload some of the traffic.
 : This may involve utilizing alternative network attachments
 available to the client (e.g., Wi-Fi).
