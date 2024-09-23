@@ -400,15 +400,9 @@ required to make use of the collaborative signaling:
   * Inspect client-to-server encrypted payload by network elements.
 
 REQ-ISP-SCALE:
-: The metadata and any other related state information that a network element (router) has to
-maintain for each additional flow it handles should be very low
-or none.
-
-REQ-CLIENT-VALIDATION:
-: The network needs to ensure the signal is coming from the same
-user/client that is part of the 5-tuple flow.  This is to ensure no
-other application influences the priority of another application's
-flow from within the same host.
+: The metadata and other state information that a router has to
+maintain for each additional media flow it handles should be kept
+to a minimum or eliminated altogether.
 
 # Use Cases {#uc}
 
@@ -604,7 +598,7 @@ Encrypting/Obfuscating metadata information is recommended ({{privacy}}).
 The client authorization signal provides the means to convey the key
 needed by the ISP to decrypt the metadata.
 
-REQ-CLIENT-DECIDES is satisfied by this in the client-to-network metadata
+REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.
 
 ## Server-Network Metadata {#server-network}
 
@@ -679,7 +673,7 @@ of the flow.
 Per-packet priority or importance determines the drop priority of
 a packet.
 
-REQ-PACKET-PRIORITY is satisfied by this in the server-to-network metadata.
+REQ-PACKET-PRIORITY is satisfied by signaling Packet Priority as part of server-to-network metadata.
 
 ### Tolerance to Delay {#delay}
 
@@ -698,7 +692,7 @@ for the packets of the transport flow and may not necessarily reflect
 the exact delay tolerance values that allow an on-path observer to
 perform traffic analysis.
 
-REQ-PACKET-DELAY is satisfied by this in the server-to-network metadata.
+REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.
 
 # System Considerations {#sys-considerations}
 
@@ -769,33 +763,6 @@ REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
 server identity and securing the metadata.
 
-## Scalability {#scalability}
-
-There may be a large number of media flows handled by the server
-and wireless/access router. Per flow information (state) at a
-wireless router for optimizing the flow can negate the advantages
-offered as the number of flows handled increases. The metadata and
-other state information that a router has to maintain for each
-additional media flow it handles should be kept to a minimum or
-eliminated altogether.
-
-REQ-ISP-SCALE is satisfied by this section.
-
-## Abuse and Constraints {#abuse}
-
-It is important that not every flow be prioritized; otherwise, the
-network devolves into the best-effort network that existed prior
-to metadata signaling. It is a requirement that mechanisms exist
-to prevent this occurrence.
-
-Such a mechanism might be simple, for example, a cellular network
-might allow one flow from a subscriber to declare itself as important;
-other flows with that subscriber are denied attempts to prioritize
-themselves. However, the network cannot identify whether the
-prioritized flow is legitimate or malicious.
-
-Such mechanism would satisfy REQ-CLIENT-VALIDATION.
-
 # Non-Requirements {#non-req}
 
 Application feedback with measurements of packets lost and delay
@@ -813,6 +780,10 @@ None.
 Security aspects for the metadata are discussed in {{privacy}}.
 The principles outlined in {{?RFC8558}}, {{?RFC9049}} and {{?RFC9419}}
 contain security considerations and are referenced in {{metadata-req}}.
+
+Since the document focuses only on priorities within a flow
+(not specifying inter-flow priority), the entire requirement spec is not abusable by
+malicious traffic.
 
 This document has no other security considerations.
 
@@ -944,9 +915,6 @@ available to the client (e.g., Wi-Fi).
 REQ-CONTINUITY:
 : Handover from one radio or router to another should continue to
 provide same service level.
-: The network must deploy wireless routers closer to users to reduce link
-latency while managing the increased frequency of handovers due to user
-movement and longer media sessions.
 
 REQ-MULTIPLE-BOTTLENECKS:
 : Signaling should support Multiple bottlenecks.
@@ -1040,7 +1008,7 @@ Use cases:
   client by informing the client of the network's bandwidth policy.
 
 
-# Extended Operational Considerations
+# Extended System Considerations
 
 ## Application Interference {#app-interference}
 
@@ -1108,3 +1076,12 @@ It is out of the scope of this document to discuss setups (e.g.,
 Rate (GBR) for specific flows is provided.
 
 Requirement: REQ-SCOPED-METADATA.
+
+## Scalability {#scalability}
+
+There may be a large number of media flows handled by the server
+and wireless/access router. Per flow information (state) at a
+wireless router for optimizing the flow can negate the advantages
+offered as the number of flows handled increases.
+
+Requirement: REQ-ISP-SCALE.
