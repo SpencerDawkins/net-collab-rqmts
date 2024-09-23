@@ -1262,12 +1262,6 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-scalability" class="internal xref">Scalability</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-abuse-and-constraints" class="internal xref">Abuse and Constraints</a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1306,7 +1300,7 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-extended-operational-consid" class="internal xref">Extended Operational Considerations</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-extended-system-considerati" class="internal xref">Extended System Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.1">
                 <p id="section-toc.1-1.16.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-application-interference" class="internal xref">Application Interference</a></p>
@@ -1322,6 +1316,9 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.5">
                 <p id="section-toc.1-1.16.2.5.1"><a href="#appendix-D.5" class="auto internal xref">D.5</a>.  <a href="#name-metadata-scope" class="internal xref">Metadata Scope</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.6">
+                <p id="section-toc.1-1.16.2.6.1"><a href="#appendix-D.6" class="auto internal xref">D.6</a>.  <a href="#name-scalability" class="internal xref">Scalability</a></p>
 </li>
             </ul>
 </li>
@@ -1862,17 +1859,9 @@ required to make use of the collaborative signaling:<a href="#section-4.4-1.4.1"
           <dd class="break"></dd>
 <dt id="section-4.4-1.5">REQ-ISP-SCALE:</dt>
           <dd style="margin-left: 1.5em" id="section-4.4-1.6">
-            <p id="section-4.4-1.6.1">The metadata and any other related state information that a network element (router) has to
-maintain for each additional flow it handles should be very low
-or none.<a href="#section-4.4-1.6.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-4.4-1.7">REQ-CLIENT-VALIDATION:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.4-1.8">
-            <p id="section-4.4-1.8.1">The network needs to ensure the signal is coming from the same
-user/client that is part of the 5-tuple flow.  This is to ensure no
-other application influences the priority of another application's
-flow from within the same host.<a href="#section-4.4-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-4.4-1.6.1">The metadata and other state information that a router has to
+maintain for each additional media flow it handles should be kept
+to a minimum or eliminated altogether.<a href="#section-4.4-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2115,7 +2104,7 @@ discussed in <a href="#metadata-negotiation" class="auto internal xref">Section 
 <p id="section-6.1.1-3">Encrypting/Obfuscating metadata information is recommended (<a href="#privacy" class="auto internal xref">Section 7.1</a>).
 The client authorization signal provides the means to convey the key
 needed by the ISP to decrypt the metadata.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-4">REQ-CLIENT-DECIDES is satisfied by this in the client-to-network metadata<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-4">REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2153,7 +2142,7 @@ the flow and may not necessarily reflect the exact priority values
 that allow an on-path observer to perform traffic analysis. This
 metadata is advisory in nature and network traffic policy
 that restricts its use would not result in additional issues. Other
-constraints including scale (<a href="#scalability" class="auto internal xref">Section 7.2</a>) and continuity
+constraints including scale (<a href="#scalability" class="auto internal xref">Appendix D.6</a>) and continuity
 (<a href="#continuity" class="auto internal xref">Appendix D.3</a>) are required for <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <p id="section-6.2-4">Realizing the additional bandwidth potential with these metadata
 may require a higher sending rate for the transport flow. This
@@ -2192,7 +2181,7 @@ the best allocation of priority values across the different streams
 of the flow.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-2">Per-packet priority or importance determines the drop priority of
 a packet.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-3">REQ-PACKET-PRIORITY is satisfied by this in the server-to-network metadata.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-3">REQ-PACKET-PRIORITY is satisfied by signaling Packet Priority as part of server-to-network metadata.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delay">
@@ -2214,7 +2203,7 @@ can decide on the metadata values that provide the best handling
 for the packets of the transport flow and may not necessarily reflect
 the exact delay tolerance values that allow an on-path observer to
 perform traffic analysis.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-2">REQ-PACKET-DELAY is satisfied by this in the server-to-network metadata.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2289,38 +2278,6 @@ metadata in some packets, add some randomness to avoid recurrent traffic pattern
 <p id="section-7.1-5">REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
 server identity and securing the metadata.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="scalability">
-<section id="section-7.2">
-        <h3 id="name-scalability">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
-        </h3>
-<p id="section-7.2-1">There may be a large number of media flows handled by the server
-and wireless/access router. Per flow information (state) at a
-wireless router for optimizing the flow can negate the advantages
-offered as the number of flows handled increases. The metadata and
-other state information that a router has to maintain for each
-additional media flow it handles should be kept to a minimum or
-eliminated altogether.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">REQ-ISP-SCALE is satisfied by this section.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="abuse">
-<section id="section-7.3">
-        <h3 id="name-abuse-and-constraints">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-abuse-and-constraints" class="section-name selfRef">Abuse and Constraints</a>
-        </h3>
-<p id="section-7.3-1">It is important that not every flow be prioritized; otherwise, the
-network devolves into the best-effort network that existed prior
-to metadata signaling. It is a requirement that mechanisms exist
-to prevent this occurrence.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">Such a mechanism might be simple, for example, a cellular network
-might allow one flow from a subscriber to declare itself as important;
-other flows with that subscriber are denied attempts to prioritize
-themselves. However, the network cannot identify whether the
-prioritized flow is legitimate or malicious.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.3-3">Such mechanism would satisfy REQ-CLIENT-VALIDATION.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2721,42 +2678,35 @@ available to the client (e.g., Wi-Fi).<a href="#appendix-B-1.24.1" class="pilcro
 provide same service level.<a href="#appendix-B-1.26.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.27"></dt>
+<dt id="appendix-B-1.27">REQ-MULTIPLE-BOTTLENECKS:</dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.28">
-          <p id="appendix-B-1.28.1">The network must deploy wireless routers closer to users to reduce link
-latency while managing the increased frequency of handovers due to user
-movement and longer media sessions.<a href="#appendix-B-1.28.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-1.28.1">Signaling should support Multiple bottlenecks.<a href="#appendix-B-1.28.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.29">REQ-MULTIPLE-BOTTLENECKS:</dt>
+<dt id="appendix-B-1.29"></dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.30">
-          <p id="appendix-B-1.30.1">Signaling should support Multiple bottlenecks.<a href="#appendix-B-1.30.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-B-1.31"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-B-1.32">
-          <p id="appendix-B-1.32.1">The network must identify multiple bottlenecks, including those
+          <p id="appendix-B-1.30.1">The network must identify multiple bottlenecks, including those
 within the ISP and subscriber networks, ensuring all bottlenecks
-benefit from network/client collaboration to enhance overall performance.<a href="#appendix-B-1.32.1" class="pilcrow">¶</a></p>
+benefit from network/client collaboration to enhance overall performance.<a href="#appendix-B-1.30.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.33">REQ-SCOPED-METADATA:</dt>
+<dt id="appendix-B-1.31">REQ-SCOPED-METADATA:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.32">
+          <p id="appendix-B-1.32.1">Means to characterize the scope of a shared metadata for the sake of
+better interoperability should be supported.<a href="#appendix-B-1.32.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.33"></dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.34">
-          <p id="appendix-B-1.34.1">Means to characterize the scope of a shared metadata for the sake of
-better interoperability should be supported.<a href="#appendix-B-1.34.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-B-1.35"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-B-1.36">
-          <p id="appendix-B-1.36.1">The metadata can be used by the network to prioritize traffic
+          <p id="appendix-B-1.34.1">The metadata can be used by the network to prioritize traffic
 within a single 5-tuple connection and metadata cannot be leveraged
-for prioritization between different flows.<a href="#appendix-B-1.36.1" class="pilcrow">¶</a></p>
+for prioritization between different flows.<a href="#appendix-B-1.34.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.37">REQ-SINGLE-CHANNEL:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-B-1.38">
-          <p id="appendix-B-1.38.1">The network should use a single channel for sharing metadata
-to simplify the process and avoid the need for redundant functions.<a href="#appendix-B-1.38.1" class="pilcrow">¶</a></p>
+<dt id="appendix-B-1.35">REQ-SINGLE-CHANNEL:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.36">
+          <p id="appendix-B-1.36.1">The network should use a single channel for sharing metadata
+to simplify the process and avoid the need for redundant functions.<a href="#appendix-B-1.36.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2855,10 +2805,10 @@ a DDoS attack mitigation).<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="extended-operational-considerations">
+<div id="extended-system-considerations">
 <section id="appendix-D">
-      <h2 id="name-extended-operational-consid">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-extended-operational-consid" class="section-name selfRef">Extended Operational Considerations</a>
+      <h2 id="name-extended-system-considerati">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-extended-system-considerati" class="section-name selfRef">Extended System Considerations</a>
       </h2>
 <div id="app-interference">
 <section id="appendix-D.1">
@@ -2935,6 +2885,18 @@ or flow.<a href="#appendix-D.5-2" class="pilcrow">¶</a></p>
 3GPP PDU Sessions) where network attachments with Guaranteed Bit
 Rate (GBR) for specific flows is provided.<a href="#appendix-D.5-3" class="pilcrow">¶</a></p>
 <p id="appendix-D.5-4">Requirement: REQ-SCOPED-METADATA.<a href="#appendix-D.5-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="scalability">
+<section id="appendix-D.6">
+        <h3 id="name-scalability">
+<a href="#appendix-D.6" class="section-number selfRef">D.6. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
+        </h3>
+<p id="appendix-D.6-1">There may be a large number of media flows handled by the server
+and wireless/access router. Per flow information (state) at a
+wireless router for optimizing the flow can negate the advantages
+offered as the number of flows handled increases.<a href="#appendix-D.6-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.6-2">Requirement: REQ-ISP-SCALE.<a href="#appendix-D.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

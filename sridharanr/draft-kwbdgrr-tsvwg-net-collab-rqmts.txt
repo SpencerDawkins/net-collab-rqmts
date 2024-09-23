@@ -110,8 +110,6 @@ Table of Contents
        6.2.2.  Tolerance to Delay
    7.  System Considerations
      7.1.  Privacy Considerations
-     7.2.  Scalability
-     7.3.  Abuse and Constraints
    8.  Non-Requirements
    9.  IANA Considerations
    10. Security Considerations
@@ -123,12 +121,13 @@ Table of Contents
      C.1.  Media Streaming Extended
      C.2.  Assisted Offload
      C.3.  Network Bandwidth & Network Rate Limiting Policies
-   Appendix D.  Extended Operational Considerations
+   Appendix D.  Extended System Considerations
      D.1.  Application Interference
      D.2.  Redundant Functions and Classification Complications
      D.3.  Session Continuity
      D.4.  Multiple Bottlenecks
      D.5.  Metadata Scope
+     D.6.  Scalability
    Authors' Addresses
 
 1.  Introduction
@@ -416,14 +415,9 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-   REQ-ISP-SCALE:  The metadata and any other related state information
-      that a network element (router) has to maintain for each
-      additional flow it handles should be very low or none.
-
-   REQ-CLIENT-VALIDATION:  The network needs to ensure the signal is
-      coming from the same user/client that is part of the 5-tuple flow.
-      This is to ensure no other application influences the priority of
-      another application's flow from within the same host.
+   REQ-ISP-SCALE:  The metadata and other state information that a
+      router has to maintain for each additional media flow it handles
+      should be kept to a minimum or eliminated altogether.
 
 5.  Use Cases
 
@@ -624,8 +618,8 @@ Table of Contents
    (Section 7.1).  The client authorization signal provides the means to
    convey the key needed by the ISP to decrypt the metadata.
 
-   REQ-CLIENT-DECIDES is satisfied by this in the client-to-network
-   metadata
+   REQ-CLIENT-DECIDES is satisfied by signaling Client Flow
+   Authorization as part of client-to-network signal.
 
 6.2.  Server-Network Metadata
 
@@ -659,7 +653,7 @@ Table of Contents
    allow an on-path observer to perform traffic analysis.  This metadata
    is advisory in nature and network traffic policy that restricts its
    use would not result in additional issues.  Other constraints
-   including scale (Section 7.2) and continuity (Appendix D.3) are
+   including scale (Appendix D.6) and continuity (Appendix D.3) are
    required for Section 6.2.1.
 
    Realizing the additional bandwidth potential with these metadata may
@@ -699,8 +693,8 @@ Table of Contents
    Per-packet priority or importance determines the drop priority of a
    packet.
 
-   REQ-PACKET-PRIORITY is satisfied by this in the server-to-network
-   metadata.
+   REQ-PACKET-PRIORITY is satisfied by signaling Packet Priority as part
+   of server-to-network metadata.
 
 6.2.2.  Tolerance to Delay
 
@@ -719,8 +713,8 @@ Table of Contents
    tolerance values that allow an on-path observer to perform traffic
    analysis.
 
-   REQ-PACKET-DELAY is satisfied by this in the server-to-network
-   metadata.
+   REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part
+   of server-to-network metadata.
 
 7.  System Considerations
 
@@ -792,32 +786,6 @@ Table of Contents
    not revealing any information that could identify the application's
    identity, reason to signal, server identity and securing the
    metadata.
-
-7.2.  Scalability
-
-   There may be a large number of media flows handled by the server and
-   wireless/access router.  Per flow information (state) at a wireless
-   router for optimizing the flow can negate the advantages offered as
-   the number of flows handled increases.  The metadata and other state
-   information that a router has to maintain for each additional media
-   flow it handles should be kept to a minimum or eliminated altogether.
-
-   REQ-ISP-SCALE is satisfied by this section.
-
-7.3.  Abuse and Constraints
-
-   It is important that not every flow be prioritized; otherwise, the
-   network devolves into the best-effort network that existed prior to
-   metadata signaling.  It is a requirement that mechanisms exist to
-   prevent this occurrence.
-
-   Such a mechanism might be simple, for example, a cellular network
-   might allow one flow from a subscriber to declare itself as
-   important; other flows with that subscriber are denied attempts to
-   prioritize themselves.  However, the network cannot identify whether
-   the prioritized flow is legitimate or malicious.
-
-   Such mechanism would satisfy REQ-CLIENT-VALIDATION.
 
 8.  Non-Requirements
 
@@ -1102,10 +1070,6 @@ Appendix B.  Extended Requirements Definition
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
 
-      The network must deploy wireless routers closer to users to reduce
-      link latency while managing the increased frequency of handovers
-      due to user movement and longer media sessions.
-
    REQ-MULTIPLE-BOTTLENECKS:  Signaling should support Multiple
       bottlenecks.
 
@@ -1201,7 +1165,7 @@ C.3.  Network Bandwidth & Network Rate Limiting Policies
        videos that were downloaded.  The network can assist the client
        by informing the client of the network's bandwidth policy.
 
-Appendix D.  Extended Operational Considerations
+Appendix D.  Extended System Considerations
 
 D.1.  Application Interference
 
@@ -1269,6 +1233,15 @@ D.5.  Metadata Scope
    (GBR) for specific flows is provided.
 
    Requirement: REQ-SCOPED-METADATA.
+
+D.6.  Scalability
+
+   There may be a large number of media flows handled by the server and
+   wireless/access router.  Per flow information (state) at a wireless
+   router for optimizing the flow can negate the advantages offered as
+   the number of flows handled increases.
+
+   Requirement: REQ-ISP-SCALE.
 
 Authors' Addresses
 
