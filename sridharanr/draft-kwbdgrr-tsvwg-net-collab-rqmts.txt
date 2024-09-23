@@ -1092,28 +1092,6 @@ Appendix B.  Extended Requirements Definition
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-   REQ-CONTINUITY:  Handover from one radio or router to another should
-      continue to provide same service level.
-
-   REQ-MULTIPLE-BOTTLENECKS:  Signaling should support Multiple
-      bottlenecks.
-
-   REQ-SCOPED-METADATA:  Means to characterize the scope of a shared
-      metadata for the sake of better interoperability should be
-      supported.
-
-Appendix C.  Extended Use-Cases
-
-   Requirements:
-
-   REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
-      video.  This is a per-flow metadata requirement.
-
-   REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
-      which need to be distinguished so that full frames can be
-      indicated to the network.  This is a per-packet metadata
-      requirement.
-
    REQ-NETWORK-SEEKS-LOAD-DOWN:  During detected reactive event, the
       network must implement a reactive traffic policy to reduce or
       offload some of the traffic.
@@ -1121,29 +1099,34 @@ Appendix C.  Extended Use-Cases
       This may involve utilizing alternative network attachments
       available to the client (e.g., Wi-Fi).
 
-   REQ-SINGLE-CHANNEL:  The network should use a single channel for
-      sharing metadata to simplify the process and avoid the need for
-      redundant functions.
+   REQ-CONTINUITY:  Handover from one radio or router to another should
+      continue to provide same service level.
 
-   REQ-MULTIPLE-BOTTLENECKS:  The network must identify multiple
-      bottlenecks, including those within the ISP and subscriber
-      networks, ensuring all bottlenecks benefit from network/client
-      collaboration to enhance overall performance.
+      The network must deploy wireless routers closer to users to reduce
+      link latency while managing the increased frequency of handovers
+      due to user movement and longer media sessions.
 
-   REQ-CONTINUITY:  The network must deploy wireless routers closer to
-      users to reduce link latency while managing the increased
-      frequency of handovers due to user movement and longer media
-      sessions.  During handovers, the network must ensure minimal delay
-      in configuring and setting up the metadata of ongoing media
-      sessions to maintain seamless connectivity.
+   REQ-MULTIPLE-BOTTLENECKS:  Signaling should support Multiple
+      bottlenecks.
 
-   REQ-SCOPED-METADATA:  Hints about resource-like metadata is bound by
-      default to the overall network attachment, not specific to a given
-      application or flow.
+      The network must identify multiple bottlenecks, including those
+      within the ISP and subscriber networks, ensuring all bottlenecks
+      benefit from network/client collaboration to enhance overall
+      performance.
+
+   REQ-SCOPED-METADATA:  Means to characterize the scope of a shared
+      metadata for the sake of better interoperability should be
+      supported.
 
       The metadata can be used by the network to prioritize traffic
       within a single 5-tuple connection and metadata cannot be
       leveraged for prioritization between different flows.
+
+   REQ-SINGLE-CHANNEL:  The network should use a single channel for
+      sharing metadata to simplify the process and avoid the need for
+      redundant functions.
+
+Appendix C.  Extended Use-Cases
 
 C.1.  Media Streaming Extended
 
@@ -1277,6 +1260,9 @@ D.5.  Metadata Scope
    network has a visibility about the overall network attachment (e.g.
    inbound/outbound bandwidth discussed in
    [I-D.ietf-opsawg-teas-attachment-circuit]).
+
+   Hints about resource-like metadata is bound by default to the overall
+   network attachment, not specific to a given application or flow.
 
    It is out of the scope of this document to discuss setups (e.g., 3GPP
    PDU Sessions) where network attachments with Guaranteed Bit Rate

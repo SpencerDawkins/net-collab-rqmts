@@ -2703,21 +2703,60 @@ clients, including changes to throughput.<a href="#appendix-B-1.16.1" class="pil
 considered. An example of such exposure is OS APIs.<a href="#appendix-B-1.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.21">REQ-CONTINUITY:</dt>
+<dt id="appendix-B-1.21">REQ-NETWORK-SEEKS-LOAD-DOWN:</dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.22">
-          <p id="appendix-B-1.22.1">Handover from one radio or router to another should continue to
-provide same service level.<a href="#appendix-B-1.22.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-1.22.1">During detected reactive event, the network must implement a
+reactive traffic policy to reduce or offload some of the traffic.<a href="#appendix-B-1.22.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.23">REQ-MULTIPLE-BOTTLENECKS:</dt>
+<dt id="appendix-B-1.23"></dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.24">
-          <p id="appendix-B-1.24.1">Signaling should support Multiple bottlenecks.<a href="#appendix-B-1.24.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-1.24.1">This may involve utilizing alternative network attachments
+available to the client (e.g., Wi-Fi).<a href="#appendix-B-1.24.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-B-1.25">REQ-SCOPED-METADATA:</dt>
+<dt id="appendix-B-1.25">REQ-CONTINUITY:</dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.26">
-          <p id="appendix-B-1.26.1">Means to characterize the scope of a shared metadata for the sake of
-better interoperability should be supported.<a href="#appendix-B-1.26.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-1.26.1">Handover from one radio or router to another should continue to
+provide same service level.<a href="#appendix-B-1.26.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.27"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.28">
+          <p id="appendix-B-1.28.1">The network must deploy wireless routers closer to users to reduce link
+latency while managing the increased frequency of handovers due to user
+movement and longer media sessions.<a href="#appendix-B-1.28.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.29">REQ-MULTIPLE-BOTTLENECKS:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.30">
+          <p id="appendix-B-1.30.1">Signaling should support Multiple bottlenecks.<a href="#appendix-B-1.30.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.31"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.32">
+          <p id="appendix-B-1.32.1">The network must identify multiple bottlenecks, including those
+within the ISP and subscriber networks, ensuring all bottlenecks
+benefit from network/client collaboration to enhance overall performance.<a href="#appendix-B-1.32.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.33">REQ-SCOPED-METADATA:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.34">
+          <p id="appendix-B-1.34.1">Means to characterize the scope of a shared metadata for the sake of
+better interoperability should be supported.<a href="#appendix-B-1.34.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.35"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.36">
+          <p id="appendix-B-1.36.1">The metadata can be used by the network to prioritize traffic
+within a single 5-tuple connection and metadata cannot be leveraged
+for prioritization between different flows.<a href="#appendix-B-1.36.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.37">REQ-SINGLE-CHANNEL:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.38">
+          <p id="appendix-B-1.38.1">The network should use a single channel for sharing metadata
+to simplify the process and avoid the need for redundant functions.<a href="#appendix-B-1.38.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2728,70 +2767,6 @@ better interoperability should be supported.<a href="#appendix-B-1.26.1" class="
       <h2 id="name-extended-use-cases">
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-extended-use-cases" class="section-name selfRef">Extended Use-Cases</a>
       </h2>
-<p id="appendix-C-1">Requirements:<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="appendix-C-2">
-        <dt id="appendix-C-2.1">REQ-MEDIA-AV-SEPARATE:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.2">
-          <p id="appendix-C-2.2.1">Audio can be prioritized differently than video. This is a per-flow
-metadata requirement.<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.3">REQ-MEDIA-KEYFRAME:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.4">
-          <p id="appendix-C-2.4.1">Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the
-network. This is a per-packet metadata requirement.<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.5">REQ-NETWORK-SEEKS-LOAD-DOWN:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.6">
-          <p id="appendix-C-2.6.1">During detected reactive event, the network must implement a
-reactive traffic policy to reduce or offload some of the traffic.<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.7"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.8">
-          <p id="appendix-C-2.8.1">This may involve utilizing alternative network attachments
-available to the client (e.g., Wi-Fi).<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.9">REQ-SINGLE-CHANNEL:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.10">
-          <p id="appendix-C-2.10.1">The network should use a single channel for sharing metadata
-to simplify the process and avoid the need for redundant functions.<a href="#appendix-C-2.10.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.11">REQ-MULTIPLE-BOTTLENECKS:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.12">
-          <p id="appendix-C-2.12.1">The network must identify multiple bottlenecks, including those
-within the ISP and subscriber networks, ensuring all bottlenecks
-benefit from network/client collaboration to enhance overall performance.<a href="#appendix-C-2.12.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.13">REQ-CONTINUITY:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.14">
-          <p id="appendix-C-2.14.1">The network must deploy wireless routers closer to users to reduce link
-latency while managing the increased frequency of handovers due to user
-movement and longer media sessions. During handovers, the network must
-ensure minimal delay in configuring and setting up the metadata of ongoing
-media sessions to maintain seamless connectivity.<a href="#appendix-C-2.14.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.15">REQ-SCOPED-METADATA:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.16">
-          <p id="appendix-C-2.16.1">Hints about resource-like metadata is bound by default to
-the overall network attachment, not specific to a given application
-or flow.<a href="#appendix-C-2.16.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-C-2.17"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-2.18">
-          <p id="appendix-C-2.18.1">The metadata can be used by the network to prioritize traffic
-within a single 5-tuple connection and metadata cannot be leveraged
-for prioritization between different flows.<a href="#appendix-C-2.18.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
 <div id="media-streaming-extended">
 <section id="appendix-C.1">
         <h3 id="name-media-streaming-extended">
@@ -2953,10 +2928,13 @@ delivered as part of an Internet connectivity service. However, the
 network has a visibility about the overall network attachment (e.g.
 inbound/outbound bandwidth discussed in
 <span>[<a href="#I-D.ietf-opsawg-teas-attachment-circuit" class="cite xref">I-D.ietf-opsawg-teas-attachment-circuit</a>]</span>).<a href="#appendix-D.5-1" class="pilcrow">¶</a></p>
-<p id="appendix-D.5-2">It is out of the scope of this document to discuss setups (e.g.,
+<p id="appendix-D.5-2">Hints about resource-like metadata is bound by default to
+the overall network attachment, not specific to a given application
+or flow.<a href="#appendix-D.5-2" class="pilcrow">¶</a></p>
+<p id="appendix-D.5-3">It is out of the scope of this document to discuss setups (e.g.,
 3GPP PDU Sessions) where network attachments with Guaranteed Bit
-Rate (GBR) for specific flows is provided.<a href="#appendix-D.5-2" class="pilcrow">¶</a></p>
-<p id="appendix-D.5-3">Requirement: REQ-SCOPED-METADATA.<a href="#appendix-D.5-3" class="pilcrow">¶</a></p>
+Rate (GBR) for specific flows is provided.<a href="#appendix-D.5-3" class="pilcrow">¶</a></p>
+<p id="appendix-D.5-4">Requirement: REQ-SCOPED-METADATA.<a href="#appendix-D.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
