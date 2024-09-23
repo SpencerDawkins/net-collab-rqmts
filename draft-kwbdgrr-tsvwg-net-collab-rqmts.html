@@ -1384,10 +1384,16 @@ requesting applications.<a href="#section-1-3" class="pilcrow">¶</a></p>
 throughput and low latency and, in some cases, carry different
 streams (e.g., audio and video) in a single transport connection
 (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">There may be preferences that an application may wish to convey,
-such as a higher priority for audio over video (or the opposite)
-in congested networks or importance of certain packets (e.g., video
-key frames).<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">Superior service during adverse network events can be achieved by the
+sender conveying packet behavior preferences to the network for
+packets within a single UDP 4-tuple.  During adverse network events
+this allows the network to be informed about the least-impactful
+packets to drop (or delay) in the same UDP 4-tuple.  Without such
+signaling, the network can only indiscriminately drop (or delay)
+packets.  With such capability, loss-tolerant and delay-tolerant
+transport protocols such as RTP, QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, and Unreliable
+QUIC <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span> can inform the network and provide a superior end
+user experience.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used
 as an implicit signal for determining relative priority. However,
 <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
@@ -2462,6 +2468,10 @@ Kahn, Marcus Ilhar and Tianji Jiang for their review and comments.<a href="#sect
 <dt id="RFC9049">[RFC9049]</dt>
       <dd>
 <span class="refAuthor">Dawkins, S., Ed.</span>, <span class="refTitle">"Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"</span>, <span class="seriesInfo">RFC 9049</span>, <span class="seriesInfo">DOI 10.17487/RFC9049</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9049">https://www.rfc-editor.org/rfc/rfc9049</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9221">[RFC9221]</dt>
+      <dd>
+<span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">D. Schinazi</span>, <span class="refTitle">"An Unreliable Datagram Extension to QUIC"</span>, <span class="seriesInfo">RFC 9221</span>, <span class="seriesInfo">DOI 10.17487/RFC9221</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9221">https://www.rfc-editor.org/rfc/rfc9221</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9293">[RFC9293]</dt>
       <dd>

@@ -185,10 +185,16 @@ Table of Contents
    streams (e.g., audio and video) in a single transport connection
    (e.g., WebRTC [RFC8825]).
 
-   There may be preferences that an application may wish to convey, such
-   as a higher priority for audio over video (or the opposite) in
-   congested networks or importance of certain packets (e.g., video key
-   frames).
+   Superior service during adverse network events can be achieved by the
+   sender conveying packet behavior preferences to the network for
+   packets within a single UDP 4-tuple.  During adverse network events
+   this allows the network to be informed about the least-impactful
+   packets to drop (or delay) in the same UDP 4-tuple.  Without such
+   signaling, the network can only indiscriminately drop (or delay)
+   packets.  With such capability, loss-tolerant and delay-tolerant
+   transport protocols such as RTP, QUIC [RFC9000], and Unreliable QUIC
+   [RFC9221] can inform the network and provide a superior end user
+   experience.
 
    With RTP [RFC3550], the media type could be examined and used as an
    implicit signal for determining relative priority.  However,
@@ -948,6 +954,11 @@ Informative References
               Deployment (A Bestiary of Roads Not Taken)", RFC 9049,
               DOI 10.17487/RFC9049, June 2021,
               <https://www.rfc-editor.org/rfc/rfc9049>.
+
+   [RFC9221]  Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
+              Datagram Extension to QUIC", RFC 9221,
+              DOI 10.17487/RFC9221, March 2022,
+              <https://www.rfc-editor.org/rfc/rfc9221>.
 
    [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
               STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
