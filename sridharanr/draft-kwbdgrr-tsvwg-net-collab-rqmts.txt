@@ -804,6 +804,10 @@ Table of Contents
    principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
    security considerations and are referenced in Section 6.
 
+   Since the document focuses only on priorities within a flow (not
+   specifying inter-flow priority), the entire requirement spec is not
+   abusable by malicious traffic.
+
    This document has no other security considerations.
 
 Acknowledgments
