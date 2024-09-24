@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-22T01:35:16.239373+00:00",
+  "timestamp": "2024-09-24T01:23:43.975902+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -621,9 +621,17 @@
       "labels": [],
       "body": "Introduction would benefit from a diet, or at least breaking into sub-sections.  Some documents have a separate background section but existing text does not seem to talk a lot about existing systems.  Hm.  Suggestions?",
       "createdAt": "2024-09-20T20:14:38Z",
-      "updatedAt": "2024-09-20T20:14:38Z",
+      "updatedAt": "2024-09-23T02:17:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree that section 1 (Intro) would benefit from breaking into 2 sections.\r\nHow about a short Introduction (section 1) that provides an overview of what's in the document, and \r\nA new section that follows ( -- something like \"Rationale for Per-packet Metadata\") which would contain the gist of what is currently in the intro but reduced in length (as much as possible).\r\nHighlighting \"per-packet metadata\" in a section heading may also help bringing attention to \"per-packet (vs. per-flow).",
+          "createdAt": "2024-09-23T02:17:26Z",
+          "updatedAt": "2024-09-23T02:17:26Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5188,21 +5196,21 @@
       "id": "PR_kwDOL0HpzM58GY4D",
       "title": "remove REQ-METADATA-ACCURACY",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/86",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I will wait for all co-authors to approve this change before commiting to Main.\n\n",
       "createdAt": "2024-09-19T23:21:13Z",
-      "updatedAt": "2024-09-20T05:24:19Z",
+      "updatedAt": "2024-09-23T14:56:02Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "remove_metadata_accuracy",
       "headRefOid": "089ff4b65738a259bd5d0ec38b540da1e0d0b6ec",
-      "closedAt": null,
+      "closedAt": "2024-09-23T14:56:02Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -5227,6 +5235,13 @@
           "body": "This REQ covers the ops complexity for network-originated metadata (scone-like). Now that we focus on H2N and S2N, I'm OK to delete this text or move to an appendix. Thanks",
           "createdAt": "2024-09-20T05:24:18Z",
           "updatedAt": "2024-09-20T05:24:18Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this can be closed now that @sridharangirish91 has merged his #87 ",
+          "createdAt": "2024-09-23T14:38:40Z",
+          "updatedAt": "2024-09-23T14:38:40Z"
         }
       ],
       "reviews": []
@@ -5236,24 +5251,26 @@
       "id": "PR_kwDOL0HpzM58Gt7M",
       "title": "Added Impact to the use cases to justify requirements.",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/87",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Created a section to define all requirements and link them in the use cases for easier read.\r\nReworded a few things",
       "createdAt": "2024-09-20T00:57:13Z",
-      "updatedAt": "2024-09-20T20:28:35Z",
+      "updatedAt": "2024-09-23T06:05:24Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
       "headRefOid": "e283e4382b58738c5526f2c08ada963eaa50a74a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-23T06:05:24Z",
+      "mergedAt": "2024-09-23T06:05:24Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "8d6be85c0c02613793af5b5de0f9eab6d84c2261"
+      },
       "comments": [
         {
           "author": "boucadair",
@@ -5430,6 +5447,19 @@
           "createdAt": "2024-09-20T20:28:35Z",
           "updatedAt": "2024-09-20T20:28:35Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KWl9K",
+          "commit": {
+            "abbreviatedOid": "e283e43"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-23T05:56:16Z",
+          "updatedAt": "2024-09-23T05:56:16Z",
+          "comments": []
         }
       ]
     },
@@ -5438,24 +5468,26 @@
       "id": "PR_kwDOL0HpzM58NhZX",
       "title": "intro: remove audio/video in favor of just saying 'packet behavior preference', and include citation of unreliable QUIC which, like RTP, would benefit from this.  We had not previously cited unreliable QUIC.",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/89",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-20T20:16:55Z",
-      "updatedAt": "2024-09-20T21:03:18Z",
+      "updatedAt": "2024-09-23T15:52:00Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "69c5f551850e9f81b5c8744d0be90849a4551be4",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "intro_superior_service",
       "headRefOid": "1b8b776252a87a4e6295ed5c9b0a57cabf79c11c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-23T15:52:00Z",
+      "mergedAt": "2024-09-23T15:52:00Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "bac70a40b173624f5f0c2a5af3279d03f5b90574"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5496,6 +5528,419 @@
           "createdAt": "2024-09-20T21:03:18Z",
           "updatedAt": "2024-09-20T21:03:18Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KWlSb",
+          "commit": {
+            "abbreviatedOid": "1b8b776"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-23T05:53:23Z",
+          "updatedAt": "2024-09-23T05:53:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 90,
+      "id": "PR_kwDOL0HpzM58YIim",
+      "title": "Moving requirements out of use cases. Rewording metadata text to be more coherent.",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/90",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Requirements in metadata doesn't make sense since signaling the metadata satisfies the requirement.",
+      "createdAt": "2024-09-23T14:07:53Z",
+      "updatedAt": "2024-09-23T21:47:27Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "bac70a40b173624f5f0c2a5af3279d03f5b90574",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "947e5bb1a423ccd7c6bd8674743c30643e99ef0f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KbmDb",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "DISMISSED",
+          "body": "",
+          "createdAt": "2024-09-23T14:37:38Z",
+          "updatedAt": "2024-09-23T16:07:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KbjQO",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I have some troubles with some changes. Some smell solution-related.",
+          "createdAt": "2024-09-23T14:33:45Z",
+          "updatedAt": "2024-09-23T14:37:42Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Not sure what is meant here.",
+              "createdAt": "2024-09-23T14:33:45Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "Idem as above",
+              "createdAt": "2024-09-23T14:34:05Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 59,
+              "body": "Idem as above",
+              "createdAt": "2024-09-23T14:34:16Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 68,
+              "body": "```suggestion\r\nREQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by\r\n```",
+              "createdAt": "2024-09-23T14:34:25Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "Not sure we need to have this statement.",
+              "createdAt": "2024-09-23T14:34:48Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "Why are we adding this? We are not designing solutions.",
+              "createdAt": "2024-09-23T14:35:10Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 97,
+              "body": "```suggestion\r\n: During detected reactive events, the network implements a\r\n```",
+              "createdAt": "2024-09-23T14:35:55Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\n: The ISP deploys access routers closer to users to reduce link\r\n```",
+              "createdAt": "2024-09-23T14:36:17Z",
+              "updatedAt": "2024-09-23T14:37:42Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "This is deployment-specific. We can't mandate what an ISP can do.",
+              "createdAt": "2024-09-23T14:36:38Z",
+              "updatedAt": "2024-09-23T14:39:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kb1tk",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T14:58:30Z",
+          "updatedAt": "2024-09-23T14:58:30Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "also, 'the prioritized flow' smells like prioritizing *between* flows.  \r\n\r\nThere should be no harm in a flow that is marking some (or all) of its packets as important, even if it is doing so maliciously.  ",
+              "createdAt": "2024-09-23T14:58:30Z",
+              "updatedAt": "2024-09-23T14:58:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kb7N1",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T15:03:43Z",
+          "updatedAt": "2024-09-23T15:03:44Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Similar concern about \"by this\" in many of the updates (since we have definitions already for each requirement)",
+              "createdAt": "2024-09-23T15:03:43Z",
+              "updatedAt": "2024-09-23T15:03:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kb-Y7",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T15:07:57Z",
+          "updatedAt": "2024-09-23T15:07:57Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "Deploying network routers closer to the user/client does not resolve \"continuity\" requirement. What matters is that when the session is re-established (after handover), any negotiation of metadata is handling during the session re-establishment.",
+              "createdAt": "2024-09-23T15:07:57Z",
+              "updatedAt": "2024-09-23T15:07:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KcztN",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:38:19Z",
+          "updatedAt": "2024-09-23T16:38:20Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "By this, I meant the REQ-CLIENT-DECIDES is met by signaling Client flow authorization. The prev text shows Requirements under metadata definitions, which really didn't make sense given signaling these metadata is the way those requirements would be met. Maybe we can word it better to say \r\n\r\n\"REQ-CLIENT-DECIDES is met by signaling Client Flow Authorization as part of client-to-network signal\"?\r\n\r\nSame line of thought for all other items as well.",
+              "createdAt": "2024-09-23T16:38:19Z",
+              "updatedAt": "2024-09-23T16:38:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kc2zX",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:44:50Z",
+          "updatedAt": "2024-09-23T16:44:50Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "```\r\nThe general trend in wireless networks is to deploy the wireless\r\nrouter closer to the user. This can help with low link latency but\r\ncan result in more frequent handovers as the user moves between\r\nrouters.\r\n```\r\n\r\nThis was already there in the text. I just moved it under the requirement itself since it seems to be referring to a way it is done today (or at least reads so to me). Do we remove the whole statement altogether then?",
+              "createdAt": "2024-09-23T16:44:50Z",
+              "updatedAt": "2024-09-23T16:44:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kc311",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:47:02Z",
+          "updatedAt": "2024-09-23T16:47:02Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "Now reading it again, the whole Abuse and Constraints section seems to be in a \"between flows\" context than within the same flow. I agree with Dan as well, no harm in marking all packets important within the same flow. Can we remove the whole section?",
+              "createdAt": "2024-09-23T16:47:02Z",
+              "updatedAt": "2024-09-23T16:47:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kc5dM",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:50:34Z",
+          "updatedAt": "2024-09-23T16:50:34Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "I'll reword it and move the scalability to extended operational considerations and make ISP scale a requirement. That way the language is more consistent. Telling the metadata information should be kept to a minimum and then saying that is a requirement as well doesn't make sense",
+              "createdAt": "2024-09-23T16:50:34Z",
+              "updatedAt": "2024-09-23T16:50:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kc6LI",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:52:09Z",
+          "updatedAt": "2024-09-23T16:52:09Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "same line of thought as REQ-CLIENT-DECIDES. Updated the language to be more specific.",
+              "createdAt": "2024-09-23T16:52:09Z",
+              "updatedAt": "2024-09-23T16:56:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kc6Me",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T16:52:12Z",
+          "updatedAt": "2024-09-23T16:52:12Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "same line of thought as REQ-CLIENT-DECIDES. Updated the language to be more specific.",
+              "createdAt": "2024-09-23T16:52:12Z",
+              "updatedAt": "2024-09-23T16:56:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kd1j_",
+          "commit": {
+            "abbreviatedOid": "3fbf33c"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T18:56:25Z",
+          "updatedAt": "2024-09-23T18:58:16Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "because we are not prioritizing between flows, I believe we are immune from abuse.  Let's say a flow was all VoIP without any silence detection or anything, for example, so it is a solid stream of bits at a fixed rate.  Every packet could be marked High Priority.  Or Low Priority.  It doesn't matter.  If, while that VoIP is going on, the user adds a file transfer or the user adds screen sharing, then the priority begins to matter -- assuming the client considers the VoIP most important, the VoIP should get the highest priority among the 3 streams on that same flow (file transfer, VoIP, screen share).  A malicious sender would be noticed by the client both in the poorer user experience and in the packets being received which have incorrect priority markings.",
+              "createdAt": "2024-09-23T18:56:25Z",
+              "updatedAt": "2024-09-23T18:58:16Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "it doesn't matter where or how things are deployed; what matters is the radio interface can provide feedback to the thing-doing-rate-limiting.  Which might be itself, but it still has to provide that feedback internally. It might be a different physical device or a VM or, in 5G, a virtualized function.  Doesn't matter at our level of requirements.",
+              "createdAt": "2024-09-23T18:58:07Z",
+              "updatedAt": "2024-09-23T18:58:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kd7oj",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T19:09:27Z",
+          "updatedAt": "2024-09-23T19:09:28Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "I agree Dan. Added text to reflect this into security considerations and removed Abuse section.",
+              "createdAt": "2024-09-23T19:09:28Z",
+              "updatedAt": "2024-09-23T19:09:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kd7x4",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T19:09:48Z",
+          "updatedAt": "2024-09-23T19:09:48Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "Agreed! Removed those lines altogether and stated the requirement for what it is, succinctly.",
+              "createdAt": "2024-09-23T19:09:48Z",
+              "updatedAt": "2024-09-23T19:09:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kd_j2",
+          "commit": {
+            "abbreviatedOid": "947e5bb"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "changes look good, but I would hold off to hear from Med on his previous comments to be sure those are closed (or need words changed).",
+          "createdAt": "2024-09-23T19:17:57Z",
+          "updatedAt": "2024-09-23T19:17:57Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KeMhe",
+          "commit": {
+            "abbreviatedOid": "947e5bb"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Updates address my comments. Thanks!",
+          "createdAt": "2024-09-23T19:47:52Z",
+          "updatedAt": "2024-09-23T19:47:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KfnHC",
+          "commit": {
+            "abbreviatedOid": "e8907c2"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T21:47:27Z",
+          "updatedAt": "2024-09-23T21:47:27Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "@Sridhar: The trend to deploy wireless routers closer to the user is driven in 3GPP by capacity and latency concerns. That this results in more frequent handovers was to motivate the problem/requirement for continuity after handover. (i.e., unlike 4G-like centralized deployments, the lack of continuity for metadata would result in many users/sessions being affected). \r\nJust wanted to clarify: I don't see this as a big issue and what's in the draft is fine.",
+              "createdAt": "2024-09-23T21:47:27Z",
+              "updatedAt": "2024-09-23T21:47:28Z"
+            }
+          ]
         }
       ]
     }
