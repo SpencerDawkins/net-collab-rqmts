@@ -2244,9 +2244,9 @@ metadata sent from the server to the network, including these
 elements and others, are vulnerable to modification while in transit.
 Only an on-path attacker can modify on-path metadata. Such an
 attacker could engage in other malicious activities, like corrupting
-the checksum or completely dropping he packet. For instance, an
-active attacker could alter the metadata to mislabel packets
-containing video key-frames as unimportant, but such changes are
+the checksum or dropping the packet. For instance, an
+active attacker could alter the metadata to mislabel important packets
+as unimportant, but such changes are
 detectable by the receiver.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 <p id="section-7.1-4">It is recommended to encrypt or obfuscate the metadata information so
 it is only available to the server, client, and authorized network
