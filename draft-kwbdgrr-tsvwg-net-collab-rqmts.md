@@ -401,7 +401,7 @@ required to make use of the collaborative signaling:
 
 REQ-ISP-SCALE:
 : The metadata and other state information that a router has to
-maintain for each additional media flow it handles should be kept
+maintain for each additional flow it handles should be kept
 to a minimum or eliminated altogether.
 
 # Use Cases {#uc}
@@ -761,7 +761,7 @@ metadata in some packets, add some randomness to avoid recurrent traffic pattern
 
 REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
-server identity and securing the metadata.
+server identity, and securing the metadata.
 
 # Non-Requirements {#non-req}
 
@@ -782,8 +782,8 @@ The principles outlined in {{?RFC8558}}, {{?RFC9049}} and {{?RFC9419}}
 contain security considerations and are referenced in {{metadata-req}}.
 
 Since the document focuses only on priorities within a flow
-(not specifying inter-flow priority), the entire requirement spec is not abusable by
-malicious traffic.
+(not specifying inter-flow priority), the document does not induce concerns related to a specific
+user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.
 
 This document has no other security considerations.
 
@@ -1079,7 +1079,7 @@ Requirement: REQ-SCOPED-METADATA.
 
 ## Scalability {#scalability}
 
-There may be a large number of media flows handled by the server
+There may be a large number of flows handled by the server
 and wireless/access router. Per flow information (state) at a
 wireless router for optimizing the flow can negate the advantages
 offered as the number of flows handled increases.
