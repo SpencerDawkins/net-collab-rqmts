@@ -399,11 +399,6 @@ required to make use of the collaborative signaling:
   * Reveal the server identity.
   * Inspect client-to-server encrypted payload by network elements.
 
-REQ-ISP-SCALE:
-: The metadata and other state information that a router has to
-maintain for each additional flow it handles should be kept
-to a minimum or eliminated altogether.
-
 # Use Cases {#uc}
 
 ## Media Streaming {#uc-streaming}
@@ -932,6 +927,11 @@ for prioritization between different flows.
 REQ-SINGLE-CHANNEL:
 : The network should use a single channel for sharing metadata
 to simplify the process and avoid the need for redundant functions.
+
+REQ-ISP-SCALE:
+: The metadata and other state information that a router has to
+maintain for each additional flow it handles should be kept
+to a minimum or eliminated altogether.
 
 # Extended Use-Cases
 
