@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 27 March 2025                              Cloud Software Group
+Expires: 28 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 27 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       23 September 2024
+                                                       24 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2025.
+   This Internet-Draft will expire on 28 March 2025.
 
 Copyright Notice
 
@@ -416,8 +416,8 @@ Table of Contents
       *  Inspect client-to-server encrypted payload by network elements.
 
    REQ-ISP-SCALE:  The metadata and other state information that a
-      router has to maintain for each additional media flow it handles
-      should be kept to a minimum or eliminated altogether.
+      router has to maintain for each additional flow it handles should
+      be kept to a minimum or eliminated altogether.
 
 5.  Use Cases
 
@@ -784,7 +784,7 @@ Table of Contents
 
    REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
    not revealing any information that could identify the application's
-   identity, reason to signal, server identity and securing the
+   identity, reason to signal, server identity, and securing the
    metadata.
 
 8.  Non-Requirements
@@ -805,8 +805,10 @@ Table of Contents
    security considerations and are referenced in Section 6.
 
    Since the document focuses only on priorities within a flow (not
-   specifying inter-flow priority), the entire requirement spec is not
-   abusable by malicious traffic.
+   specifying inter-flow priority), the document does not induce
+   concerns related to a specific user or client declaring all flows or
+   a subset of them as being more important.  Such abuse concerns are
+   thus not applicable.
 
    This document has no other security considerations.
 
@@ -1240,7 +1242,7 @@ D.5.  Metadata Scope
 
 D.6.  Scalability
 
-   There may be a large number of media flows handled by the server and
+   There may be a large number of flows handled by the server and
    wireless/access router.  Per flow information (state) at a wireless
    router for optimizing the flow can negate the advantages offered as
    the number of flows handled increases.

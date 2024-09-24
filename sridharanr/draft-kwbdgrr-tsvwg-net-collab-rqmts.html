@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 27 March 2025</td>
+<td class="center">Expires 28 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-23" class="published">23 September 2024</time>
+<time datetime="2024-09-24" class="published">24 September 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-27">27 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-28">28 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1155,7 +1155,7 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1860,7 +1860,7 @@ required to make use of the collaborative signaling:<a href="#section-4.4-1.4.1"
 <dt id="section-4.4-1.5">REQ-ISP-SCALE:</dt>
           <dd style="margin-left: 1.5em" id="section-4.4-1.6">
             <p id="section-4.4-1.6.1">The metadata and other state information that a router has to
-maintain for each additional media flow it handles should be kept
+maintain for each additional flow it handles should be kept
 to a minimum or eliminated altogether.<a href="#section-4.4-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -2277,7 +2277,7 @@ mitigate traffic analysis, the sender might, for example, purposefully mis-mark
 metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
 <p id="section-7.1-5">REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
-server identity and securing the metadata.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+server identity, and securing the metadata.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2310,8 +2310,8 @@ aspects are not in the scope of this document.<a href="#section-8-1" class="pilc
 The principles outlined in <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>, <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span> and <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>
 contain security considerations and are referenced in <a href="#metadata-req" class="auto internal xref">Section 6</a>.<a href="#section-10-1" class="pilcrow">¶</a></p>
 <p id="section-10-2">Since the document focuses only on priorities within a flow
-(not specifying inter-flow priority), the entire requirement spec is not abusable by
-malicious traffic.<a href="#section-10-2" class="pilcrow">¶</a></p>
+(not specifying inter-flow priority), the document does not induce concerns related to a specific
+user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3">This document has no other security considerations.<a href="#section-10-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2895,7 +2895,7 @@ Rate (GBR) for specific flows is provided.<a href="#appendix-D.5-3" class="pilcr
         <h3 id="name-scalability">
 <a href="#appendix-D.6" class="section-number selfRef">D.6. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
         </h3>
-<p id="appendix-D.6-1">There may be a large number of media flows handled by the server
+<p id="appendix-D.6-1">There may be a large number of flows handled by the server
 and wireless/access router. Per flow information (state) at a
 wireless router for optimizing the flow can negate the advantages
 offered as the number of flows handled increases.<a href="#appendix-D.6-1" class="pilcrow">¶</a></p>
