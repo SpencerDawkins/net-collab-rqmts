@@ -422,10 +422,6 @@ Table of Contents
 
       *  Inspect client-to-server encrypted payload by network elements.
 
-   REQ-ISP-SCALE:  The metadata and other state information that a
-      router has to maintain for each additional flow it handles should
-      be kept to a minimum or eliminated altogether.
-
 5.  Use Cases
 
 5.1.  Media Streaming
@@ -1106,6 +1102,10 @@ Appendix B.  Extended Requirements Definition
    REQ-SINGLE-CHANNEL:  The network should use a single channel for
       sharing metadata to simplify the process and avoid the need for
       redundant functions.
+
+   REQ-ISP-SCALE:  The metadata and other state information that a
+      router has to maintain for each additional flow it handles should
+      be kept to a minimum or eliminated altogether.
 
 Appendix C.  Extended Use-Cases
 
