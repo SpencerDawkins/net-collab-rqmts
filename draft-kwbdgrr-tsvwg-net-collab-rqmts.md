@@ -124,8 +124,23 @@ flows bound to the same user.
 Wireless networks including 5G and WLAN inherently experience large
 variations in link quality over sub-RTT intervals and on the other
 hand applications such as interactive media demand both low latency
-and high bandwidth. Maximizing network utilization and end user
-experience under such conditions is challenging. Factors that affect
+and high bandwidth.
+
+Superior service during adverse network events can be achieved by the
+sender conveying packet behavior preferences to the network for
+packets within a single UDP 4-tuple flow.  During adverse network events
+this allows the network to be informed about the least-impactful
+packets to drop (or delay) in the same UDP 4-tuple flow.  Without such
+signaling, the network can only indiscriminately drop (or delay)
+packets.  With such capability, loss-tolerant and delay-tolerant
+transport protocols such as RTP, QUIC {{?RFC9000}}, and Unreliable
+QUIC {{?RFC9221}} can inform the network and provide a superior end
+user experience.
+
+## Rationale for Per-packet Metadata
+
+Maximizing network utilization and end user
+experience under adverse network conditions is challenging. Factors that affect
 wireless networks include change in channel conditions, interference
 between proximate cells, and end user mobility. These variations
 in link quality can be in the order of a millisecond or less
@@ -172,17 +187,6 @@ Other applications like interactive media can demand both high
 throughput and low latency and, in some cases, carry different
 streams (e.g., audio and video) in a single transport connection
 (e.g., WebRTC {{?RFC8825}}).
-
-Superior service during adverse network events can be achieved by the
-sender conveying packet behavior preferences to the network for
-packets within a single UDP 4-tuple.  During adverse network events
-this allows the network to be informed about the least-impactful
-packets to drop (or delay) in the same UDP 4-tuple.  Without such
-signaling, the network can only indiscriminately drop (or delay)
-packets.  With such capability, loss-tolerant and delay-tolerant
-transport protocols such as RTP, QUIC {{?RFC9000}}, and Unreliable
-QUIC {{?RFC9221}} can inform the network and provide a superior end
-user experience.
 
 With RTP {{?RFC3550}}, the media type could be examined and used
 as an implicit signal for determining relative priority. However,
