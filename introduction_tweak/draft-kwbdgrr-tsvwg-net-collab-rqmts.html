@@ -12,8 +12,6 @@
 <meta content="Spencer Dawkins" name="author">
 <meta content="Mohamed Boucadair" name="author">
 <meta content="
-       Wireless networks experience significant but transient variations
-in link quality that affect user experience. 
        Collaborative signaling from client-to-network and server-to-network
 can improve the user experience by informing the network about the
 nature and relative importance of packets (frames, streams, etc.)
@@ -28,7 +26,7 @@ through cooperation of server/client and the network.
        This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-flows bound to the same user. 
+UDP flows bound to the same user. 
     " name="description">
 <meta content="xml2rfc 3.23.1" name="generator">
 <meta content="Media" name="keyword">
@@ -1105,9 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Requirements for Network Collaboration Signaling</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Wireless networks experience significant but transient variations
-in link quality that affect user experience.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">Collaborative signaling from client-to-network and server-to-network
+<p id="section-abstract-1">Collaborative signaling from client-to-network and server-to-network
 can improve the user experience by informing the network about the
 nature and relative importance of packets (frames, streams, etc.)
 without having to disclose the content of the packets. Moreover,
@@ -1117,11 +1113,11 @@ Also, client-to-network collaboration can be put in place without
 revealing the identity of the remote servers. This collaboration
 allows for differentiated services at the network (e.g., packet
 discard preference), the sender (e.g., adaptive transmission), or
-through cooperation of server/client and the network.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">This document lists some use cases that illustrate the need for a
+through cooperation of server/client and the network.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1186,25 +1182,12 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-rationale-for-per-packet-me" class="internal xref">Rationale for Per-packet Metadata</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-definitions" class="internal xref">Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-types-of-metadata-requireme" class="internal xref">Types of Metadata Requirement</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-per-flow-metadata" class="internal xref">Per Flow Metadata</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-per-packet-metadata" class="internal xref">Per Packet Metadata</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-rationale-for-per-packet-me" class="internal xref">Rationale for Per-packet Metadata</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-requirements-definition" class="internal xref">Requirements Definition</a></p>
@@ -1342,8 +1325,8 @@ flows bound to the same user.<a href="#section-abstract-3" class="pilcrow">¶</a
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Wireless networks including 5G and WLAN inherently experience large
-variations in link quality over sub-RTT intervals and on the other
+<p id="section-1-1">Wireless networks, including 5G and WLAN, inherently experience large
+variations in link quality over sub-RTT (round-trip time) intervals and on the other
 hand applications such as interactive media demand both low latency
 and high bandwidth.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Superior service during adverse network events can be achieved by the
@@ -1353,309 +1336,21 @@ this allows the network to be informed about the least-impactful
 packets to drop (or delay) in the same UDP 4-tuple flow.  Without such
 signaling, the network can only indiscriminately drop (or delay)
 packets.  With such capability, loss-tolerant and delay-tolerant
-transport protocols such as RTP, QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, and Unreliable
+transport protocols such as RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, and Unreliable
 QUIC <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span> can inform the network and provide a superior end
 user experience.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<div id="rationale-for-per-packet-metadata">
-<section id="section-1.1">
-        <h3 id="name-rationale-for-per-packet-me">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-rationale-for-per-packet-me" class="section-name selfRef">Rationale for Per-packet Metadata</a>
-        </h3>
-<p id="section-1.1-1">Maximizing network utilization and end user
-experience under adverse network conditions is challenging. Factors that affect
-wireless networks include change in channel conditions, interference
-between proximate cells, and end user mobility. These variations
-in link quality can be in the order of a millisecond or less
-<span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of
-milliseconds (more than one round-trip time (RTT)) to estimate data
-rate. Similarly, application servers that encode and serve live or
-interactive media take time to adjust the encoding level and other
-processes to match the network rate. End-to-end congestion control
-algorithms are far from being optimal when the link quality is
-highly variable in sub-RTT timeframes and the application demands
-both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>). In these conditions, applications settle for a lower
-throughput when latency is prioritized, or for higher throughput
-at the expense of much higher delays.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">While rate control based on feedback for a flow (UDP 4-tuple) is
-evidently not able adapt for sub-RTT changes in available wireless
-channel resources, an application server can provide information
-on a per-packet basis that a network shaper may use to allocate the
-available resources more effectively. <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> has shown for
-volumetric video packets and a rate controller that errs on the
-side of overestimation, that the network shaper can drop low priority
-frames of a group of pictures (corresponding to transient wireless
-link bandwidth drops) and still achieve significantly better
-performance than state-of-the-art based on feedback. With not fully
-encrypted packets, networks may use heuristics to build an "implicit
-signal" gleaned from a packet to prioritize or otherwise shape
-flows. However, implicit signals are not desirable as they lead to
-ossification of protocols as result of introducing unintended
-dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>. When packet contents are encrypted, the
-approach of using implicit signals is no longer viable.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">Bandwidth constraints exist most predominantly at the access network
-(e.g., radio access networks). Users who are serviced via these
-networks use clients which run various applications; each having
-different connectivity needs for an optimal user experience. These
-needs are not frozen but change over time depending on the application
-and even depending on how an application is used (e.g., user's
-preferences). An explicit signal to the client can help to manage
-the use of available bandwidth better and better share it with
-requesting applications.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
-<p id="section-1.1-4">Other applications like interactive media can demand both high
-throughput and low latency and, in some cases, carry different
-streams (e.g., audio and video) in a single transport connection
-(e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used
-as an implicit signal for determining relative priority. However,
-<span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
-header extensions and Contributing sources (CSRCs). Furthermore, a
-full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
-any media header information that on-path network elements can use
-for forwarding decisions.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
-<figure id="figure-1">
-          <div id="section-1.1-6.1">
-            <div class="alignLeft art-svg artwork" id="section-1.1-6.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="304" width="528" viewBox="0 0 528 304" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                <path d="M 8,64 L 8,128" fill="none" stroke="black"></path>
-                <path d="M 8,176 L 8,240" fill="none" stroke="black"></path>
-                <path d="M 24,80 L 24,112" fill="none" stroke="black"></path>
-                <path d="M 24,192 L 24,224" fill="none" stroke="black"></path>
-                <path d="M 80,80 L 80,112" fill="none" stroke="black"></path>
-                <path d="M 80,192 L 80,224" fill="none" stroke="black"></path>
-                <path d="M 112,192 L 112,224" fill="none" stroke="black"></path>
-                <path d="M 152,192 L 152,224" fill="none" stroke="black"></path>
-                <path d="M 200,192 L 200,224" fill="none" stroke="black"></path>
-                <path d="M 208,80 L 208,112" fill="none" stroke="black"></path>
-                <path d="M 256,80 L 256,112" fill="none" stroke="black"></path>
-                <path d="M 256,192 L 256,224" fill="none" stroke="black"></path>
-                <path d="M 272,176 L 272,200" fill="none" stroke="black"></path>
-                <path d="M 272,216 L 272,240" fill="none" stroke="black"></path>
-                <path d="M 288,192 L 288,224" fill="none" stroke="black"></path>
-                <path d="M 296,80 L 296,112" fill="none" stroke="black"></path>
-                <path d="M 320,112 L 320,192" fill="none" stroke="black"></path>
-                <path d="M 344,80 L 344,112" fill="none" stroke="black"></path>
-                <path d="M 344,192 L 344,224" fill="none" stroke="black"></path>
-                <path d="M 360,64 L 360,128" fill="none" stroke="black"></path>
-                <path d="M 376,192 L 376,224" fill="none" stroke="black"></path>
-                <path d="M 432,192 L 432,224" fill="none" stroke="black"></path>
-                <path d="M 464,192 L 464,224" fill="none" stroke="black"></path>
-                <path d="M 520,192 L 520,224" fill="none" stroke="black"></path>
-                <path d="M 8,64 L 168,64" fill="none" stroke="black"></path>
-                <path d="M 184,64 L 360,64" fill="none" stroke="black"></path>
-                <path d="M 24,80 L 80,80" fill="none" stroke="black"></path>
-                <path d="M 208,80 L 256,80" fill="none" stroke="black"></path>
-                <path d="M 296,80 L 344,80" fill="none" stroke="black"></path>
-                <path d="M 80,96 L 168,96" fill="none" stroke="black"></path>
-                <path d="M 184,96 L 208,96" fill="none" stroke="black"></path>
-                <path d="M 256,96 L 296,96" fill="none" stroke="black"></path>
-                <path d="M 24,112 L 80,112" fill="none" stroke="black"></path>
-                <path d="M 208,112 L 256,112" fill="none" stroke="black"></path>
-                <path d="M 296,112 L 344,112" fill="none" stroke="black"></path>
-                <path d="M 8,128 L 168,128" fill="none" stroke="black"></path>
-                <path d="M 184,128 L 312,128" fill="none" stroke="black"></path>
-                <path d="M 328,128 L 360,128" fill="none" stroke="black"></path>
-                <path d="M 8,176 L 168,176" fill="none" stroke="black"></path>
-                <path d="M 184,176 L 272,176" fill="none" stroke="black"></path>
-                <path d="M 24,192 L 80,192" fill="none" stroke="black"></path>
-                <path d="M 112,192 L 152,192" fill="none" stroke="black"></path>
-                <path d="M 200,192 L 256,192" fill="none" stroke="black"></path>
-                <path d="M 288,192 L 344,192" fill="none" stroke="black"></path>
-                <path d="M 376,192 L 432,192" fill="none" stroke="black"></path>
-                <path d="M 464,192 L 520,192" fill="none" stroke="black"></path>
-                <path d="M 152,208 L 168,208" fill="none" stroke="black"></path>
-                <path d="M 184,208 L 200,208" fill="none" stroke="black"></path>
-                <path d="M 256,208 L 288,208" fill="none" stroke="black"></path>
-                <path d="M 344,208 L 376,208" fill="none" stroke="black"></path>
-                <path d="M 432,208 L 464,208" fill="none" stroke="black"></path>
-                <path d="M 24,224 L 80,224" fill="none" stroke="black"></path>
-                <path d="M 112,224 L 152,224" fill="none" stroke="black"></path>
-                <path d="M 200,224 L 256,224" fill="none" stroke="black"></path>
-                <path d="M 288,224 L 344,224" fill="none" stroke="black"></path>
-                <path d="M 376,224 L 432,224" fill="none" stroke="black"></path>
-                <path d="M 464,224 L 520,224" fill="none" stroke="black"></path>
-                <path d="M 8,240 L 168,240" fill="none" stroke="black"></path>
-                <path d="M 184,240 L 272,240" fill="none" stroke="black"></path>
-                <g class="text">
-                  <text x="176" y="36">:</text>
-                  <text x="104" y="52">3GPP/mobile</text>
-                  <text x="184" y="52">network</text>
-                  <text x="176" y="68">:</text>
-                  <text x="176" y="84">:</text>
-                  <text x="52" y="100">client</text>
-                  <text x="176" y="100">B</text>
-                  <text x="232" y="100">radio</text>
-                  <text x="324" y="100">CN</text>
-                  <text x="176" y="116">:</text>
-                  <text x="176" y="132">:</text>
-                  <text x="176" y="148">:</text>
-                  <text x="92" y="164">Wireless</text>
-                  <text x="164" y="164">home/ISP</text>
-                  <text x="232" y="164">network</text>
-                  <text x="176" y="180">:</text>
-                  <text x="360" y="180">:</text>
-                  <text x="448" y="180">:</text>
-                  <text x="176" y="196">:</text>
-                  <text x="360" y="196">:</text>
-                  <text x="448" y="196">:</text>
-                  <text x="52" y="212">client</text>
-                  <text x="96" y="212">-B-</text>
-                  <text x="132" y="212">WLAN</text>
-                  <text x="176" y="212">B</text>
-                  <text x="228" y="212">router</text>
-                  <text x="316" y="212">router</text>
-                  <text x="404" y="212">router</text>
-                  <text x="492" y="212">server</text>
-                  <text x="176" y="228">:</text>
-                  <text x="360" y="228">:</text>
-                  <text x="448" y="228">:</text>
-                  <text x="176" y="244">:</text>
-                  <text x="360" y="244">:</text>
-                  <text x="448" y="244">:</text>
-                  <text x="176" y="260">:</text>
-                  <text x="360" y="260">:</text>
-                  <text x="448" y="260">:</text>
-                  <text x="176" y="276">:</text>
-                  <text x="360" y="276">:</text>
-                  <text x="400" y="276">Transit</text>
-                  <text x="448" y="276">:</text>
-                  <text x="496" y="276">Content</text>
-                  <text x="28" y="292">User</text>
-                  <text x="108" y="292">device/Network</text>
-                  <text x="176" y="292">:</text>
-                  <text x="240" y="292">MNO/ISP</text>
-                  <text x="304" y="292">Network</text>
-                  <text x="360" y="292">:</text>
-                  <text x="400" y="292">Network</text>
-                  <text x="448" y="292">:</text>
-                  <text x="496" y="292">Network</text>
-                </g>
-              </svg><a href="#section-1.1-6.1.1" class="pilcrow">¶</a>
-</div>
-</div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-e2e-media-transport-overvie" class="selfRef">E2E Media Transport Overview</a>
-          </figcaption></figure>
-</div>
-<p id="section-1.1-7"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints
-usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
-and WLAN/ISP networks.  When a bottleneck exists temporarily, the
-network has no choice but to discard or delay packets -- which can
-harm certain flows and, thus, lead to suboptimal perceived experience.
-In this document, this is termed 'Reactive Management'.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
-<span id="name-metadata-and-network-shapin"></span><div id="Figure-netshaper">
-<figure id="figure-2">
-          <div id="section-1.1-8.1">
-            <div class="alignCenter art-svg artwork" id="section-1.1-8.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="560" viewBox="0 0 560 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                <path d="M 8,80 L 8,176" fill="none" stroke="black"></path>
-                <path d="M 64,80 L 64,176" fill="none" stroke="black"></path>
-                <path d="M 184,80 L 184,176" fill="none" stroke="black"></path>
-                <path d="M 200,112 L 200,160" fill="none" stroke="black"></path>
-                <path d="M 272,112 L 272,160" fill="none" stroke="black"></path>
-                <path d="M 288,80 L 288,176" fill="none" stroke="black"></path>
-                <path d="M 496,80 L 496,176" fill="none" stroke="black"></path>
-                <path d="M 552,80 L 552,176" fill="none" stroke="black"></path>
-                <path d="M 48,48 L 504,48" fill="none" stroke="black"></path>
-                <path d="M 8,80 L 64,80" fill="none" stroke="black"></path>
-                <path d="M 184,80 L 288,80" fill="none" stroke="black"></path>
-                <path d="M 496,80 L 552,80" fill="none" stroke="black"></path>
-                <path d="M 72,112 L 176,112" fill="none" stroke="black"></path>
-                <path d="M 200,112 L 272,112" fill="none" stroke="black"></path>
-                <path d="M 72,142 L 200,142" fill="none" stroke="black"></path>
-                <path d="M 72,146 L 200,146" fill="none" stroke="black"></path>
-                <path d="M 280,142 L 496,142" fill="none" stroke="black"></path>
-                <path d="M 280,146 L 496,146" fill="none" stroke="black"></path>
-                <path d="M 200,160 L 272,160" fill="none" stroke="black"></path>
-                <path d="M 8,176 L 64,176" fill="none" stroke="black"></path>
-                <path d="M 184,176 L 288,176" fill="none" stroke="black"></path>
-                <path d="M 496,176 L 552,176" fill="none" stroke="black"></path>
-                <path d="M 504,48 L 520,80" fill="none" stroke="black"></path>
-                <path d="M 32,80 L 48,48" fill="none" stroke="black"></path>
-                <polygon class="arrowhead" points="288,144 276,138.4 276,149.6" fill="black" transform="rotate(180,280,144)"></polygon>
-                <polygon class="arrowhead" points="184,112 172,106.4 172,117.6" fill="black" transform="rotate(0,176,112)"></polygon>
-                <polygon class="arrowhead" points="80,144 68,138.4 68,149.6" fill="black" transform="rotate(180,72,144)"></polygon>
-                <polygon class="arrowhead" points="80,112 68,106.4 68,117.6" fill="black" transform="rotate(180,72,112)"></polygon>
-                <g class="text">
-                  <text x="112" y="36">(A)</text>
-                  <text x="176" y="36">Application</text>
-                  <text x="264" y="36">signaling</text>
-                  <text x="336" y="36">(client</text>
-                  <text x="376" y="36">-</text>
-                  <text x="416" y="36">server)</text>
-                  <text x="104" y="100">(C)</text>
-                  <text x="136" y="100">C2N</text>
-                  <text x="240" y="132">Network</text>
-                  <text x="348" y="132">downstream</text>
-                  <text x="420" y="132">packet</text>
-                  <text x="236" y="148">Shaper</text>
-                  <text x="312" y="164">(B)</text>
-                  <text x="360" y="164">on-path</text>
-                  <text x="408" y="164">S2N</text>
-                  <text x="460" y="164">metadata</text>
-                  <text x="36" y="196">Client</text>
-                  <text x="236" y="196">Router</text>
-                  <text x="524" y="196">Server</text>
-                </g>
-              </svg><a href="#section-1.1-8.1.1" class="pilcrow">¶</a>
-</div>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-metadata-and-network-shapin" class="selfRef">Metadata and Network Shaping</a>
-          </figcaption></figure>
-</div>
-<p id="section-1.1-9"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path
-of packets from Server to Client.  A network shaper in the router
-manages QoS of flows of multiple users and can buffer (delay),
-discard, or apply other flow control rules. Application layer
-signaling and feedback between Client - Server (A - in the figure)
-adjust transmission rate over a period of several RTTs using feedback
-and congestion control algorithms.  Congestion control algorithms (CCAs)
-are generally conservative and settle to a steady rate that avoids
-excessive packet loss.  In networks where link conditions (between
-Client and Router) vary significantly at timescales well below the
-RTT, this results in unused (wasted) bandwidth at short timescales.<a href="#section-1.1-9" class="pilcrow">¶</a></p>
-<p id="section-1.1-10">There is some research <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> to indicate that media
-applications can obtain better QoE when sending at a higher rate
-(less conservative than current CCA) and the media application is
-willing to tolerate some packet loss or delay of low priority
-packets.  Packet priority and tolerance to delay of packets in such
-a case would be provided on-path in a side channel associated to
-the downstream packet (B - in the figure).  The requirements for this
-server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 6.2</a>.<a href="#section-1.1-10" class="pilcrow">¶</a></p>
-<p id="section-1.1-11">The client may provide information to an (access) router to drop
-lower priority marked packets of a flow (UDP 4-tuple) temporarily
-which can in turn allocate available bandwidth to other flows of that network
-attachment, especially during a reactive management event.<a href="#section-1.1-11" class="pilcrow">¶</a></p>
-<p id="section-1.1-12">Network shapers
-observe flows and apply policies to maximize performance but are
-not aware whether  there is a high preference for one flow (UDP
-4-tuple) over another flow belonging to the same user and network
-attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
-<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).  Clients may provide an (access)
-router with preferences of which flow (UDP 4-tuple) has relative
-priority among flows of that network attachment using H2N (C - in
-the figure).  Clients may also provide information to an (access) router
-to drop, when resources are congested,  'lower priority'-marked
-packets of a flow (UDP 4-tuple) temporarily which can in turn
-allocate bandwidth to other flows of that same network attachment.<a href="#section-1.1-12" class="pilcrow">¶</a></p>
-<p id="section-1.1-13">In summary, the rapid variation of wireless link quality and/or
-bandwidth limitations in networks along with interactive applications
-that demand low latency and high throughput can lead to suboptimal
-user experience. <a href="#uc" class="auto internal xref">Section 5</a> outlines use cases to illustrate the issues
-and the need for additional information per flow to allow the network
-to optimize its handling.<a href="#section-1.1-13" class="pilcrow">¶</a></p>
-<p id="section-1.1-14">Some of the complications that are induced by the phenomena discussed
-above may be eliminated by adequate dimensioning and upgrades.
+<p id="section-1-3">Some of the complications that are induced by adverse network events
+may be eliminated by adequate dimensioning and upgrades.
 However, such upgrades may not be always (immediately) possible or
 justified. Complementary mitigations are thus needed to soften these
 complications by introducing some collaboration between endpoints and
-networks to adjust their behaviors.<a href="#section-1.1-14" class="pilcrow">¶</a></p>
-<p id="section-1.1-15"><a href="#sys-considerations" class="auto internal xref">Section 7</a> provides operational constraints in the network and
-<a href="#metadata-req" class="auto internal xref">Section 6</a> describes the requirements for on-path media
-collaboration signals.<a href="#section-1.1-15" class="pilcrow">¶</a></p>
-</section>
-</div>
+networks to adjust their behaviors.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4"><a href="#sec-rationale" class="auto internal xref">Section 3</a> discusses the rationale for per-packet metadata.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5"><a href="#uc" class="auto internal xref">Section 5</a> outlines use cases to illustrate the issues
+and the need for additional information per flow to allow the network
+to optimize its handling. <a href="#metadata-req" class="auto internal xref">Section 6</a> describes the requirements for on-path media
+collaboration signals.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6"><a href="#sys-considerations" class="auto internal xref">Section 7</a> provides operational constraints in the network.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="definitions">
@@ -1678,50 +1373,333 @@ competing packets of that same flow.<a href="#section-2-2.2.1" class="pilcrow">�
 quota or bandwidth limit, or quality (delay and/or jitter)) assurances.<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.5">Reactive Management:</dt>
+<dt id="section-2-2.5">Per-Flow Metadata:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.6">
-          <p id="section-2-2.6.1">Network management actions that are undertaken as a reaction to unplanned overload events.
-Concretely, this includes policies which react to congestion events with very short to very
-long durations (e.g., varying wireless and mobile air interface conditions) or protection
-policies to soften the impact of ongoing attacks.<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.6.1">Refers to metadata that doesn't change often during the lifetime
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.7">Traffic shaping:</dt>
+<dt id="section-2-2.7"></dt>
         <dd style="margin-left: 1.5em" id="section-2-2.8">
-          <p id="section-2-2.8.1">Refers in this document to QoS management at an
+          <p id="section-2-2.8.1">Examples of such metadata are client request to honor per-packet metadata and preferences.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.9">Per-Packet Metadata:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.10">
+          <p id="section-2-2.10.1">Refers to metadata that varies packet to packet within the same flow, often capturing
+the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis.<a href="#section-2-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.11"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.12">
+          <p id="section-2-2.12.1">Examples of such metadata are Packet Priority and tolerance to delay<a href="#section-2-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.13">Reactive Management:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.14">
+          <p id="section-2-2.14.1">Network management actions that are undertaken as a reaction to unplanned overload events.
+Concretely, this includes policies which react to congestion events with very short to very
+long durations (e.g., varying wireless and mobile air interface conditions) or protection
+policies to soften the impact of ongoing attacks.<a href="#section-2-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.15">Traffic shaping:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.16">
+          <p id="section-2-2.16.1">Refers in this document to QoS management at an
 access router to delay or discard packets of lower priority
-to achieve bounded latency and high throughput.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
+to achieve bounded latency and high throughput.<a href="#section-2-2.16.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 </section>
 </div>
-<div id="types-of-metadata-requirement">
+<div id="sec-rationale">
 <section id="section-3">
-      <h2 id="name-types-of-metadata-requireme">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-types-of-metadata-requireme" class="section-name selfRef">Types of Metadata Requirement</a>
+      <h2 id="name-rationale-for-per-packet-me">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-rationale-for-per-packet-me" class="section-name selfRef">Rationale for Per-packet Metadata</a>
       </h2>
-<div id="md-perflow">
-<section id="section-3.1">
-        <h3 id="name-per-flow-metadata">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-per-flow-metadata" class="section-name selfRef">Per Flow Metadata</a>
-        </h3>
-<p id="section-3.1-1">Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Examples: client request to honor per-packet metadata, preferences.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-</section>
+<p id="section-3-1">Maximizing network utilization and enhancing perceived end user
+experience under adverse network conditions are challenging. Factors that affect
+wireless networks include change in channel conditions, interference
+between proximate cells, and end user mobility. These variations
+in link quality can be in the order of a millisecond or less
+<span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of
+milliseconds (more than one RTT) to estimate data
+rate over a specific path. Similarly, application servers that encode and serve live or
+interactive content (media, typically) take time to adjust the encoding level and other
+processes to match the network rate. End-to-end congestion control
+algorithms are far from being optimal when the link quality is
+highly variable in sub-RTT timeframes and the application demands
+both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>). In these conditions, applications settle for a lower
+throughput when latency is prioritized, or for higher throughput
+at the expense of much higher delays.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">While rate control based on feedback for a flow (UDP 4-tuple) is
+evidently not able to adapt for sub-RTT changes in available wireless
+channel resources, an application server can provide information
+on a per-packet basis that a network shaper may use to allocate the
+available resources more effectively. For example, <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> has shown for
+volumetric video packets and a rate controller that errs on the
+side of overestimation, that the network shaper can drop low priority
+frames of a group of pictures (corresponding to transient wireless
+link bandwidth drops) and still achieve significantly better
+performance than state-of-the-art based on feedback. With not fully
+encrypted packets, networks may use heuristics to build an "implicit
+signal" gleaned from a packet to prioritize or otherwise shape
+flows. However, implicit signals are not desirable as they lead to
+ossification of protocols as result of introducing unintended
+dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>. When packet contents are encrypted, the
+approach of using implicit signals is no longer viable.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Bandwidth constraints exist most predominantly at the access network
+(e.g., radio access networks). Users who are serviced via these
+networks use clients which run various applications; each having
+different connectivity needs for an optimal user experience. These
+needs are not frozen but change over time depending on the application
+and even depending on how an application is used (e.g., user's
+preferences). An explicit signal to the client can help to manage
+the use of available bandwidth better and better share it with
+requesting applications.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">Other applications like interactive media can demand both high
+throughput and low latency and, in some cases, carry different
+streams (e.g., audio and video) in a single transport connection
+(e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used
+as an implicit signal for determining relative priority. However,
+<span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
+header extensions and Contributing sources (CSRCs). Furthermore, a
+full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
+any media header information that on-path network elements can use
+for forwarding decisions.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
+<figure id="figure-1">
+        <div id="section-3-6.1">
+          <div class="alignLeft art-svg artwork" id="section-3-6.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="304" width="528" viewBox="0 0 528 304" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,64 L 8,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 8,240" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 24,112" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 24,224" fill="none" stroke="black"></path>
+              <path d="M 80,80 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 80,192 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 112,224" fill="none" stroke="black"></path>
+              <path d="M 152,192 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 200,224" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 208,112" fill="none" stroke="black"></path>
+              <path d="M 256,80 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 256,192 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 272,176 L 272,200" fill="none" stroke="black"></path>
+              <path d="M 272,216 L 272,240" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 288,224" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 296,112" fill="none" stroke="black"></path>
+              <path d="M 320,112 L 320,192" fill="none" stroke="black"></path>
+              <path d="M 344,80 L 344,112" fill="none" stroke="black"></path>
+              <path d="M 344,192 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 360,64 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 376,224" fill="none" stroke="black"></path>
+              <path d="M 432,192 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 464,224" fill="none" stroke="black"></path>
+              <path d="M 520,192 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 168,64" fill="none" stroke="black"></path>
+              <path d="M 184,64 L 360,64" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 80,80" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 256,80" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 80,96 L 168,96" fill="none" stroke="black"></path>
+              <path d="M 184,96 L 208,96" fill="none" stroke="black"></path>
+              <path d="M 256,96 L 296,96" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 208,112 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 296,112 L 344,112" fill="none" stroke="black"></path>
+              <path d="M 8,128 L 168,128" fill="none" stroke="black"></path>
+              <path d="M 184,128 L 312,128" fill="none" stroke="black"></path>
+              <path d="M 328,128 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 168,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 272,176" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 80,192" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 152,192" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 256,192" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 344,192" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 432,192" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 520,192" fill="none" stroke="black"></path>
+              <path d="M 152,208 L 168,208" fill="none" stroke="black"></path>
+              <path d="M 184,208 L 200,208" fill="none" stroke="black"></path>
+              <path d="M 256,208 L 288,208" fill="none" stroke="black"></path>
+              <path d="M 344,208 L 376,208" fill="none" stroke="black"></path>
+              <path d="M 432,208 L 464,208" fill="none" stroke="black"></path>
+              <path d="M 24,224 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,224 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,224 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 288,224 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 376,224 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,224 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,240 L 168,240" fill="none" stroke="black"></path>
+              <path d="M 184,240 L 272,240" fill="none" stroke="black"></path>
+              <g class="text">
+                <text x="176" y="36">:</text>
+                <text x="104" y="52">3GPP/mobile</text>
+                <text x="184" y="52">network</text>
+                <text x="176" y="68">:</text>
+                <text x="176" y="84">:</text>
+                <text x="52" y="100">client</text>
+                <text x="176" y="100">B</text>
+                <text x="232" y="100">radio</text>
+                <text x="324" y="100">CN</text>
+                <text x="176" y="116">:</text>
+                <text x="176" y="132">:</text>
+                <text x="176" y="148">:</text>
+                <text x="92" y="164">Wireless</text>
+                <text x="164" y="164">home/ISP</text>
+                <text x="232" y="164">network</text>
+                <text x="176" y="180">:</text>
+                <text x="360" y="180">:</text>
+                <text x="448" y="180">:</text>
+                <text x="176" y="196">:</text>
+                <text x="360" y="196">:</text>
+                <text x="448" y="196">:</text>
+                <text x="52" y="212">client</text>
+                <text x="96" y="212">-B-</text>
+                <text x="132" y="212">WLAN</text>
+                <text x="176" y="212">B</text>
+                <text x="228" y="212">router</text>
+                <text x="316" y="212">router</text>
+                <text x="404" y="212">router</text>
+                <text x="492" y="212">server</text>
+                <text x="176" y="228">:</text>
+                <text x="360" y="228">:</text>
+                <text x="448" y="228">:</text>
+                <text x="176" y="244">:</text>
+                <text x="360" y="244">:</text>
+                <text x="448" y="244">:</text>
+                <text x="176" y="260">:</text>
+                <text x="360" y="260">:</text>
+                <text x="448" y="260">:</text>
+                <text x="176" y="276">:</text>
+                <text x="360" y="276">:</text>
+                <text x="400" y="276">Transit</text>
+                <text x="448" y="276">:</text>
+                <text x="496" y="276">Content</text>
+                <text x="28" y="292">User</text>
+                <text x="108" y="292">device/Network</text>
+                <text x="176" y="292">:</text>
+                <text x="240" y="292">MNO/ISP</text>
+                <text x="304" y="292">Network</text>
+                <text x="360" y="292">:</text>
+                <text x="400" y="292">Network</text>
+                <text x="448" y="292">:</text>
+                <text x="496" y="292">Network</text>
+              </g>
+            </svg><a href="#section-3-6.1.1" class="pilcrow">¶</a>
 </div>
-<div id="per-packet-metadata">
-<section id="section-3.2">
-        <h3 id="name-per-packet-metadata">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-per-packet-metadata" class="section-name selfRef">Per Packet Metadata</a>
-        </h3>
-<p id="section-3.2-1">Refers to metadata that varies packet to packet within the same flow, often capturing
-the nature and characteristics of the traffic each packet carries.
-This needs to be communicated on a per packet basis.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Examples: Packet Priority, tolerance to delay<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-</section>
 </div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-e2e-media-transport-overvie" class="selfRef">E2E Media Transport Overview</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-7"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints
+usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
+and WLAN/ISP networks.  When a bottleneck exists temporarily, the
+network has no choice but to discard or delay packets -- which can
+harm certain flows and, thus, lead to suboptimal perceived experience.
+In this document, this is termed 'Reactive Management'.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<span id="name-metadata-and-network-shapin"></span><div id="Figure-netshaper">
+<figure id="figure-2">
+        <div id="section-3-8.1">
+          <div class="alignCenter art-svg artwork" id="section-3-8.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="560" viewBox="0 0 560 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,80 L 8,176" fill="none" stroke="black"></path>
+              <path d="M 64,80 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 184,176" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 200,160" fill="none" stroke="black"></path>
+              <path d="M 272,112 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 288,80 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 496,176" fill="none" stroke="black"></path>
+              <path d="M 552,80 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 48,48 L 504,48" fill="none" stroke="black"></path>
+              <path d="M 8,80 L 64,80" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 288,80" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 552,80" fill="none" stroke="black"></path>
+              <path d="M 72,112 L 176,112" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 272,112" fill="none" stroke="black"></path>
+              <path d="M 72,142 L 200,142" fill="none" stroke="black"></path>
+              <path d="M 72,146 L 200,146" fill="none" stroke="black"></path>
+              <path d="M 280,142 L 496,142" fill="none" stroke="black"></path>
+              <path d="M 280,146 L 496,146" fill="none" stroke="black"></path>
+              <path d="M 200,160 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,176 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 504,48 L 520,80" fill="none" stroke="black"></path>
+              <path d="M 32,80 L 48,48" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="288,144 276,138.4 276,149.6" fill="black" transform="rotate(180,280,144)"></polygon>
+              <polygon class="arrowhead" points="184,112 172,106.4 172,117.6" fill="black" transform="rotate(0,176,112)"></polygon>
+              <polygon class="arrowhead" points="80,144 68,138.4 68,149.6" fill="black" transform="rotate(180,72,144)"></polygon>
+              <polygon class="arrowhead" points="80,112 68,106.4 68,117.6" fill="black" transform="rotate(180,72,112)"></polygon>
+              <g class="text">
+                <text x="112" y="36">(A)</text>
+                <text x="176" y="36">Application</text>
+                <text x="264" y="36">signaling</text>
+                <text x="336" y="36">(client</text>
+                <text x="376" y="36">-</text>
+                <text x="416" y="36">server)</text>
+                <text x="104" y="100">(C)</text>
+                <text x="136" y="100">C2N</text>
+                <text x="240" y="132">Network</text>
+                <text x="348" y="132">downstream</text>
+                <text x="420" y="132">packet</text>
+                <text x="236" y="148">Shaper</text>
+                <text x="312" y="164">(B)</text>
+                <text x="360" y="164">on-path</text>
+                <text x="408" y="164">S2N</text>
+                <text x="460" y="164">metadata</text>
+                <text x="36" y="196">Client</text>
+                <text x="236" y="196">Router</text>
+                <text x="524" y="196">Server</text>
+              </g>
+            </svg><a href="#section-3-8.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-metadata-and-network-shapin" class="selfRef">Metadata and Network Shaping</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-9"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path
+of packets from Server to Client.  A network shaper in the router
+manages QoS of flows of multiple users and can buffer (delay),
+discard, or apply other flow control rules. Application layer
+signaling and feedback between Client - Server (A - in the figure)
+adjust transmission rate over a period of several RTTs using feedback
+and congestion control algorithms.  Congestion control algorithms (CCAs)
+are generally conservative and settle to a steady rate that avoids
+excessive packet loss.  In networks where link conditions (between
+Client and Router) vary significantly at timescales well below the
+RTT, this results in unused (wasted) bandwidth at short timescales.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-10">There is some research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) to indicate that media
+applications can obtain better Quality of Experience (QoE) when sending at a higher rate
+(less conservative than current CCA) and the media application is
+willing to tolerate some packet loss or delay of low priority
+packets.  Packet priority and tolerance to delay of packets in such
+a case would be provided on-path in a side channel associated to
+the downstream packet (B - in the figure).  The requirements for this
+server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 6.2</a>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">The client may provide information to an (access) router to drop
+lower priority marked packets of a flow (UDP 4-tuple) temporarily
+which can in turn allocate available bandwidth to other flows of that network
+attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-12">Network shapers
+observe flows and apply policies to maximize performance but are
+not aware whether  there is a high preference for one flow (UDP
+4-tuple) over another flow belonging to the same user and network
+attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
+<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).  Clients may provide an (access)
+router with preferences of which flow (UDP 4-tuple) has relative
+priority among flows of that network attachment using H2N (C - in
+the figure).  Clients may also provide information to an (access) router
+to drop, when resources are congested,  'lower priority'-marked
+packets of a flow (UDP 4-tuple) temporarily which can in turn
+allocate bandwidth to other flows of that same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<p id="section-3-13">In summary, the rapid variation of wireless link quality and/or
+bandwidth limitations in networks along with interactive applications
+that demand low latency and high throughput can lead to suboptimal
+user experience.<a href="#section-3-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="req-definition">
