@@ -97,9 +97,6 @@ informative:
 
 --- abstract
 
-Wireless networks experience significant but transient variations
-in link quality that affect user experience.
-
 Collaborative signaling from client-to-network and server-to-network
 can improve the user experience by informing the network about the
 nature and relative importance of packets (frames, streams, etc.)
@@ -115,24 +112,89 @@ through cooperation of server/client and the network.
 This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-flows bound to the same user.
+UDP flows bound to the same user.
 
 --- middle
 
 # Introduction {#intro}
 
-Wireless networks including 5G and WLAN inherently experience large
-variations in link quality over sub-RTT intervals and on the other
+Wireless networks, including 5G and WLAN, inherently experience large
+variations in link quality over sub-RTT (round-trip time) intervals and on the other
 hand applications such as interactive media demand both low latency
-and high bandwidth. Maximizing network utilization and end user
-experience under such conditions is challenging. Factors that affect
+and high bandwidth.
+
+Superior service during adverse network events can be achieved by the
+sender conveying packet behavior preferences to the network for
+packets within a single UDP 4-tuple flow.  During adverse network events
+this allows the network to be informed about the least-impactful
+packets to drop (or delay) in the same UDP 4-tuple flow.  Without such
+signaling, the network can only indiscriminately drop (or delay)
+packets.  With such capability, loss-tolerant and delay-tolerant
+transport protocols such as RTP {{?RFC3550}}, QUIC {{?RFC9000}}, and Unreliable
+QUIC {{?RFC9221}} can inform the network and provide a superior end
+user experience.
+
+Some of the complications that are induced by adverse network events
+may be eliminated by adequate dimensioning and upgrades.
+However, such upgrades may not be always (immediately) possible or
+justified. Complementary mitigations are thus needed to soften these
+complications by introducing some collaboration between endpoints and
+networks to adjust their behaviors.
+
+{{sec-rationale}} discusses the rationale for per-packet metadata.
+
+{{uc}} outlines use cases to illustrate the issues
+and the need for additional information per flow to allow the network
+to optimize its handling. {{metadata-req}} describes the requirements for on-path media
+collaboration signals.
+
+{{sys-considerations}} provides operational constraints in the network.
+
+# Definitions
+
+The document makes use of the following terms:
+
+Discard preference:
+: Is an indication of drop preference within a
+flow when there are no sufficient network resources to handle all
+competing packets of that same flow.
+
+Intentional Management:
+: Network policy such as (monthly) bandwidth
+quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
+
+Per-Flow Metadata:
+: Refers to metadata that doesn't change often during the lifetime
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.
+: Examples of such metadata are client request to honor per-packet metadata and preferences.
+
+Per-Packet Metadata:
+: Refers to metadata that varies packet to packet within the same flow, often capturing
+the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis.
+: Examples of such metadata are Packet Priority and tolerance to delay
+
+Reactive Management:
+: Network management actions that are undertaken as a reaction to unplanned overload events.
+Concretely, this includes policies which react to congestion events with very short to very
+long durations (e.g., varying wireless and mobile air interface conditions) or protection
+policies to soften the impact of ongoing attacks.
+
+Traffic shaping:
+: Refers in this document to QoS management at an
+access router to delay or discard packets of lower priority
+to achieve bounded latency and high throughput.
+
+# Rationale for Per-packet Metadata {#sec-rationale}
+
+Maximizing network utilization and enhancing perceived end user
+experience under adverse network conditions are challenging. Factors that affect
 wireless networks include change in channel conditions, interference
 between proximate cells, and end user mobility. These variations
 in link quality can be in the order of a millisecond or less
 {{5G-Lumos}} while congestion control takes several tens of
-milliseconds (more than one round-trip time (RTT)) to estimate data
-rate. Similarly, application servers that encode and serve live or
-interactive media take time to adjust the encoding level and other
+milliseconds (more than one RTT) to estimate data
+rate over a specific path. Similarly, application servers that encode and serve live or
+interactive content (media, typically) take time to adjust the encoding level and other
 processes to match the network rate. End-to-end congestion control
 algorithms are far from being optimal when the link quality is
 highly variable in sub-RTT timeframes and the application demands
@@ -142,10 +204,10 @@ throughput when latency is prioritized, or for higher throughput
 at the expense of much higher delays.
 
 While rate control based on feedback for a flow (UDP 4-tuple) is
-evidently not able adapt for sub-RTT changes in available wireless
+evidently not able to adapt for sub-RTT changes in available wireless
 channel resources, an application server can provide information
 on a per-packet basis that a network shaper may use to allocate the
-available resources more effectively. {{5G-Octopus}} has shown for
+available resources more effectively. For example, {{5G-Octopus}} has shown for
 volumetric video packets and a rate controller that errs on the
 side of overestimation, that the network shaper can drop low priority
 frames of a group of pictures (corresponding to transient wireless
@@ -172,17 +234,6 @@ Other applications like interactive media can demand both high
 throughput and low latency and, in some cases, carry different
 streams (e.g., audio and video) in a single transport connection
 (e.g., WebRTC {{?RFC8825}}).
-
-Superior service during adverse network events can be achieved by the
-sender conveying packet behavior preferences to the network for
-packets within a single UDP 4-tuple.  During adverse network events
-this allows the network to be informed about the least-impactful
-packets to drop (or delay) in the same UDP 4-tuple.  Without such
-signaling, the network can only indiscriminately drop (or delay)
-packets.  With such capability, loss-tolerant and delay-tolerant
-transport protocols such as RTP, QUIC {{?RFC9000}}, and Unreliable
-QUIC {{?RFC9221}} can inform the network and provide a superior end
-user experience.
 
 With RTP {{?RFC3550}}, the media type could be examined and used
 as an implicit signal for determining relative priority. However,
@@ -247,8 +298,8 @@ excessive packet loss.  In networks where link conditions (between
 Client and Router) vary significantly at timescales well below the
 RTT, this results in unused (wasted) bandwidth at short timescales.
 
-There is some research {{5G-Octopus}} to indicate that media
-applications can obtain better QoE when sending at a higher rate
+There is some research (e.g., {{5G-Octopus}}) to indicate that media
+applications can obtain better Quality of Experience (QoE) when sending at a higher rate
 (less conservative than current CCA) and the media application is
 willing to tolerate some packet loss or delay of low priority
 packets.  Packet priority and tolerance to delay of packets in such
@@ -277,64 +328,7 @@ allocate bandwidth to other flows of that same network attachment.
 In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
 that demand low latency and high throughput can lead to suboptimal
-user experience. {{uc}} outlines use cases to illustrate the issues
-and the need for additional information per flow to allow the network
-to optimize its handling.
-
-Some of the complications that are induced by the phenomena discussed
-above may be eliminated by adequate dimensioning and upgrades.
-However, such upgrades may not be always (immediately) possible or
-justified. Complementary mitigations are thus needed to soften these
-complications by introducing some collaboration between endpoints and
-networks to adjust their behaviors.
-
-{{sys-considerations}} provides operational constraints in the network and
-{{metadata-req}} describes the requirements for on-path media
-collaboration signals.
-
-
-# Definitions
-
-The document makes use of the following terms:
-
-Discard preference:
-: Is an indication of drop preference within a
-flow when there are no sufficient network resources to handle all
-competing packets of that same flow.
-
-Intentional Management:
-: Network policy such as (monthly) bandwidth
-quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
-
-Reactive Management:
-: Network management actions that are undertaken as a reaction to unplanned overload events.
-Concretely, this includes policies which react to congestion events with very short to very
-long durations (e.g., varying wireless and mobile air interface conditions) or protection
-policies to soften the impact of ongoing attacks.
-
-Traffic shaping:
-: Refers in this document to QoS management at an
-access router to delay or discard packets of lower priority
-to achieve bounded latency and high throughput.
-
-
-# Types of Metadata Requirement
-
-## Per Flow Metadata {#md-perflow}
-
-Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.
-
-Examples: client request to honor per-packet metadata, preferences.
-
-## Per Packet Metadata
-
-Refers to metadata that varies packet to packet within the same flow, often capturing
-the nature and characteristics of the traffic each packet carries.
-This needs to be communicated on a per packet basis.
-
-Examples: Packet Priority, tolerance to delay
-
+user experience.
 
 # Requirements Definition {#req-definition}
 
