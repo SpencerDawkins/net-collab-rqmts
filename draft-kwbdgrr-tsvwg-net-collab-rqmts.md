@@ -154,23 +154,14 @@ collaboration signals.
 
 The document makes use of the following terms:
 
-Discard preference:
-: Is an indication of drop preference within a
-flow when there are no sufficient network resources to handle all
-competing packets of that same flow.
-
-Intentional Management:
-: Network policy such as (monthly) bandwidth
-quota or bandwidth limit, or quality (delay and/or jitter)) assurances.
-
 Per-Flow Metadata:
 : Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.  This is sent from client to network.
 : Examples of such metadata are client request to honor per-packet metadata and preferences.
 
 Per-Packet Metadata:
 : Refers to metadata that varies packet to packet within the same flow, often capturing
-the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis.
+the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis. This is sent from server to network.
 : Examples of such metadata are Packet Priority and tolerance to delay
 
 Reactive Management:
@@ -178,11 +169,6 @@ Reactive Management:
 Concretely, this includes policies which react to congestion events with very short to very
 long durations (e.g., varying wireless and mobile air interface conditions) or protection
 policies to soften the impact of ongoing attacks.
-
-Traffic Shaping:
-: Refers in this document to QoS management at an
-access router to delay or discard packets of lower priority
-to achieve bounded latency and high throughput.
 
 # Rationale for Per-packet Metadata {#sec-rationale}
 
