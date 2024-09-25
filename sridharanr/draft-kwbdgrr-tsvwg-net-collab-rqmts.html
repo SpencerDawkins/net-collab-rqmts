@@ -1415,57 +1415,35 @@ to achieve bounded latency and high throughput.<a href="#section-2-2.16.1" class
       <h2 id="name-rationale-for-per-packet-me">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-rationale-for-per-packet-me" class="section-name selfRef">Rationale for Per-packet Metadata</a>
       </h2>
-<p id="section-3-1">Maximizing network utilization and enhancing perceived end user
-experience under adverse network conditions are challenging. Factors that affect
-wireless networks include change in channel conditions, interference
-between proximate cells, and end user mobility. These variations
-in link quality can be in the order of a millisecond or less
-<span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of
-milliseconds (more than one RTT) to estimate data
-rate over a specific path. Similarly, application servers that encode and serve live or
-interactive content (media, typically) take time to adjust the encoding level and other
-processes to match the network rate. End-to-end congestion control
-algorithms are far from being optimal when the link quality is
-highly variable in sub-RTT timeframes and the application demands
-both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>). In these conditions, applications settle for a lower
-throughput when latency is prioritized, or for higher throughput
-at the expense of much higher delays.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">While rate control based on feedback for a flow (UDP 4-tuple) is
-evidently not able to adapt for sub-RTT changes in available wireless
-channel resources, an application server can provide information
-on a per-packet basis that a network shaper may use to allocate the
-available resources more effectively. For example, <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> has shown for
-volumetric video packets and a rate controller that errs on the
-side of overestimation, that the network shaper can drop low priority
-frames of a group of pictures (corresponding to transient wireless
-link bandwidth drops) and still achieve significantly better
-performance than state-of-the-art based on feedback. With not fully
-encrypted packets, networks may use heuristics to build an "implicit
-signal" gleaned from a packet to prioritize or otherwise shape
-flows. However, implicit signals are not desirable as they lead to
-ossification of protocols as result of introducing unintended
-dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>. When packet contents are encrypted, the
-approach of using implicit signals is no longer viable.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">Bandwidth constraints exist most predominantly at the access network
-(e.g., radio access networks). Users who are serviced via these
-networks use clients which run various applications; each having
-different connectivity needs for an optimal user experience. These
-needs are not frozen but change over time depending on the application
-and even depending on how an application is used (e.g., user's
-preferences). An explicit signal to the client can help to manage
-the use of available bandwidth better and better share it with
-requesting applications.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">Other applications like interactive media can demand both high
-throughput and low latency and, in some cases, carry different
-streams (e.g., audio and video) in a single transport connection
-(e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used
-as an implicit signal for determining relative priority. However,
-<span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
-header extensions and Contributing sources (CSRCs). Furthermore, a
-full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
-any media header information that on-path network elements can use
-for forwarding decisions.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-1">Maximizing network utilization and enhancing user experience under
+adverse conditions are challenging. Wireless networks face issues
+like channel condition changes, cell interference, and user mobility.
+These variations can occur in milliseconds <span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span>, while congestion
+control takes tens of milliseconds (more than one RTT) to estimate data
+rate. Application servers encoding live or interactive content also take
+time to adjust to network rates. End-to-end congestion control algorithms
+are suboptimal when link quality varies in sub-RTT timeframes and applications
+need low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>).
+Applications settle for lower throughput when prioritizing latency or higher
+throughput with higher delays.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Feedback-based rate control for a flow (UDP 4-tuple) cannot adapt to sub-RTT
+wireless channel changes. Application servers can provide per-packet information
+for network shapers to allocate resources effectively. For example, <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>
+shows that network shapers can drop low priority frames during transient bandwidth
+drops and still perform better than feedback-based methods. Heuristics can build
+an “implicit signal” from unencrypted packets to prioritize flows, but this leads
+to protocol ossification <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>. Encrypted packets make implicit signals unviable.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Bandwidth constraints are most prominent in access networks (e.g., radio access networks).
+Users, serviced via these networks, use clients with varying connectivity needs for
+optimal experiences, which change over time based on application usage.
+Explicit signals to clients can help manage bandwidth better.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">Interactive media applications and likewise demand high throughput and low latency,
+sometimes carrying different streams (e.g., audio and video)
+in a single connection (e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, media type could be used as an implicit signal
+for determining relative priority. However, <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> encrypts RTP
+header extensions and Contributing sources (CSRCs). Fully encrypted transport
+(e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose media header information for network decisions.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
 <figure id="figure-1">
         <div id="section-3-6.1">
@@ -1658,41 +1636,27 @@ In this document, this is termed 'Reactive Management'.<a href="#section-3-7" cl
 <a href="#name-metadata-and-network-shapin" class="selfRef">Metadata and Network Shaping</a>
         </figcaption></figure>
 </div>
-<p id="section-3-9"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path
-of packets from Server to Client.  A network shaper in the router
-manages QoS of flows of multiple users and can buffer (delay),
-discard, or apply other flow control rules. Application layer
-signaling and feedback between Client - Server (A - in the figure)
-adjust transmission rate over a period of several RTTs using feedback
-and congestion control algorithms.  Congestion control algorithms (CCAs)
-are generally conservative and settle to a steady rate that avoids
-excessive packet loss.  In networks where link conditions (between
-Client and Router) vary significantly at timescales well below the
-RTT, this results in unused (wasted) bandwidth at short timescales.<a href="#section-3-9" class="pilcrow">¶</a></p>
-<p id="section-3-10">There is some research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) to indicate that media
-applications can obtain better Quality of Experience (QoE) when sending at a higher rate
-(less conservative than current CCA) and the media application is
-willing to tolerate some packet loss or delay of low priority
-packets.  Packet priority and tolerance to delay of packets in such
-a case would be provided on-path in a side channel associated to
-the downstream packet (B - in the figure).  The requirements for this
-server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 6.2</a>.<a href="#section-3-10" class="pilcrow">¶</a></p>
-<p id="section-3-11">The client may provide information to an (access) router to drop
-lower priority marked packets of a flow (UDP 4-tuple) temporarily
-which can in turn allocate available bandwidth to other flows of that network
-attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
-<p id="section-3-12">Network shapers
-observe flows and apply policies to maximize performance but are
-not aware whether  there is a high preference for one flow (UDP
-4-tuple) over another flow belonging to the same user and network
-attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
-<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).  Clients may provide an (access)
-router with preferences of which flow (UDP 4-tuple) has relative
-priority among flows of that network attachment using H2N (C - in
-the figure).  Clients may also provide information to an (access) router
-to drop, when resources are congested,  'lower priority'-marked
-packets of a flow (UDP 4-tuple) temporarily which can in turn
-allocate bandwidth to other flows of that same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<p id="section-3-9"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the Server to Client path.
+A network shaper in the router manages QoS of multiple users’ flows and can buffer,
+discard, or apply other flow control rules. Application layer signaling and feedback
+between Client and Server (A - in the figure) adjust transmission rate over several RTTs
+using feedback and congestion control algorithms (CCAs). CCAs are generally conservative
+and settle to a steady rate to avoid excessive packet loss. In networks where link
+conditions (between Client and Router) vary significantly at sub-RTT timescales,
+this results in unused bandwidth at short timescales.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-10">Research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) indicates that media applications can achieve better QoE
+when sending at a higher rate (less conservative than current CCA) and tolerating some
+packet loss or delay of low priority packets. Packet priority and tolerance to delay in
+such cases would be provided on-path in a side channel associated with the downstream packet (B).
+The requirements for this server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 6.2</a>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">The client may provide information to an (access) router to drop lower priority marked packets
+of a flow (UDP 4-tuple) temporarily which can in turn allocate available bandwidth
+to other flows of that network attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-12">Network shapers observe flows and apply policies to maximize performancebut are unaware underlying
+flows belinging to the same user and network attachment (e.g., a subscriber connection,a 3GPP PDU
+Session <a href="#net-attach" class="auto internal xref">Appendix A</a>). Clients may provide information to an (access) router to drop
+‘lower priority’-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
+allowing bandwidth allocation to other flows of the same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
 <p id="section-3-13">In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
 that demand low latency and high throughput can lead to suboptimal
