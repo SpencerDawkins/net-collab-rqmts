@@ -1,0 +1,2973 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Requirements for Network Collaboration Signaling</title>
+<meta content="John Kaippallimalil" name="author">
+<meta content="Dan Wing" name="author">
+<meta content="Sri Gundavelli" name="author">
+<meta content="Sridharan Rajagopalan" name="author">
+<meta content="Spencer Dawkins" name="author">
+<meta content="Mohamed Boucadair" name="author">
+<meta content="
+       Collaborative signaling from client-to-network and server-to-network
+can improve the user experience by informing the network about the
+nature and relative importance of packets (frames, streams, etc.)
+without having to disclose the content of the packets. Moreover,
+the collaborative signaling may be enabled so that clients and
+servers are aware of the network's treatment of incoming packets.
+Also, client-to-network collaboration can be put in place without
+revealing the identity of the remote servers. This collaboration
+allows for differentiated services at the network (e.g., packet
+discard preference), the sender (e.g., adaptive transmission), or
+through cooperation of server/client and the network. 
+       This document lists some use cases that illustrate the need for a
+mechanism to share metadata and outlines requirements for both
+client-to-network and server-to-network. The document focuses on
+UDP flows bound to the same user. 
+    " name="description">
+<meta content="xml2rfc 3.23.1" name="generator">
+<meta content="Media" name="keyword">
+<meta content="Low Latency" name="keyword">
+<meta content="Wireless Links" name="keyword">
+<meta content="Bandwidth constraints" name="keyword">
+<meta content="Policy" name="keyword">
+<meta content="Operational Considerations" name="keyword">
+<meta content="draft-kwbdgrr-tsvwg-net-collab-rqmts-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.23.1
+    Python 3.12.6
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.3.6
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 70.3.0
+    wcwidth 0.2.13
+-->
+<link href="draft-kwbdgrr-tsvwg-net-collab-rqmts.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Network Collaboration Requirements</td>
+<td class="right">September 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Kaippallimalil, et al.</td>
+<td class="center">Expires 29 March 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Transport and Services Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-09-25" class="published">25 September 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-03-29">29 March 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">J. Kaippallimalil</div>
+<div class="org">Futurewei</div>
+</div>
+<div class="author">
+      <div class="author-name">D. Wing</div>
+<div class="org">Cloud Software Group</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Gundavelli</div>
+<div class="org">Cisco</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Rajagopalan</div>
+<div class="org">Cloud Software Group</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Dawkins</div>
+<div class="org">Tencent America LLC</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Boucadair</div>
+<div class="org">Orange</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Requirements for Network Collaboration Signaling</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Collaborative signaling from client-to-network and server-to-network
+can improve the user experience by informing the network about the
+nature and relative importance of packets (frames, streams, etc.)
+without having to disclose the content of the packets. Moreover,
+the collaborative signaling may be enabled so that clients and
+servers are aware of the network's treatment of incoming packets.
+Also, client-to-network collaboration can be put in place without
+revealing the identity of the remote servers. This collaboration
+allows for differentiated services at the network (e.g., packet
+discard preference), the sender (e.g., adaptive transmission), or
+through cooperation of server/client and the network.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document lists some use cases that illustrate the need for a
+mechanism to share metadata and outlines requirements for both
+client-to-network and server-to-network. The document focuses on
+UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-kwbdgrr-tsvwg-net-collab-rqmts/">https://datatracker.ietf.org/doc/draft-kwbdgrr-tsvwg-net-collab-rqmts/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        TSVWG Working Group mailing list (<span><a href="mailto:tsvwg@ietf.org">mailto:tsvwg@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/tsvwg/">https://mailarchive.ietf.org/arch/browse/tsvwg/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/tsvwg/">https://www.ietf.org/mailman/listinfo/tsvwg/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 29 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-definitions" class="internal xref">Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-rationale-for-per-packet-me" class="internal xref">Rationale for Per-packet Metadata</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-requirements-definition" class="internal xref">Requirements Definition</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-server-to-network" class="internal xref">Server-to-Network</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-client-to-network" class="internal xref">Client-to-Network</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-api" class="internal xref">API</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-system-considerations" class="internal xref">System Considerations</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-use-cases" class="internal xref">Use Cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-media-streaming" class="internal xref">Media Streaming</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-interactive-media" class="internal xref">Interactive Media</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-metadata-negotiation-suppor" class="internal xref">Metadata Negotiation Support</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-on-path-metadata-requiremen" class="internal xref">On-path Metadata Requirements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-client-network-metadata" class="internal xref">Client-Network Metadata</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-client-flow-authorization" class="internal xref">Client Flow Authorization</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-packet-priority" class="internal xref">Packet Priority</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-tolerance-to-delay" class="internal xref">Tolerance to Delay</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-system-considerations-2" class="internal xref">System Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-non-requirements" class="internal xref">Non-Requirements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-network-attachment" class="internal xref">Network Attachment</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-extended-requirements-defin" class="internal xref">Extended Requirements Definition</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-extended-use-cases" class="internal xref">Extended Use-Cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1">
+                <p id="section-toc.1-1.15.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-media-streaming-extended" class="internal xref">Media Streaming Extended</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.2">
+                <p id="section-toc.1-1.15.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-assisted-offload" class="internal xref">Assisted Offload</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.3">
+                <p id="section-toc.1-1.15.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-network-bandwidth-network-r" class="internal xref">Network Bandwidth &amp; Network Rate Limiting Policies</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-extended-system-considerati" class="internal xref">Extended System Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.1">
+                <p id="section-toc.1-1.16.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-application-interference" class="internal xref">Application Interference</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.2">
+                <p id="section-toc.1-1.16.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-redundant-functions-and-cla" class="internal xref">Redundant Functions and Classification Complications</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.3">
+                <p id="section-toc.1-1.16.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-session-continuity" class="internal xref">Session Continuity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.4">
+                <p id="section-toc.1-1.16.2.4.1"><a href="#appendix-D.4" class="auto internal xref">D.4</a>.  <a href="#name-multiple-bottlenecks" class="internal xref">Multiple Bottlenecks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.5">
+                <p id="section-toc.1-1.16.2.5.1"><a href="#appendix-D.5" class="auto internal xref">D.5</a>.  <a href="#name-metadata-scope" class="internal xref">Metadata Scope</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.6">
+                <p id="section-toc.1-1.16.2.6.1"><a href="#appendix-D.6" class="auto internal xref">D.6</a>.  <a href="#name-scalability" class="internal xref">Scalability</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
+            <p id="section-toc.1-1.17.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="intro">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">Wireless networks, including 5G and WLAN, inherently experience large
+variations in link quality over sub-RTT (round-trip time) intervals and on the other
+hand, applications such as interactive media demand both low latency
+and high bandwidth.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Superior service during adverse network events can be achieved by the
+sender conveying packet behavior preferences to the network for
+packets within a single UDP 4-tuple flow.  During adverse network events
+this allows the network to be informed about the least-impactful
+packets to drop (or delay) in the same UDP 4-tuple flow.  Without such
+signaling, the network can only indiscriminately drop (or delay)
+packets.  With such capability, loss-tolerant and delay-tolerant
+transport protocols such as RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, and Unreliable
+QUIC <span>[<a href="#RFC9221" class="cite xref">RFC9221</a>]</span> can inform the network and provide a superior end
+user experience.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Some of the complications that are induced by adverse network events
+may be eliminated by adequate dimensioning and upgrades.
+However, such upgrades may not be always (immediately) possible or
+justified. Complementary mitigations are thus needed to soften these
+complications by introducing some collaboration between endpoints and
+networks to adjust their behaviors.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4"><a href="#sec-rationale" class="auto internal xref">Section 3</a> discusses the rationale for per-packet metadata.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5"><a href="#uc" class="auto internal xref">Section 5</a> outlines use cases to illustrate the issues
+and the need for additional information per flow to allow the network
+to optimize its handling. <a href="#metadata-req" class="auto internal xref">Section 6</a> describes the requirements for on-path media
+collaboration signals.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6"><a href="#sys-considerations" class="auto internal xref">Section 7</a> provides operational constraints in the network.<a href="#section-1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="definitions">
+<section id="section-2">
+      <h2 id="name-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-definitions" class="section-name selfRef">Definitions</a>
+      </h2>
+<p id="section-2-1">The document makes use of the following terms:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-2">
+        <dt id="section-2-2.1">Discard preference:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.2">
+          <p id="section-2-2.2.1">Is an indication of drop preference within a
+flow when there are no sufficient network resources to handle all
+competing packets of that same flow.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.3">Intentional Management:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.4">
+          <p id="section-2-2.4.1">Network policy such as (monthly) bandwidth
+quota or bandwidth limit, or quality (delay and/or jitter)) assurances.<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.5">Per-Flow Metadata:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.6">
+          <p id="section-2-2.6.1">Refers to metadata that doesn't change often during the lifetime
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.7"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.8">
+          <p id="section-2-2.8.1">Examples of such metadata are client request to honor per-packet metadata and preferences.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.9">Per-Packet Metadata:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.10">
+          <p id="section-2-2.10.1">Refers to metadata that varies packet to packet within the same flow, often capturing
+the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis.<a href="#section-2-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.11"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.12">
+          <p id="section-2-2.12.1">Examples of such metadata are Packet Priority and tolerance to delay<a href="#section-2-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.13">Reactive Management:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.14">
+          <p id="section-2-2.14.1">Network management actions that are undertaken as a reaction to unplanned overload events.
+Concretely, this includes policies which react to congestion events with very short to very
+long durations (e.g., varying wireless and mobile air interface conditions) or protection
+policies to soften the impact of ongoing attacks.<a href="#section-2-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-2.15">Traffic Shaping:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-2.16">
+          <p id="section-2-2.16.1">Refers in this document to QoS management at an
+access router to delay or discard packets of lower priority
+to achieve bounded latency and high throughput.<a href="#section-2-2.16.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-rationale">
+<section id="section-3">
+      <h2 id="name-rationale-for-per-packet-me">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-rationale-for-per-packet-me" class="section-name selfRef">Rationale for Per-packet Metadata</a>
+      </h2>
+<p id="section-3-1">Maximizing network utilization and enhancing perceived end user
+experience under adverse network conditions are challenging. Factors that affect
+wireless networks include change in channel conditions, interference
+between proximate cells, and end user mobility. These variations
+in link quality can be in the order of a millisecond or less
+<span>[<a href="#_5G-Lumos" class="cite xref">_5G-Lumos</a>]</span> while congestion control takes several tens of
+milliseconds (more than one RTT) to estimate data
+rate over a specific path. Similarly, application servers that encode and serve live or
+interactive content (media, typically) take time to adjust the encoding level and other
+processes to match the network rate. End-to-end congestion control
+algorithms are far from being optimal when the link quality is
+highly variable in sub-RTT timeframes and the application demands
+both low latency and high bandwidth (e.g., <span><a href="https://rfc-editor.org/rfc/rfc6077#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC6077" class="cite xref">RFC6077</a>]</span>). In these conditions, applications settle for a lower
+throughput when latency is prioritized, or for higher throughput
+at the expense of much higher delays.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">While rate control based on feedback for a flow (UDP 4-tuple) is
+evidently not able to adapt for sub-RTT changes in available wireless
+channel resources, an application server can provide information
+on a per-packet basis that a network shaper may use to allocate the
+available resources more effectively. For example, <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> has shown for
+volumetric video packets and a rate controller that errs on the
+side of overestimation, that the network shaper can drop low priority
+frames of a group of pictures (corresponding to transient wireless
+link bandwidth drops) and still achieve significantly better
+performance than state-of-the-art based on feedback. With not fully
+encrypted packets, networks may use heuristics to build an "implicit
+signal" gleaned from a packet to prioritize or otherwise shape
+flows. However, implicit signals are not desirable as they lead to
+ossification of protocols as result of introducing unintended
+dependencies <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>. When packet contents are encrypted, the
+approach of using implicit signals is no longer viable.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Bandwidth constraints exist most predominantly at the access network
+(e.g., radio access networks). Users who are serviced via these
+networks use clients which run various applications; each having
+different connectivity needs for an optimal user experience. These
+needs are not frozen but change over time depending on the application
+and even depending on how an application is used (e.g., user's
+preferences). An explicit signal to the client can help to manage
+the use of available bandwidth better and better share it with
+requesting applications.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">Other applications like interactive media can demand both high
+throughput and low latency and, in some cases, carry different
+streams (e.g., audio and video) in a single transport connection
+(e.g., WebRTC <span>[<a href="#RFC8825" class="cite xref">RFC8825</a>]</span>).<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">With RTP <span>[<a href="#RFC3550" class="cite xref">RFC3550</a>]</span>, the media type could be examined and used
+as an implicit signal for determining relative priority. However,
+<span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
+header extensions and Contributing sources (CSRCs). Furthermore, a
+full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
+any media header information that on-path network elements can use
+for forwarding decisions.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
+<figure id="figure-1">
+        <div id="section-3-6.1">
+          <div class="alignLeft art-svg artwork" id="section-3-6.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="304" width="528" viewBox="0 0 528 304" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,64 L 8,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 8,240" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 24,112" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 24,224" fill="none" stroke="black"></path>
+              <path d="M 80,80 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 80,192 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 112,224" fill="none" stroke="black"></path>
+              <path d="M 152,192 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 200,224" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 208,112" fill="none" stroke="black"></path>
+              <path d="M 256,80 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 256,192 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 272,176 L 272,200" fill="none" stroke="black"></path>
+              <path d="M 272,216 L 272,240" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 288,224" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 296,112" fill="none" stroke="black"></path>
+              <path d="M 320,112 L 320,192" fill="none" stroke="black"></path>
+              <path d="M 344,80 L 344,112" fill="none" stroke="black"></path>
+              <path d="M 344,192 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 360,64 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 376,224" fill="none" stroke="black"></path>
+              <path d="M 432,192 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 464,224" fill="none" stroke="black"></path>
+              <path d="M 520,192 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 168,64" fill="none" stroke="black"></path>
+              <path d="M 184,64 L 360,64" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 80,80" fill="none" stroke="black"></path>
+              <path d="M 208,80 L 256,80" fill="none" stroke="black"></path>
+              <path d="M 296,80 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 80,96 L 168,96" fill="none" stroke="black"></path>
+              <path d="M 184,96 L 208,96" fill="none" stroke="black"></path>
+              <path d="M 256,96 L 296,96" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 80,112" fill="none" stroke="black"></path>
+              <path d="M 208,112 L 256,112" fill="none" stroke="black"></path>
+              <path d="M 296,112 L 344,112" fill="none" stroke="black"></path>
+              <path d="M 8,128 L 168,128" fill="none" stroke="black"></path>
+              <path d="M 184,128 L 312,128" fill="none" stroke="black"></path>
+              <path d="M 328,128 L 360,128" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 168,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 272,176" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 80,192" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 152,192" fill="none" stroke="black"></path>
+              <path d="M 200,192 L 256,192" fill="none" stroke="black"></path>
+              <path d="M 288,192 L 344,192" fill="none" stroke="black"></path>
+              <path d="M 376,192 L 432,192" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 520,192" fill="none" stroke="black"></path>
+              <path d="M 152,208 L 168,208" fill="none" stroke="black"></path>
+              <path d="M 184,208 L 200,208" fill="none" stroke="black"></path>
+              <path d="M 256,208 L 288,208" fill="none" stroke="black"></path>
+              <path d="M 344,208 L 376,208" fill="none" stroke="black"></path>
+              <path d="M 432,208 L 464,208" fill="none" stroke="black"></path>
+              <path d="M 24,224 L 80,224" fill="none" stroke="black"></path>
+              <path d="M 112,224 L 152,224" fill="none" stroke="black"></path>
+              <path d="M 200,224 L 256,224" fill="none" stroke="black"></path>
+              <path d="M 288,224 L 344,224" fill="none" stroke="black"></path>
+              <path d="M 376,224 L 432,224" fill="none" stroke="black"></path>
+              <path d="M 464,224 L 520,224" fill="none" stroke="black"></path>
+              <path d="M 8,240 L 168,240" fill="none" stroke="black"></path>
+              <path d="M 184,240 L 272,240" fill="none" stroke="black"></path>
+              <g class="text">
+                <text x="176" y="36">:</text>
+                <text x="104" y="52">3GPP/mobile</text>
+                <text x="184" y="52">network</text>
+                <text x="176" y="68">:</text>
+                <text x="176" y="84">:</text>
+                <text x="52" y="100">client</text>
+                <text x="176" y="100">B</text>
+                <text x="232" y="100">radio</text>
+                <text x="324" y="100">CN</text>
+                <text x="176" y="116">:</text>
+                <text x="176" y="132">:</text>
+                <text x="176" y="148">:</text>
+                <text x="92" y="164">Wireless</text>
+                <text x="164" y="164">home/ISP</text>
+                <text x="232" y="164">network</text>
+                <text x="176" y="180">:</text>
+                <text x="360" y="180">:</text>
+                <text x="448" y="180">:</text>
+                <text x="176" y="196">:</text>
+                <text x="360" y="196">:</text>
+                <text x="448" y="196">:</text>
+                <text x="52" y="212">client</text>
+                <text x="96" y="212">-B-</text>
+                <text x="132" y="212">WLAN</text>
+                <text x="176" y="212">B</text>
+                <text x="228" y="212">router</text>
+                <text x="316" y="212">router</text>
+                <text x="404" y="212">router</text>
+                <text x="492" y="212">server</text>
+                <text x="176" y="228">:</text>
+                <text x="360" y="228">:</text>
+                <text x="448" y="228">:</text>
+                <text x="176" y="244">:</text>
+                <text x="360" y="244">:</text>
+                <text x="448" y="244">:</text>
+                <text x="176" y="260">:</text>
+                <text x="360" y="260">:</text>
+                <text x="448" y="260">:</text>
+                <text x="176" y="276">:</text>
+                <text x="360" y="276">:</text>
+                <text x="400" y="276">Transit</text>
+                <text x="448" y="276">:</text>
+                <text x="496" y="276">Content</text>
+                <text x="28" y="292">User</text>
+                <text x="108" y="292">device/Network</text>
+                <text x="176" y="292">:</text>
+                <text x="240" y="292">MNO/ISP</text>
+                <text x="304" y="292">Network</text>
+                <text x="360" y="292">:</text>
+                <text x="400" y="292">Network</text>
+                <text x="448" y="292">:</text>
+                <text x="496" y="292">Network</text>
+              </g>
+            </svg><a href="#section-3-6.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-e2e-media-transport-overvie" class="selfRef">E2E Media Transport Overview</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-7"><a href="#Figure-e2e" class="auto internal xref">Figure 1</a> shows where such bandwidth and performance constraints
+usually exist with a "B" (for Bottleneck) in 3GPP/mobile networks
+and WLAN/ISP networks.  When a bottleneck exists temporarily, the
+network has no choice but to discard or delay packets -- which can
+harm certain flows and, thus, lead to suboptimal perceived experience.
+In this document, this is termed 'Reactive Management'.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<span id="name-metadata-and-network-shapin"></span><div id="Figure-netshaper">
+<figure id="figure-2">
+        <div id="section-3-8.1">
+          <div class="alignCenter art-svg artwork" id="section-3-8.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="560" viewBox="0 0 560 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,80 L 8,176" fill="none" stroke="black"></path>
+              <path d="M 64,80 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 184,176" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 200,160" fill="none" stroke="black"></path>
+              <path d="M 272,112 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 288,80 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 496,176" fill="none" stroke="black"></path>
+              <path d="M 552,80 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 48,48 L 504,48" fill="none" stroke="black"></path>
+              <path d="M 8,80 L 64,80" fill="none" stroke="black"></path>
+              <path d="M 184,80 L 288,80" fill="none" stroke="black"></path>
+              <path d="M 496,80 L 552,80" fill="none" stroke="black"></path>
+              <path d="M 72,112 L 176,112" fill="none" stroke="black"></path>
+              <path d="M 200,112 L 272,112" fill="none" stroke="black"></path>
+              <path d="M 72,142 L 200,142" fill="none" stroke="black"></path>
+              <path d="M 72,146 L 200,146" fill="none" stroke="black"></path>
+              <path d="M 280,142 L 496,142" fill="none" stroke="black"></path>
+              <path d="M 280,146 L 496,146" fill="none" stroke="black"></path>
+              <path d="M 200,160 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 64,176" fill="none" stroke="black"></path>
+              <path d="M 184,176 L 288,176" fill="none" stroke="black"></path>
+              <path d="M 496,176 L 552,176" fill="none" stroke="black"></path>
+              <path d="M 504,48 L 520,80" fill="none" stroke="black"></path>
+              <path d="M 32,80 L 48,48" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="288,144 276,138.4 276,149.6" fill="black" transform="rotate(180,280,144)"></polygon>
+              <polygon class="arrowhead" points="184,112 172,106.4 172,117.6" fill="black" transform="rotate(0,176,112)"></polygon>
+              <polygon class="arrowhead" points="80,144 68,138.4 68,149.6" fill="black" transform="rotate(180,72,144)"></polygon>
+              <polygon class="arrowhead" points="80,112 68,106.4 68,117.6" fill="black" transform="rotate(180,72,112)"></polygon>
+              <g class="text">
+                <text x="112" y="36">(A)</text>
+                <text x="176" y="36">Application</text>
+                <text x="264" y="36">signaling</text>
+                <text x="336" y="36">(client</text>
+                <text x="376" y="36">-</text>
+                <text x="416" y="36">server)</text>
+                <text x="104" y="100">(C)</text>
+                <text x="136" y="100">C2N</text>
+                <text x="240" y="132">Network</text>
+                <text x="348" y="132">downstream</text>
+                <text x="420" y="132">packet</text>
+                <text x="236" y="148">Shaper</text>
+                <text x="312" y="164">(B)</text>
+                <text x="360" y="164">on-path</text>
+                <text x="408" y="164">S2N</text>
+                <text x="460" y="164">metadata</text>
+                <text x="36" y="196">Client</text>
+                <text x="236" y="196">Router</text>
+                <text x="524" y="196">Server</text>
+              </g>
+            </svg><a href="#section-3-8.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-metadata-and-network-shapin" class="selfRef">Metadata and Network Shaping</a>
+        </figcaption></figure>
+</div>
+<p id="section-3-9"><a href="#Figure-netshaper" class="auto internal xref">Figure 2</a> shows a bottleneck (access) router on the path
+of packets from Server to Client.  A network shaper in the router
+manages QoS of flows of multiple users and can buffer (delay),
+discard, or apply other flow control rules. Application layer
+signaling and feedback between Client - Server (A - in the figure)
+adjust transmission rate over a period of several RTTs using feedback
+and congestion control algorithms.  Congestion control algorithms (CCAs)
+are generally conservative and settle to a steady rate that avoids
+excessive packet loss.  In networks where link conditions (between
+Client and Router) vary significantly at timescales well below the
+RTT, this results in unused (wasted) bandwidth at short timescales.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-10">There is some research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) to indicate that media
+applications can obtain better Quality of Experience (QoE) when sending at a higher rate
+(less conservative than current CCA) and the media application is
+willing to tolerate some packet loss or delay of low priority
+packets.  Packet priority and tolerance to delay of packets in such
+a case would be provided on-path in a side channel associated to
+the downstream packet (B - in the figure).  The requirements for this
+server-to-network (S2N) metadata are described in <a href="#server-network" class="auto internal xref">Section 6.2</a>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">The client may provide information to an (access) router to drop
+lower priority marked packets of a flow (UDP 4-tuple) temporarily
+which can in turn allocate available bandwidth to other flows of that network
+attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-12">Network shapers
+observe flows and apply policies to maximize performance but are
+not aware whether  there is a high preference for one flow (UDP
+4-tuple) over another flow belonging to the same user and network
+attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
+<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).  Clients may provide an (access)
+router with preferences of which flow (UDP 4-tuple) has relative
+priority among flows of that network attachment using H2N (C - in
+the figure).  Clients may also provide information to an (access) router
+to drop, when resources are congested,  'lower priority'-marked
+packets of a flow (UDP 4-tuple) temporarily which can in turn
+allocate bandwidth to other flows of that same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<p id="section-3-13">In summary, the rapid variation of wireless link quality and/or
+bandwidth limitations in networks along with interactive applications
+that demand low latency and high throughput can lead to suboptimal
+user experience.<a href="#section-3-13" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="req-definition">
+<section id="section-4">
+      <h2 id="name-requirements-definition">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirements-definition" class="section-name selfRef">Requirements Definition</a>
+      </h2>
+<div id="server-to-network">
+<section id="section-4.1">
+        <h3 id="name-server-to-network">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-server-to-network" class="section-name selfRef">Server-to-Network</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-4.1-1">
+          <dt id="section-4.1-1.1">REQ-PACKET-PRIORITY:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.2">
+            <p id="section-4.1-1.2.1">Server indicates the importance of a packet within a flow. This allows the network
+to prioritize based on requirement and during reactive events. This
+priority value may also be used to indicate loss tolerance and the
+network elements may drop loss tolerant packets during reactive
+events.<a href="#section-4.1-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-1.3"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.4">
+            <p id="section-4.1-1.4.1">This is a per-packet metadata requirement.<a href="#section-4.1-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-1.5">REQ-PACKET-DELAY:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.6">
+            <p id="section-4.1-1.6.1">Metadata to indicate whether the packet can tolerate delay.<a href="#section-4.1-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-1.7"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-1.8">
+            <p id="section-4.1-1.8.1">This is a per-packet metadata requirement.<a href="#section-4.1-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="client-to-network">
+<section id="section-4.2">
+        <h3 id="name-client-to-network">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-client-to-network" class="section-name selfRef">Client-to-Network</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-4.2-1">
+          <dt id="section-4.2-1.1">REQ-CLIENT-DECIDES:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-1.2">
+            <p id="section-4.2-1.2.1">User/Client indicating to the network to honor the application's
+metadata signaling.<a href="#section-4.2-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.2-1.3"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-1.4">
+            <p id="section-4.2-1.4.1">This is a per-flow metadata requirement.<a href="#section-4.2-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.2-1.5">REQ-PAYLOAD-CLIENT-DECIDES:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-1.6">
+            <p id="section-4.2-1.6.1">The ability of the receiver to change the priority by communicating
+to the network to prioritize one payload(metadata) over another within
+the flow -- without cooperation of the sender. Gives the sender the
+ability to have same metadata for all the connections without having
+to change based on the user preference, aids in scalability.<a href="#section-4.2-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.2-1.7"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-1.8">
+            <p id="section-4.2-1.8.1">This is a per-flow metadata requirement.<a href="#section-4.2-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="api">
+<section id="section-4.3">
+        <h3 id="name-api">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-api" class="section-name selfRef">API</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-4.3-1">
+          <dt id="section-4.3-1.1">REQ-API-FRAMEWORK:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-1.2">
+            <p id="section-4.3-1.2.1">API framework to facilitate signaling for applications.<a href="#section-4.3-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.3-1.3"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-1.4">
+            <p id="section-4.3-1.4.1">Signaling to the network (<a href="#client-network" class="auto internal xref">Section 6.1</a>, <a href="#server-network" class="auto internal xref">Section 6.2</a>)
+will need to be facilitated by Application Programming Interfaces
+(APIs) for any application to use them. Signaling and retrieval of
+the signals may not be performed at a single layer (although not
+encouraged). Hence, a framework is required to abstract the underlying
+protocol(s) and allow the application(s) to retrieve/send signals
+using a single or a set of APIs independent of the channels that
+are used to convey the signals. The API framework is required even
+if one single channel is used so that any application on a client can
+consume the signals.<a href="#section-4.3-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.3-1.5"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-1.6">
+            <p id="section-4.3-1.6.1">There might be many channels to signal the metadata such as
+(non-exhaustive list):<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-1.6.2.1">
+                <p id="section-4.3-1.6.2.1.1">TCP options <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span><a href="#section-4.3-1.6.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.3-1.6.2.2">
+                <p id="section-4.3-1.6.2.2.1">UDP Options <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span><a href="#section-4.3-1.6.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.3-1.6.2.3">
+                <p id="section-4.3-1.6.2.3.1">IPv6 Hop-by-Hop Options (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>)<a href="#section-4.3-1.6.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.3-1.6.2.4">
+                <p id="section-4.3-1.6.2.4.1">QUIC CID mapping<a href="#section-4.3-1.6.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.3-1.6.2.5">
+                <p id="section-4.3-1.6.2.5.1">ICMP messages<a href="#section-4.3-1.6.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="system-considerations">
+<section id="section-4.4">
+        <h3 id="name-system-considerations">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-system-considerations" class="section-name selfRef">System Considerations</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-4.4-1">
+          <dt id="section-4.4-1.1">REQ-PRIVACY-ADDITIONAL:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.4-1.2">
+            <p id="section-4.4-1.2.1">An on-path observer obtains (or gleans) no additional information about the IP
+packet.<a href="#section-4.4-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.4-1.3">REQ-SIGNALING-AVOIDANCE:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.4-1.4">
+            <p id="section-4.4-1.4.1">Leveraging previous experience <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>, the following is not
+required to make use of the collaborative signaling:<a href="#section-4.4-1.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4-1.4.2.1">
+                <p id="section-4.4-1.4.2.1.1">Reveal the application identity.<a href="#section-4.4-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.4-1.4.2.2">
+                <p id="section-4.4-1.4.2.2.1">Expose the application cause (or 'reason') to signal metadata.<a href="#section-4.4-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.4-1.4.2.3">
+                <p id="section-4.4-1.4.2.3.1">Reveal the server identity.<a href="#section-4.4-1.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.4-1.4.2.4">
+                <p id="section-4.4-1.4.2.4.1">Inspect client-to-server encrypted payload by network elements.<a href="#section-4.4-1.4.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="uc">
+<section id="section-5">
+      <h2 id="name-use-cases">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
+      </h2>
+<div id="uc-streaming">
+<section id="section-5.1">
+        <h3 id="name-media-streaming">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-media-streaming" class="section-name selfRef">Media Streaming</a>
+        </h3>
+<p id="section-5.1-1">Streaming video contains the occasional key frame ("I-frame")
+containing a full video frame.  These frames are necessary to rebuild
+receiver state after loss of delta frames.  The key frames are
+therefore more critical to deliver to the receiver than delta frames.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Examples: live broadcast, on-demand video streaming.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">Use cases:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.1-4">
+<li id="section-5.1-4.1">
+            <p id="section-5.1-4.1.1">Majority of streaming traffic is Audio and Video traffic.
+Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.
+Audio traffic is more critical than video for many applications.
+This differences in priority needs to be indicated to the network to
+ensure network (de)prioritizes (or even drop if deemed necessary)
+traffic appropriately.<a href="#section-5.1-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.1.2">
+Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.1-4.1.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.1.3">
+Impact: With the above requirement met, better quality of service
+ could be maintained in resource-constrained networks and during
+ reactive events ensuring better user experience.<a href="#section-5.1-4.1.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.1-4.2">
+            <p id="section-5.1-4.2.1">The server (or relay) sends the same stream to many receivers,
+including the same metadata (especially with media over QUIC).
+Different clients have different priorities for different types of traffic.
+This would result in change in priorities for the same type of traffic
+that a single server sends, based on the user/client.<a href="#section-5.1-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.2.2">
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-5.1-4.2.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.2.3">
+Impact: With the above requirement met, each client/user preferences are
+ prioritized accordingly while maintaining scalability on the server, since
+ the metadata that the server sends still remains the same for all the connections.<a href="#section-5.1-4.2.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.1-4.3">
+            <p id="section-5.1-4.3.1">In loss-prone networks or during Reactive Management events, if all packets of an application
+flow (UDP 4-tuple) such as live broadcast or on-demand video streaming are treated the same,
+it limits the ability to maximize network utilization and use the transiently available bandwidth.
+Dropping or delaying of (media) packets randomly is likely to lower network utilization
+and application performance.<a href="#section-5.1-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.3.2">
+Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.<a href="#section-5.1-4.3.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-4.3.3">
+Impact: By identifying packets that tolerate being dropped, congestion can be reduced leading
+ to improved performance/quality of service.<a href="#section-5.1-4.3.3" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+</section>
+</div>
+<div id="uc-interactive">
+<section id="section-5.2">
+        <h3 id="name-interactive-media">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-interactive-media" class="section-name selfRef">Interactive Media</a>
+        </h3>
+<p id="section-5.2-1">Interactive media includes content that a user can actively engage
+with and results in input and response actions that can be highly
+delay-sensitive. This can also include mixed traffic based on the
+user activity and interaction.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Examples: VoIP (Peer-to-Peer (P2P), group conferencing), gaming,
+Remote Desktop Virtualization, eXtended Reality (XR).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">Use cases:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.2-4">
+<li id="section-5.2-4.1">
+            <p id="section-5.2-4.1.1">A mobile/roaming user prioritizes audio over video during a VoIP
+call to have a seamless meeting experience.<a href="#section-5.2-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.1.2">
+Requirement: REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-5.2-4.1.2" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.1.3">
+Impact: With the above requirement met, each client/user preferences are
+ prioritized accordingly while maintaining scalability on the server.<a href="#section-5.2-4.1.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.2-4.2">
+            <p id="section-5.2-4.2.1">A remote desktop user prioritizes graphics updates over an on-going
+file copy operation. A user types in/interacts with a document/file after triggering a
+save file operation, while save operation is on-going.<a href="#section-5.2-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.2.2">
+Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.<a href="#section-5.2-4.2.2" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.2.3">
+Impact: By prioritizing graphic updates/interactive traffic, user
+ interactivity is improved with lesser jitter.<a href="#section-5.2-4.2.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.2-4.3">
+            <p id="section-5.2-4.3.1">A game or VoIP application may want to signal different metadata
+for the same type of packet in each direction. One user, in a VoIP
+conference call, wants to prioritize the slide deck being shared while
+the other wants to prioritize audio and other wants to prioritize
+video of the speaker. Each user's varied preferences can be catered
+with same type of metadata originating from the server.<a href="#section-5.2-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.3.2">
+Requirement: REQ-PACKET-PRIORITY, REQ-PAYLOAD-CLIENT-DECIDES.<a href="#section-5.2-4.3.2" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.3.3">
+Impact: With the above requirement met, each client/user preferences are
+ prioritized accordingly while maintaining scalability on the server.<a href="#section-5.2-4.3.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.2-4.4">
+            <p id="section-5.2-4.4.1">A network glitch while user is in an eXtended Reality application.
+The traffic comprises of haptic, video, audio, graphics update and
+keystrokes. During such reactive event, some packets need to be
+deprioritized/dropped to maintain interactivity.<a href="#section-5.2-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.4.2">
+Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.<a href="#section-5.2-4.4.2" class="pilcrow">¶</a></p>
+<p id="section-5.2-4.4.3">
+Impact: By prioritizing high priority traffic, user's
+ interactive experience is improved with lesser jitter.<a href="#section-5.2-4.4.3" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+</section>
+</div>
+<div id="metadata-negotiation">
+<section id="section-5.3">
+        <h3 id="name-metadata-negotiation-suppor">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-metadata-negotiation-suppor" class="section-name selfRef">Metadata Negotiation Support</a>
+        </h3>
+<p id="section-5.3-1">Currently, some flows are granted higher priority over other flows
+because of a contractual agreement between the ISP and the content
+provider. These contracts could be extended to also allow per-packet
+prioritization within a single UDP 4-tuple, as desired by this
+document (<a href="#client-network" class="auto internal xref">Section 6.1</a> and <a href="#client-flow-auth" class="auto internal xref">Section 6.1.1</a>).<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">For such applications to benefit from per-packet prioritization within
+a single UDP 4-tuple, the client needs to determine which per-packet
+markings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,
+UDP Option, or DSCP). Then it can indicate to the ISP's network that a
+certain UDP 4-tuple will have those markings.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">Impact: By signaling ISPs to honor the metadata for a particular flow, the client
+  facilitates in the identification of traffic to prioritize for the ISPs.
+  This would enable the ISPs to extend contracts to servers that cannot be identified
+  by using IP addresses, thereby opening up such contracts to more content providers.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<span id="name-api-framework-client-learns"></span><div id="client-learn">
+<figure id="figure-3">
+          <div id="section-5.3-5.1">
+            <div class="alignCenter art-svg artwork" id="section-5.3-5.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="272" width="480" viewBox="0 0 480 272" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 24,48 L 24,224" fill="none" stroke="black"></path>
+                <path d="M 440,48 L 440,224" fill="none" stroke="black"></path>
+                <path d="M 32,64 L 432,64" fill="none" stroke="black"></path>
+                <path d="M 32,112 L 432,112" fill="none" stroke="black"></path>
+                <path d="M 32,160 L 432,160" fill="none" stroke="black"></path>
+                <path d="M 32,208 L 432,208" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="440,160 428,154.4 428,165.6" fill="black" transform="rotate(0,432,160)"></polygon>
+                <polygon class="arrowhead" points="440,64 428,58.4 428,69.6" fill="black" transform="rotate(0,432,64)"></polygon>
+                <polygon class="arrowhead" points="40,208 28,202.4 28,213.6" fill="black" transform="rotate(180,32,208)"></polygon>
+                <polygon class="arrowhead" points="40,112 28,106.4 28,117.6" fill="black" transform="rotate(180,32,112)"></polygon>
+                <g class="text">
+                  <text x="28" y="36">Client</text>
+                  <text x="408" y="36">ISP</text>
+                  <text x="452" y="36">router</text>
+                  <text x="64" y="84">Network</text>
+                  <text x="152" y="84">Collaboration</text>
+                  <text x="264" y="84">Capabilities?</text>
+                  <text x="44" y="132">my</text>
+                  <text x="88" y="132">Network</text>
+                  <text x="176" y="132">Collaboration</text>
+                  <text x="284" y="132">capabilities</text>
+                  <text x="60" y="180">Server</text>
+                  <text x="108" y="180">will</text>
+                  <text x="148" y="180">mark</text>
+                  <text x="200" y="180">packets</text>
+                  <text x="256" y="180">using</text>
+                  <text x="312" y="180">"method</text>
+                  <text x="360" y="180">#4"</text>
+                  <text x="44" y="228">ok</text>
+                </g>
+              </svg><a href="#section-5.3-5.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-api-framework-client-learns" class="selfRef">API Framework: Client learns ISP capabilities and signals how incoming IP packets will signal network collaboration</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="metadata-req">
+<section id="section-6">
+      <h2 id="name-on-path-metadata-requiremen">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-on-path-metadata-requiremen" class="section-name selfRef">On-path Metadata Requirements</a>
+      </h2>
+<p id="section-6-1">There are various approaches for collaborative signaling between
+the server/client and network including out-of-band signaling,
+client-centric metadata sharing and proxied connections. The
+requirements here focus on proxied metadata connections on path
+with the data traffic.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">The path signals below should follow the principles of intentional
+distribution, protection of information, minimization and limiting
+impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>. Leveraging
+previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals do not
+need application identity, application cause (or 'reason'), server
+identity or the inspection of client-to-server encrypted payload.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The metadata connections may be between server and network (in
+either direction) or between client and network (in either direction).<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">Some use cases benefit from server - network metadata exchanges
+(<a href="#server-network" class="auto internal xref">Section 6.2</a>) and others need client involvement
+(<a href="#client-network" class="auto internal xref">Section 6.1</a>).<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">For the requirements that follow, the assumption is that the client
+agrees to the exchange of metadata between the server and network,
+or between the client and network.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<div id="client-network">
+<section id="section-6.1">
+        <h3 id="name-client-network-metadata">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-client-network-metadata" class="section-name selfRef">Client-Network Metadata</a>
+        </h3>
+<p id="section-6.1-1">Due to contractual agreements (mentioned in <a href="#req-definition" class="auto internal xref">Section 4</a> under
+REQ-CLIENT-DECIDES) between content providers and ISPs, not all the
+content providers' signals are honored. However, extending these
+contracts would disadvantage content providers and other servers
+that cannot obtain such a contract or have traffic that is difficult
+or impossible for the ISP to identify and provide such service. This
+drawback can be overcome using metadata defined in <a href="#client-flow-auth" class="auto internal xref">Section 6.1.1</a>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<div id="client-flow-auth">
+<section id="section-6.1.1">
+          <h4 id="name-client-flow-authorization">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-client-flow-authorization" class="section-name selfRef">Client Flow Authorization</a>
+          </h4>
+<p id="section-6.1.1-1">Client authorization signal provides information on whether the ISP
+should honor the signals sent by the current flow. This would enable
+the ISP to identify servers, which are difficult or impossible to
+identify by other available methods today.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">This signal also serves as the medium to initiate the negotiation
+discussed in <a href="#metadata-negotiation" class="auto internal xref">Section 5.3</a>).<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-3">Encrypting/Obfuscating metadata information is recommended (<a href="#privacy" class="auto internal xref">Section 7.1</a>).
+The client authorization signal provides the means to convey the key
+needed by the ISP to decrypt the metadata.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-4">REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="server-network">
+<section id="section-6.2">
+        <h3 id="name-server-network-metadata">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-server-network-metadata" class="section-name selfRef">Server-Network Metadata</a>
+        </h3>
+<p id="section-6.2-1">Application flows (UDP 4-tuple) for live media, eXtended Reality
+(XR) and gaming require both high bandwidth and low latency and
+would as such benefit from being able to use the bandwidth available
+for the flow. In wireless networks, some of the bandwidth available
+for the flow is not possible to schedule using the feedback based
+rate control (due to the significant link variations at sub-RTT
+timescales). In such networks where variations in link quality is
+well below RTT, congestion control algorithms settle to a steady
+rate that avoids excessive packet loss. Feedback via ECN/L4S
+<span>[<a href="#RFC9331" class="cite xref">RFC9331</a>]</span> provides an accurate signal but is also on an RTT
+timescale and thus does not provide finer resolution information
+of instantaneous bandwidth available.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">If application packets can either tolerate delay or some loss of
+lower priority packets, the network traffic shaper and scheduler
+can use this information to provide a higher application quality
+of service. There is some research <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span> to indicate that media
+applications can obtain better measured application quality when
+sending at a higher rate (less conservative than current CCA) and
+allowing the network to delay or drop low priority packets.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The metadata in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a> should also satisfy constraints
+identified in <a href="#sys-considerations" class="auto internal xref">Section 7</a>. Privacy (<a href="#privacy" class="auto internal xref">Section 7.1</a>) requires that
+metadata should not provide additional information to identify the
+application or the user. The application server can decide on the
+metadata values that provide the best handling for the packets of
+the flow.
+This
+metadata is advisory in nature and network traffic policy
+that restricts its use would not result in additional issues. Other
+constraints including scale (<a href="#scalability" class="auto internal xref">Appendix D.6</a>) and continuity
+(<a href="#continuity" class="auto internal xref">Appendix D.3</a>) are required for <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Realizing the additional bandwidth potential with these metadata
+may require a higher sending rate for the transport flow. This
+requires work that is not specified in this document. Similarly,
+the assumption is that network shapers and schedulers can use the
+metadata in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a> but further details are out of
+scope.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">Previous work in <span>[<a href="#TR.23.700-70-3GPP" class="cite xref">TR.23.700-70-3GPP</a>]</span> has identified the general
+problem in this section. However, the solution in <span>[<a href="#TS.23.501-3GPP" class="cite xref">TS.23.501-3GPP</a>]</span>
+is specific to a 5G network. The metadata sent from a (dedicated
+5G) application server identifies PDU set information and end-of-burst
+signals which are not understood by non-3GPP systems such as Wi-Fi
+or DOCSIS. Further, 3GPP functions and policy configurations are
+required since this is a 5G specific solution. The metadata disclosed
+in the 5G solution also identifies frame boundaries and does not
+fully conform to the constraints for privacy or minimality of data
+identified in <a href="#sys-considerations" class="auto internal xref">Section 7</a>.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<div id="relative-priority">
+<section id="section-6.2.1">
+          <h4 id="name-packet-priority">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-packet-priority" class="section-name selfRef">Packet Priority</a>
+          </h4>
+<p id="section-6.2.1-1">Per-packet priority information provides the priority level of one
+packet relative to other packets within a transport flow (UDP
+4-tuple). When a packet is marked with high priority, the expectation
+is that the network will give high importance to forwarding the
+packet and when a packet is marked with lower priority, the network
+will drop the packet in the presence of severe congestion or limited
+bandwidth. The application server can decide on the priority or
+importance values that provide the best handling for the packets
+of the transport flow.
+When more than one application stream (e.g., video, audio)
+is sent on the same transport flow, the application server decides
+the best allocation of priority values across the different streams
+of the flow.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-2">Per-packet priority or importance determines the drop priority of
+a packet.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-3">REQ-PACKET-PRIORITY is satisfied by signaling Packet Priority as part of server-to-network metadata.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="delay">
+<section id="section-6.2.2">
+          <h4 id="name-tolerance-to-delay">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-tolerance-to-delay" class="section-name selfRef">Tolerance to Delay</a>
+          </h4>
+<p id="section-6.2.2-1">Some packets of a media flow (UDP 4-tuple) can tolerate more delay
+over the wire than others (e.g., packets carrying live media frames
+require very low latency while packets carrying a background image
+for augmented reality can tolerate more delay). The objective of
+this metadata is to indicate that these packets can tolerate a
+limited amount of delay when there is severe congestion or limited
+bandwidth. Similar to the LE PHB <span>[<a href="#RFC8622" class="cite xref">RFC8622</a>]</span> for flows, the
+expectation is that in this case, each packet marked with this
+metadata is dropped only when there is excessive delay. As with
+per-packet priority in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a>, the application server
+can decide on the metadata values that provide the best handling
+for the packets of the transport flow.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="sys-considerations">
+<section id="section-7">
+      <h2 id="name-system-considerations-2">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-system-considerations-2" class="section-name selfRef">System Considerations</a>
+      </h2>
+<p id="section-7-1">Traffic policing and shaping are enforced in ingress/egress network
+points for various reasons (protect the network against attacks,
+ensure conformance with a traffic profile, etc.). Out-of-profile
+traffic may be discarded or assigned another class (e.g., using Lower
+Effort Per-Domain Behavior (LE PDB) <span>[<a href="#RFC3662" class="cite xref">RFC3662</a>]</span>) a bandwidth limit
+among others. The exact behavior is policy-based and deployment-specific.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">The entire set of operations to manage traffic is beyond the scope
+of this document.  This section focuses on operational constraints
+that impact  server-network, and client-network modes of sending
+metadata.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<div id="privacy">
+<section id="section-7.1">
+        <h3 id="name-privacy-considerations">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+        </h3>
+<p id="section-7.1-1">Encrypted media payloads along with temporary IPv6 addresses between
+a server and user (client) provide a measure of privacy for the
+content and the identity of the user.  It should, however, be noted
+that most media flows (e.g., encrypted video payloads in SRTP or QUIC) exhibit
+a pattern of bursts and intervals that is vulnerable to traffic analysis.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">To avoid this kind of traffic analysis without per-packet metadata, media sent by the server
+would need to be scheduled or multiplexed differently to each
+user/recipient. This may be possible in transports like QUIC which
+allows flexibility in scheduling each stream. Transports like QUIC
+also fully encrypt the entire stream and, therefore, no media headers
+are observable on-path either. The security aspects of the media
+payload / transport are not in the scope of this document and is
+described here only to provide context for metadata privacy.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">Some metadata (e.g., the size of a burst of packets, sequence number,
+and timestamp) can be readily observed or inferred by entities along
+the network path. However, it is essential to recognize that while
+sequence numbers and timestamps are typically visible in the
+clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are
+not directly observable in encrypted protocols such as QUIC. All
+metadata sent from the server to the network, including these
+elements and others, are vulnerable to modification while in transit.
+Only an on-path attacker can modify on-path metadata. Such an
+attacker could engage in other malicious activities, like corrupting
+the checksum or dropping the packet. For instance, an
+active attacker could alter the metadata to mislabel important packets
+as unimportant, but such changes are
+detectable by the receiver.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">It is recommended to encrypt or obfuscate the metadata information so
+it is only available to the server, client, and authorized network
+elements. The method of encryption or obfuscation is not described in
+this document but rather in other documents that specify how this
+metadata is encoded and exchanged amongst client, server, and network
+elements. The privacy implications of revealing metadata to network
+elements need to be thoroughly analyzed. This analysis should ensure
+that any exposure of metadata does not compromise user privacy or
+allow unauthorized entities to infer sensitive information about the
+data being transmitted while maintaining minimal resource
+consumption. There is a tension between resource consumption (and thus efficiency) of such
+encryption and the user's privacy and this tension depends on the threat
+model (<span><a href="https://rfc-editor.org/rfc/rfc6973#section-7.4" class="relref">Section 7.4</a> of [<a href="#RFC6973" class="cite xref">RFC6973</a>]</span>); the threat of a network provider
+building a subscriber profile of viewed video content
+is different from the threat of an interactive voice or video call. To
+mitigate traffic analysis, the sender might, for example, purposefully mis-mark
+metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1-5">REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
+not revealing any information that could identify the application's identity, reason to signal,
+server identity, and securing the metadata.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="non-req">
+<section id="section-8">
+      <h2 id="name-non-requirements">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-non-requirements" class="section-name selfRef">Non-Requirements</a>
+      </h2>
+<p id="section-8-1">Application feedback with measurements of packets lost and delay
+incurred may affect the sending rate and other behavior of the
+application.  The requirements and specification to mitigate these
+aspects are not in the scope of this document.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana">
+<section id="section-9">
+      <h2 id="name-iana-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-9-1">None.<a href="#section-9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-cons">
+<section id="section-10">
+      <h2 id="name-security-considerations">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-10-1">Security aspects for the metadata are discussed in <a href="#privacy" class="auto internal xref">Section 7.1</a>.
+The principles outlined in <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>, <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span> and <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span>
+contain security considerations and are referenced in <a href="#metadata-req" class="auto internal xref">Section 6</a>.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">Since the document focuses only on priorities within a flow
+(not specifying inter-flow priority), the document does not induce concerns related to a specific
+user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-3">See also <a href="#privacy" class="auto internal xref">Section 7.1</a>.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">This document has no other security considerations.<a href="#section-10-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="section-11">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="section-11-1">This document is a merge of <span>[<a href="#I-D.rwbr-tsvwg-signaling-use-cases" class="cite xref">I-D.rwbr-tsvwg-signaling-use-cases</a>]</span>
+and <span>[<a href="#I-D.kaippallimalil-tsvwg-media-hdr-wireless" class="cite xref">I-D.kaippallimalil-tsvwg-media-hdr-wireless</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">T. Reddy contributed text and ideas to this document.<a href="#section-11-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-11-3">
+        <dt id="section-11-3.1">Acknowledgments from <span>[<a href="#I-D.kaippallimalil-tsvwg-media-hdr-wireless" class="cite xref">I-D.kaippallimalil-tsvwg-media-hdr-wireless</a>]</span>:</dt>
+        <dd style="margin-left: 1.5em" id="section-11-3.2">
+          <p id="section-11-3.2.1">Xavier De Foy and the authors of this draft have discussed the
+similarities and differences of this draft with the MoQ draft for
+carrying media metadata.<a href="#section-11-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-11-3.3"></dt>
+        <dd style="margin-left: 1.5em" id="section-11-3.4">
+          <p id="section-11-3.4.1">The authors wish to thank Mike Heard,
+Sebastian Moeller and Tom Herbert for discussions on metadata fields,
+fragmentation and various transport aspects.<a href="#section-11-3.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-11-3.5"></dt>
+        <dd style="margin-left: 1.5em" id="section-11-3.6">
+          <p id="section-11-3.6.1">The authors appreciate
+input from Marcus Ilhar and Magnus Westerlund on the need to address
+privacy in general and Dan Druta to consider a common transport
+across various client/server to network signaling when possible.
+Ruediger Geib suggested that limiting the amount of state information
+that a wireless router has to keep for a flow should be minimized.<a href="#section-11-3.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-11-3.7"></dt>
+        <dd style="margin-left: 1.5em" id="section-11-3.8">
+          <p id="section-11-3.8.1">Ingemar Johansson's suggestions on fast fading (which L4S handles)
+and dramatic drops in wireless accesses have been helpful to identify
+the issues.  Thanks to Hang Shi for the review and comments on
+client-to-network signaling.  Thanks to Luis Miguel Contreras, Colin
+Kahn, Marcus Ilhar and Tianji Jiang for their review and comments.<a href="#section-11-3.8.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-12">
+      <h2 id="name-informative-references">
+<a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+      </h2>
+<dl class="references">
+<dt id="app-measurement">[app-measurement]</dt>
+      <dd>
+<span class="refAuthor">Gurel, Z.</span> and <span class="refAuthor">A. C. Begen</span>, <span class="refTitle">"Bandwidth measurement for QUIC"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/">https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-opsawg-teas-attachment-circuit">[I-D.ietf-opsawg-teas-attachment-circuit]</dt>
+      <dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Roberts, R.</span>, <span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, and <span class="refAuthor">B. Wu</span>, <span class="refTitle">"YANG Data Models for Bearers and 'Attachment Circuits'-as-a-Service (ACaaS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-16</span>, <time datetime="2024-09-10" class="refDate">10 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-16">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-teas-attachment-circuit-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-tsvwg-udp-options">[I-D.ietf-tsvwg-udp-options]</dt>
+      <dd>
+<span class="refAuthor">Touch, J. D.</span> and <span class="refAuthor">C. M. Heard</span>, <span class="refTitle">"Transport Options for UDP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tsvwg-udp-options-36</span>, <time datetime="2024-09-22" class="refDate">22 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-udp-options-36">https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-udp-options-36</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.kaippallimalil-tsvwg-media-hdr-wireless">[I-D.kaippallimalil-tsvwg-media-hdr-wireless]</dt>
+      <dd>
+<span class="refAuthor">Kaippallimalil, J.</span>, <span class="refAuthor">Gundavelli, S.</span>, and <span class="refAuthor">S. Dawkins</span>, <span class="refTitle">"Media Handling Considerations for Wireless Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-kaippallimalil-tsvwg-media-hdr-wireless-05</span>, <time datetime="2024-08-10" class="refDate">10 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kaippallimalil-tsvwg-media-hdr-wireless-05">https://datatracker.ietf.org/doc/html/draft-kaippallimalil-tsvwg-media-hdr-wireless-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.rwbr-tsvwg-signaling-use-cases">[I-D.rwbr-tsvwg-signaling-use-cases]</dt>
+      <dd>
+<span class="refAuthor">Rajagopalan, S.</span>, <span class="refAuthor">Wing, D.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">T. Reddy.K</span>, <span class="refTitle">"Host to Network Signaling Use Cases for Collaborative Traffic Differentiation"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-rwbr-tsvwg-signaling-use-cases-02</span>, <time datetime="2024-03-17" class="refDate">17 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-rwbr-tsvwg-signaling-use-cases-02">https://datatracker.ietf.org/doc/html/draft-rwbr-tsvwg-signaling-use-cases-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3550">[RFC3550]</dt>
+      <dd>
+<span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Casner, S.</span>, <span class="refAuthor">Frederick, R.</span>, and <span class="refAuthor">V. Jacobson</span>, <span class="refTitle">"RTP: A Transport Protocol for Real-Time Applications"</span>, <span class="seriesInfo">STD 64</span>, <span class="seriesInfo">RFC 3550</span>, <span class="seriesInfo">DOI 10.17487/RFC3550</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3550">https://www.rfc-editor.org/rfc/rfc3550</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3662">[RFC3662]</dt>
+      <dd>
+<span class="refAuthor">Bless, R.</span>, <span class="refAuthor">Nichols, K.</span>, and <span class="refAuthor">K. Wehrle</span>, <span class="refTitle">"A Lower Effort Per-Domain Behavior (PDB) for Differentiated Services"</span>, <span class="seriesInfo">RFC 3662</span>, <span class="seriesInfo">DOI 10.17487/RFC3662</span>, <time datetime="2003-12" class="refDate">December 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3662">https://www.rfc-editor.org/rfc/rfc3662</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6077">[RFC6077]</dt>
+      <dd>
+<span class="refAuthor">Papadimitriou, D., Ed.</span>, <span class="refAuthor">Welzl, M.</span>, <span class="refAuthor">Scharf, M.</span>, and <span class="refAuthor">B. Briscoe</span>, <span class="refTitle">"Open Research Issues in Internet Congestion Control"</span>, <span class="seriesInfo">RFC 6077</span>, <span class="seriesInfo">DOI 10.17487/RFC6077</span>, <time datetime="2011-02" class="refDate">February 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6077">https://www.rfc-editor.org/rfc/rfc6077</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6973">[RFC6973]</dt>
+      <dd>
+<span class="refAuthor">Cooper, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Aboba, B.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Morris, J.</span>, <span class="refAuthor">Hansen, M.</span>, and <span class="refAuthor">R. Smith</span>, <span class="refTitle">"Privacy Considerations for Internet Protocols"</span>, <span class="seriesInfo">RFC 6973</span>, <span class="seriesInfo">DOI 10.17487/RFC6973</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6973">https://www.rfc-editor.org/rfc/rfc6973</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8200">[RFC8200]</dt>
+      <dd>
+<span class="refAuthor">Deering, S.</span> and <span class="refAuthor">R. Hinden</span>, <span class="refTitle">"Internet Protocol, Version 6 (IPv6) Specification"</span>, <span class="seriesInfo">STD 86</span>, <span class="seriesInfo">RFC 8200</span>, <span class="seriesInfo">DOI 10.17487/RFC8200</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8200">https://www.rfc-editor.org/rfc/rfc8200</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8558">[RFC8558]</dt>
+      <dd>
+<span class="refAuthor">Hardie, T., Ed.</span>, <span class="refTitle">"Transport Protocol Path Signals"</span>, <span class="seriesInfo">RFC 8558</span>, <span class="seriesInfo">DOI 10.17487/RFC8558</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8558">https://www.rfc-editor.org/rfc/rfc8558</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8622">[RFC8622]</dt>
+      <dd>
+<span class="refAuthor">Bless, R.</span>, <span class="refTitle">"A Lower-Effort Per-Hop Behavior (LE PHB) for Differentiated Services"</span>, <span class="seriesInfo">RFC 8622</span>, <span class="seriesInfo">DOI 10.17487/RFC8622</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8622">https://www.rfc-editor.org/rfc/rfc8622</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8825">[RFC8825]</dt>
+      <dd>
+<span class="refAuthor">Alvestrand, H.</span>, <span class="refTitle">"Overview: Real-Time Protocols for Browser-Based Applications"</span>, <span class="seriesInfo">RFC 8825</span>, <span class="seriesInfo">DOI 10.17487/RFC8825</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8825">https://www.rfc-editor.org/rfc/rfc8825</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+      <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9049">[RFC9049]</dt>
+      <dd>
+<span class="refAuthor">Dawkins, S., Ed.</span>, <span class="refTitle">"Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"</span>, <span class="seriesInfo">RFC 9049</span>, <span class="seriesInfo">DOI 10.17487/RFC9049</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9049">https://www.rfc-editor.org/rfc/rfc9049</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9221">[RFC9221]</dt>
+      <dd>
+<span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">D. Schinazi</span>, <span class="refTitle">"An Unreliable Datagram Extension to QUIC"</span>, <span class="seriesInfo">RFC 9221</span>, <span class="seriesInfo">DOI 10.17487/RFC9221</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9221">https://www.rfc-editor.org/rfc/rfc9221</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9293">[RFC9293]</dt>
+      <dd>
+<span class="refAuthor">Eddy, W., Ed.</span>, <span class="refTitle">"Transmission Control Protocol (TCP)"</span>, <span class="seriesInfo">STD 7</span>, <span class="seriesInfo">RFC 9293</span>, <span class="seriesInfo">DOI 10.17487/RFC9293</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9293">https://www.rfc-editor.org/rfc/rfc9293</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9331">[RFC9331]</dt>
+      <dd>
+<span class="refAuthor">De Schepper, K.</span> and <span class="refAuthor">B. Briscoe, Ed.</span>, <span class="refTitle">"The Explicit Congestion Notification (ECN) Protocol for Low Latency, Low Loss, and Scalable Throughput (L4S)"</span>, <span class="seriesInfo">RFC 9331</span>, <span class="seriesInfo">DOI 10.17487/RFC9331</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9331">https://www.rfc-editor.org/rfc/rfc9331</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9335">[RFC9335]</dt>
+      <dd>
+<span class="refAuthor">Uberti, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">S. Murillo</span>, <span class="refTitle">"Completely Encrypting RTP Header Extensions and Contributing Sources"</span>, <span class="seriesInfo">RFC 9335</span>, <span class="seriesInfo">DOI 10.17487/RFC9335</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9335">https://www.rfc-editor.org/rfc/rfc9335</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9419">[RFC9419]</dt>
+      <dd>
+<span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Hardie, T.</span>, <span class="refAuthor">Pauly, T.</span>, and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Considerations on Application - Network Collaboration Using Path Signals"</span>, <span class="seriesInfo">RFC 9419</span>, <span class="seriesInfo">DOI 10.17487/RFC9419</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9419">https://www.rfc-editor.org/rfc/rfc9419</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TR.23.700-70-3GPP">[TR.23.700-70-3GPP]</dt>
+      <dd>
+<span class="refTitle">"Study on XR (Extended Reality) and media services (Release 19)"</span>, <time datetime="2024-08" class="refDate">August 2024</time>. </dd>
+<dd class="break"></dd>
+<dt id="TS.23.501-3GPP">[TS.23.501-3GPP]</dt>
+      <dd>
+<span class="refTitle">"3rd Generation Partnership Project; Technical Specification Group Servies and System Aspects; System architecture for the 5G System (5GS); Stage 2 (Release 18)"</span>, <time datetime="2023-03" class="refDate">March 2023</time>. </dd>
+<dd class="break"></dd>
+<dt id="_5G-Lumos">[_5G-Lumos]</dt>
+      <dd>
+<span class="refTitle">"Lumos5G: Mapping and Predicting Commercial mmWave 5G Throughput, Arvind Narayanan et al., ACM Internet Measurement Conference (IMC '20), https://dl.acm.org/doi/10.1145/3419394.3423629"</span>, <time datetime="2020-10" class="refDate">October 2020</time>. </dd>
+<dd class="break"></dd>
+<dt id="_5G-Octopus">[_5G-Octopus]</dt>
+    <dd>
+<span class="refTitle">"Octopus: In-Network Content Adaptation to Control Congestion on 5G Links, Yongzhou Chen et al., ACM/IEEE Symposium on Edge Computing (SEC '23), https://dl.acm.org/doi/10.1145/3583740.3628438"</span>, <time datetime="2023-12" class="refDate">December 2023</time>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="net-attach">
+<section id="appendix-A">
+      <h2 id="name-network-attachment">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-network-attachment" class="section-name selfRef">Network Attachment</a>
+      </h2>
+<p id="appendix-A-1">A network attachment represents the communication link between
+clients and network (router) over which a connection policy (including
+QoS) is applied to flows within that network attachment.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">A network attachment may be established using control plane signaling
+between the client and the network (access) router and is out of
+scope of this document.  Transport flows over a network attachment
+may consist of multiple streams such as video or audio.
+<a href="#Figure-conn-flow" class="auto internal xref">Figure 4</a> shows a high level view of network attachments,
+flows, and QoS/policy discussed in <a href="#metadata-req" class="auto internal xref">Section 6</a>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The requirements in <a href="#metadata-req" class="auto internal xref">Section 6</a> apply to data units like frames
+within a flow, but not between flows. Specifically, this document
+does not discuss flows of distinct clients/users.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<span id="name-e2e-transport-flows-and-con"></span><div id="Figure-conn-flow">
+<figure id="figure-4">
+        <div id="appendix-A-4.1">
+          <div class="alignLeft art-svg artwork" id="appendix-A-4.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="504" viewBox="0 0 504 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,208" fill="none" stroke="black"></path>
+              <path d="M 8,256 L 8,352" fill="none" stroke="black"></path>
+              <path d="M 24,48 L 24,80" fill="none" stroke="black"></path>
+              <path d="M 24,288 L 24,320" fill="none" stroke="black"></path>
+              <path d="M 40,80 L 40,160" fill="none" stroke="black"></path>
+              <path d="M 56,48 L 56,80" fill="none" stroke="black"></path>
+              <path d="M 64,288 L 64,320" fill="none" stroke="black"></path>
+              <path d="M 72,48 L 72,80" fill="none" stroke="black"></path>
+              <path d="M 88,80 L 88,144" fill="none" stroke="black"></path>
+              <path d="M 104,48 L 104,80" fill="none" stroke="black"></path>
+              <path d="M 104,144 L 104,160" fill="none" stroke="black"></path>
+              <path d="M 128,32 L 128,120" fill="none" stroke="black"></path>
+              <path d="M 128,184 L 128,208" fill="none" stroke="black"></path>
+              <path d="M 128,256 L 128,280" fill="none" stroke="black"></path>
+              <path d="M 128,328 L 128,352" fill="none" stroke="black"></path>
+              <path d="M 216,32 L 216,120" fill="none" stroke="black"></path>
+              <path d="M 216,184 L 216,280" fill="none" stroke="black"></path>
+              <path d="M 216,328 L 216,352" fill="none" stroke="black"></path>
+              <path d="M 232,48 L 232,80" fill="none" stroke="black"></path>
+              <path d="M 264,80 L 264,120" fill="none" stroke="black"></path>
+              <path d="M 288,144 L 288,160" fill="none" stroke="black"></path>
+              <path d="M 304,80 L 304,280" fill="none" stroke="black"></path>
+              <path d="M 344,48 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 360,32 L 360,352" fill="none" stroke="black"></path>
+              <path d="M 424,80 L 424,112" fill="none" stroke="black"></path>
+              <path d="M 440,208 L 440,240" fill="none" stroke="black"></path>
+              <path d="M 448,112 L 448,144" fill="none" stroke="black"></path>
+              <path d="M 464,160 L 464,208" fill="none" stroke="black"></path>
+              <path d="M 464,240 L 464,304" fill="none" stroke="black"></path>
+              <path d="M 480,80 L 480,112" fill="none" stroke="black"></path>
+              <path d="M 496,208 L 496,240" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 128,32" fill="none" stroke="black"></path>
+              <path d="M 216,32 L 360,32" fill="none" stroke="black"></path>
+              <path d="M 24,48 L 56,48" fill="none" stroke="black"></path>
+              <path d="M 72,48 L 104,48" fill="none" stroke="black"></path>
+              <path d="M 232,48 L 344,48" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 56,80" fill="none" stroke="black"></path>
+              <path d="M 72,80 L 104,80" fill="none" stroke="black"></path>
+              <path d="M 232,80 L 344,80" fill="none" stroke="black"></path>
+              <path d="M 424,80 L 480,80" fill="none" stroke="black"></path>
+              <path d="M 424,112 L 480,112" fill="none" stroke="black"></path>
+              <path d="M 120,128 L 272,128" fill="none" stroke="black"></path>
+              <path d="M 88,144 L 160,144" fill="none" stroke="black"></path>
+              <path d="M 240,144 L 296,144" fill="none" stroke="black"></path>
+              <path d="M 312,144 L 352,144" fill="none" stroke="black"></path>
+              <path d="M 368,144 L 448,144" fill="none" stroke="black"></path>
+              <path d="M 40,160 L 160,160" fill="none" stroke="black"></path>
+              <path d="M 240,160 L 296,160" fill="none" stroke="black"></path>
+              <path d="M 312,160 L 352,160" fill="none" stroke="black"></path>
+              <path d="M 368,160 L 464,160" fill="none" stroke="black"></path>
+              <path d="M 120,176 L 272,176" fill="none" stroke="black"></path>
+              <path d="M 8,208 L 128,208" fill="none" stroke="black"></path>
+              <path d="M 440,208 L 496,208" fill="none" stroke="black"></path>
+              <path d="M 440,240 L 496,240" fill="none" stroke="black"></path>
+              <path d="M 8,256 L 128,256" fill="none" stroke="black"></path>
+              <path d="M 24,288 L 64,288" fill="none" stroke="black"></path>
+              <path d="M 96,288 L 312,288" fill="none" stroke="black"></path>
+              <path d="M 64,304 L 168,304" fill="none" stroke="black"></path>
+              <path d="M 248,304 L 352,304" fill="none" stroke="black"></path>
+              <path d="M 368,304 L 464,304" fill="none" stroke="black"></path>
+              <path d="M 24,320 L 64,320" fill="none" stroke="black"></path>
+              <path d="M 96,320 L 312,320" fill="none" stroke="black"></path>
+              <path d="M 8,352 L 128,352" fill="none" stroke="black"></path>
+              <path d="M 216,352 L 360,352" fill="none" stroke="black"></path>
+              <path d="M 120,128 C 111.16936,128 104,135.16936 104,144" fill="none" stroke="black"></path>
+              <path d="M 272,128 C 280.83064,128 288,135.16936 288,144" fill="none" stroke="black"></path>
+              <path d="M 120,176 C 111.16936,176 104,168.83064 104,160" fill="none" stroke="black"></path>
+              <path d="M 272,176 C 280.83064,176 288,168.83064 288,160" fill="none" stroke="black"></path>
+              <path d="M 96,288 C 87.16936,288 80,295.16936 80,304" fill="none" stroke="black"></path>
+              <path d="M 312,288 C 320.83064,288 328,295.16936 328,304" fill="none" stroke="black"></path>
+              <path d="M 96,320 C 87.16936,320 80,312.83064 80,304" fill="none" stroke="black"></path>
+              <path d="M 312,320 C 320.83064,320 328,312.83064 328,304" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="312,280 300,274.4 300,285.6" fill="black" transform="rotate(90,304,280)"></polygon>
+              <polygon class="arrowhead" points="272,120 260,114.4 260,125.6" fill="black" transform="rotate(90,264,120)"></polygon>
+              <g class="text">
+                <text x="36" y="68">A1</text>
+                <text x="84" y="68">A2</text>
+                <text x="260" y="68">QoS,</text>
+                <text x="308" y="68">Policy</text>
+                <text x="176" y="100">Network</text>
+                <text x="452" y="100">srv-A2</text>
+                <text x="172" y="116">attachment</text>
+                <text x="200" y="148">flow-x2</text>
+                <text x="200" y="164">flow-x1</text>
+                <text x="52" y="228">Client-1</text>
+                <text x="468" y="228">srv-A1</text>
+                <text x="176" y="260">Network</text>
+                <text x="172" y="276">attachment</text>
+                <text x="44" y="308">A1</text>
+                <text x="208" y="308">flow-x3</text>
+                <text x="52" y="372">Client-2</text>
+                <text x="252" y="372">Router</text>
+              </g>
+            </svg><a href="#appendix-A-4.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-e2e-transport-flows-and-con" class="selfRef">E2E transport flows and connection session</a>
+        </figcaption></figure>
+</div>
+<p id="appendix-A-5"><a href="#Figure-conn-flow" class="auto internal xref">Figure 4</a> shows "Client-1" and "Client-2" which negotiate
+connection policy (e.g., QoS) and other aspects like mobility
+handling, charging applied to flows in that network attachment.
+"Client-1" has "flow-x1" and "flow-x2" over its network attachment
+while "Client-2" has "flow-x3".  <strong>The requirements in this document
+focus on on-path collaboration signals that apply to data units
+such as media frames within flows like "flow-x1/x2/x3" but not
+between them.</strong><a href="#appendix-A-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="x-req-def">
+<section id="appendix-B">
+      <h2 id="name-extended-requirements-defin">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-extended-requirements-defin" class="section-name selfRef">Extended Requirements Definition</a>
+      </h2>
+<span class="break"></span><dl class="dlParallel" id="appendix-B-1">
+        <dt id="appendix-B-1.1">REQ-MEDIA-AV-SEPARATE:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.2">
+          <p id="appendix-B-1.2.1">Audio can be prioritized differently than video.<a href="#appendix-B-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.3"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.4">
+          <p id="appendix-B-1.4.1">This requirement may be generalized to non-media packet types.<a href="#appendix-B-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.5"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.6">
+          <p id="appendix-B-1.6.1">This is an enhanced requirement that requires e2e application layer
+signaling (out of scope here) to identify of frame boundaries and may
+not be suitable in cases which are sensitive to traffic analysis
+(see REQ-SIGNALING-AVOIDANCE and <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>). If the application
+provides frame boundaries, the client signals the enhanced application
+priority values in REQ-PAYLOAD-CLIENT-DECIDES.<a href="#appendix-B-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.7"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.8">
+          <p id="appendix-B-1.8.1">This is a per-flow metadata requirement.<a href="#appendix-B-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.9">REQ-MEDIA-KEYFRAME:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.10">
+          <p id="appendix-B-1.10.1">Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the
+network.<a href="#appendix-B-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.11"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.12">
+          <p id="appendix-B-1.12.1">This is an enhanced requirement that requires e2e application layer
+signaling (out of scope here) to identify of frame boundaries and may
+not be suitable in cases which are sensitive to traffic analysis
+(see REQ-SIGNALING-AVOIDANCE and <span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>). If the application
+provides frame boundaries, the client signals the enhanced application
+priority values in REQ-PAYLOAD-CLIENT-DECIDES.<a href="#appendix-B-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.13"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.14">
+          <p id="appendix-B-1.14.1">This is a per-packet metadata requirement.<a href="#appendix-B-1.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.15">REQ-NETWORK-THROUGHPUT:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.16">
+          <p id="appendix-B-1.16.1">A mechanism to signal the available network throughput to interested
+clients, including changes to throughput.<a href="#appendix-B-1.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.17">REQ-NRLP:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.18">
+          <p id="appendix-B-1.18.1">The network shall inform the endpoint of the Rate limiting policies.<a href="#appendix-B-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.19">REQ-SIGNAL-EXPOSURE-FAIRNESS:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.20">
+          <p id="appendix-B-1.20.1">Means to expose the signal independent of the application should be
+considered. An example of such exposure is OS APIs.<a href="#appendix-B-1.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.21">REQ-NETWORK-SEEKS-LOAD-DOWN:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.22">
+          <p id="appendix-B-1.22.1">During detected reactive events, the network implements a
+reactive traffic policy to reduce or offload some of the traffic.<a href="#appendix-B-1.22.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.23"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.24">
+          <p id="appendix-B-1.24.1">This may involve utilizing alternative network attachments
+available to the client (e.g., Wi-Fi).<a href="#appendix-B-1.24.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.25">REQ-CONTINUITY:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.26">
+          <p id="appendix-B-1.26.1">Handover from one radio or router to another should continue to
+provide same service level.<a href="#appendix-B-1.26.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.27">REQ-MULTIPLE-BOTTLENECKS:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.28">
+          <p id="appendix-B-1.28.1">Signaling should support Multiple bottlenecks.<a href="#appendix-B-1.28.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.29"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.30">
+          <p id="appendix-B-1.30.1">The network must identify multiple bottlenecks, including those
+within the ISP and subscriber networks, ensuring all bottlenecks
+benefit from network/client collaboration to enhance overall performance.<a href="#appendix-B-1.30.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.31">REQ-SCOPED-METADATA:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.32">
+          <p id="appendix-B-1.32.1">Means to characterize the scope of a shared metadata for the sake of
+better interoperability should be supported.<a href="#appendix-B-1.32.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.33"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.34">
+          <p id="appendix-B-1.34.1">The metadata can be used by the network to prioritize traffic
+within a single 5-tuple connection and metadata cannot be leveraged
+for prioritization between different flows.<a href="#appendix-B-1.34.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.35">REQ-SINGLE-CHANNEL:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.36">
+          <p id="appendix-B-1.36.1">The network should use a single channel for sharing metadata
+to simplify the process and avoid the need for redundant functions.<a href="#appendix-B-1.36.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-B-1.37">REQ-ISP-SCALE:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-B-1.38">
+          <p id="appendix-B-1.38.1">The metadata and other state information that a router has to
+maintain for each additional flow it handles should be kept
+to a minimum or eliminated altogether.<a href="#appendix-B-1.38.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="extended-use-cases">
+<section id="appendix-C">
+      <h2 id="name-extended-use-cases">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-extended-use-cases" class="section-name selfRef">Extended Use-Cases</a>
+      </h2>
+<div id="media-streaming-extended">
+<section id="appendix-C.1">
+        <h3 id="name-media-streaming-extended">
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-media-streaming-extended" class="section-name selfRef">Media Streaming Extended</a>
+        </h3>
+<p id="appendix-C.1-1">Streaming video contains the occasional key frame ("I-frame")
+containing a full video frame.  These frames are necessary to rebuild
+receiver state after loss of delta frames.  The key frames are
+therefore more critical to deliver to the receiver than delta frames.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-2">Examples:<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.1-3">
+<li id="appendix-C.1-3.1">
+            <p id="appendix-C.1-3.1.1">Audio is more critical than video for many applications and should
+be prioritized differently than video.<a href="#appendix-C.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="appendix-C.1-4">Requirement: REQ-MEDIA-AV-SEPARATE.<a href="#appendix-C.1-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.1-5">
+<li id="appendix-C.1-5.1">
+            <p id="appendix-C.1-5.1.1">Video contains partial frames and full frames, which need to be
+distinguished so that full frames can be indicated to the network.<a href="#appendix-C.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="appendix-C.1-6">Requirement: REQ-MEDIA-KEYFRAME.<a href="#appendix-C.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="assisted-offload">
+<section id="appendix-C.2">
+        <h3 id="name-assisted-offload">
+<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-assisted-offload" class="section-name selfRef">Assisted Offload</a>
+        </h3>
+<p id="appendix-C.2-1">There are cases (crisis) where "normal" network resources cannot
+be used at maximum and, thus, a network would seek to reduce or
+offload some of the traffic during these events -- often called
+'reactive traffic policy'. An example of such use case is cellular
+networks that are overly used (and radio resources exhausted) such
+as a large collection of people (e.g., parade, sporting event), or
+such as a partial radio network outage (e.g., tower power outage).
+During such a condition, an alternative network attachment may be
+available to the client (e.g., Wi-Fi).<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-2">Network-to-client signals are useful to put in place adequate traffic
+distribution policies on the client (e.g., prefer the use of alternate
+paths, offload a network).<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-3">Requirement: REQ-NETWORK-SEEKS-LOAD-DOWN.<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="nrlp">
+<section id="appendix-C.3">
+        <h3 id="name-network-bandwidth-network-r">
+<a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-network-bandwidth-network-r" class="section-name selfRef">Network Bandwidth &amp; Network Rate Limiting Policies</a>
+        </h3>
+<p id="appendix-C.3-1">Bandwidth constraints exist most predominantly at the access network.
+This can be constraints in the network itself or a result of rate
+limiting due to various reasons.<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-2">Also, traffic exchanged over a network attachment may be subject
+to rate-limit policies. These policies may be intentional policies
+(e.g., enforced as part of the activation of the network attachment
+and typically agreed upon service subscription) or be reactive
+policies (e.g., enforced temporarily to manage an overload or during
+a DDoS attack mitigation).<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-3">Requirements: REQ-NETWORK-THROUGHPUT, REQ-NRLP.<a href="#appendix-C.3-3" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-4">Use cases:<a href="#appendix-C.3-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.3-5">
+<li id="appendix-C.3-5.1">
+            <p id="appendix-C.3-5.1.1">Performance Optimization: Some applications support some forms
+  of bandwidth measurements (e.g., <span>[<a href="#app-measurement" class="cite xref">app-measurement</a>]</span>) which feed
+  how the content is accessed to using ABR. Complementing or replacing
+  these measurements with explicit signals will improve overall
+  network performance and can help optimize the data transfer.
+  Signaling bandwidth availability allows endpoints to avoid
+  contributing to network congestion. When the network informs the
+  endpoint about available bandwidth, the endpoint can dynamically
+  adjust its data transmission rate. Knowing available bandwidth
+  helps the endpoint allocate resources efficiently. Cloud-based
+  applications can auto-scale based on available bandwidth.<a href="#appendix-C.3-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="appendix-C.3-5.2">
+            <p id="appendix-C.3-5.2.1">Rate Limiting: Monthly data quotas on cellular networks can
+  be easily exceeded by video streaming, in particular, if the
+  client chooses excessively high quality or routinely abandons
+  watching videos that were downloaded. The network can assist the
+  client by informing the client of the network's bandwidth policy.<a href="#appendix-C.3-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+</section>
+</div>
+</section>
+</div>
+<div id="extended-system-considerations">
+<section id="appendix-D">
+      <h2 id="name-extended-system-considerati">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-extended-system-considerati" class="section-name selfRef">Extended System Considerations</a>
+      </h2>
+<div id="app-interference">
+<section id="appendix-D.1">
+        <h3 id="name-application-interference">
+<a href="#appendix-D.1" class="section-number selfRef">D.1. </a><a href="#name-application-interference" class="section-name selfRef">Application Interference</a>
+        </h3>
+<p id="appendix-D.1-1">Applications that have access to a resource-quota information may
+adopt an aggressive behavior (compared to those that don't have
+access) if they assumed that a resource-quota like metadata is for
+the application, not for the client that runs the applications.<a href="#appendix-D.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.1-2">This is challenging for home networks where multiple clients may
+be running behind the same CPE, with each of them running a video
+application. The same challenge may apply when tethering is enabled.<a href="#appendix-D.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-D.1-3">Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS.<a href="#appendix-D.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="classification">
+<section id="appendix-D.2">
+        <h3 id="name-redundant-functions-and-cla">
+<a href="#appendix-D.2" class="section-number selfRef">D.2. </a><a href="#name-redundant-functions-and-cla" class="section-name selfRef">Redundant Functions and Classification Complications</a>
+        </h3>
+<p id="appendix-D.2-1">If distinct channels are used to share the metadata between a client
+and a network, a network that engages in the collaborative signaling
+approach will require sophisticated features to classify flows and
+decide which channel is used to share metadata so that it can consume
+that information.<a href="#appendix-D.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.2-2">Likewise, the network will require to implement redundant functions;
+for each signaling interface.<a href="#appendix-D.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-D.2-3"><em>As such, application- and protocol-specific signaling channels are
+suboptimal.</em> (REQ-SINGLE-CHANNEL)<a href="#appendix-D.2-3" class="pilcrow">¶</a></p>
+<p id="appendix-D.2-4">Requirement:  REQ-SINGLE-CHANNEL is preferred.<a href="#appendix-D.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="continuity">
+<section id="appendix-D.3">
+        <h3 id="name-session-continuity">
+<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-session-continuity" class="section-name selfRef">Session Continuity</a>
+        </h3>
+<p id="appendix-D.3-1">The frequency of handovers increases when a user moves
+faster or when the media session lasts longer. During handovers,
+there should be minimal delay incurred during handover in
+configuring/setting up the metadata of a media session in progress.<a href="#appendix-D.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.3-2">Requirement: REQ-CONTINUITY.<a href="#appendix-D.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="multiple-bottlenecks">
+<section id="appendix-D.4">
+        <h3 id="name-multiple-bottlenecks">
+<a href="#appendix-D.4" class="section-number selfRef">D.4. </a><a href="#name-multiple-bottlenecks" class="section-name selfRef">Multiple Bottlenecks</a>
+        </h3>
+<p id="appendix-D.4-1">Whereas models often show a single bottleneck, there are frequently
+two (or more) bottlenecks: the ISP network and within the subscriber
+network (e.g., Wi-Fi link). As such, all bottlenecks near the
+subscriber should be able to benefit from network/client collaboration.<a href="#appendix-D.4-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.4-2">Requirement: REQ-MULTIPLE-BOTTLENECKS.<a href="#appendix-D.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="metadata-scope">
+<section id="appendix-D.5">
+        <h3 id="name-metadata-scope">
+<a href="#appendix-D.5" class="section-number selfRef">D.5. </a><a href="#name-metadata-scope" class="section-name selfRef">Metadata Scope</a>
+        </h3>
+<p id="appendix-D.5-1">An operational challenge for sharing resource-quota like metadata
+(e.g., maximum bitrate) is that the network is generally not entitled
+to allocate quota per-application, per-flow, per-stream, etc. that
+delivered as part of an Internet connectivity service. However, the
+network has a visibility about the overall network attachment (e.g.
+inbound/outbound bandwidth discussed in
+<span>[<a href="#I-D.ietf-opsawg-teas-attachment-circuit" class="cite xref">I-D.ietf-opsawg-teas-attachment-circuit</a>]</span>).<a href="#appendix-D.5-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.5-2">Hints about resource-like metadata is bound by default to
+the overall network attachment, not specific to a given application
+or flow.<a href="#appendix-D.5-2" class="pilcrow">¶</a></p>
+<p id="appendix-D.5-3">It is out of the scope of this document to discuss setups (e.g.,
+3GPP PDU Sessions) where network attachments with Guaranteed Bit
+Rate (GBR) for specific flows is provided.<a href="#appendix-D.5-3" class="pilcrow">¶</a></p>
+<p id="appendix-D.5-4">Requirement: REQ-SCOPED-METADATA.<a href="#appendix-D.5-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="scalability">
+<section id="appendix-D.6">
+        <h3 id="name-scalability">
+<a href="#appendix-D.6" class="section-number selfRef">D.6. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
+        </h3>
+<p id="appendix-D.6-1">There may be a large number of flows handled by the server
+and wireless/access router. Per flow information (state) at a
+wireless router for optimizing the flow can negate the advantages
+offered as the number of flows handled increases.<a href="#appendix-D.6-1" class="pilcrow">¶</a></p>
+<p id="appendix-D.6-2">Requirement: REQ-ISP-SCALE.<a href="#appendix-D.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-E">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">John Kaippallimalil</span></div>
+<div dir="auto" class="left"><span class="org">Futurewei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:john.kaippallimalil@futurewei.com" class="email">john.kaippallimalil@futurewei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Dan Wing</span></div>
+<div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:danwing@gmail.com" class="email">danwing@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sri Gundavelli</span></div>
+<div dir="auto" class="left"><span class="org">Cisco</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:sgundave@cisco.com" class="email">sgundave@cisco.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sridharan Rajagopalan</span></div>
+<div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:Sridharan.girish@gmail.com" class="email">Sridharan.girish@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Spencer Dawkins</span></div>
+<div dir="auto" class="left"><span class="org">Tencent America LLC</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:spencerdawkins.ietf@gmail.com" class="email">spencerdawkins.ietf@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Mohamed Boucadair</span></div>
+<div dir="auto" class="left"><span class="org">Orange</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">35000</span> <span class="locality">Rennes</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">France</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mohamed.boucadair@orange.com" class="email">mohamed.boucadair@orange.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
