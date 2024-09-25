@@ -1644,7 +1644,7 @@ using feedback and congestion control algorithms (CCAs). CCAs are generally cons
 and settle to a steady rate to avoid excessive packet loss. In networks where link
 conditions (between Client and Router) vary significantly at sub-RTT timescales,
 this results in unused bandwidth at short timescales.<a href="#section-3-9" class="pilcrow">¶</a></p>
-<p id="section-3-10">Research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) indicates that media applications can achieve better QoE
+<p id="section-3-10">Research (e.g., <span>[<a href="#_5G-Octopus" class="cite xref">_5G-Octopus</a>]</span>) indicates that media applications can achieve better Quality of Experience (QoE)
 when sending at a higher rate (less conservative than current CCA) and tolerating some
 packet loss or delay of low priority packets. Packet priority and tolerance to delay in
 such cases would be provided on-path in a side channel associated with the downstream packet (B).
@@ -1653,10 +1653,10 @@ The requirements for this server-to-network (S2N) metadata are described in <a h
 of a flow (UDP 4-tuple) temporarily which can in turn allocate available bandwidth
 to other flows of that network attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">Network shapers observe flows and apply policies to maximize performancebut are unaware underlying
-flows belinging to the same user and network attachment (e.g., a subscriber connection,a 3GPP PDU
+flows belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU
 Session <a href="#net-attach" class="auto internal xref">Appendix A</a>). Clients may provide information to an (access) router to drop
-‘lower priority’-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
-allowing bandwidth allocation to other flows of the same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
+‘lower priority’-marked packets of a flow (UDP 4-tuple) during Reactive Management,
+allowing bandwidth allocation to other packets of the same UDP 4-tuple.<a href="#section-3-12" class="pilcrow">¶</a></p>
 <p id="section-3-13">In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
 that demand low latency and high throughput can lead to suboptimal
@@ -2081,7 +2081,7 @@ to provide higher application quality of service. Research in <span>[<a href="#_
 that media applications can achieve better quality when sending at a higher rate
 and allowing the network to delay or drop low priority packets.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">The metadata in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a> should satisfy constraints identified
-in <a href="#sys-considerations" class="auto internal xref">Section 7</a>. Privacy <a href="#privacy" class="auto internal xref">Section 7.1</a> requires that metadata should not provide
+in <a href="#sys-considerations" class="auto internal xref">Section 7</a>. Privacy (<a href="#privacy" class="auto internal xref">Section 7.1</a>) requires that metadata should not provide
 additional information to identify the application or user. The application
 server can decide on metadata values that provide the best handling for packets
 and may not reflect exact priority values. This metadata is advisory, and
