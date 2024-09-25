@@ -272,7 +272,7 @@ and settle to a steady rate to avoid excessive packet loss. In networks where li
 conditions (between Client and Router) vary significantly at sub-RTT timescales,
 this results in unused bandwidth at short timescales.
 
-Research (e.g., {{5G-Octopus}}) indicates that media applications can achieve better QoE
+Research (e.g., {{5G-Octopus}}) indicates that media applications can achieve better Quality of Experience (QoE)
 when sending at a higher rate (less conservative than current CCA) and tolerating some
 packet loss or delay of low priority packets. Packet priority and tolerance to delay in
 such cases would be provided on-path in a side channel associated with the downstream packet (B).
@@ -283,10 +283,10 @@ of a flow (UDP 4-tuple) temporarily which can in turn allocate available bandwid
 to other flows of that network attachment, especially during a reactive management event.
 
 Network shapers observe flows and apply policies to maximize performancebut are unaware underlying
-flows belinging to the same user and network attachment (e.g., a subscriber connection,a 3GPP PDU
+flows belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU
 Session {{net-attach}}). Clients may provide information to an (access) router to drop
-‘lower priority’-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
-allowing bandwidth allocation to other flows of the same network attachment.
+‘lower priority’-marked packets of a flow (UDP 4-tuple) during Reactive Management,
+allowing bandwidth allocation to other packets of the same UDP 4-tuple.
 
 In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
@@ -575,7 +575,7 @@ that media applications can achieve better quality when sending at a higher rate
 and allowing the network to delay or drop low priority packets.
 
 The metadata in {{relative-priority}} should satisfy constraints identified
-in {{sys-considerations}}. Privacy {{privacy}} requires that metadata should not provide
+in {{sys-considerations}}. Privacy ({{privacy}}) requires that metadata should not provide
 additional information to identify the application or user. The application
 server can decide on metadata values that provide the best handling for packets
 and may not reflect exact priority values. This metadata is advisory, and
