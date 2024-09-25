@@ -387,6 +387,9 @@ Table of Contents
       even if one single channel is used so that any application on a
       client can consume the signals.
 
+      The API framework uses the medium negotiated under Section 5.3 to
+      send/receive the signals
+
 4.4.  System Considerations
 
    REQ-PRIVACY-ADDITIONAL:  An on-path observer obtains (or gleans) no
