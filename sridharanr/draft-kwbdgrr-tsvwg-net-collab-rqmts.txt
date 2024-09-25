@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 28 March 2025                              Cloud Software Group
+Expires: 29 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 28 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       24 September 2024
+                                                       25 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2025.
+   This Internet-Draft will expire on 29 March 2025.
 
 Copyright Notice
 
@@ -626,55 +626,46 @@ Table of Contents
 
 6.2.  Server-Network Metadata
 
-   Application flows (UDP 4-tuple) for live media, eXtended Reality (XR)
-   and gaming require both high bandwidth and low latency and would as
-   such benefit from being able to use the bandwidth available for the
-   flow.  In wireless networks, some of the bandwidth available for the
-   flow is not possible to schedule using the feedback based rate
-   control (due to the significant link variations at sub-RTT
-   timescales).  In such networks where variations in link quality is
-   well below RTT, congestion control algorithms settle to a steady rate
-   that avoids excessive packet loss.  Feedback via ECN/L4S [RFC9331]
-   provides an accurate signal but is also on an RTT timescale and thus
-   does not provide finer resolution information of instantaneous
-   bandwidth available.
+   Application flows (UDP 4-tuple) for live media, eXtended Reality
+   (XR), and gaming require high bandwidth and low latency.  In wireless
+   networks, some bandwidth cannot be scheduled using feedback-based
+   rate control due to significant link variations at sub-RTT
+   timescales.  Congestion control algorithms settle to a steady rate to
+   avoid excessive packet loss.  Feedback via ECN/L4S [RFC9331] provides
+   an accurate signal but lacks finer resolution information of
+   instantaneous bandwidth available.
 
-   If application packets can either tolerate delay or some loss of
-   lower priority packets, the network traffic shaper and scheduler can
-   use this information to provide a higher application quality of
-   service.  There is some research [_5G-Octopus] to indicate that media
-   applications can obtain better measured application quality when
-   sending at a higher rate (less conservative than current CCA) and
-   allowing the network to delay or drop low priority packets.
+   If application packets can tolerate delay or some loss of lower
+   priority packets, the network traffic shaper and scheduler can use
+   this information to provide higher application quality of service.
+   Research in [_5G-Octopus] indicates that media applications can
+   achieve better quality when sending at a higher rate and allowing the
+   network to delay or drop low priority packets.
 
-   The metadata in Section 6.2.1 should also satisfy constraints
-   identified in Section 7.  Privacy (Section 7.1) requires that
-   metadata should not provide additional information to identify the
-   application or the user.  The application server can decide on the
-   metadata values that provide the best handling for the packets of the
-   flow and may not necessarily reflect the exact priority values that
-   allow an on-path observer to perform traffic analysis.  This metadata
-   is advisory in nature and network traffic policy that restricts its
-   use would not result in additional issues.  Other constraints
-   including scale (Appendix D.6) and continuity (Appendix D.3) are
-   required for Section 6.2.1.
+   The metadata in Section 6.2.1 should satisfy constraints identified
+   in Section 7.  Privacy Section 7.1 requires that metadata should not
+   provide additional information to identify the application or user.
+   The application server can decide on metadata values that provide the
+   best handling for packets and may not reflect exact priority values.
+   This metadata is advisory, and network traffic policy that restricts
+   its use would not result in additional issues.  Other constraints
+   include scale (Appendix D.6) and continuity (Appendix D.3).
 
    Realizing the additional bandwidth potential with these metadata may
-   require a higher sending rate for the transport flow.  This requires
-   work that is not specified in this document.  Similarly, the
-   assumption is that network shapers and schedulers can use the
-   metadata in Section 6.2.1 but further details are out of scope.
+   require a higher sending rate for the transport flow, which is not
+   specified in this document.  Network shapers and schedulers can use
+   the metadata in Section 6.2.1, but further details are out of scope.
 
    Previous work in [TR.23.700-70-3GPP] has identified the general
-   problem in this section.  However, the solution in [TS.23.501-3GPP]
-   is specific to a 5G network.  The metadata sent from a (dedicated 5G)
-   application server identifies PDU set information and end-of-burst
-   signals which are not understood by non-3GPP systems such as Wi-Fi or
-   DOCSIS.  Further, 3GPP functions and policy configurations are
-   required since this is a 5G specific solution.  The metadata
-   disclosed in the 5G solution also identifies frame boundaries and
-   does not fully conform to the constraints for privacy or minimality
-   of data identified in Section 7.
+   problem, but the solution in [TS.23.501-3GPP] is specific to a 5G
+   network.  The metadata sent from a dedicated 5G application server
+   identifies PDU set information and end-of-burst signals, which are
+   not understood by non-3GPP systems such as Wi-Fi or DOCSIS.  Further,
+   3GPP functions and policy configurations are required since this is a
+   5G specific solution.  The metadata disclosed in the 5G solution also
+   identifies frame boundaries and does not fully conform to the
+   constraints for privacy or minimality of data identified in
+   Section 7.
 
 6.2.1.  Packet Priority
 
