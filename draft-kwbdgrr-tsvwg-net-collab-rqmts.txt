@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 28 March 2025                              Cloud Software Group
+Expires: 29 March 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 28 March 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                       24 September 2024
+                                                       25 September 2024
 
 
             Requirements for Network Collaboration Signaling
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2025.
+   This Internet-Draft will expire on 29 March 2025.
 
 Copyright Notice
 
@@ -129,7 +129,7 @@ Table of Contents
 
    Wireless networks, including 5G and WLAN, inherently experience large
    variations in link quality over sub-RTT (round-trip time) intervals
-   and on the other hand applications such as interactive media demand
+   and on the other hand, applications such as interactive media demand
    both low latency and high bandwidth.
 
    Superior service during adverse network events can be achieved by the
@@ -194,7 +194,7 @@ Table of Contents
       interface conditions) or protection policies to soften the impact
       of ongoing attacks.
 
-   Traffic shaping:  Refers in this document to QoS management at an
+   Traffic Shaping:  Refers in this document to QoS management at an
       access router to delay or discard packets of lower priority to
       achieve bounded latency and high throughput.
 
@@ -522,10 +522,11 @@ Table of Contents
        preferences are prioritized accordingly while maintaining
        scalability on the server.
 
-   4.  A network glitch while user is in a eXtended Reality application.
-       The traffic comprises of haptic, video, audio, graphics update
-       and keystrokes.  During such reactive event, some packets need to
-       be deprioritized/dropped to maintain interactivity.
+   4.  A network glitch while user is in an eXtended Reality
+       application.  The traffic comprises of haptic, video, audio,
+       graphics update and keystrokes.  During such reactive event, some
+       packets need to be deprioritized/dropped to maintain
+       interactivity.
 
        Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.
 
@@ -558,7 +559,7 @@ Table of Contents
           Client                                           ISP router
             |                                                   |
             |-------------------------------------------------->|
-            | Network Collaboration Capabilites?                |
+            | Network Collaboration Capabilities?               |
             |                                                   |
             |<--------------------------------------------------|
             | my Network Collaboration capabilities             |
@@ -583,9 +584,9 @@ Table of Contents
    The path signals below should follow the principles of intentional
    distribution, protection of information, minimization and limiting
    impact as described in [RFC9419] and [RFC8558].  Leveraging previous
-   experience ([RFC9049]), the metadata signals does not need
-   application identity, application cause (or 'reason'), server
-   identity or the inspection of client-to-server encrypted payload.
+   experience ([RFC9049]), the metadata signals do not need application
+   identity, application cause (or 'reason'), server identity or the
+   inspection of client-to-server encrypted payload.
 
    The metadata connections may be between server and network (in either
    direction) or between client and network (in either direction).
@@ -723,8 +724,8 @@ Table of Contents
 
    Traffic policing and shaping are enforced in ingress/egress network
    points for various reasons (protect the network against attacks,
-   ensure conformance with a trafic profile, etc.).  Out-of-profile
-   trafic may be discarded or assigned another class (e.g., using Lower
+   ensure conformance with a traffic profile, etc.).  Out-of-profile
+   traffic may be discarded or assigned another class (e.g., using Lower
    Effort Per-Domain Behavior (LE PDB) [RFC3662]) a bandwidth limit
    among others.  The exact behavior is policy-based and deployment-
    specific.
