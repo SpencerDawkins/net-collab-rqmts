@@ -373,6 +373,7 @@ using a single or a set of APIs independent of the channels that
 are used to convey the signals. The API framework is required even
 if one single channel is used so that any application on a client can
 consume the signals.
+: The API framework uses the medium negotiated under {{metadata-negotiation}} to send/receive the signals
 
 
 ## System Considerations
