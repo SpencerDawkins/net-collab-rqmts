@@ -362,12 +362,13 @@ to change based on the user preference, aids in scalability.
 
 REQ-API-FRAMEWORK:
 : API framework to facilitate signaling for applications.
-: Signaling to the network ({{client-flow-auth}}, {{server-network}})
-will need to be facilitated by Application Programming Interfaces
-(APIs) for any application to use them. Signaling and retrieval of
+: Signaling from client to network ({{client-flow-auth}})
+and server to network ({{server-network}}))
+is best facilitated by Application Programming Interfaces
+(APIs). Signaling and retrieval of
 the signals may not be performed at a single layer (although not
-encouraged). Hence, a framework is required to abstract the underlying
-protocol(s) and allow the application(s) to retrieve/send signals
+encouraged). Hence, for server to network signaling, a framework is required to abstract the underlying
+per-packet metadata protocol(s) and allow the application(s) to retrieve/send signals
 using a single or a set of APIs independent of the channels that
 are used to convey the signals. The API framework is required even
 if one single channel is used so that any application on a client can
