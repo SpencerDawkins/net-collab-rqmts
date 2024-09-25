@@ -120,7 +120,7 @@ UDP flows bound to the same user.
 
 Wireless networks, including 5G and WLAN, inherently experience large
 variations in link quality over sub-RTT (round-trip time) intervals and on the other
-hand applications such as interactive media demand both low latency
+hand, applications such as interactive media demand both low latency
 and high bandwidth.
 
 Superior service during adverse network events can be achieved by the
@@ -179,7 +179,7 @@ Concretely, this includes policies which react to congestion events with very sh
 long durations (e.g., varying wireless and mobile air interface conditions) or protection
 policies to soften the impact of ongoing attacks.
 
-Traffic shaping:
+Traffic Shaping:
 : Refers in this document to QoS management at an
 access router to delay or discard packets of lower priority
 to achieve bounded latency and high throughput.
@@ -491,7 +491,7 @@ with same type of metadata originating from the server.
     Impact: With the above requirement met, each client/user preferences are
     prioritized accordingly while maintaining scalability on the server.
 
-5. A network glitch while user is in a eXtended Reality application.
+5. A network glitch while user is in an eXtended Reality application.
 The traffic comprises of haptic, video, audio, graphics update and
 keystrokes. During such reactive event, some packets need to be
 deprioritized/dropped to maintain interactivity.
@@ -526,7 +526,7 @@ certain UDP 4-tuple will have those markings.
      Client                                           ISP router
        |                                                   |
        |-------------------------------------------------->|
-       | Network Collaboration Capabilites?                |
+       | Network Collaboration Capabilities?               |
        |                                                   |
        |<--------------------------------------------------|
        | my Network Collaboration capabilities             |
@@ -554,7 +554,7 @@ with the data traffic.
 The path signals below should follow the principles of intentional
 distribution, protection of information, minimization and limiting
 impact as described in {{?RFC9419}} and {{?RFC8558}}. Leveraging
-previous experience ({{?RFC9049}}), the metadata signals does not
+previous experience ({{?RFC9049}}), the metadata signals do not
 need application identity, application cause (or 'reason'), server
 identity or the inspection of client-to-server encrypted payload.
 
@@ -693,8 +693,8 @@ REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-
 
 Traffic policing and shaping are enforced in ingress/egress network
 points for various reasons (protect the network against attacks,
-ensure conformance with a trafic profile, etc.). Out-of-profile
-trafic may be discarded or assigned another class (e.g., using Lower
+ensure conformance with a traffic profile, etc.). Out-of-profile
+traffic may be discarded or assigned another class (e.g., using Lower
 Effort Per-Domain Behavior (LE PDB) {{?RFC3662}}) a bandwidth limit
 among others. The exact behavior is policy-based and deployment-specific.
 
