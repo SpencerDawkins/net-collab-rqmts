@@ -752,7 +752,7 @@ Table of Contents
 10.  Security Considerations
 
    Security aspects for the metadata are discussed in Section 7.1.  The
-   principles outlined in [RFC8558], [RFC9049] and [RFC9419] contain
+   principles outlined in [RFC8558], [RFC9049], and [RFC9419] contain
    security considerations and are referenced in Section 6.
 
    Per-packet metadata can be vulnerable to modification in transit by
