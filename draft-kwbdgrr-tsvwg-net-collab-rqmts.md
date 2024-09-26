@@ -94,6 +94,22 @@ informative:
           fullname: Ali C. Begen
         target: https://datatracker.ietf.org/doc/slides-119-moq-bandwidth-measurement-for-quic/
 
+  traffic-analysis:
+        title: "Encrypted Network Traffic Analysis and Classification Utilizing Machine Learning"
+        date: 2024
+        author:
+        -
+          fullname: Ibrahim A. Alwhbi
+        -
+          fullname: Cliff C. Zou
+        -
+          fullname: Reem N. Alharbi
+        target: https://www.mdpi.com/1424-8220/24/11/3509
+  traffic-analysis-2:
+        title: "A real-world dataset of netflix videos and user watch-behavior"
+        date: 2021
+        target: https://www.gnan.ece.gatech.edu/archive/ICC_2021_Netflix_Insights.pdf
+
 
 --- abstract
 
@@ -694,53 +710,30 @@ metadata.
 
 ## Privacy Considerations {#privacy}
 
-Encrypted media payloads along with temporary IPv6 addresses between
-a server and user (client) provide a measure of privacy for the
-content and the identity of the user.  It should, however, be noted
-that most media flows (e.g., encrypted video payloads in SRTP or QUIC) exhibit
-a pattern of bursts and intervals that is vulnerable to traffic analysis.
+Media flows are vulnerable to traffic analysis even without per-packet
+metadata (see, e.g., {{traffic-analysis}}). The security aspects of the
+media payload / transport are not in the scope of this document; these
+are mentioned here only to provide context for metadata privacy.
 
-To avoid this kind of traffic analysis without per-packet metadata, media sent by the server
-would need to be scheduled or multiplexed differently to each
-user/recipient. This may be possible in transports like QUIC which
-allows flexibility in scheduling each stream. Transports like QUIC
-also fully encrypt the entire stream and, therefore, no media headers
-are observable on-path either. The security aspects of the media
-payload / transport are not in the scope of this document and is
-described here only to provide context for metadata privacy.
+Protocols such as TLS, SRTP, and QUIC offer some mitigations (like padding)
+but are vulnerable to traffic analysis ({{traffic-analysis-2}}).
+Metadata is vulnerable to modification in transit by
+on-path attackers, who can corrupt checksums, drop packets, or mislabel
+important packets. Such changes are detectable by the receiver.
 
-Some metadata (e.g., the size of a burst of packets, sequence number,
-and timestamp) can be readily observed or inferred by entities along
-the network path. However, it is essential to recognize that while
-sequence numbers and timestamps are typically visible in the
-clear-text headers of protocols (e.g., TCP, RTP, or SRTP) they are
-not directly observable in encrypted protocols such as QUIC. All
-metadata sent from the server to the network, including these
-elements and others, are vulnerable to modification while in transit.
-Only an on-path attacker can modify on-path metadata. Such an
-attacker could engage in other malicious activities, like corrupting
-the checksum or dropping the packet. For instance, an
-active attacker could alter the metadata to mislabel important packets
-as unimportant, but such changes are
-detectable by the receiver.
+Per-packet metadata can aid in traffic analysis. Hence, it is recommended to
+encrypt or obfuscate the metadata information so it is only available to the
+server, client, and authorized network elements. However, encryption/obfuscation
+of per-packet metadata is ineffective if the threat resides in the same network
+entity with keys to decrypt the metadata. The method of encryption or
+obfuscation is out of scope.
 
-It is recommended to encrypt or obfuscate the metadata information so
-it is only available to the server, client, and authorized network
-elements. The method of encryption or obfuscation is not described in
-this document but rather in other documents that specify how this
-metadata is encoded and exchanged amongst client, server, and network
-elements. The privacy implications of revealing metadata to network
-elements need to be thoroughly analyzed. This analysis should ensure
-that any exposure of metadata does not compromise user privacy or
-allow unauthorized entities to infer sensitive information about the
-data being transmitted while maintaining minimal resource
-consumption. There is a tension between resource consumption (and thus efficiency) of such
-encryption and the user's privacy and this tension depends on the threat
-model ({{Section 7.4 of ?RFC6973}}); the threat of a network provider
-building a subscriber profile of viewed video content
-is different from the threat of an interactive voice or video call. To
-mitigate traffic analysis, the sender might, for example, purposefully mis-mark
-metadata in some packets, add some randomness to avoid recurrent traffic patterns, etc.
+Analysis to ensure that metadata exposure does not compromise user privacy
+or allow unauthorized entities to infer sensitive information, while
+maintaining minimal resource consumption is crucial. There is a tension
+between resource consumption of such encryption and the user's privacy
+({{Section 7.4 of ?RFC6973}}).
+
 
 REQ-PRIVACY-ADDITIONAL and REQ-SIGNALING-AVOIDANCE are satisfied by
 not revealing any information that could identify the application's identity, reason to signal,
