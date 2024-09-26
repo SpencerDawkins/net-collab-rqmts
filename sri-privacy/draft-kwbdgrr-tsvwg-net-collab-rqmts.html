@@ -26,7 +26,7 @@ through cooperation of server/client and the network.
        This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-UDP flows bound to the same user. 
+signaling information about a UDP transport flow (UDP 4-tuple). 
     " name="description">
 <meta content="xml2rfc 3.23.1" name="generator">
 <meta content="Media" name="keyword">
@@ -1117,7 +1117,7 @@ through cooperation of server/client and the network.<a href="#section-abstract-
 <p id="section-abstract-2">This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+signaling information about a UDP transport flow (UDP 4-tuple).<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1224,12 +1224,7 @@ UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">�
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-on-path-metadata-requiremen" class="internal xref">On-path Metadata Requirements</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-client-network-metadata" class="internal xref">Client-Network Metadata</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
-                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-client-flow-authorization" class="internal xref">Client Flow Authorization</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-client-network-flow-authori" class="internal xref">Client-Network Flow Authorization and Negotiation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-server-network-metadata" class="internal xref">Server-Network Metadata</a></p>
@@ -1324,7 +1319,7 @@ UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">�
       </h2>
 <p id="section-1-1">Wireless networks, including 5G and WLAN, inherently experience large
 variations in link quality over sub-RTT (round-trip time) intervals and on the other
-hand applications such as interactive media demand both low latency
+hand, applications such as interactive media demand both low latency
 and high bandwidth.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Superior service during adverse network events can be achieved by the
 sender conveying packet behavior preferences to the network for
@@ -1400,7 +1395,7 @@ long durations (e.g., varying wireless and mobile air interface conditions) or p
 policies to soften the impact of ongoing attacks.<a href="#section-2-2.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-2.15">Traffic shaping:</dt>
+<dt id="section-2-2.15">Traffic Shaping:</dt>
         <dd style="margin-left: 1.5em" id="section-2-2.16">
           <p id="section-2-2.16.1">Refers in this document to QoS management at an
 access router to delay or discard packets of lower priority
@@ -1452,9 +1447,8 @@ networks use clients which run various applications; each having
 different connectivity needs for an optimal user experience. These
 needs are not frozen but change over time depending on the application
 and even depending on how an application is used (e.g., user's
-preferences). An explicit signal to the client can help to manage
-the use of available bandwidth better and better share it with
-requesting applications.<a href="#section-3-3" class="pilcrow">¶</a></p>
+preferences). An explicit signal to the client can improve management
+of available bandwidth.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">Other applications like interactive media can demand both high
 throughput and low latency and, in some cases, carry different
 streams (e.g., audio and video) in a single transport connection
@@ -1464,8 +1458,8 @@ as an implicit signal for determining relative priority. However,
 <span>[<a href="#RFC9335" class="cite xref">RFC9335</a>]</span> defines a new mechanism that completely encrypts RTP
 header extensions and Contributing sources (CSRCs). Furthermore, a
 full encrypted transport (e.g., QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) does not expose
-any media header information that on-path network elements can use
-for forwarding decisions.<a href="#section-3-5" class="pilcrow">¶</a></p>
+any media header information to influence on-path network elements
+during a Reactive Management event.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <span id="name-e2e-media-transport-overvie"></span><div id="Figure-e2e">
 <figure id="figure-1">
         <div id="section-3-6.1">
@@ -1680,19 +1674,16 @@ server-to-network (S2N) metadata are described in <a href="#server-network" clas
 <p id="section-3-11">The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
 which can in turn allocate available bandwidth to other flows of that network
-attachment, especially during a reactive management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
+attachment, especially during a Reactive Management event.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">Network shapers
 observe flows and apply policies to maximize performance but are
 not aware whether  there is a high preference for one flow (UDP
 4-tuple) over another flow belonging to the same user and network
 attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
-<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).  Clients may provide an (access)
-router with preferences of which flow (UDP 4-tuple) has relative
-priority among flows of that network attachment using H2N (C - in
-the figure).  Clients may also provide information to an (access) router
-to drop, when resources are congested,  'lower priority'-marked
-packets of a flow (UDP 4-tuple) temporarily which can in turn
-allocate bandwidth to other flows of that same network attachment.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<a href="#net-attach" class="auto internal xref">Appendix A</a> for more details).
+Clients can provide information to an (access) router
+to drop 'lower priority'-marked
+packets of a flow (UDP 4-tuple) during a Reactive Management event.<a href="#section-3-12" class="pilcrow">¶</a></p>
 <p id="section-3-13">In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
 that demand low latency and high throughput can lead to suboptimal
@@ -1713,9 +1704,9 @@ user experience.<a href="#section-3-13" class="pilcrow">¶</a></p>
           <dt id="section-4.1-1.1">REQ-PACKET-PRIORITY:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.2">
             <p id="section-4.1-1.2.1">Server indicates the importance of a packet within a flow. This allows the network
-to prioritize based on requirement and during reactive events. This
+to prioritize based on requirement and during a Reactive Management event. This
 priority value may also be used to indicate loss tolerance and the
-network elements may drop loss tolerant packets during reactive
+network elements may drop loss tolerant packets during Reactive Management
 events.<a href="#section-4.1-1.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1784,12 +1775,13 @@ to change based on the user preference, aids in scalability.<a href="#section-4.
           <dd class="break"></dd>
 <dt id="section-4.3-1.3"></dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.4">
-            <p id="section-4.3-1.4.1">Signaling to the network (<a href="#client-network" class="auto internal xref">Section 6.1</a>, <a href="#server-network" class="auto internal xref">Section 6.2</a>)
-will need to be facilitated by Application Programming Interfaces
-(APIs) for any application to use them. Signaling and retrieval of
+            <p id="section-4.3-1.4.1">Signaling from client to network (<a href="#client-flow-auth" class="auto internal xref">Section 6.1</a>)
+and server to network (<a href="#server-network" class="auto internal xref">Section 6.2</a>))
+is best facilitated by Application Programming Interfaces
+(APIs). Signaling and retrieval of
 the signals may not be performed at a single layer (although not
-encouraged). Hence, a framework is required to abstract the underlying
-protocol(s) and allow the application(s) to retrieve/send signals
+encouraged). Hence, for server to network signaling, a framework is required to abstract the underlying
+per-packet metadata protocol(s) and allow the application(s) to retrieve/send signals
 using a single or a set of APIs independent of the channels that
 are used to convey the signals. The API framework is required even
 if one single channel is used so that any application on a client can
@@ -1798,25 +1790,7 @@ consume the signals.<a href="#section-4.3-1.4.1" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-4.3-1.5"></dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.6">
-            <p id="section-4.3-1.6.1">There might be many channels to signal the metadata such as
-(non-exhaustive list):<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.3-1.6.2.1">
-                <p id="section-4.3-1.6.2.1.1">TCP options <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span><a href="#section-4.3-1.6.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.3-1.6.2.2">
-                <p id="section-4.3-1.6.2.2.1">UDP Options <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span><a href="#section-4.3-1.6.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.3-1.6.2.3">
-                <p id="section-4.3-1.6.2.3.1">IPv6 Hop-by-Hop Options (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>)<a href="#section-4.3-1.6.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.3-1.6.2.4">
-                <p id="section-4.3-1.6.2.4.1">QUIC CID mapping<a href="#section-4.3-1.6.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.3-1.6.2.5">
-                <p id="section-4.3-1.6.2.5.1">ICMP messages<a href="#section-4.3-1.6.2.5.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="section-4.3-1.6.1">The API framework uses the medium negotiated under <a href="#metadata-negotiation" class="auto internal xref">Section 5.3</a> to send/receive the signals<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1889,7 +1863,7 @@ Requirement: REQ-PACKET-PRIORITY.<a href="#section-5.1-4.1.2" class="pilcrow">¶
 <p id="section-5.1-4.1.3">
 Impact: With the above requirement met, better quality of service
  could be maintained in resource-constrained networks and during
- reactive events ensuring better user experience.<a href="#section-5.1-4.1.3" class="pilcrow">¶</a></p>
+ Reactive Management events ensuring better user experience.<a href="#section-5.1-4.1.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-4.2">
             <p id="section-5.1-4.2.1">The server (or relay) sends the same stream to many receivers,
@@ -1965,9 +1939,9 @@ Impact: With the above requirement met, each client/user preferences are
  prioritized accordingly while maintaining scalability on the server.<a href="#section-5.2-4.3.3" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.2-4.4">
-            <p id="section-5.2-4.4.1">A network glitch while user is in a eXtended Reality application.
+            <p id="section-5.2-4.4.1">A network glitch while user is in an eXtended Reality application.
 The traffic comprises of haptic, video, audio, graphics update and
-keystrokes. During such reactive event, some packets need to be
+keystrokes. During such a Reactive Management event, some packets need to be
 deprioritized/dropped to maintain interactivity.<a href="#section-5.2-4.4.1" class="pilcrow">¶</a></p>
 <p id="section-5.2-4.4.2">
 Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.<a href="#section-5.2-4.4.2" class="pilcrow">¶</a></p>
@@ -1986,22 +1960,46 @@ Impact: By prioritizing high priority traffic, user's
 <p id="section-5.3-1">Currently, some flows are granted higher priority over other flows
 because of a contractual agreement between the ISP and the content
 provider. These contracts could be extended to also allow per-packet
-prioritization within a single UDP 4-tuple, as desired by this
-document (<a href="#client-network" class="auto internal xref">Section 6.1</a> and <a href="#client-flow-auth" class="auto internal xref">Section 6.1.1</a>).<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">For such applications to benefit from per-packet prioritization within
-a single UDP 4-tuple, the client needs to determine which per-packet
+metadata within a single UDP 4-tuple, as desired by this
+document (<a href="#client-flow-auth" class="auto internal xref">Section 6.1</a>). However,
+these sorts of agreements favor large content providers and major
+ISPs, disfavoring smaller providers and smaller ISPs while also
+preventing other network topologies such as peer-to-peer networking
+(e.g., VoIP) as that traffic does not originate from a contracted
+content provider.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">For all applications to benefit from per-packet prioritization within
+a single UDP 4-tuple, the client needs to communicate with the ISP to determine which per-packet
 markings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,
 UDP Option, or DSCP). Then it can indicate to the ISP's network that a
-certain UDP 4-tuple will have those markings.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">Impact: By signaling ISPs to honor the metadata for a particular flow, the client
-  facilitates in the identification of traffic to prioritize for the ISPs.
-  This would enable the ISPs to extend contracts to servers that cannot be identified
-  by using IP addresses, thereby opening up such contracts to more content providers.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+certain UDP 4-tuple will have those markings and instruct the server
+to generate those per-packet metadata markings.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">There might be many channels to signal the Server-to-Network per-packet metadata such as
+(non-exhaustive list):<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.3-4.1">
+            <p id="section-5.3-4.1.1">TCP options <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span><a href="#section-5.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-4.2">
+            <p id="section-5.3-4.2.1">UDP Options <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span><a href="#section-5.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-4.3">
+            <p id="section-5.3-4.3.1">IPv6 Hop-by-Hop Options (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>)<a href="#section-5.3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-4.4">
+            <p id="section-5.3-4.4.1">QUIC CID mapping<a href="#section-5.3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-4.5">
+            <p id="section-5.3-4.5.1">ICMP messages<a href="#section-5.3-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.3-5">Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<p id="section-5.3-6">Impact: By signaling ISPs to honor the metadata for a particular flow, the client
+  facilitates identifying important packets to the ISP enhancing packet delay or
+  drop decisions during Reactive Management events.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 <span id="name-api-framework-client-learns"></span><div id="client-learn">
 <figure id="figure-3">
-          <div id="section-5.3-5.1">
-            <div class="alignCenter art-svg artwork" id="section-5.3-5.1.1">
+          <div id="section-5.3-7.1">
+            <div class="alignCenter art-svg artwork" id="section-5.3-7.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="272" width="480" viewBox="0 0 480 272" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 24,48 L 24,224" fill="none" stroke="black"></path>
                 <path d="M 440,48 L 440,224" fill="none" stroke="black"></path>
@@ -2019,7 +2017,7 @@ certain UDP 4-tuple will have those markings.<a href="#section-5.3-2" class="pil
                   <text x="452" y="36">router</text>
                   <text x="64" y="84">Network</text>
                   <text x="152" y="84">Collaboration</text>
-                  <text x="260" y="84">Capabilites?</text>
+                  <text x="264" y="84">Capabilities?</text>
                   <text x="44" y="132">my</text>
                   <text x="88" y="132">Network</text>
                   <text x="176" y="132">Collaboration</text>
@@ -2033,7 +2031,7 @@ certain UDP 4-tuple will have those markings.<a href="#section-5.3-2" class="pil
                   <text x="360" y="180">#4"</text>
                   <text x="44" y="228">ok</text>
                 </g>
-              </svg><a href="#section-5.3-5.1.1" class="pilcrow">¶</a>
+              </svg><a href="#section-5.3-7.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
@@ -2057,46 +2055,29 @@ with the data traffic.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The path signals below should follow the principles of intentional
 distribution, protection of information, minimization and limiting
 impact as described in <span>[<a href="#RFC9419" class="cite xref">RFC9419</a>]</span> and <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span>. Leveraging
-previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals does not
+previous experience (<span>[<a href="#RFC9049" class="cite xref">RFC9049</a>]</span>), the metadata signals do not
 need application identity, application cause (or 'reason'), server
 identity or the inspection of client-to-server encrypted payload.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">The metadata connections may be between server and network (in
 either direction) or between client and network (in either direction).<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">Some use cases benefit from server - network metadata exchanges
-(<a href="#server-network" class="auto internal xref">Section 6.2</a>) and others need client involvement
-(<a href="#client-network" class="auto internal xref">Section 6.1</a>).<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-4">Some use cases benefit from server-network metadata exchanges
+(<a href="#server-network" class="auto internal xref">Section 6.2</a>) after first performing a client-network metadata
+exchange (<a href="#client-flow-auth" class="auto internal xref">Section 6.1</a>).<a href="#section-6-4" class="pilcrow">¶</a></p>
 <p id="section-6-5">For the requirements that follow, the assumption is that the client
 agrees to the exchange of metadata between the server and network,
 or between the client and network.<a href="#section-6-5" class="pilcrow">¶</a></p>
-<div id="client-network">
-<section id="section-6.1">
-        <h3 id="name-client-network-metadata">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-client-network-metadata" class="section-name selfRef">Client-Network Metadata</a>
-        </h3>
-<p id="section-6.1-1">Due to contractual agreements (mentioned in <a href="#req-definition" class="auto internal xref">Section 4</a> under
-REQ-CLIENT-DECIDES) between content providers and ISPs, not all the
-content providers' signals are honored. However, extending these
-contracts would disadvantage content providers and other servers
-that cannot obtain such a contract or have traffic that is difficult
-or impossible for the ISP to identify and provide such service. This
-drawback can be overcome using metadata defined in <a href="#client-flow-auth" class="auto internal xref">Section 6.1.1</a>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div id="client-flow-auth">
-<section id="section-6.1.1">
-          <h4 id="name-client-flow-authorization">
-<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-client-flow-authorization" class="section-name selfRef">Client Flow Authorization</a>
-          </h4>
-<p id="section-6.1.1-1">Client authorization signal provides information on whether the ISP
-should honor the signals sent by the current flow. This would enable
-the ISP to identify servers, which are difficult or impossible to
-identify by other available methods today.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-2">This signal also serves as the medium to initiate the negotiation
-discussed in <a href="#metadata-negotiation" class="auto internal xref">Section 5.3</a>).<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-3">Encrypting/Obfuscating metadata information is recommended (<a href="#privacy" class="auto internal xref">Section 7.1</a>).
-The client authorization signal provides the means to convey the key
-needed by the ISP to decrypt the metadata.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-4">REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
+<section id="section-6.1">
+        <h3 id="name-client-network-flow-authori">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-client-network-flow-authori" class="section-name selfRef">Client-Network Flow Authorization and Negotiation</a>
+        </h3>
+<p id="section-6.1-1">By signaling the ISP, a client can authorize the ISP to honor
+incoming per-packet metadata for a certain flow (UDP 4-tuple).<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">This same signal also allows negotiating capabilities
+discussed in <a href="#metadata-negotiation" class="auto internal xref">Section 5.3</a>) and sharing the keys
+necessary for encrypting or obfuscating server-to-network per-
+packet metadata recommended in <a href="#privacy" class="auto internal xref">Section 7.1</a>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="server-network">
@@ -2128,8 +2109,8 @@ identified in <a href="#sys-considerations" class="auto internal xref">Section 7
 metadata should not provide additional information to identify the
 application or the user. The application server can decide on the
 metadata values that provide the best handling for the packets of
-the flow and may not necessarily reflect the exact priority values
-that allow an on-path observer to perform traffic analysis. This
+the flow.
+This
 metadata is advisory in nature and network traffic policy
 that restricts its use would not result in additional issues. Other
 constraints including scale (<a href="#scalability" class="auto internal xref">Appendix D.6</a>) and continuity
@@ -2158,14 +2139,12 @@ identified in <a href="#sys-considerations" class="auto internal xref">Section 7
 <p id="section-6.2.1-1">Per-packet priority information provides the priority level of one
 packet relative to other packets within a transport flow (UDP
 4-tuple). When a packet is marked with high priority, the expectation
-is that the network will give high importance to forwarding the
-packet and when a packet is marked with lower priority, the network
-will drop the packet in the presence of severe congestion or limited
-bandwidth. The application server can decide on the priority or
+is that during a Reactive Management event, the network will give high importance to forwarding the
+packet compared to a packet marked with low priority.
+The application server can decide on the priority or
 importance values that provide the best handling for the packets
-of the transport flow and may not necessarily reflect the exact
-priority values that allow an on-path observer to perform traffic
-analysis. When more than one application stream (e.g., video, audio)
+of the transport flow.
+When more than one application stream (e.g., video, audio)
 is sent on the same transport flow, the application server decides
 the best allocation of priority values across the different streams
 of the flow.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
@@ -2187,12 +2166,10 @@ this metadata is to indicate that these packets can tolerate a
 limited amount of delay when there is severe congestion or limited
 bandwidth. Similar to the LE PHB <span>[<a href="#RFC8622" class="cite xref">RFC8622</a>]</span> for flows, the
 expectation is that in this case, each packet marked with this
-metadata is dropped only when there is excessive delay. As with
+metadata is dropped during a Reactive Management event. As with
 per-packet priority in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a>, the application server
 can decide on the metadata values that provide the best handling
-for the packets of the transport flow and may not necessarily reflect
-the exact delay tolerance values that allow an on-path observer to
-perform traffic analysis.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+for the packets of the transport flow.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.2-2">REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2207,8 +2184,8 @@ perform traffic analysis.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-7-1">Traffic policing and shaping are enforced in ingress/egress network
 points for various reasons (protect the network against attacks,
-ensure conformance with a trafic profile, etc.). Out-of-profile
-trafic may be discarded or assigned another class (e.g., using Lower
+ensure conformance with a traffic profile, etc.). Out-of-profile
+traffic may be discarded or assigned another class (e.g., using Lower
 Effort Per-Domain Behavior (LE PDB) <span>[<a href="#RFC3662" class="cite xref">RFC3662</a>]</span>) a bandwidth limit
 among others. The exact behavior is policy-based and deployment-specific.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The entire set of operations to manage traffic is beyond the scope
@@ -2277,7 +2254,8 @@ contain security considerations and are referenced in <a href="#metadata-req" cl
 <p id="section-10-2">Since the document focuses only on priorities within a flow
 (not specifying inter-flow priority), the document does not induce concerns related to a specific
 user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3">This document has no other security considerations.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-3">See also <a href="#privacy" class="auto internal xref">Section 7.1</a>.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">This document has no other security considerations.<a href="#section-10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
@@ -2642,7 +2620,7 @@ considered. An example of such exposure is OS APIs.<a href="#appendix-B-1.20.1" 
         <dd class="break"></dd>
 <dt id="appendix-B-1.21">REQ-NETWORK-SEEKS-LOAD-DOWN:</dt>
         <dd style="margin-left: 1.5em" id="appendix-B-1.22">
-          <p id="appendix-B-1.22.1">During detected reactive events, the network implements a
+          <p id="appendix-B-1.22.1">During detected Reactive Management events, the network implements a
 reactive traffic policy to reduce or offload some of the traffic.<a href="#appendix-B-1.22.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -2737,8 +2715,8 @@ distinguished so that full frames can be indicated to the network.<a href="#appe
         </h3>
 <p id="appendix-C.2-1">There are cases (crisis) where "normal" network resources cannot
 be used at maximum and, thus, a network would seek to reduce or
-offload some of the traffic during these events -- often called
-'reactive traffic policy'. An example of such use case is cellular
+offload some of the traffic during these events -- called
+'Reactive Management' policy.  An example of such use case is cellular
 networks that are overly used (and radio resources exhausted) such
 as a large collection of people (e.g., parade, sporting event), or
 such as a partial radio network outage (e.g., tower power outage).
@@ -2761,7 +2739,7 @@ limiting due to various reasons.<a href="#appendix-C.3-1" class="pilcrow">¶</a>
 <p id="appendix-C.3-2">Also, traffic exchanged over a network attachment may be subject
 to rate-limit policies. These policies may be intentional policies
 (e.g., enforced as part of the activation of the network attachment
-and typically agreed upon service subscription) or be reactive
+and typically agreed upon service subscription) or be Reactive Management
 policies (e.g., enforced temporarily to manage an overload or during
 a DDoS attack mitigation).<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.3-3">Requirements: REQ-NETWORK-THROUGHPUT, REQ-NRLP.<a href="#appendix-C.3-3" class="pilcrow">¶</a></p>

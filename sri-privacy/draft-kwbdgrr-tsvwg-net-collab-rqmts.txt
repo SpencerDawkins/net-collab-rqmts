@@ -36,8 +36,8 @@ Abstract
 
    This document lists some use cases that illustrate the need for a
    mechanism to share metadata and outlines requirements for both
-   client-to-network and server-to-network.  The document focuses on UDP
-   flows bound to the same user.
+   client-to-network and server-to-network.  The document focuses on
+   signaling information about a UDP transport flow (UDP 4-tuple).
 
 About This Document
 
@@ -98,8 +98,7 @@ Table of Contents
      5.2.  Interactive Media
      5.3.  Metadata Negotiation Support
    6.  On-path Metadata Requirements
-     6.1.  Client-Network Metadata
-       6.1.1.  Client Flow Authorization
+     6.1.  Client-Network Flow Authorization and Negotiation
      6.2.  Server-Network Metadata
        6.2.1.  Packet Priority
        6.2.2.  Tolerance to Delay
@@ -129,7 +128,7 @@ Table of Contents
 
    Wireless networks, including 5G and WLAN, inherently experience large
    variations in link quality over sub-RTT (round-trip time) intervals
-   and on the other hand applications such as interactive media demand
+   and on the other hand, applications such as interactive media demand
    both low latency and high bandwidth.
 
    Superior service during adverse network events can be achieved by the
@@ -194,7 +193,7 @@ Table of Contents
       interface conditions) or protection policies to soften the impact
       of ongoing attacks.
 
-   Traffic shaping:  Refers in this document to QoS management at an
+   Traffic Shaping:  Refers in this document to QoS management at an
       access router to delay or discard packets of lower priority to
       achieve bounded latency and high throughput.
 
@@ -240,9 +239,8 @@ Table of Contents
    different connectivity needs for an optimal user experience.  These
    needs are not frozen but change over time depending on the
    application and even depending on how an application is used (e.g.,
-   user's preferences).  An explicit signal to the client can help to
-   manage the use of available bandwidth better and better share it with
-   requesting applications.
+   user's preferences).  An explicit signal to the client can improve
+   management of available bandwidth.
 
    Other applications like interactive media can demand both high
    throughput and low latency and, in some cases, carry different
@@ -254,8 +252,8 @@ Table of Contents
    [RFC9335] defines a new mechanism that completely encrypts RTP header
    extensions and Contributing sources (CSRCs).  Furthermore, a full
    encrypted transport (e.g., QUIC [RFC9000]) does not expose any media
-   header information that on-path network elements can use for
-   forwarding decisions.
+   header information to influence on-path network elements during a
+   Reactive Management event.
 
                         :
           3GPP/mobile network
@@ -323,20 +321,15 @@ Table of Contents
    The client may provide information to an (access) router to drop
    lower priority marked packets of a flow (UDP 4-tuple) temporarily
    which can in turn allocate available bandwidth to other flows of that
-   network attachment, especially during a reactive management event.
+   network attachment, especially during a Reactive Management event.
 
    Network shapers observe flows and apply policies to maximize
    performance but are not aware whether there is a high preference for
    one flow (UDP 4-tuple) over another flow belonging to the same user
    and network attachment (e.g., a subscriber connection, a 3GPP PDU
-   Session.  See Appendix A for more details).  Clients may provide an
-   (access) router with preferences of which flow (UDP 4-tuple) has
-   relative priority among flows of that network attachment using H2N (C
-   - in the figure).  Clients may also provide information to an
-   (access) router to drop, when resources are congested, 'lower
-   priority'-marked packets of a flow (UDP 4-tuple) temporarily which
-   can in turn allocate bandwidth to other flows of that same network
-   attachment.
+   Session.  See Appendix A for more details).  Clients can provide
+   information to an (access) router to drop 'lower priority'-marked
+   packets of a flow (UDP 4-tuple) during a Reactive Management event.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -349,9 +342,10 @@ Table of Contents
 
    REQ-PACKET-PRIORITY:  Server indicates the importance of a packet
       within a flow.  This allows the network to prioritize based on
-      requirement and during reactive events.  This priority value may
-      also be used to indicate loss tolerance and the network elements
-      may drop loss tolerant packets during reactive events.
+      requirement and during a Reactive Management event.  This priority
+      value may also be used to indicate loss tolerance and the network
+      elements may drop loss tolerant packets during Reactive Management
+      events.
 
       This is a per-packet metadata requirement.
 
@@ -381,29 +375,20 @@ Table of Contents
    REQ-API-FRAMEWORK:  API framework to facilitate signaling for
       applications.
 
-      Signaling to the network (Section 6.1, Section 6.2) will need to
-      be facilitated by Application Programming Interfaces (APIs) for
-      any application to use them.  Signaling and retrieval of the
+      Signaling from client to network (Section 6.1) and server to
+      network (Section 6.2)) is best facilitated by Application
+      Programming Interfaces (APIs).  Signaling and retrieval of the
       signals may not be performed at a single layer (although not
-      encouraged).  Hence, a framework is required to abstract the
-      underlying protocol(s) and allow the application(s) to retrieve/
-      send signals using a single or a set of APIs independent of the
-      channels that are used to convey the signals.  The API framework
-      is required even if one single channel is used so that any
-      application on a client can consume the signals.
+      encouraged).  Hence, for server to network signaling, a framework
+      is required to abstract the underlying per-packet metadata
+      protocol(s) and allow the application(s) to retrieve/send signals
+      using a single or a set of APIs independent of the channels that
+      are used to convey the signals.  The API framework is required
+      even if one single channel is used so that any application on a
+      client can consume the signals.
 
-      There might be many channels to signal the metadata such as (non-
-      exhaustive list):
-
-      *  TCP options [RFC9293]
-
-      *  UDP Options [I-D.ietf-tsvwg-udp-options]
-
-      *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
-
-      *  QUIC CID mapping
-
-      *  ICMP messages
+      The API framework uses the medium negotiated under Section 5.3 to
+      send/receive the signals
 
 4.4.  System Considerations
 
@@ -447,7 +432,7 @@ Table of Contents
 
        Impact: With the above requirement met, better quality of service
        could be maintained in resource-constrained networks and during
-       reactive events ensuring better user experience.
+       Reactive Management events ensuring better user experience.
 
    2.  The server (or relay) sends the same stream to many receivers,
        including the same metadata (especially with media over QUIC).
@@ -522,10 +507,11 @@ Table of Contents
        preferences are prioritized accordingly while maintaining
        scalability on the server.
 
-   4.  A network glitch while user is in a eXtended Reality application.
-       The traffic comprises of haptic, video, audio, graphics update
-       and keystrokes.  During such reactive event, some packets need to
-       be deprioritized/dropped to maintain interactivity.
+   4.  A network glitch while user is in an eXtended Reality
+       application.  The traffic comprises of haptic, video, audio,
+       graphics update and keystrokes.  During such a Reactive
+       Management event, some packets need to be deprioritized/dropped
+       to maintain interactivity.
 
        Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.
 
@@ -537,28 +523,45 @@ Table of Contents
    Currently, some flows are granted higher priority over other flows
    because of a contractual agreement between the ISP and the content
    provider.  These contracts could be extended to also allow per-packet
-   prioritization within a single UDP 4-tuple, as desired by this
-   document (Section 6.1 and Section 6.1.1).
+   metadata within a single UDP 4-tuple, as desired by this document
+   (Section 6.1).  However, these sorts of agreements favor large
+   content providers and major ISPs, disfavoring smaller providers and
+   smaller ISPs while also preventing other network topologies such as
+   peer-to-peer networking (e.g., VoIP) as that traffic does not
+   originate from a contracted content provider.
 
-   For such applications to benefit from per-packet prioritization
-   within a single UDP 4-tuple, the client needs to determine which per-
-   packet markings are supported by the ISP's network (e.g., encoded
-   into IPv6 Flow Label, UDP Option, or DSCP).  Then it can indicate to
-   the ISP's network that a certain UDP 4-tuple will have those
-   markings.
+   For all applications to benefit from per-packet prioritization within
+   a single UDP 4-tuple, the client needs to communicate with the ISP to
+   determine which per-packet markings are supported by the ISP's
+   network (e.g., encoded into IPv6 Flow Label, UDP Option, or DSCP).
+   Then it can indicate to the ISP's network that a certain UDP 4-tuple
+   will have those markings and instruct the server to generate those
+   per-packet metadata markings.
+
+   There might be many channels to signal the Server-to-Network per-
+   packet metadata such as (non-exhaustive list):
+
+   *  TCP options [RFC9293]
+
+   *  UDP Options [I-D.ietf-tsvwg-udp-options]
+
+   *  IPv6 Hop-by-Hop Options (Section 4.3 of [RFC8200])
+
+   *  QUIC CID mapping
+
+   *  ICMP messages
 
    Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
 
    Impact: By signaling ISPs to honor the metadata for a particular
-   flow, the client facilitates in the identification of traffic to
-   prioritize for the ISPs.  This would enable the ISPs to extend
-   contracts to servers that cannot be identified by using IP addresses,
-   thereby opening up such contracts to more content providers.
+   flow, the client facilitates identifying important packets to the ISP
+   enhancing packet delay or drop decisions during Reactive Management
+   events.
 
           Client                                           ISP router
             |                                                   |
             |-------------------------------------------------->|
-            | Network Collaboration Capabilites?                |
+            | Network Collaboration Capabilities?               |
             |                                                   |
             |<--------------------------------------------------|
             | my Network Collaboration capabilities             |
@@ -583,43 +586,30 @@ Table of Contents
    The path signals below should follow the principles of intentional
    distribution, protection of information, minimization and limiting
    impact as described in [RFC9419] and [RFC8558].  Leveraging previous
-   experience ([RFC9049]), the metadata signals does not need
-   application identity, application cause (or 'reason'), server
-   identity or the inspection of client-to-server encrypted payload.
+   experience ([RFC9049]), the metadata signals do not need application
+   identity, application cause (or 'reason'), server identity or the
+   inspection of client-to-server encrypted payload.
 
    The metadata connections may be between server and network (in either
    direction) or between client and network (in either direction).
 
-   Some use cases benefit from server - network metadata exchanges
-   (Section 6.2) and others need client involvement (Section 6.1).
+   Some use cases benefit from server-network metadata exchanges
+   (Section 6.2) after first performing a client-network metadata
+   exchange (Section 6.1).
 
    For the requirements that follow, the assumption is that the client
    agrees to the exchange of metadata between the server and network, or
    between the client and network.
 
-6.1.  Client-Network Metadata
+6.1.  Client-Network Flow Authorization and Negotiation
 
-   Due to contractual agreements (mentioned in Section 4 under REQ-
-   CLIENT-DECIDES) between content providers and ISPs, not all the
-   content providers' signals are honored.  However, extending these
-   contracts would disadvantage content providers and other servers that
-   cannot obtain such a contract or have traffic that is difficult or
-   impossible for the ISP to identify and provide such service.  This
-   drawback can be overcome using metadata defined in Section 6.1.1.
+   By signaling the ISP, a client can authorize the ISP to honor
+   incoming per-packet metadata for a certain flow (UDP 4-tuple).
 
-6.1.1.  Client Flow Authorization
-
-   Client authorization signal provides information on whether the ISP
-   should honor the signals sent by the current flow.  This would enable
-   the ISP to identify servers, which are difficult or impossible to
-   identify by other available methods today.
-
-   This signal also serves as the medium to initiate the negotiation
-   discussed in Section 5.3).
-
-   Encrypting/Obfuscating metadata information is recommended
-   (Section 7.1).  The client authorization signal provides the means to
-   convey the key needed by the ISP to decrypt the metadata.
+   This same signal also allows negotiating capabilities discussed in
+   Section 5.3) and sharing the keys necessary for encrypting or
+   obfuscating server-to-network per- packet metadata recommended in
+   Section 7.1.
 
    REQ-CLIENT-DECIDES is satisfied by signaling Client Flow
    Authorization as part of client-to-network signal.
@@ -652,12 +642,10 @@ Table of Contents
    metadata should not provide additional information to identify the
    application or the user.  The application server can decide on the
    metadata values that provide the best handling for the packets of the
-   flow and may not necessarily reflect the exact priority values that
-   allow an on-path observer to perform traffic analysis.  This metadata
-   is advisory in nature and network traffic policy that restricts its
-   use would not result in additional issues.  Other constraints
-   including scale (Appendix D.6) and continuity (Appendix D.3) are
-   required for Section 6.2.1.
+   flow.  This metadata is advisory in nature and network traffic policy
+   that restricts its use would not result in additional issues.  Other
+   constraints including scale (Appendix D.6) and continuity
+   (Appendix D.3) are required for Section 6.2.1.
 
    Realizing the additional bandwidth potential with these metadata may
    require a higher sending rate for the transport flow.  This requires
@@ -681,17 +669,14 @@ Table of Contents
    Per-packet priority information provides the priority level of one
    packet relative to other packets within a transport flow (UDP
    4-tuple).  When a packet is marked with high priority, the
-   expectation is that the network will give high importance to
-   forwarding the packet and when a packet is marked with lower
-   priority, the network will drop the packet in the presence of severe
-   congestion or limited bandwidth.  The application server can decide
+   expectation is that during a Reactive Management event, the network
+   will give high importance to forwarding the packet compared to a
+   packet marked with low priority.  The application server can decide
    on the priority or importance values that provide the best handling
-   for the packets of the transport flow and may not necessarily reflect
-   the exact priority values that allow an on-path observer to perform
-   traffic analysis.  When more than one application stream (e.g.,
-   video, audio) is sent on the same transport flow, the application
-   server decides the best allocation of priority values across the
-   different streams of the flow.
+   for the packets of the transport flow.  When more than one
+   application stream (e.g., video, audio) is sent on the same transport
+   flow, the application server decides the best allocation of priority
+   values across the different streams of the flow.
 
    Per-packet priority or importance determines the drop priority of a
    packet.
@@ -709,12 +694,10 @@ Table of Contents
    limited amount of delay when there is severe congestion or limited
    bandwidth.  Similar to the LE PHB [RFC8622] for flows, the
    expectation is that in this case, each packet marked with this
-   metadata is dropped only when there is excessive delay.  As with per-
+   metadata is dropped during a Reactive Management event.  As with per-
    packet priority in Section 6.2.1, the application server can decide
    on the metadata values that provide the best handling for the packets
-   of the transport flow and may not necessarily reflect the exact delay
-   tolerance values that allow an on-path observer to perform traffic
-   analysis.
+   of the transport flow.
 
    REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part
    of server-to-network metadata.
@@ -723,8 +706,8 @@ Table of Contents
 
    Traffic policing and shaping are enforced in ingress/egress network
    points for various reasons (protect the network against attacks,
-   ensure conformance with a trafic profile, etc.).  Out-of-profile
-   trafic may be discarded or assigned another class (e.g., using Lower
+   ensure conformance with a traffic profile, etc.).  Out-of-profile
+   traffic may be discarded or assigned another class (e.g., using Lower
    Effort Per-Domain Behavior (LE PDB) [RFC3662]) a bandwidth limit
    among others.  The exact behavior is policy-based and deployment-
    specific.
@@ -789,6 +772,8 @@ Table of Contents
    concerns related to a specific user or client declaring all flows or
    a subset of them as being more important.  Such abuse concerns are
    thus not applicable.
+
+   See also Section 7.1.
 
    This document has no other security considerations.
 
@@ -1062,9 +1047,9 @@ Appendix B.  Extended Requirements Definition
       of the application should be considered.  An example of such
       exposure is OS APIs.
 
-   REQ-NETWORK-SEEKS-LOAD-DOWN:  During detected reactive events, the
-      network implements a reactive traffic policy to reduce or offload
-      some of the traffic.
+   REQ-NETWORK-SEEKS-LOAD-DOWN:  During detected Reactive Management
+      events, the network implements a reactive traffic policy to reduce
+      or offload some of the traffic.
 
       This may involve utilizing alternative network attachments
       available to the client (e.g., Wi-Fi).
@@ -1122,8 +1107,8 @@ C.2.  Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
-   some of the traffic during these events -- often called 'reactive
-   traffic policy'.  An example of such use case is cellular networks
+   some of the traffic during these events -- called 'Reactive
+   Management' policy.  An example of such use case is cellular networks
    that are overly used (and radio resources exhausted) such as a large
    collection of people (e.g., parade, sporting event), or such as a
    partial radio network outage (e.g., tower power outage).  During such
@@ -1145,9 +1130,9 @@ C.3.  Network Bandwidth & Network Rate Limiting Policies
    Also, traffic exchanged over a network attachment may be subject to
    rate-limit policies.  These policies may be intentional policies
    (e.g., enforced as part of the activation of the network attachment
-   and typically agreed upon service subscription) or be reactive
-   policies (e.g., enforced temporarily to manage an overload or during
-   a DDoS attack mitigation).
+   and typically agreed upon service subscription) or be Reactive
+   Management policies (e.g., enforced temporarily to manage an overload
+   or during a DDoS attack mitigation).
 
    Requirements: REQ-NETWORK-THROUGHPUT, REQ-NRLP.
 
