@@ -623,8 +623,8 @@ identified in {{sys-considerations}}. Privacy ({{privacy}}) requires that
 metadata should not provide additional information to identify the
 application or the user. The application server can decide on the
 metadata values that provide the best handling for the packets of
-the flow and may not necessarily reflect the exact priority values
-that allow an on-path observer to perform traffic analysis. This
+the flow.
+This
 metadata is advisory in nature and network traffic policy
 that restricts its use would not result in additional issues. Other
 constraints including scale ({{scalability}}) and continuity
@@ -658,9 +658,8 @@ packet and when a packet is marked with lower priority, the network
 will drop the packet in the presence of severe congestion or limited
 bandwidth. The application server can decide on the priority or
 importance values that provide the best handling for the packets
-of the transport flow and may not necessarily reflect the exact
-priority values that allow an on-path observer to perform traffic
-analysis. When more than one application stream (e.g., video, audio)
+of the transport flow.
+When more than one application stream (e.g., video, audio)
 is sent on the same transport flow, the application server decides
 the best allocation of priority values across the different streams
 of the flow.
@@ -683,9 +682,7 @@ expectation is that in this case, each packet marked with this
 metadata is dropped only when there is excessive delay. As with
 per-packet priority in {{relative-priority}}, the application server
 can decide on the metadata values that provide the best handling
-for the packets of the transport flow and may not necessarily reflect
-the exact delay tolerance values that allow an on-path observer to
-perform traffic analysis.
+for the packets of the transport flow.
 
 REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.
 
@@ -708,11 +705,10 @@ metadata.
 Encrypted media payloads along with temporary IPv6 addresses between
 a server and user (client) provide a measure of privacy for the
 content and the identity of the user.  It should, however, be noted
-that media flows (e.g., encrypted video payloads in SRTP) exhibit
-a pattern of bursts and intervals that amounts to a signature and
-is vulnerable to frequency analysis.
+that most media flows (e.g., encrypted video payloads in SRTP or QUIC) exhibit
+a pattern of bursts and intervals that is vulnerable to traffic analysis.
 
-To avoid this kind of frequency analysis, media sent by the server
+To avoid this kind of traffic analysis without per-packet metadata, media sent by the server
 would need to be scheduled or multiplexed differently to each
 user/recipient. This may be possible in transports like QUIC which
 allows flexibility in scheduling each stream. Transports like QUIC
@@ -779,6 +775,8 @@ contain security considerations and are referenced in {{metadata-req}}.
 Since the document focuses only on priorities within a flow
 (not specifying inter-flow priority), the document does not induce concerns related to a specific
 user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.
+
+See also {{privacy}}.
 
 This document has no other security considerations.
 
