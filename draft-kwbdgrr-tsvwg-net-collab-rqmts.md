@@ -156,12 +156,12 @@ The document makes use of the following terms:
 
 Per-Flow Metadata:
 : Refers to metadata that doesn't change often during the lifetime
-of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.  This is sent from client to network.
+of a connection and thus can be exchanged once or as needed. This is communicated per flow (i.e., UDP 4-tuple) between client and network.
 : Examples of such metadata are client request to honor per-packet metadata and preferences.
 
 Per-Packet Metadata:
 : Refers to metadata that varies packet to packet within the same flow, often capturing
-the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis. This is sent from server to network.
+the nature and characteristics of the traffic each packet carries. This needs to be communicated on a per packet basis.
 : Examples of such metadata are Packet Priority and tolerance to delay
 
 Reactive Management:
