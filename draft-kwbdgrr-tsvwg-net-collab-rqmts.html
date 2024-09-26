@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaippallimalil, et al.</td>
-<td class="center">Expires 29 March 2025</td>
+<td class="center">Expires 30 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kwbdgrr-tsvwg-net-collab-rqmts-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-25" class="published">25 September 2024</time>
+<time datetime="2024-09-26" class="published">26 September 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-29">29 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-30">30 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1151,7 +1151,7 @@ UDP flows bound to the same user.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2128,8 +2128,8 @@ identified in <a href="#sys-considerations" class="auto internal xref">Section 7
 metadata should not provide additional information to identify the
 application or the user. The application server can decide on the
 metadata values that provide the best handling for the packets of
-the flow and may not necessarily reflect the exact priority values
-that allow an on-path observer to perform traffic analysis. This
+the flow.
+This
 metadata is advisory in nature and network traffic policy
 that restricts its use would not result in additional issues. Other
 constraints including scale (<a href="#scalability" class="auto internal xref">Appendix D.6</a>) and continuity
@@ -2163,9 +2163,8 @@ packet and when a packet is marked with lower priority, the network
 will drop the packet in the presence of severe congestion or limited
 bandwidth. The application server can decide on the priority or
 importance values that provide the best handling for the packets
-of the transport flow and may not necessarily reflect the exact
-priority values that allow an on-path observer to perform traffic
-analysis. When more than one application stream (e.g., video, audio)
+of the transport flow.
+When more than one application stream (e.g., video, audio)
 is sent on the same transport flow, the application server decides
 the best allocation of priority values across the different streams
 of the flow.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
@@ -2190,9 +2189,7 @@ expectation is that in this case, each packet marked with this
 metadata is dropped only when there is excessive delay. As with
 per-packet priority in <a href="#relative-priority" class="auto internal xref">Section 6.2.1</a>, the application server
 can decide on the metadata values that provide the best handling
-for the packets of the transport flow and may not necessarily reflect
-the exact delay tolerance values that allow an on-path observer to
-perform traffic analysis.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+for the packets of the transport flow.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.2-2">REQ-PACKET-DELAY is satisfied by signaling Tolerance to Delay as part of server-to-network metadata.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2223,10 +2220,9 @@ metadata.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7.1-1">Encrypted media payloads along with temporary IPv6 addresses between
 a server and user (client) provide a measure of privacy for the
 content and the identity of the user.  It should, however, be noted
-that media flows (e.g., encrypted video payloads in SRTP) exhibit
-a pattern of bursts and intervals that amounts to a signature and
-is vulnerable to frequency analysis.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">To avoid this kind of frequency analysis, media sent by the server
+that most media flows (e.g., encrypted video payloads in SRTP or QUIC) exhibit
+a pattern of bursts and intervals that is vulnerable to traffic analysis.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">To avoid this kind of traffic analysis without per-packet metadata, media sent by the server
 would need to be scheduled or multiplexed differently to each
 user/recipient. This may be possible in transports like QUIC which
 allows flexibility in scheduling each stream. Transports like QUIC
@@ -2302,7 +2298,8 @@ contain security considerations and are referenced in <a href="#metadata-req" cl
 <p id="section-10-2">Since the document focuses only on priorities within a flow
 (not specifying inter-flow priority), the document does not induce concerns related to a specific
 user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3">This document has no other security considerations.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-3">See also <a href="#privacy" class="auto internal xref">Section 7.1</a>.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">This document has no other security considerations.<a href="#section-10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
