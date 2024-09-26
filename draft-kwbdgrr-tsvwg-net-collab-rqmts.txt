@@ -107,8 +107,7 @@ Table of Contents
    8.  Non-Requirements
    9.  IANA Considerations
    10. Security Considerations
-   Acknowledgments
-   Informative References
+   11. Informative References
    Appendix A.  Network Attachment
    Appendix B.  Extended Requirements Definition
    Appendix C.  Extended Use-Cases
@@ -122,6 +121,7 @@ Table of Contents
      D.4.  Multiple Bottlenecks
      D.5.  Metadata Scope
      D.6.  Scalability
+   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
@@ -765,42 +765,9 @@ Table of Contents
    a subset of them as being more important.  Such abuse concerns are
    thus not applicable.
 
-   See also Section 7.1.
+   Privacy-related considerations are discussed in Section 7.1.
 
-   This document has no other security considerations.
-
-Acknowledgments
-
-   This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
-   [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
-
-   T.  Reddy contributed text and ideas to this document.
-
-   Acknowledgments from
-   [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
-      authors of this draft have discussed the similarities and
-      differences of this draft with the MoQ draft for carrying media
-      metadata.
-
-      The authors wish to thank Mike Heard, Sebastian Moeller and Tom
-      Herbert for discussions on metadata fields, fragmentation and
-      various transport aspects.
-
-      The authors appreciate input from Marcus Ilhar and Magnus
-      Westerlund on the need to address privacy in general and Dan Druta
-      to consider a common transport across various client/server to
-      network signaling when possible.  Ruediger Geib suggested that
-      limiting the amount of state information that a wireless router
-      has to keep for a flow should be minimized.
-
-      Ingemar Johansson's suggestions on fast fading (which L4S handles)
-      and dramatic drops in wireless accesses have been helpful to
-      identify the issues.  Thanks to Hang Shi for the review and
-      comments on client-to-network signaling.  Thanks to Luis Miguel
-      Contreras, Colin Kahn, Marcus Ilhar and Tianji Jiang for their
-      review and comments.
-
-Informative References
+11.  Informative References
 
    [app-measurement]
               Gurel, Z. and A. C. Begen, "Bandwidth measurement for
@@ -1225,6 +1192,37 @@ D.6.  Scalability
    the number of flows handled increases.
 
    Requirement: REQ-ISP-SCALE.
+
+Acknowledgments
+
+   This document is a merge of [I-D.rwbr-tsvwg-signaling-use-cases] and
+   [I-D.kaippallimalil-tsvwg-media-hdr-wireless].
+
+   T.  Reddy contributed text and ideas to this document.
+
+   Acknowledgments from
+   [I-D.kaippallimalil-tsvwg-media-hdr-wireless]:  Xavier De Foy and the
+      authors of this draft have discussed the similarities and
+      differences of this draft with the MoQ draft for carrying media
+      metadata.
+
+      The authors wish to thank Mike Heard, Sebastian Moeller and Tom
+      Herbert for discussions on metadata fields, fragmentation and
+      various transport aspects.
+
+      The authors appreciate input from Marcus Ilhar and Magnus
+      Westerlund on the need to address privacy in general and Dan Druta
+      to consider a common transport across various client/server to
+      network signaling when possible.  Ruediger Geib suggested that
+      limiting the amount of state information that a wireless router
+      has to keep for a flow should be minimized.
+
+      Ingemar Johansson's suggestions on fast fading (which L4S handles)
+      and dramatic drops in wireless accesses have been helpful to
+      identify the issues.  Thanks to Hang Shi for the review and
+      comments on client-to-network signaling.  Thanks to Luis Miguel
+      Contreras, Colin Kahn, Marcus Ilhar and Tianji Jiang for their
+      review and comments.
 
 Authors' Addresses
 
