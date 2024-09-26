@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T01:23:43.975902+00:00",
+  "timestamp": "2024-09-26T01:23:06.789460+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -614,15 +614,15 @@
       "id": "I_kwDOL0HpzM6XX0tK",
       "title": "introduction is really long",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/88",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danwing",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Introduction would benefit from a diet, or at least breaking into sub-sections.  Some documents have a separate background section but existing text does not seem to talk a lot about existing systems.  Hm.  Suggestions?",
       "createdAt": "2024-09-20T20:14:38Z",
-      "updatedAt": "2024-09-23T02:17:27Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-24T14:25:24Z",
+      "closedAt": "2024-09-24T14:25:23Z",
       "comments": [
         {
           "author": "John-Kaippallimalil",
@@ -630,8 +630,31 @@
           "body": "I agree that section 1 (Intro) would benefit from breaking into 2 sections.\r\nHow about a short Introduction (section 1) that provides an overview of what's in the document, and \r\nA new section that follows ( -- something like \"Rationale for Per-packet Metadata\") which would contain the gist of what is currently in the intro but reduced in length (as much as possible).\r\nHighlighting \"per-packet metadata\" in a section heading may also help bringing attention to \"per-packet (vs. per-flow).",
           "createdAt": "2024-09-23T02:17:26Z",
           "updatedAt": "2024-09-23T02:17:26Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See how #91 feels -- I moved one new paragraph up, and slammed all the rest of the existing introduction into a new section 1.1, _Rational for Per-Packet Metadata_.  ",
+          "createdAt": "2024-09-24T01:46:31Z",
+          "updatedAt": "2024-09-24T01:46:31Z"
         }
       ]
+    },
+    {
+      "number": 98,
+      "id": "I_kwDOL0HpzM6X7ADC",
+      "title": "Privacy Considerations would benefit from re-write",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/98",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Privacy Considerations is long and worries about some of the wrong things, like modifying the metadata by an on-path attacker.  This section should have a structure of:\r\n\r\n1. traffic analysis is a problem for user privacy (e.g., ISP builds profile of streamed movies)\r\n2. existing TLS, SRTP, and QUIC traffic is vulnerable to traffic analysis, and have some mitigations like padding\r\n3. per-packet metadata makes traffic analysis easier\r\n4. mitigations for (3) are:  encrypting/obfuscating per-packet metdata, mis-marking metadata\r\n5. however, encrypting/obfuscating per-packet metadata is ineffective if threat is from the same network entity with the keys",
+      "createdAt": "2024-09-25T19:24:43Z",
+      "updatedAt": "2024-09-25T19:24:43Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5549,24 +5572,26 @@
       "id": "PR_kwDOL0HpzM58YIim",
       "title": "Moving requirements out of use cases. Rewording metadata text to be more coherent.",
       "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/90",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "sridharangirish91",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Requirements in metadata doesn't make sense since signaling the metadata satisfies the requirement.",
       "createdAt": "2024-09-23T14:07:53Z",
-      "updatedAt": "2024-09-23T21:47:27Z",
+      "updatedAt": "2024-09-24T14:05:43Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "bac70a40b173624f5f0c2a5af3279d03f5b90574",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
-      "headRefOid": "947e5bb1a423ccd7c6bd8674743c30643e99ef0f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1105d1a0bcc4276d8e52f9f6624996338d1474b3",
+      "closedAt": "2024-09-24T14:05:42Z",
+      "mergedAt": "2024-09-24T14:05:42Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "929f72332e34277735e208d5aee86021233f1e9f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5941,8 +5966,552 @@
               "updatedAt": "2024-09-23T21:47:28Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kihjh",
+          "commit": {
+            "abbreviatedOid": "947e5bb"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks for clarifying. \r\n\r\nSome few changes, fwiw. Thanks.",
+          "createdAt": "2024-09-24T07:22:26Z",
+          "updatedAt": "2024-09-24T07:33:45Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nmaintain for each additional flow it handles should be kept\r\n```",
+              "createdAt": "2024-09-24T07:22:26Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "no need to know this is \"media flow\". Removing is consistent with the assumption in the draft that we don't care about the application type, etc. ",
+              "createdAt": "2024-09-24T07:23:47Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            },
+            {
+              "originalPosition": 230,
+              "body": "```suggestion\r\nThere may be a large number of flows handled by the server\r\n```",
+              "createdAt": "2024-09-24T07:27:02Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            },
+            {
+              "originalPosition": 116,
+              "body": "```suggestion\r\nserver identity, and securing the metadata.\r\n```",
+              "createdAt": "2024-09-24T07:28:06Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            },
+            {
+              "originalPosition": 125,
+              "body": "```suggestion\r\n(not specifying inter-flow priority), the document does not induce concerns related to a specific\r\nuser or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.\r\n```",
+              "createdAt": "2024-09-24T07:32:58Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-09-24T07:33:05Z",
+              "updatedAt": "2024-09-24T07:33:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KmTPy",
+          "commit": {
+            "abbreviatedOid": "947e5bb"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-24T13:36:18Z",
+          "updatedAt": "2024-09-24T13:36:18Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Agree, just \"flow\" is better. (same for similar changes below)",
+              "createdAt": "2024-09-24T13:36:18Z",
+              "updatedAt": "2024-09-24T13:36:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kmpy5",
+          "commit": {
+            "abbreviatedOid": "1105d1a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-24T14:03:51Z",
+          "updatedAt": "2024-09-24T14:03:51Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 91,
+      "id": "PR_kwDOL0HpzM58cr-N",
+      "title": "simple change to Introduction, without making it shorter",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/91",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-24T01:45:25Z",
+      "updatedAt": "2024-09-24T16:01:56Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "bac70a40b173624f5f0c2a5af3279d03f5b90574",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "introduction_tweak",
+      "headRefOid": "83ff26f5c920f9fa5ec9ca9fe27643ba13862828",
+      "closedAt": "2024-09-24T14:24:32Z",
+      "mergedAt": "2024-09-24T14:24:32Z",
+      "mergedBy": "John-Kaippallimalil",
+      "mergeCommit": {
+        "oid": "a4aca859654f1fd70312c54cb9cb970aae044902"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Wanted to create a PR against Dan's one but mistakenly committed there. \r\n\r\nFWIW, it is easy to use the diff to track the changes: https://author-tools.ietf.org/api/iddiff?url_1=https://SpencerDawkins.github.io/net-collab-rqmts/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt&url_2=https://SpencerDawkins.github.io/net-collab-rqmts/introduction_tweak/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt",
+          "createdAt": "2024-09-24T08:02:19Z",
+          "updatedAt": "2024-09-24T08:02:50Z"
+        },
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Wanted to create a PR against Dan's one but mistakenly committed there.\r\n> \r\n> FWIW, it is easy to use the diff to track the changes: https://author-tools.ietf.org/api/iddiff?url_1=https://SpencerDawkins.github.io/net-collab-rqmts/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt&url_2=https://SpencerDawkins.github.io/net-collab-rqmts/introduction_tweak/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt\r\n\r\nThanks for the link, that eased comparison.\r\n\r\nI see new:\r\n\r\n> \t7.3.  Abuse and Constraints\t\r\n> \t\t\r\n> \t   It is important that not every flow be prioritized; \r\n\r\nFlows can be prioritized against each other?  I mean, I agree we want that in the future.  But the new text brings a new idea:  have the ISP router be where the client's various non-cooperating applications \"fight it out\" for which flow is prioritized.  That is a different model than what I had envisioned previously (my previous mental model is some software library on the client would \"fight it out\").  Doing this at the ISP router might well be a good solution, *and* it allows a subversive ISP (read: all of them) to favor one flow over another (Facebook versus Dan-Tube, my new streaming video service).\r\n",
+          "createdAt": "2024-09-24T15:38:04Z",
+          "updatedAt": "2024-09-24T15:38:04Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KjD0k",
+          "commit": {
+            "abbreviatedOid": "83ff26f"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-24T08:02:33Z",
+          "updatedAt": "2024-09-24T08:02:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6KmPck",
+          "commit": {
+            "abbreviatedOid": "83ff26f"
+          },
+          "author": "John-Kaippallimalil",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks great. ",
+          "createdAt": "2024-09-24T13:30:53Z",
+          "updatedAt": "2024-09-24T13:30:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6Kn3vQ",
+          "commit": {
+            "abbreviatedOid": "83ff26f"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Med, it appears your commit (83ff26f5c920f9fa5ec9ca9fe27643ba13862828) got lost.\r\n\r\nUpdate: Nevermind, the text I was attributing to you as 'new' was text Sridharan had moved around in a separate commit. My mistake.",
+          "createdAt": "2024-09-24T15:48:45Z",
+          "updatedAt": "2024-09-24T16:01:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOL0HpzM58ihnN",
+      "title": "generalize mention of video i-frame, nit 'he'->'the'",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/92",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-24T15:51:14Z",
+      "updatedAt": "2024-09-24T19:10:50Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "a4aca859654f1fd70312c54cb9cb970aae044902",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "av_and_nit",
+      "headRefOid": "e992d227f4f236080554ab378be2cf22d27ba782",
+      "closedAt": "2024-09-24T19:10:50Z",
+      "mergedAt": "2024-09-24T19:10:50Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "4a3a1d95b260d45386b8bfe60236ce04d4884e17"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KoVqm",
+          "commit": {
+            "abbreviatedOid": "e992d22"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-24T16:40:11Z",
+          "updatedAt": "2024-09-24T16:40:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 93,
+      "id": "PR_kwDOL0HpzM58jXBU",
+      "title": "move REQ-ISP-SCALE to appendix",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/93",
+      "state": "MERGED",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "REQ-ISP-SCALE was left in the main text but the use case was moved to appendix. No reference for it in the main text exists today. Moving the requirement to appendix as well.",
+      "createdAt": "2024-09-24T17:58:29Z",
+      "updatedAt": "2024-09-24T19:12:14Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "a4aca859654f1fd70312c54cb9cb970aae044902",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "609600c182b2cab30577a77b207164b5c854edce",
+      "closedAt": "2024-09-24T19:12:13Z",
+      "mergedAt": "2024-09-24T19:12:13Z",
+      "mergedBy": "sridharangirish91",
+      "mergeCommit": {
+        "oid": "2ffaed51fa783d18b195ee37ed82ef7b24c709a7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6Kpnu6",
+          "commit": {
+            "abbreviatedOid": "609600c"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-24T19:10:02Z",
+          "updatedAt": "2024-09-24T19:10:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 94,
+      "id": "PR_kwDOL0HpzM58ldRU",
+      "title": "Reducing length the doc while keeping the message \u2026",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/94",
+      "state": "CLOSED",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026consistent",
+      "createdAt": "2024-09-25T00:21:41Z",
+      "updatedAt": "2024-09-25T21:52:09Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "2ffaed51fa783d18b195ee37ed82ef7b24c709a7",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "755ee45dbe88c55b3c61cc7b081e5773625b33ba",
+      "closedAt": "2024-09-25T21:52:09Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "body": "github considers every line to have changed.  Here is an (easier) side-by-side diff via RFCDIFF, https://author-tools.ietf.org/api/iddiff?url_1=https://SpencerDawkins.github.io/net-collab-rqmts/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt&url_2=https://SpencerDawkins.github.io/net-collab-rqmts/sridharanr/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt",
+          "createdAt": "2024-09-25T01:42:35Z",
+          "updatedAt": "2024-09-25T01:42:35Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I like the changes overall, but given that we are not sure that everyone understands what we are trying to do, I suggest we leave the elaborated version (OLD) as it providers readers with explicit details. \r\n\r\nWe can consider merging this PR in future versions. Thanks.",
+          "createdAt": "2024-09-25T07:34:35Z",
+          "updatedAt": "2024-09-25T07:34:35Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KsEdc",
+          "commit": {
+            "abbreviatedOid": "d957220"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-09-25T01:53:33Z",
+          "updatedAt": "2024-09-25T01:59:53Z",
+          "comments": [
+            {
+              "originalPosition": 234,
+              "body": "```suggestion\r\nin {{sys-considerations}}. Privacy ({{privacy}}) requires that metadata should not provide\r\n```",
+              "createdAt": "2024-09-25T01:53:34Z",
+              "updatedAt": "2024-09-25T01:59:53Z"
+            },
+            {
+              "originalPosition": 147,
+              "body": "```suggestion\r\nResearch (e.g., {{5G-Octopus}}) indicates that media applications can achieve better Quality of Experience (QoE)\r\n```\r\n\r\nIETF likes acronym expanded on first use. We don't use QoE later, but it's useful to have **QoE** in the document if someone searches for it.",
+              "createdAt": "2024-09-25T01:54:54Z",
+              "updatedAt": "2024-09-25T01:59:53Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\nflows belonging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU\r\n```",
+              "createdAt": "2024-09-25T01:57:23Z",
+              "updatedAt": "2024-09-25T01:59:53Z"
+            },
+            {
+              "originalPosition": 160,
+              "body": "```suggestion\r\n\u2018lower priority\u2019-marked packets of a flow (UDP 4-tuple) during Reactive Management,\r\n```",
+              "createdAt": "2024-09-25T01:58:03Z",
+              "updatedAt": "2024-09-25T01:59:53Z"
+            },
+            {
+              "originalPosition": 161,
+              "body": "```suggestion\r\nallowing bandwidth allocation to other packets of the same UDP 4-tuple.\r\n```",
+              "createdAt": "2024-09-25T01:58:33Z",
+              "updatedAt": "2024-09-25T01:59:53Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 95,
+      "id": "PR_kwDOL0HpzM58lu4p",
+      "title": "fix spelling and grammar nits",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/95",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-25T01:49:44Z",
+      "updatedAt": "2024-09-25T02:00:20Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "2ffaed51fa783d18b195ee37ed82ef7b24c709a7",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "nits",
+      "headRefOid": "2a3fa1b27852c1ea9da723d8983bb8d42d07b750",
+      "closedAt": "2024-09-25T02:00:20Z",
+      "mergedAt": "2024-09-25T02:00:20Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "73be23e6da7ffcc1b644f61ac6a032c91b8111d0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6KsFjK",
+          "commit": {
+            "abbreviatedOid": "2a3fa1b"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T01:59:09Z",
+          "updatedAt": "2024-09-25T01:59:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 96,
+      "id": "PR_kwDOL0HpzM58sxoq",
+      "title": "further reduce implied or direct text that mentions prioritizing between UDP flows; switched to 'Reactive Management' everywhere I could find; attempt to better highlight client-network as negotiation and capabilities",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/96",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-25T19:05:29Z",
+      "updatedAt": "2024-09-25T22:11:25Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "73be23e6da7ffcc1b644f61ac6a032c91b8111d0",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "flow_definition",
+      "headRefOid": "c7546d28d0624567ef46de5582a6de2aa9fdf6ba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6K2heC",
+          "commit": {
+            "abbreviatedOid": "e05f3ef"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-25T21:13:09Z",
+          "updatedAt": "2024-09-25T21:13:09Z",
+          "comments": [
+            {
+              "originalPosition": 91,
+              "body": "these lines were all moved to Section 5.3, \"Metadata Negotiation Support\", approximately line 514, as the server-to-network per-packet metadata is not related to API, but rather something that is learned (negotiated) by the client talking to its network.",
+              "createdAt": "2024-09-25T21:13:09Z",
+              "updatedAt": "2024-09-25T21:13:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOL0HpzM6K2nPM",
+          "commit": {
+            "abbreviatedOid": "e05f3ef"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T21:30:00Z",
+          "updatedAt": "2024-09-25T21:30:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "PR_kwDOL0HpzM58s4oW",
+      "title": "consolidate 'traffic analysis' to just the Privacy section; 'frequency analysis'->'traffic analysis' (the more common IETF term)",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/97",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "```\r\n% grep -i -o \"frequency analysis\" rfc*.txt | wc -l\r\n3\r\n% grep -i -o \"traffic analysis\" rfc*.txt | wc -l\r\n411\r\n```\r\n",
+      "createdAt": "2024-09-25T19:17:29Z",
+      "updatedAt": "2024-09-25T21:12:28Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "73be23e6da7ffcc1b644f61ac6a032c91b8111d0",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "consolidate_traffic_analysis",
+      "headRefOid": "e83bcd8ba9f594986f54ac3dc9f220301f6dc7ef",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6K2hDe",
+          "commit": {
+            "abbreviatedOid": "e83bcd8"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T21:12:28Z",
+          "updatedAt": "2024-09-25T21:12:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 99,
+      "id": "PR_kwDOL0HpzM58toAZ",
+      "title": "remove unused terminology",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/99",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove Discard Preference, Intentional Management, Traffic Shaping.  \n\nOf those, only Discard Preference was used, and only in the abstract! The others \nwere not used at all.\n\n\n",
+      "createdAt": "2024-09-25T21:21:24Z",
+      "updatedAt": "2024-09-25T21:51:29Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "73be23e6da7ffcc1b644f61ac6a032c91b8111d0",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "unused_terminology",
+      "headRefOid": "2fbdef3ebc12107016f43439c3ba35706ec2d21f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6K2t2O",
+          "commit": {
+            "abbreviatedOid": "2fbdef3"
+          },
+          "author": "sridharangirish91",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-25T21:51:29Z",
+          "updatedAt": "2024-09-25T21:51:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOL0HpzM58uNJ7",
+      "title": "reducing length of privacy considerations",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/100",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-26T00:01:51Z",
+      "updatedAt": "2024-09-26T00:01:51Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "73be23e6da7ffcc1b644f61ac6a032c91b8111d0",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sri-privacy",
+      "headRefOid": "d00dc1f28eb41004e80ce47d207bba380bbc6e27",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
