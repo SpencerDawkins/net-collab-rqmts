@@ -741,7 +741,7 @@ None.
 # Security Considerations {#sec-cons}
 
 Security aspects for the metadata are discussed in {{privacy}}.
-The principles outlined in {{?RFC8558}}, {{?RFC9049}} and {{?RFC9419}}
+The principles outlined in {{?RFC8558}}, {{?RFC9049}}, and {{?RFC9419}}
 contain security considerations and are referenced in {{metadata-req}}.
 
 Per-packet metadata can be vulnerable to modification in transit by
