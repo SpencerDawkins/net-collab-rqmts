@@ -717,16 +717,17 @@ are mentioned here only to provide context for metadata privacy.
 
 Protocols such as TLS, SRTP, and QUIC offer some mitigations (like padding)
 but are vulnerable to traffic analysis ({{traffic-analysis-2}}).
-Metadata is vulnerable to modification in transit by
-on-path attackers, who can corrupt checksums, drop packets, or mislabel
-important packets. Such changes are detectable by the receiver.
+
 
 Per-packet metadata can aid in traffic analysis. Hence, it is recommended to
 encrypt or obfuscate the metadata information so it is only available to the
 server, client, and authorized network elements. However, encryption/obfuscation
 of per-packet metadata is ineffective if the threat resides in the same network
 entity with keys to decrypt the metadata. The method of encryption or
-obfuscation is out of scope.
+obfuscation is out of scope.  To best preserve privacy, implementations might
+also consider less granular per-packet marking, for example marking all
+audio and video packets the same and only marking a background data transfer
+with different metadata.
 
 Analysis to ensure that metadata exposure does not compromise user privacy
 or allow unauthorized entities to infer sensitive information, while
@@ -756,6 +757,10 @@ None.
 Security aspects for the metadata are discussed in {{privacy}}.
 The principles outlined in {{?RFC8558}}, {{?RFC9049}} and {{?RFC9419}}
 contain security considerations and are referenced in {{metadata-req}}.
+
+Per-packet metadata can be vulnerable to modification in transit by
+on-path attackers, who can corrupt checksums, drop packets, or modify
+metadata. Such changes can be detected by the receiver.
 
 Since the document focuses only on priorities within a flow
 (not specifying inter-flow priority), the document does not induce concerns related to a specific
