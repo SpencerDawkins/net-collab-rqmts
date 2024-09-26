@@ -721,13 +721,13 @@ metadata.
 
 ## Privacy Considerations {#privacy}
 
-Media flows are vulnerable to traffic analysis without per packet
-metadata ({{traffic-analysis}}). The security aspects of the
-media payload / transport are not in the scope of this document and
-is mentioned here only to provide context for metadata privacy.
+Media flows are vulnerable to traffic analysis even without per-packet
+metadata (see, e.g., {{traffic-analysis}}). The security aspects of the
+media payload / transport are not in the scope of this document; these
+are mentioned here only to provide context for metadata privacy.
 
-Existing TLS, SRTP and QUIC protocols have some mititgations (like padding)
-but are vulnerable to traffic analysis. ({{traffic-analysis-2}})
+Protocols such as TLS, SRTP, and QUIC offer some mitigations (like padding)
+but are vulnerable to traffic analysis ({{traffic-analysis-2}}).
 Metadata is vulnerable to modification in transit by
 on-path attackers, who can corrupt checksums, drop packets, or mislabel
 important packets. Such changes are detectable by the receiver.
@@ -737,7 +737,7 @@ encrypt or obfuscate the metadata information so it is only available to the
 server, client, and authorized network elements. However, encryption/obfuscation
 of per-packet metadata is ineffective if the threat resides in the same network
 entity with keys to decrypt the metadata. The method of encryption or
-obfuscation is out of this document's scope.
+obfuscation is out of scope.
 
 Analysis to ensure that metadata exposure does not compromise user privacy
 or allow unauthorized entities to infer sensitive information, while
