@@ -752,36 +752,7 @@ Since the document focuses only on priorities within a flow
 (not specifying inter-flow priority), the document does not induce concerns related to a specific
 user or client declaring all flows or a subset of them as being more important. Such abuse concerns are thus not applicable.
 
-See also {{privacy}}.
-
-This document has no other security considerations.
-
-# Acknowledgments
-{:numbered="false"}
-
-This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}}
-and {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
-
-T. Reddy contributed text and ideas to this document.
-
-Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
-: Xavier De Foy and the authors of this draft have discussed the
-similarities and differences of this draft with the MoQ draft for
-carrying media metadata.
-: The authors wish to thank Mike Heard,
-Sebastian Moeller and Tom Herbert for discussions on metadata fields,
-fragmentation and various transport aspects.
-: The authors appreciate
-input from Marcus Ilhar and Magnus Westerlund on the need to address
-privacy in general and Dan Druta to consider a common transport
-across various client/server to network signaling when possible.
-Ruediger Geib suggested that limiting the amount of state information
-that a wireless router has to keep for a flow should be minimized.
-: Ingemar Johansson's suggestions on fast fading (which L4S handles)
-and dramatic drops in wireless accesses have been helpful to identify
-the issues.  Thanks to Hang Shi for the review and comments on
-client-to-network signaling.  Thanks to Luis Miguel Contreras, Colin
-Kahn, Marcus Ilhar and Tianji Jiang for their review and comments.
+Privacy-related considerations are discussed in {{privacy}}.
 
 --- back
 
@@ -1059,3 +1030,30 @@ wireless router for optimizing the flow can negate the advantages
 offered as the number of flows handled increases.
 
 Requirement: REQ-ISP-SCALE.
+
+# Acknowledgments
+{:numbered="false"}
+
+This document is a merge of {{?I-D.rwbr-tsvwg-signaling-use-cases}}
+and {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}.
+
+T. Reddy contributed text and ideas to this document.
+
+Acknowledgments from {{?I-D.kaippallimalil-tsvwg-media-hdr-wireless}}:
+: Xavier De Foy and the authors of this draft have discussed the
+similarities and differences of this draft with the MoQ draft for
+carrying media metadata.
+: The authors wish to thank Mike Heard,
+Sebastian Moeller and Tom Herbert for discussions on metadata fields,
+fragmentation and various transport aspects.
+: The authors appreciate
+input from Marcus Ilhar and Magnus Westerlund on the need to address
+privacy in general and Dan Druta to consider a common transport
+across various client/server to network signaling when possible.
+Ruediger Geib suggested that limiting the amount of state information
+that a wireless router has to keep for a flow should be minimized.
+: Ingemar Johansson's suggestions on fast fading (which L4S handles)
+and dramatic drops in wireless accesses have been helpful to identify
+the issues.  Thanks to Hang Shi for the review and comments on
+client-to-network signaling.  Thanks to Luis Miguel Contreras, Colin
+Kahn, Marcus Ilhar and Tianji Jiang for their review and comments.
