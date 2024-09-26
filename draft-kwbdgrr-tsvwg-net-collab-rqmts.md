@@ -112,7 +112,7 @@ through cooperation of server/client and the network.
 This document lists some use cases that illustrate the need for a
 mechanism to share metadata and outlines requirements for both
 client-to-network and server-to-network. The document focuses on
-UDP flows bound to the same user.
+signaling information about a UDP transport flow (UDP 4-tuple).
 
 --- middle
 
@@ -226,9 +226,8 @@ networks use clients which run various applications; each having
 different connectivity needs for an optimal user experience. These
 needs are not frozen but change over time depending on the application
 and even depending on how an application is used (e.g., user's
-preferences). An explicit signal to the client can help to manage
-the use of available bandwidth better and better share it with
-requesting applications.
+preferences). An explicit signal to the client can improve management
+of available bandwidth.
 
 Other applications like interactive media can demand both high
 throughput and low latency and, in some cases, carry different
@@ -240,8 +239,8 @@ as an implicit signal for determining relative priority. However,
 {{?RFC9335}} defines a new mechanism that completely encrypts RTP
 header extensions and Contributing sources (CSRCs). Furthermore, a
 full encrypted transport (e.g., QUIC {{?RFC9000}}) does not expose
-any media header information that on-path network elements can use
-for forwarding decisions.
+any media header information to influence on-path network elements
+during a Reactive Management event.
 
 ~~~~~~~~aasvg
                      :
@@ -310,20 +309,18 @@ server-to-network (S2N) metadata are described in {{server-network}}.
 The client may provide information to an (access) router to drop
 lower priority marked packets of a flow (UDP 4-tuple) temporarily
 which can in turn allocate available bandwidth to other flows of that network
-attachment, especially during a reactive management event.
+attachment, especially during a Reactive Management event.
 
 Network shapers
 observe flows and apply policies to maximize performance but are
 not aware whether  there is a high preference for one flow (UDP
 4-tuple) over another flow belonging to the same user and network
 attachment (e.g., a subscriber connection, a 3GPP PDU Session. See
-{{net-attach}} for more details).  Clients may provide an (access)
-router with preferences of which flow (UDP 4-tuple) has relative
-priority among flows of that network attachment using H2N (C - in
-the figure).  Clients may also provide information to an (access) router
-to drop, when resources are congested,  'lower priority'-marked
-packets of a flow (UDP 4-tuple) temporarily which can in turn
-allocate bandwidth to other flows of that same network attachment.
+{{net-attach}} for more details).
+Clients can provide information to an (access) router
+to drop 'lower priority'-marked
+packets of a flow (UDP 4-tuple) during a Reactive Management event.
+
 
 In summary, the rapid variation of wireless link quality and/or
 bandwidth limitations in networks along with interactive applications
@@ -336,9 +333,9 @@ user experience.
 
 REQ-PACKET-PRIORITY:
 : Server indicates the importance of a packet within a flow. This allows the network
-to prioritize based on requirement and during reactive events. This
+to prioritize based on requirement and during a Reactive Management event. This
 priority value may also be used to indicate loss tolerance and the
-network elements may drop loss tolerant packets during reactive
+network elements may drop loss tolerant packets during Reactive Management
 events.
 : This is a per-packet metadata requirement.
 
@@ -365,24 +362,19 @@ to change based on the user preference, aids in scalability.
 
 REQ-API-FRAMEWORK:
 : API framework to facilitate signaling for applications.
-: Signaling to the network ({{client-network}}, {{server-network}})
-will need to be facilitated by Application Programming Interfaces
-(APIs) for any application to use them. Signaling and retrieval of
+: Signaling from client to network ({{client-flow-auth}})
+and server to network ({{server-network}}))
+is best facilitated by Application Programming Interfaces
+(APIs). Signaling and retrieval of
 the signals may not be performed at a single layer (although not
-encouraged). Hence, a framework is required to abstract the underlying
-protocol(s) and allow the application(s) to retrieve/send signals
+encouraged). Hence, for server to network signaling, a framework is required to abstract the underlying
+per-packet metadata protocol(s) and allow the application(s) to retrieve/send signals
 using a single or a set of APIs independent of the channels that
 are used to convey the signals. The API framework is required even
 if one single channel is used so that any application on a client can
 consume the signals.
-: There might be many channels to signal the metadata such as
-(non-exhaustive list):
+: The API framework uses the medium negotiated under {{metadata-negotiation}} to send/receive the signals
 
-  * TCP options {{?RFC9293}}
-  * UDP Options {{?I-D.ietf-tsvwg-udp-options}}
-  * IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
-  * QUIC CID mapping
-  * ICMP messages
 
 ## System Considerations
 
@@ -424,7 +416,7 @@ traffic appropriately.
 
     Impact: With the above requirement met, better quality of service
     could be maintained in resource-constrained networks and during
-    reactive events ensuring better user experience.
+    Reactive Management events ensuring better user experience.
 
 2. The server (or relay) sends the same stream to many receivers,
 including the same metadata (especially with media over QUIC).
@@ -493,7 +485,7 @@ with same type of metadata originating from the server.
 
 5. A network glitch while user is in an eXtended Reality application.
 The traffic comprises of haptic, video, audio, graphics update and
-keystrokes. During such reactive event, some packets need to be
+keystrokes. During such a Reactive Management event, some packets need to be
 deprioritized/dropped to maintain interactivity.
 
     Requirement: REQ-PACKET-PRIORITY, REQ-PACKET-DELAY.
@@ -506,21 +498,36 @@ deprioritized/dropped to maintain interactivity.
 Currently, some flows are granted higher priority over other flows
 because of a contractual agreement between the ISP and the content
 provider. These contracts could be extended to also allow per-packet
-prioritization within a single UDP 4-tuple, as desired by this
-document ({{client-network}} and {{client-flow-auth}}).
+metadata within a single UDP 4-tuple, as desired by this
+document ({{client-flow-auth}}). However,
+these sorts of agreements favor large content providers and major
+ISPs, disfavoring smaller providers and smaller ISPs while also
+preventing other network topologies such as peer-to-peer networking
+(e.g., VoIP) as that traffic does not originate from a contracted
+content provider.
 
-For such applications to benefit from per-packet prioritization within
-a single UDP 4-tuple, the client needs to determine which per-packet
+For all applications to benefit from per-packet prioritization within
+a single UDP 4-tuple, the client needs to communicate with the ISP to determine which per-packet
 markings are supported by the ISP's network (e.g., encoded into IPv6 Flow Label,
 UDP Option, or DSCP). Then it can indicate to the ISP's network that a
-certain UDP 4-tuple will have those markings.
+certain UDP 4-tuple will have those markings and instruct the server
+to generate those per-packet metadata markings.
 
-  Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+There might be many channels to signal the Server-to-Network per-packet metadata such as
+(non-exhaustive list):
 
-  Impact: By signaling ISPs to honor the metadata for a particular flow, the client
-  facilitates in the identification of traffic to prioritize for the ISPs.
-  This would enable the ISPs to extend contracts to servers that cannot be identified
-  by using IP addresses, thereby opening up such contracts to more content providers.
+  * TCP options {{?RFC9293}}
+  * UDP Options {{?I-D.ietf-tsvwg-udp-options}}
+  * IPv6 Hop-by-Hop Options ({{Section 4.3 of ?RFC8200}})
+  * QUIC CID mapping
+  * ICMP messages
+
+Requirements: REQ-API-FRAMEWORK and REQ-CLIENT-DECIDES.
+
+Impact: By signaling ISPs to honor the metadata for a particular flow, the client
+  facilitates identifying important packets to the ISP enhancing packet delay or
+  drop decisions during Reactive Management events.
+
 
 ~~~~~aasvg
      Client                                           ISP router
@@ -561,37 +568,23 @@ identity or the inspection of client-to-server encrypted payload.
 The metadata connections may be between server and network (in
 either direction) or between client and network (in either direction).
 
-Some use cases benefit from server - network metadata exchanges
-({{server-network}}) and others need client involvement
-({{client-network}}).
+Some use cases benefit from server-network metadata exchanges
+({{server-network}}) after first performing a client-network metadata
+exchange ({{client-flow-auth}}).
 
 For the requirements that follow, the assumption is that the client
 agrees to the exchange of metadata between the server and network,
 or between the client and network.
 
-## Client-Network Metadata {#client-network}
+## Client-Network Flow Authorization and Negotiation {#client-flow-auth}
 
-Due to contractual agreements (mentioned in {{req-definition}} under
-REQ-CLIENT-DECIDES) between content providers and ISPs, not all the
-content providers' signals are honored. However, extending these
-contracts would disadvantage content providers and other servers
-that cannot obtain such a contract or have traffic that is difficult
-or impossible for the ISP to identify and provide such service. This
-drawback can be overcome using metadata defined in {{client-flow-auth}}.
+By signaling the ISP, a client can authorize the ISP to honor
+incoming per-packet metadata for a certain flow (UDP 4-tuple).
 
-### Client Flow Authorization {#client-flow-auth}
-
-Client authorization signal provides information on whether the ISP
-should honor the signals sent by the current flow. This would enable
-the ISP to identify servers, which are difficult or impossible to
-identify by other available methods today.
-
-This signal also serves as the medium to initiate the negotiation
-discussed in {{metadata-negotiation}}).
-
-Encrypting/Obfuscating metadata information is recommended ({{privacy}}).
-The client authorization signal provides the means to convey the key
-needed by the ISP to decrypt the metadata.
+This same signal also allows negotiating capabilities
+discussed in {{metadata-negotiation}}) and sharing the keys
+necessary for encrypting or obfuscating server-to-network per-
+packet metadata recommended in {{privacy}}.
 
 REQ-CLIENT-DECIDES is satisfied by signaling Client Flow Authorization as part of client-to-network signal.
 
@@ -653,10 +646,9 @@ identified in {{sys-considerations}}.
 Per-packet priority information provides the priority level of one
 packet relative to other packets within a transport flow (UDP
 4-tuple). When a packet is marked with high priority, the expectation
-is that the network will give high importance to forwarding the
-packet and when a packet is marked with lower priority, the network
-will drop the packet in the presence of severe congestion or limited
-bandwidth. The application server can decide on the priority or
+is that during a Reactive Management event, the network will give high importance to forwarding the
+packet compared to a packet marked with low priority.
+The application server can decide on the priority or
 importance values that provide the best handling for the packets
 of the transport flow.
 When more than one application stream (e.g., video, audio)
@@ -679,7 +671,7 @@ this metadata is to indicate that these packets can tolerate a
 limited amount of delay when there is severe congestion or limited
 bandwidth. Similar to the LE PHB {{?RFC8622}} for flows, the
 expectation is that in this case, each packet marked with this
-metadata is dropped only when there is excessive delay. As with
+metadata is dropped during a Reactive Management event. As with
 per-packet priority in {{relative-priority}}, the application server
 can decide on the metadata values that provide the best handling
 for the packets of the transport flow.
@@ -900,7 +892,7 @@ REQ-SIGNAL-EXPOSURE-FAIRNESS:
 considered. An example of such exposure is OS APIs.
 
 REQ-NETWORK-SEEKS-LOAD-DOWN:
-: During detected reactive events, the network implements a
+: During detected Reactive Management events, the network implements a
 reactive traffic policy to reduce or offload some of the traffic.
 : This may involve utilizing alternative network attachments
 available to the client (e.g., Wi-Fi).
@@ -956,8 +948,8 @@ Requirement: REQ-MEDIA-KEYFRAME.
 
 There are cases (crisis) where "normal" network resources cannot
 be used at maximum and, thus, a network would seek to reduce or
-offload some of the traffic during these events -- often called
-'reactive traffic policy'. An example of such use case is cellular
+offload some of the traffic during these events -- called
+'Reactive Management' policy.  An example of such use case is cellular
 networks that are overly used (and radio resources exhausted) such
 as a large collection of people (e.g., parade, sporting event), or
 such as a partial radio network outage (e.g., tower power outage).
@@ -979,7 +971,7 @@ limiting due to various reasons.
 Also, traffic exchanged over a network attachment may be subject
 to rate-limit policies. These policies may be intentional policies
 (e.g., enforced as part of the activation of the network attachment
-and typically agreed upon service subscription) or be reactive
+and typically agreed upon service subscription) or be Reactive Management
 policies (e.g., enforced temporarily to manage an overload or during
 a DDoS attack mitigation).
 
