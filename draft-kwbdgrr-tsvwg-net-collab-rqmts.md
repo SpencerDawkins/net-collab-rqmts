@@ -544,7 +544,12 @@ For the requirements that follow, the assumption is that the client
 agrees to the exchange of metadata between the server and network,
 or between the client and network.
 
-## Client-Network Flow Authorization and Negotiation {#client-flow-auth}
+## Client-Network Metadata {#client-network}
+
+Client-to-network metadata is critical in both identifying the flow that
+contains metadata as well as negotiate the medium of signaling of metadata.
+
+### Client-Network Flow Authorization and Negotiation {#client-flow-auth}
 
 By signaling the ISP, a client can authorize the ISP to honor
 incoming per-packet metadata for a certain flow (UDP 4-tuple).
