@@ -282,8 +282,8 @@ of a flow (UDP 4-tuple) temporarily which can in turn allocate available bandwid
 to other flows of that network attachment, especially during a reactive management event.
 
 Network shapers observe flows and apply policies to maximize performancebut are unaware underlying
-flows belinging to the same user and network attachment (e.g., a subscriber connection,a 3GPP PDU
-Session {{net-attach}}). Clients may provide information to an (access) router to drop
+flows belinging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU
+Session). Clients may provide information to an (access) router to drop
 ‘lower priority’-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
 allowing bandwidth allocation to other flows of the same network attachment.
 
