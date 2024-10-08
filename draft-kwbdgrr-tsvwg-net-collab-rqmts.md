@@ -194,7 +194,7 @@ like channel condition changes, cell interference, and user mobility.
 These variations can occur in milliseconds {{5G-Lumos}}, while congestion
 control takes tens of milliseconds (more than one RTT) to estimate data
 rate. Application servers encoding live or interactive content also take
-time to adjust to network rates. End-to-end congestion control algorithms
+time to adjust to network rates. End-to-end congestion control algorithms (CCAs)
 are suboptimal when link quality varies in sub-RTT timeframes and applications
 need low latency and high bandwidth (e.g., {{Section 2.1 of ?RFC6077}}).
 Applications settle for lower throughput when prioritizing latency or higher
@@ -202,9 +202,7 @@ throughput with higher delays.
 
 Feedback-based rate control for a flow (UDP 4-tuple) cannot adapt to sub-RTT
 wireless channel changes. Application servers can provide per-packet information
-for network shapers to allocate resources effectively. For example, {{5G-Octopus}}
-shows that network shapers can drop low priority frames during transient bandwidth
-drops and still perform better than feedback-based methods. Heuristics can build
+for network shapers to allocate resources effectively. Heuristics can build
 an “implicit signal” from unencrypted packets to prioritize flows, but this leads
 to protocol ossification {{?RFC9419}}. Encrypted packets make implicit signals unviable.
 
@@ -269,10 +267,9 @@ In this document, this is termed 'Reactive Management'.
 A network shaper in the router manages QoS of multiple users’ flows and can buffer,
 discard, or apply other flow control rules. Application layer signaling and feedback
 between Client and Server (A - in the figure) adjust transmission rate over several RTTs
-using feedback and congestion control algorithms (CCAs). CCAs are generally conservative
-and settle to a steady rate to avoid excessive packet loss. In networks where link
-conditions (between Client and Router) vary significantly at sub-RTT timescales,
-this results in unused bandwidth at short timescales.
+using feedback and CCAs, settling to a steady rate to avoid excessive packet loss.
+In networks where link conditions (between Client and Router) vary significantly at
+sub-RTT timescales, this results in unused bandwidth at short timescales.
 
 Research (e.g., {{5G-Octopus}}) indicates that media applications can achieve better QoE
 when sending at a higher rate (less conservative than current CCA) and tolerating some
@@ -341,7 +338,7 @@ using a single or a set of APIs independent of the channels that
 are used to convey the signals. The API framework is required even
 if one single channel is used so that any application on a client can
 consume the signals.
-: The API framework uses the medium negotiated under {{metadata-negotiation}} to send/receive the signals
+: The API framework uses the medium negotiated under {{metadata-negotiation}} to send/receive the signals.
 
 
 ## System Considerations
@@ -372,13 +369,11 @@ Examples: live broadcast, on-demand video streaming.
 
 Use cases:
 
-1. Majority of streaming traffic is Audio and Video traffic.
-Video contains partial frames and full frames, which need to be
-distinguished so that full frames can be indicated to the network.
-Audio traffic is more critical than video for many applications.
-This differences in priority needs to be indicated to the network to
-ensure network (de)prioritizes (or even drop if deemed necessary)
-traffic appropriately.
+1. The majority of streaming traffic is Audio and Video traffic.
+Audio traffic is more critical than video for many applications and
+vice-versa for some. This differences in priority needs to be indicated
+to the network to ensure network (de)prioritizes (or even drop if
+deemed necessary) traffic appropriately.
 
     Requirement: REQ-PACKET-PRIORITY.
 
@@ -573,9 +568,7 @@ resolution information of instantaneous bandwidth available.
 
 If application packets can tolerate delay or some loss of lower priority
 packets, the network traffic shaper and scheduler can use this information
-to provide higher application quality of service. Research in {{5G-Octopus}} indicates
-that media applications can achieve better quality when sending at a higher rate
-and allowing the network to delay or drop low priority packets.
+to provide higher application quality of service {{5G-Octopus}}.
 
 The metadata in {{relative-priority}} should satisfy constraints identified
 in {{sys-considerations}}. Privacy {{privacy}} requires that metadata should not provide
@@ -711,60 +704,6 @@ Privacy-related considerations are discussed in {{privacy}}.
 
 --- back
 
-
-# Network Attachment {#net-attach}
-
-A network attachment represents the communication link between
-clients and network (router) over which a connection policy (including
-QoS) is applied to flows within that network attachment.
-
-A network attachment may be established using control plane signaling
-between the client and the network (access) router and is out of
-scope of this document.  Transport flows over a network attachment
-may consist of multiple streams such as video or audio.
-{{Figure-conn-flow}} shows a high level view of network attachments,
-flows, and QoS/policy discussed in {{metadata-req}}.
-
-The requirements in {{metadata-req}} apply to data units like frames
-within a flow, but not between flows. Specifically, this document
-does not discuss flows of distinct clients/users.
-
-~~~~~~~~aasvg
-+--------------+          +-----------------+
-| +---+ +---+  |          | +-------------+ |
-| |A1 | |A2 |  |          | | QoS, Policy | |
-| +-+-+ +-+-+  |          | +---+----+----+ |       +------+
-|   |     |    |  Network |     |    |      |       |srv-A2|
-|   |     |    |attachment|     v    |      |       +--+---+
-|   |     |  .------------------+-.  |      |          |
-|   |     +-+------- flow-x2 ------+-|------|----------+
-|   +-------+------- flow-x1 ------+-|------|------------+
-|            '--------------------'  |      |            |
-|              |          |          |      |            |
-+--------------+          |          |      |         +--+---+
-  Client-1                |          |      |         |srv-A1|
-                          |          |      |         +--+---+
-+--------------+  Network |          |      |            |
-|              |attachment|          v      |            |
-| +----+  .--------------------------+-.    |            |
-| | A1 +-+----------- flow-x3 ----------+---|------------+
-| +----+  '----------------------------'    |
-|              |          |                 |
-+--------------+          +-----------------+
-  Client-2                  Router
-~~~~~~~~
-{: #Figure-conn-flow title="E2E transport flows and connection session"}
-
-
-{{Figure-conn-flow}} shows "Client-1" and "Client-2" which negotiate
-connection policy (e.g., QoS) and other aspects like mobility
-handling, charging applied to flows in that network attachment.
-"Client-1" has "flow-x1" and "flow-x2" over its network attachment
-while "Client-2" has "flow-x3".  **The requirements in this document
-focus on on-path collaboration signals that apply to data units
-such as media frames within flows like "flow-x1/x2/x3" but not
-between them.**
-
 # Extended Requirements Definition {#x-req-def}
 
 REQ-MEDIA-AV-SEPARATE:
@@ -779,7 +718,7 @@ priority values in REQ-PAYLOAD-CLIENT-DECIDES.
 : This is a per-flow metadata requirement.
 
 REQ-MEDIA-KEYFRAME:
-: Video contains partial frames and full frames, which need to be
+: Video contains prediction frames and full frames, which need to be
 distinguished so that full frames can be indicated to the
 network.
 : This is an enhanced requirement that requires e2e application layer
@@ -849,7 +788,7 @@ be prioritized differently than video.
 
 Requirement: REQ-MEDIA-AV-SEPARATE.
 
-2. Video contains partial frames and full frames, which need to be
+2. Video contains prediction frames and full frames, which need to be
 distinguished so that full frames can be indicated to the network.
 
 Requirement: REQ-MEDIA-KEYFRAME.
