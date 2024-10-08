@@ -171,7 +171,7 @@ collaboration signals.
 The document makes use of the following terms:
 
 Host:
-: Refers to an endpoint that is connected to a network (called, client) or to a server that delivers a service to a client. 
+: Refers to an endpoint that is connected to a network (called, client) or a server that delivers a service to a client.
 
 Per-Flow Metadata:
 : Refers to metadata that doesn't change often during the lifetime
