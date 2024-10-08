@@ -98,7 +98,8 @@ Table of Contents
      5.2.  Interactive Media
      5.3.  Metadata Negotiation Support
    6.  On-path Metadata Requirements
-     6.1.  Client-Network Flow Authorization and Negotiation
+     6.1.  Client-Network Metadata
+       6.1.1.  Client-Network Flow Authorization and Negotiation
      6.2.  Server-Network Metadata
        6.2.1.  Packet Priority
        6.2.2.  Tolerance to Delay
@@ -108,19 +109,18 @@ Table of Contents
    9.  IANA Considerations
    10. Security Considerations
    11. Informative References
-   Appendix A.  Network Attachment
-   Appendix B.  Extended Requirements Definition
-   Appendix C.  Extended Use-Cases
-     C.1.  Media Streaming Extended
-     C.2.  Assisted Offload
-     C.3.  Network Bandwidth & Network Rate Limiting Policies
-   Appendix D.  Extended System Considerations
-     D.1.  Application Interference
-     D.2.  Redundant Functions and Classification Complications
-     D.3.  Session Continuity
-     D.4.  Multiple Bottlenecks
-     D.5.  Metadata Scope
-     D.6.  Scalability
+   Appendix A.  Extended Requirements Definition
+   Appendix B.  Extended Use-Cases
+     B.1.  Media Streaming Extended
+     B.2.  Assisted Offload
+     B.3.  Network Bandwidth & Network Rate Limiting Policies
+   Appendix C.  Extended System Considerations
+     C.1.  Application Interference
+     C.2.  Redundant Functions and Classification Complications
+     C.3.  Session Continuity
+     C.4.  Multiple Bottlenecks
+     C.5.  Metadata Scope
+     C.6.  Scalability
    Acknowledgments
    Authors' Addresses
 
@@ -194,21 +194,19 @@ Table of Contents
    congestion control takes tens of milliseconds (more than one RTT) to
    estimate data rate.  Application servers encoding live or interactive
    content also take time to adjust to network rates.  End-to-end
-   congestion control algorithms are suboptimal when link quality varies
-   in sub-RTT timeframes and applications need low latency and high
-   bandwidth (e.g., Section 2.1 of [RFC6077]).  Applications settle for
-   lower throughput when prioritizing latency or higher throughput with
-   higher delays.
+   congestion control algorithms (CCAs) are suboptimal when link quality
+   varies in sub-RTT timeframes and applications need low latency and
+   high bandwidth (e.g., Section 2.1 of [RFC6077]).  Applications settle
+   for lower throughput when prioritizing latency or higher throughput
+   with higher delays.
 
    Feedback-based rate control for a flow (UDP 4-tuple) cannot adapt to
    sub-RTT wireless channel changes.  Application servers can provide
    per-packet information for network shapers to allocate resources
-   effectively.  For example, [_5G-Octopus] shows that network shapers
-   can drop low priority frames during transient bandwidth drops and
-   still perform better than feedback-based methods.  Heuristics can
-   build an “implicit signal” from unencrypted packets to prioritize
-   flows, but this leads to protocol ossification [RFC9419].  Encrypted
-   packets make implicit signals unviable.
+   effectively.  Heuristics can build an “implicit signal” from
+   unencrypted packets to prioritize flows, but this leads to protocol
+   ossification [RFC9419].  Encrypted packets make implicit signals
+   unviable.
 
    Bandwidth constraints are most prominent in access networks (e.g.,
    radio access networks).  Users, serviced via these networks, use
@@ -272,8 +270,7 @@ Table of Contents
    flows and can buffer, discard, or apply other flow control rules.
    Application layer signaling and feedback between Client and Server (A
    - in the figure) adjust transmission rate over several RTTs using
-   feedback and congestion control algorithms (CCAs).  CCAs are
-   generally conservative and settle to a steady rate to avoid excessive
+   feedback and CCAs, settling to a steady rate to avoid excessive
    packet loss.  In networks where link conditions (between Client and
    Router) vary significantly at sub-RTT timescales, this results in
    unused bandwidth at short timescales.
@@ -293,11 +290,11 @@ Table of Contents
 
    Network shapers observe flows and apply policies to maximize
    performancebut are unaware underlying flows belinging to the same
-   user and network attachment (e.g., a subscriber connection,a 3GPP PDU
-   Session Appendix A).  Clients may provide information to an (access)
-   router to drop ‘lower priority’-marked packets of a flow (UDP
-   4-tuple) temporarily during congestion, allowing bandwidth allocation
-   to other flows of the same network attachment.
+   user and network attachment (e.g., a subscriber connection, a 3GPP
+   PDU Session).  Clients may provide information to an (access) router
+   to drop ‘lower priority’-marked packets of a flow (UDP 4-tuple)
+   temporarily during congestion, allowing bandwidth allocation to other
+   flows of the same network attachment.
 
    In summary, the rapid variation of wireless link quality and/or
    bandwidth limitations in networks along with interactive applications
@@ -343,7 +340,7 @@ Table of Contents
    REQ-API-FRAMEWORK:  API framework to facilitate signaling for
       applications.
 
-      Signaling from client to network (Section 6.1) and server to
+      Signaling from client to network (Section 6.1.1) and server to
       network (Section 6.2)) is best facilitated by Application
       Programming Interfaces (APIs).  Signaling and retrieval of the
       signals may not be performed at a single layer (although not
@@ -356,7 +353,7 @@ Table of Contents
       client can consume the signals.
 
       The API framework uses the medium negotiated under Section 5.3 to
-      send/receive the signals
+      send/receive the signals.
 
 4.4.  System Considerations
 
@@ -388,13 +385,11 @@ Table of Contents
 
    Use cases:
 
-   1.  Majority of streaming traffic is Audio and Video traffic.  Video
-       contains partial frames and full frames, which need to be
-       distinguished so that full frames can be indicated to the
-       network.  Audio traffic is more critical than video for many
-       applications.  This differences in priority needs to be indicated
-       to the network to ensure network (de)prioritizes (or even drop if
-       deemed necessary) traffic appropriately.
+   1.  The majority of streaming traffic is Audio and Video traffic.
+       Audio traffic is more critical than video for many applications
+       and vice-versa for some.  This differences in priority needs to
+       be indicated to the network to ensure network (de)prioritizes (or
+       even drop if deemed necessary) traffic appropriately.
 
        Requirement: REQ-PACKET-PRIORITY.
 
@@ -492,7 +487,7 @@ Table of Contents
    because of a contractual agreement between the ISP and the content
    provider.  These contracts could be extended to also allow per-packet
    metadata within a single UDP 4-tuple, as desired by this document
-   (Section 6.1).  However, these sorts of agreements favor large
+   (Section 6.1.1).  However, these sorts of agreements favor large
    content providers and major ISPs, disfavoring smaller providers and
    smaller ISPs while also preventing other network topologies such as
    peer-to-peer networking (e.g., VoIP) as that traffic does not
@@ -563,13 +558,19 @@ Table of Contents
 
    Some use cases benefit from server-network metadata exchanges
    (Section 6.2) after first performing a client-network metadata
-   exchange (Section 6.1).
+   exchange (Section 6.1.1).
 
    For the requirements that follow, the assumption is that the client
    agrees to the exchange of metadata between the server and network, or
    between the client and network.
 
-6.1.  Client-Network Flow Authorization and Negotiation
+6.1.  Client-Network Metadata
+
+   Client-to-network metadata is critical in both identifying the flow
+   that contains metadata as well as negotiate the medium of signaling
+   of metadata.
+
+6.1.1.  Client-Network Flow Authorization and Negotiation
 
    By signaling the ISP, a client can authorize the ISP to honor
    incoming per-packet metadata for a certain flow (UDP 4-tuple).
@@ -595,10 +596,8 @@ Table of Contents
 
    If application packets can tolerate delay or some loss of lower
    priority packets, the network traffic shaper and scheduler can use
-   this information to provide higher application quality of service.
-   Research in [_5G-Octopus] indicates that media applications can
-   achieve better quality when sending at a higher rate and allowing the
-   network to delay or drop low priority packets.
+   this information to provide higher application quality of service
+   [_5G-Octopus].
 
    The metadata in Section 6.2.1 should satisfy constraints identified
    in Section 7.  Privacy Section 7.1 requires that metadata should not
@@ -607,7 +606,7 @@ Table of Contents
    best handling for packets and may not reflect exact priority values.
    This metadata is advisory, and network traffic policy that restricts
    its use would not result in additional issues.  Other constraints
-   include scale (Appendix D.6) and continuity (Appendix D.3).
+   include scale (Appendix C.6) and continuity (Appendix C.3).
 
    Realizing the additional bandwidth potential with these metadata may
    require a higher sending rate for the transport flow, which is not
@@ -888,57 +887,7 @@ Table of Contents
               https://dl.acm.org/doi/10.1145/3583740.3628438", December
               2023.
 
-Appendix A.  Network Attachment
-
-   A network attachment represents the communication link between
-   clients and network (router) over which a connection policy
-   (including QoS) is applied to flows within that network attachment.
-
-   A network attachment may be established using control plane signaling
-   between the client and the network (access) router and is out of
-   scope of this document.  Transport flows over a network attachment
-   may consist of multiple streams such as video or audio.  Figure 4
-   shows a high level view of network attachments, flows, and QoS/policy
-   discussed in Section 6.
-
-   The requirements in Section 6 apply to data units like frames within
-   a flow, but not between flows.  Specifically, this document does not
-   discuss flows of distinct clients/users.
-
-   +--------------+          +-----------------+
-   | +---+ +---+  |          | +-------------+ |
-   | |A1 | |A2 |  |          | | QoS, Policy | |
-   | +-+-+ +-+-+  |          | +---+----+----+ |       +------+
-   |   |     |    |  Network |     |    |      |       |srv-A2|
-   |   |     |    |attachment|     v    |      |       +--+---+
-   |   |     |  .------------------+-.  |      |          |
-   |   |     +-+------- flow-x2 ------+-|------|----------+
-   |   +-------+------- flow-x1 ------+-|------|------------+
-   |            '--------------------'  |      |            |
-   |              |          |          |      |            |
-   +--------------+          |          |      |         +--+---+
-     Client-1                |          |      |         |srv-A1|
-                             |          |      |         +--+---+
-   +--------------+  Network |          |      |            |
-   |              |attachment|          v      |            |
-   | +----+  .--------------------------+-.    |            |
-   | | A1 +-+----------- flow-x3 ----------+---|------------+
-   | +----+  '----------------------------'    |
-   |              |          |                 |
-   +--------------+          +-----------------+
-     Client-2                  Router
-
-            Figure 4: E2E transport flows and connection session
-
-   Figure 4 shows "Client-1" and "Client-2" which negotiate connection
-   policy (e.g., QoS) and other aspects like mobility handling, charging
-   applied to flows in that network attachment.  "Client-1" has "flow-
-   x1" and "flow-x2" over its network attachment while "Client-2" has
-   "flow-x3".  *The requirements in this document focus on on-path
-   collaboration signals that apply to data units such as media frames
-   within flows like "flow-x1/x2/x3" but not between them.*
-
-Appendix B.  Extended Requirements Definition
+Appendix A.  Extended Requirements Definition
 
    REQ-MEDIA-AV-SEPARATE:  Audio can be prioritized differently than
       video.
@@ -955,8 +904,8 @@ Appendix B.  Extended Requirements Definition
 
       This is a per-flow metadata requirement.
 
-   REQ-MEDIA-KEYFRAME:  Video contains partial frames and full frames,
-      which need to be distinguished so that full frames can be
+   REQ-MEDIA-KEYFRAME:  Video contains prediction frames and full
+      frames, which need to be distinguished so that full frames can be
       indicated to the network.
 
       This is an enhanced requirement that requires e2e application
@@ -1013,9 +962,9 @@ Appendix B.  Extended Requirements Definition
       router has to maintain for each additional flow it handles should
       be kept to a minimum or eliminated altogether.
 
-Appendix C.  Extended Use-Cases
+Appendix B.  Extended Use-Cases
 
-C.1.  Media Streaming Extended
+B.1.  Media Streaming Extended
 
    Streaming video contains the occasional key frame ("I-frame")
    containing a full video frame.  These frames are necessary to rebuild
@@ -1029,13 +978,13 @@ C.1.  Media Streaming Extended
 
    Requirement: REQ-MEDIA-AV-SEPARATE.
 
-   1.  Video contains partial frames and full frames, which need to be
-       distinguished so that full frames can be indicated to the
+   1.  Video contains prediction frames and full frames, which need to
+       be distinguished so that full frames can be indicated to the
        network.
 
    Requirement: REQ-MEDIA-KEYFRAME.
 
-C.2.  Assisted Offload
+B.2.  Assisted Offload
 
    There are cases (crisis) where "normal" network resources cannot be
    used at maximum and, thus, a network would seek to reduce or offload
@@ -1053,7 +1002,7 @@ C.2.  Assisted Offload
 
    Requirement: REQ-NETWORK-SEEKS-LOAD-DOWN.
 
-C.3.  Network Bandwidth & Network Rate Limiting Policies
+B.3.  Network Bandwidth & Network Rate Limiting Policies
 
    Bandwidth constraints exist most predominantly at the access network.
    This can be constraints in the network itself or a result of rate
@@ -1088,9 +1037,9 @@ C.3.  Network Bandwidth & Network Rate Limiting Policies
        videos that were downloaded.  The network can assist the client
        by informing the client of the network's bandwidth policy.
 
-Appendix D.  Extended System Considerations
+Appendix C.  Extended System Considerations
 
-D.1.  Application Interference
+C.1.  Application Interference
 
    Applications that have access to a resource-quota information may
    adopt an aggressive behavior (compared to those that don't have
@@ -1103,7 +1052,7 @@ D.1.  Application Interference
 
    Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS.
 
-D.2.  Redundant Functions and Classification Complications
+C.2.  Redundant Functions and Classification Complications
 
    If distinct channels are used to share the metadata between a client
    and a network, a network that engages in the collaborative signaling
@@ -1119,7 +1068,7 @@ D.2.  Redundant Functions and Classification Complications
 
    Requirement: REQ-SINGLE-CHANNEL is preferred.
 
-D.3.  Session Continuity
+C.3.  Session Continuity
 
    The frequency of handovers increases when a user moves faster or when
    the media session lasts longer.  During handovers, there should be
@@ -1128,7 +1077,7 @@ D.3.  Session Continuity
 
    Requirement: REQ-CONTINUITY.
 
-D.4.  Multiple Bottlenecks
+C.4.  Multiple Bottlenecks
 
    Whereas models often show a single bottleneck, there are frequently
    two (or more) bottlenecks: the ISP network and within the subscriber
@@ -1138,7 +1087,7 @@ D.4.  Multiple Bottlenecks
 
    Requirement: REQ-MULTIPLE-BOTTLENECKS.
 
-D.5.  Metadata Scope
+C.5.  Metadata Scope
 
    An operational challenge for sharing resource-quota like metadata
    (e.g., maximum bitrate) is that the network is generally not entitled
@@ -1157,7 +1106,7 @@ D.5.  Metadata Scope
 
    Requirement: REQ-SCOPED-METADATA.
 
-D.6.  Scalability
+C.6.  Scalability
 
    There may be a large number of flows handled by the server and
    wireless/access router.  Per flow information (state) at a wireless
