@@ -1,6 +1,6 @@
 ---
-title: "Requirements for Network Collaboration Signaling"
-abbrev: "Network Collaboration Requirements"
+title: "Requirements for Host-to-Network Collaboration Signaling"
+abbrev: "H2N Collaboration Requirements"
 category: info
 
 docname: draft-kwbdgrr-tsvwg-net-collab-rqmts-latest
@@ -113,7 +113,7 @@ informative:
 
 --- abstract
 
-Collaborative signaling from client-to-network and server-to-network
+Collaborative signaling from host-to-network (i.e., client-to-network and server-to-network)
 can improve the user experience by informing the network about the
 nature and relative importance of packets (frames, streams, etc.)
 without having to disclose the content of the packets. Moreover,
@@ -126,8 +126,7 @@ discard preference), the sender (e.g., adaptive transmission), or
 through cooperation of server/client and the network.
 
 This document lists some use cases that illustrate the need for a
-mechanism to share metadata and outlines requirements for both
-client-to-network and server-to-network. The document focuses on
+mechanism to share metadata and outlines host-to-network requirements. The document focuses on
 signaling information about a UDP transport flow (UDP 4-tuple).
 
 --- middle
@@ -155,7 +154,8 @@ may be eliminated by adequate dimensioning and upgrades.
 However, such upgrades may not be always (immediately) possible or
 justified. Complementary mitigations are thus needed to soften these
 complications by introducing some collaboration between endpoints and
-networks to adjust their behaviors.
+networks to adjust their behaviors. This document focuses on host-to-network collaboration,
+which covers both client-to-network (C2N) and server-to-network (S2N) directions.
 
 {{sec-rationale}} discusses the rationale for per-packet metadata.
 
@@ -169,6 +169,9 @@ collaboration signals.
 # Definitions
 
 The document makes use of the following terms:
+
+Host:
+: Refers to an endpoint that is connected to a network (called, client) or to a server that delivers a service to a client. 
 
 Per-Flow Metadata:
 : Refers to metadata that doesn't change often during the lifetime
@@ -308,7 +311,7 @@ REQ-PACKET-DELAY:
 : Metadata to indicate whether the packet can tolerate delay.
 : This is a per-packet metadata requirement.
 
-## Client-to-Network
+## Client-to-Network (C2N)
 
 REQ-CLIENT-DECIDES:
 : User/Client indicating to the network to honor the application's
