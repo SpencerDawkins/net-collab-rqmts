@@ -17,27 +17,28 @@ Expires: 11 April 2025                              Cloud Software Group
                                                           8 October 2024
 
 
-            Requirements for Network Collaboration Signaling
+        Requirements for Host-to-Network Collaboration Signaling
               draft-kwbdgrr-tsvwg-net-collab-rqmts-latest
 
 Abstract
 
-   Collaborative signaling from client-to-network and server-to-network
-   can improve the user experience by informing the network about the
-   nature and relative importance of packets (frames, streams, etc.)
-   without having to disclose the content of the packets.  Moreover, the
-   collaborative signaling may be enabled so that clients and servers
-   are aware of the network's treatment of incoming packets.  Also,
-   client-to-network collaboration can be put in place without revealing
-   the identity of the remote servers.  This collaboration allows for
-   differentiated services at the network (e.g., packet discard
-   preference), the sender (e.g., adaptive transmission), or through
-   cooperation of server/client and the network.
+   Collaborative signaling from host-to-network (i.e., client-to-network
+   and server-to-network) can improve the user experience by informing
+   the network about the nature and relative importance of packets
+   (frames, streams, etc.) without having to disclose the content of the
+   packets.  Moreover, the collaborative signaling may be enabled so
+   that clients and servers are aware of the network's treatment of
+   incoming packets.  Also, client-to-network collaboration can be put
+   in place without revealing the identity of the remote servers.  This
+   collaboration allows for differentiated services at the network
+   (e.g., packet discard preference), the sender (e.g., adaptive
+   transmission), or through cooperation of server/client and the
+   network.
 
    This document lists some use cases that illustrate the need for a
-   mechanism to share metadata and outlines requirements for both
-   client-to-network and server-to-network.  The document focuses on
-   signaling information about a UDP transport flow (UDP 4-tuple).
+   mechanism to share metadata and outlines host-to-network
+   requirements.  The document focuses on signaling information about a
+   UDP transport flow (UDP 4-tuple).
 
 About This Document
 
@@ -90,7 +91,7 @@ Table of Contents
    3.  Rationale for Per-packet Metadata
    4.  Requirements Definition
      4.1.  Server-to-Network
-     4.2.  Client-to-Network
+     4.2.  Client-to-Network (C2N)
      4.3.  API
      4.4.  System Considerations
    5.  Use Cases
@@ -147,7 +148,9 @@ Table of Contents
    such upgrades may not be always (immediately) possible or justified.
    Complementary mitigations are thus needed to soften these
    complications by introducing some collaboration between endpoints and
-   networks to adjust their behaviors.
+   networks to adjust their behaviors.  This document focuses on host-
+   to-network collaboration, which covers both client-to-network (C2N)
+   and server-to-network (S2N) directions.
 
    Section 3 discusses the rationale for per-packet metadata.
 
@@ -161,6 +164,9 @@ Table of Contents
 2.  Definitions
 
    The document makes use of the following terms:
+
+   Host:  Refers to an endpoint that is connected to a network (called,
+      client) or a server that delivers a service to a client.
 
    Per-Flow Metadata:  Refers to metadata that doesn't change often
       during the lifetime of a connection and thus can be exchanged once
@@ -319,7 +325,7 @@ Table of Contents
 
       This is a per-packet metadata requirement.
 
-4.2.  Client-to-Network
+4.2.  Client-to-Network (C2N)
 
    REQ-CLIENT-DECIDES:  User/Client indicating to the network to honor
       the application's metadata signaling.
