@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 11 April 2025                              Cloud Software Group
+Expires: 12 April 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 11 April 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                          8 October 2024
+                                                          9 October 2024
 
 
         Requirements for Host-to-Network Collaboration Signaling
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2025.
+   This Internet-Draft will expire on 12 April 2025.
 
 Copyright Notice
 
@@ -90,7 +90,7 @@ Table of Contents
    2.  Definitions
    3.  Rationale for Per-packet Metadata
    4.  Requirements Definition
-     4.1.  Server-to-Network
+     4.1.  Server-to-Network (S2N)
      4.2.  Client-to-Network (C2N)
      4.3.  API
      4.4.  System Considerations
@@ -309,7 +309,7 @@ Table of Contents
 
 4.  Requirements Definition
 
-4.1.  Server-to-Network
+4.1.  Server-to-Network (S2N)
 
    REQ-PACKET-PRIORITY:  Server indicates the importance of a packet
       within a flow.  This allows the network to prioritize based on
