@@ -297,7 +297,7 @@ user experience.
 
 # Requirements Definition {#req-definition}
 
-## Server-to-Network
+## Server-to-Network (S2N)
 
 REQ-PACKET-PRIORITY:
 : Server indicates the importance of a packet within a flow. This allows the network
