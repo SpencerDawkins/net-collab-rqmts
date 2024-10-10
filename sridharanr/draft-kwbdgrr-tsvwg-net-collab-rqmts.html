@@ -2350,54 +2350,35 @@ priority values in REQ-PAYLOAD-CLIENT-DECIDES.<a href="#appendix-A-1.12.1" class
           <p id="appendix-A-1.14.1">This is a per-packet metadata requirement.<a href="#appendix-A-1.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-A-1.15">REQ-SIGNAL-EXPOSURE-FAIRNESS:</dt>
+<dt id="appendix-A-1.15">REQ-CONTINUITY:</dt>
         <dd style="margin-left: 1.5em" id="appendix-A-1.16">
-          <p id="appendix-A-1.16.1">Means to expose the signal independent of the application should be
-considered. An example of such exposure is OS APIs.<a href="#appendix-A-1.16.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-1.16.1">Handover from one radio or router to another should continue to
+provide same service level.<a href="#appendix-A-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-A-1.17">REQ-CONTINUITY:</dt>
+<dt id="appendix-A-1.17">REQ-MULTIPLE-BOTTLENECKS:</dt>
         <dd style="margin-left: 1.5em" id="appendix-A-1.18">
-          <p id="appendix-A-1.18.1">Handover from one radio or router to another should continue to
-provide same service level.<a href="#appendix-A-1.18.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-1.18.1">Signaling should support Multiple bottlenecks.<a href="#appendix-A-1.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-A-1.19">REQ-MULTIPLE-BOTTLENECKS:</dt>
+<dt id="appendix-A-1.19"></dt>
         <dd style="margin-left: 1.5em" id="appendix-A-1.20">
-          <p id="appendix-A-1.20.1">Signaling should support Multiple bottlenecks.<a href="#appendix-A-1.20.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-A-1.21"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-A-1.22">
-          <p id="appendix-A-1.22.1">The network must identify multiple bottlenecks, including those
+          <p id="appendix-A-1.20.1">The network must identify multiple bottlenecks, including those
 within the ISP and subscriber networks, ensuring all bottlenecks
-benefit from network/client collaboration to enhance overall performance.<a href="#appendix-A-1.22.1" class="pilcrow">¶</a></p>
+benefit from network/client collaboration to enhance overall performance.<a href="#appendix-A-1.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="appendix-A-1.23">REQ-SCOPED-METADATA:</dt>
+<dt id="appendix-A-1.21">REQ-SINGLE-CHANNEL:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-A-1.22">
+          <p id="appendix-A-1.22.1">The network should use a single channel for sharing metadata
+to simplify the process and avoid the need for redundant functions.<a href="#appendix-A-1.22.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-A-1.23">REQ-ISP-SCALE:</dt>
         <dd style="margin-left: 1.5em" id="appendix-A-1.24">
-          <p id="appendix-A-1.24.1">Means to characterize the scope of a shared metadata for the sake of
-better interoperability should be supported.<a href="#appendix-A-1.24.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-A-1.25"></dt>
-        <dd style="margin-left: 1.5em" id="appendix-A-1.26">
-          <p id="appendix-A-1.26.1">The metadata can be used by the network to prioritize traffic
-within a single 5-tuple connection and metadata cannot be leveraged
-for prioritization between different flows.<a href="#appendix-A-1.26.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-A-1.27">REQ-SINGLE-CHANNEL:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-A-1.28">
-          <p id="appendix-A-1.28.1">The network should use a single channel for sharing metadata
-to simplify the process and avoid the need for redundant functions.<a href="#appendix-A-1.28.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="appendix-A-1.29">REQ-ISP-SCALE:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-A-1.30">
-          <p id="appendix-A-1.30.1">The metadata and other state information that a router has to
+          <p id="appendix-A-1.24.1">The metadata and other state information that a router has to
 maintain for each additional flow it handles should be kept
-to a minimum or eliminated altogether.<a href="#appendix-A-1.30.1" class="pilcrow">¶</a></p>
+to a minimum or eliminated altogether.<a href="#appendix-A-1.24.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
