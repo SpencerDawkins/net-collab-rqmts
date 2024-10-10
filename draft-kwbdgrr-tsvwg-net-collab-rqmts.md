@@ -732,22 +732,9 @@ provides frame boundaries, the client signals the enhanced application
 priority values in REQ-PAYLOAD-CLIENT-DECIDES.
 : This is a per-packet metadata requirement.
 
-REQ-NETWORK-THROUGHPUT:
-: A mechanism to signal the available network throughput to interested
-clients, including changes to throughput.
-
-REQ-NRLP:
-: The network shall inform the endpoint of the Rate limiting policies.
-
 REQ-SIGNAL-EXPOSURE-FAIRNESS:
 : Means to expose the signal independent of the application should be
 considered. An example of such exposure is OS APIs.
-
-REQ-NETWORK-SEEKS-LOAD-DOWN:
-: During detected Reactive Management events, the network implements a
-reactive traffic policy to reduce or offload some of the traffic.
-: This may involve utilizing alternative network attachments
-available to the client (e.g., Wi-Fi).
 
 REQ-CONTINUITY:
 : Handover from one radio or router to another should continue to
@@ -796,78 +783,11 @@ distinguished so that full frames can be indicated to the network.
 
 Requirement: REQ-MEDIA-KEYFRAME.
 
-## Assisted Offload
-
-There are cases (crisis) where "normal" network resources cannot
-be used at maximum and, thus, a network would seek to reduce or
-offload some of the traffic during these events -- called
-'Reactive Management' policy.  An example of such use case is cellular
-networks that are overly used (and radio resources exhausted) such
-as a large collection of people (e.g., parade, sporting event), or
-such as a partial radio network outage (e.g., tower power outage).
-During such a condition, an alternative network attachment may be
-available to the client (e.g., Wi-Fi).
-
-Network-to-client signals are useful to put in place adequate traffic
-distribution policies on the client (e.g., prefer the use of alternate
-paths, offload a network).
-
-Requirement: REQ-NETWORK-SEEKS-LOAD-DOWN.
-
-## Network Bandwidth & Network Rate Limiting Policies {#nrlp}
-
-Bandwidth constraints exist most predominantly at the access network.
-This can be constraints in the network itself or a result of rate
-limiting due to various reasons.
-
-Also, traffic exchanged over a network attachment may be subject
-to rate-limit policies. These policies may be intentional policies
-(e.g., enforced as part of the activation of the network attachment
-and typically agreed upon service subscription) or be Reactive Management
-policies (e.g., enforced temporarily to manage an overload or during
-a DDoS attack mitigation).
-
-Requirements: REQ-NETWORK-THROUGHPUT, REQ-NRLP.
-
-Use cases:
-
-  1. Performance Optimization: Some applications support some forms
-  of bandwidth measurements (e.g., {{app-measurement}}) which feed
-  how the content is accessed to using ABR. Complementing or replacing
-  these measurements with explicit signals will improve overall
-  network performance and can help optimize the data transfer.
-  Signaling bandwidth availability allows endpoints to avoid
-  contributing to network congestion. When the network informs the
-  endpoint about available bandwidth, the endpoint can dynamically
-  adjust its data transmission rate. Knowing available bandwidth
-  helps the endpoint allocate resources efficiently. Cloud-based
-  applications can auto-scale based on available bandwidth.
-
-  2. Rate Limiting: Monthly data quotas on cellular networks can
-  be easily exceeded by video streaming, in particular, if the
-  client chooses excessively high quality or routinely abandons
-  watching videos that were downloaded. The network can assist the
-  client by informing the client of the network's bandwidth policy.
-
-
 # Extended System Considerations
-
-## Application Interference {#app-interference}
-
-Applications that have access to a resource-quota information may
-adopt an aggressive behavior (compared to those that don't have
-access) if they assumed that a resource-quota like metadata is for
-the application, not for the client that runs the applications.
-
-This is challenging for home networks where multiple clients may
-be running behind the same CPE, with each of them running a video
-application. The same challenge may apply when tethering is enabled.
-
-Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS.
 
 ## Redundant Functions and Classification Complications {#classification}
 
-If distinct channels are used to share the metadata between a client
+If distinct channels are used to share the metadata between a host
 and a network, a network that engages in the collaborative signaling
 approach will require sophisticated features to classify flows and
 decide which channel is used to share metadata so that it can consume
@@ -898,26 +818,6 @@ network (e.g., Wi-Fi link). As such, all bottlenecks near the
 subscriber should be able to benefit from network/client collaboration.
 
 Requirement: REQ-MULTIPLE-BOTTLENECKS.
-
-## Metadata Scope {#metadata-scope}
-
-An operational challenge for sharing resource-quota like metadata
-(e.g., maximum bitrate) is that the network is generally not entitled
-to allocate quota per-application, per-flow, per-stream, etc. that
-delivered as part of an Internet connectivity service. However, the
-network has a visibility about the overall network attachment (e.g.
-inbound/outbound bandwidth discussed in
-{{?I-D.ietf-opsawg-teas-attachment-circuit}}).
-
-Hints about resource-like metadata is bound by default to
-the overall network attachment, not specific to a given application
-or flow.
-
-It is out of the scope of this document to discuss setups (e.g.,
-3GPP PDU Sessions) where network attachments with Guaranteed Bit
-Rate (GBR) for specific flows is provided.
-
-Requirement: REQ-SCOPED-METADATA.
 
 ## Scalability {#scalability}
 
