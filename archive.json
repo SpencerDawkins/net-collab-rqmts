@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-08T01:23:48.145338+00:00",
+  "timestamp": "2024-10-10T01:23:17.025336+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -654,6 +654,22 @@
       "createdAt": "2024-09-25T19:24:43Z",
       "updatedAt": "2024-09-26T16:01:40Z",
       "closedAt": "2024-09-26T16:01:40Z",
+      "comments": []
+    },
+    {
+      "number": 105,
+      "id": "I_kwDOL0HpzM6Zm52c",
+      "title": "Further reduce the Appendix",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/issues/105",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "If the document is focused on Host-to-Network signaling, can we remove the following from appendix, which are not focused on host-network signaling?\r\n\r\n1. NRLP\r\n2. Assited Offloading\r\n3. Redundant Functions and Classification Complications\r\n4. Metadata Scope\r\n5. Application Interface (Since we are focusing only within the same UDP 4-tuple, we don't need to mention about multiple applications).\r\n\r\nWe can also remove the corresponding requirements to keep the document more focused and shorter.\r\n\r\nThe extended use case would just contain media streaming extended (which is of the main focus areas).\r\n\r\nThoughts?",
+      "createdAt": "2024-10-09T22:53:06Z",
+      "updatedAt": "2024-10-09T22:53:06Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -6888,6 +6904,54 @@
           "body": "",
           "createdAt": "2024-09-26T18:12:36Z",
           "updatedAt": "2024-09-26T18:12:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 104,
+      "id": "PR_kwDOL0HpzM5948P-",
+      "title": "Shortening the doc and addressing Michael's comments",
+      "url": "https://github.com/SpencerDawkins/net-collab-rqmts/pull/104",
+      "state": "OPEN",
+      "author": "sridharangirish91",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@boucadair - reopening the shorter version in-light of Michael's feedback. Please let me know if you want to go ahead with this now or just address his comments. I have removed the repetitions as well and fixed the nits. I can just apply those over the original document too, if that is preferred.",
+      "createdAt": "2024-10-08T03:11:34Z",
+      "updatedAt": "2024-10-09T19:25:34Z",
+      "baseRepository": "SpencerDawkins/net-collab-rqmts",
+      "baseRefName": "main",
+      "baseRefOid": "d5aa30ca6ec22f498b7bff59a7cc9fc9602baa94",
+      "headRepository": "SpencerDawkins/net-collab-rqmts",
+      "headRefName": "sridharanr",
+      "headRefOid": "345e3ecfe9992bf0e0f49322333d5b72f20fa797",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sent a message to the list to share the diff: https://author-tools.ietf.org/api/iddiff?url_1=https://SpencerDawkins.github.io/net-collab-rqmts/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt&url_2=https://SpencerDawkins.github.io/net-collab-rqmts/sridharanr/draft-kwbdgrr-tsvwg-net-collab-rqmts.txt\r\n\r\nLet's wait till the end of the week, then merge and submit a new revision. \r\n\r\nThanks @sridharangirish91. ",
+          "createdAt": "2024-10-08T15:55:56Z",
+          "updatedAt": "2024-10-08T15:55:56Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOL0HpzM6Mjk35",
+          "commit": {
+            "abbreviatedOid": "345e3ec"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T19:25:34Z",
+          "updatedAt": "2024-10-09T19:25:34Z",
           "comments": []
         }
       ]
