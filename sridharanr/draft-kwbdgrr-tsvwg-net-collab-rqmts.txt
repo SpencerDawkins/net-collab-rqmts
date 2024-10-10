@@ -5,7 +5,7 @@
 Transport and Services Working Group                   J. Kaippallimalil
 Internet-Draft                                                 Futurewei
 Intended status: Informational                                   D. Wing
-Expires: 12 April 2025                              Cloud Software Group
+Expires: 13 April 2025                              Cloud Software Group
                                                            S. Gundavelli
                                                                    Cisco
                                                           S. Rajagopalan
@@ -14,7 +14,7 @@ Expires: 12 April 2025                              Cloud Software Group
                                                      Tencent America LLC
                                                             M. Boucadair
                                                                   Orange
-                                                          9 October 2024
+                                                         10 October 2024
 
 
         Requirements for Host-to-Network Collaboration Signaling
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2025.
+   This Internet-Draft will expire on 13 April 2025.
 
 Copyright Notice
 
@@ -113,15 +113,11 @@ Table of Contents
    Appendix A.  Extended Requirements Definition
    Appendix B.  Extended Use-Cases
      B.1.  Media Streaming Extended
-     B.2.  Assisted Offload
-     B.3.  Network Bandwidth & Network Rate Limiting Policies
    Appendix C.  Extended System Considerations
-     C.1.  Application Interference
-     C.2.  Redundant Functions and Classification Complications
-     C.3.  Session Continuity
-     C.4.  Multiple Bottlenecks
-     C.5.  Metadata Scope
-     C.6.  Scalability
+     C.1.  Redundant Functions and Classification Complications
+     C.2.  Session Continuity
+     C.3.  Multiple Bottlenecks
+     C.4.  Scalability
    Acknowledgments
    Authors' Addresses
 
@@ -612,7 +608,7 @@ Table of Contents
    best handling for packets and may not reflect exact priority values.
    This metadata is advisory, and network traffic policy that restricts
    its use would not result in additional issues.  Other constraints
-   include scale (Appendix C.6) and continuity (Appendix C.3).
+   include scale (Appendix C.4) and continuity (Appendix C.2).
 
    Realizing the additional bandwidth potential with these metadata may
    require a higher sending rate for the transport flow, which is not
@@ -751,15 +747,6 @@ Table of Contents
               Gurel, Z. and A. C. Begen, "Bandwidth measurement for
               QUIC", 2024, <https://datatracker.ietf.org/doc/slides-119-
               moq-bandwidth-measurement-for-quic/>.
-
-   [I-D.ietf-opsawg-teas-attachment-circuit]
-              Boucadair, M., Roberts, R., de Dios, O. G., Barguil, S.,
-              and B. Wu, "YANG Data Models for Bearers and 'Attachment
-              Circuits'-as-a-Service (ACaaS)", Work in Progress,
-              Internet-Draft, draft-ietf-opsawg-teas-attachment-circuit-
-              16, 10 September 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              teas-attachment-circuit-16>.
 
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D. and C. M. Heard, "Transport Options for UDP",
@@ -924,22 +911,9 @@ Appendix A.  Extended Requirements Definition
 
       This is a per-packet metadata requirement.
 
-   REQ-NETWORK-THROUGHPUT:  A mechanism to signal the available network
-      throughput to interested clients, including changes to throughput.
-
-   REQ-NRLP:  The network shall inform the endpoint of the Rate limiting
-      policies.
-
    REQ-SIGNAL-EXPOSURE-FAIRNESS:  Means to expose the signal independent
       of the application should be considered.  An example of such
       exposure is OS APIs.
-
-   REQ-NETWORK-SEEKS-LOAD-DOWN:  During detected Reactive Management
-      events, the network implements a reactive traffic policy to reduce
-      or offload some of the traffic.
-
-      This may involve utilizing alternative network attachments
-      available to the client (e.g., Wi-Fi).
 
    REQ-CONTINUITY:  Handover from one radio or router to another should
       continue to provide same service level.
@@ -990,77 +964,11 @@ B.1.  Media Streaming Extended
 
    Requirement: REQ-MEDIA-KEYFRAME.
 
-B.2.  Assisted Offload
-
-   There are cases (crisis) where "normal" network resources cannot be
-   used at maximum and, thus, a network would seek to reduce or offload
-   some of the traffic during these events -- called 'Reactive
-   Management' policy.  An example of such use case is cellular networks
-   that are overly used (and radio resources exhausted) such as a large
-   collection of people (e.g., parade, sporting event), or such as a
-   partial radio network outage (e.g., tower power outage).  During such
-   a condition, an alternative network attachment may be available to
-   the client (e.g., Wi-Fi).
-
-   Network-to-client signals are useful to put in place adequate traffic
-   distribution policies on the client (e.g., prefer the use of
-   alternate paths, offload a network).
-
-   Requirement: REQ-NETWORK-SEEKS-LOAD-DOWN.
-
-B.3.  Network Bandwidth & Network Rate Limiting Policies
-
-   Bandwidth constraints exist most predominantly at the access network.
-   This can be constraints in the network itself or a result of rate
-   limiting due to various reasons.
-
-   Also, traffic exchanged over a network attachment may be subject to
-   rate-limit policies.  These policies may be intentional policies
-   (e.g., enforced as part of the activation of the network attachment
-   and typically agreed upon service subscription) or be Reactive
-   Management policies (e.g., enforced temporarily to manage an overload
-   or during a DDoS attack mitigation).
-
-   Requirements: REQ-NETWORK-THROUGHPUT, REQ-NRLP.
-
-   Use cases:
-
-   1.  Performance Optimization: Some applications support some forms of
-       bandwidth measurements (e.g., [app-measurement]) which feed how
-       the content is accessed to using ABR.  Complementing or replacing
-       these measurements with explicit signals will improve overall
-       network performance and can help optimize the data transfer.
-       Signaling bandwidth availability allows endpoints to avoid
-       contributing to network congestion.  When the network informs the
-       endpoint about available bandwidth, the endpoint can dynamically
-       adjust its data transmission rate.  Knowing available bandwidth
-       helps the endpoint allocate resources efficiently.  Cloud-based
-       applications can auto-scale based on available bandwidth.
-
-   2.  Rate Limiting: Monthly data quotas on cellular networks can be
-       easily exceeded by video streaming, in particular, if the client
-       chooses excessively high quality or routinely abandons watching
-       videos that were downloaded.  The network can assist the client
-       by informing the client of the network's bandwidth policy.
-
 Appendix C.  Extended System Considerations
 
-C.1.  Application Interference
+C.1.  Redundant Functions and Classification Complications
 
-   Applications that have access to a resource-quota information may
-   adopt an aggressive behavior (compared to those that don't have
-   access) if they assumed that a resource-quota like metadata is for
-   the application, not for the client that runs the applications.
-
-   This is challenging for home networks where multiple clients may be
-   running behind the same CPE, with each of them running a video
-   application.  The same challenge may apply when tethering is enabled.
-
-   Requirement: REQ-SIGNAL-EXPOSURE-FAIRNESS.
-
-C.2.  Redundant Functions and Classification Complications
-
-   If distinct channels are used to share the metadata between a client
+   If distinct channels are used to share the metadata between a host
    and a network, a network that engages in the collaborative signaling
    approach will require sophisticated features to classify flows and
    decide which channel is used to share metadata so that it can consume
@@ -1074,7 +982,7 @@ C.2.  Redundant Functions and Classification Complications
 
    Requirement: REQ-SINGLE-CHANNEL is preferred.
 
-C.3.  Session Continuity
+C.2.  Session Continuity
 
    The frequency of handovers increases when a user moves faster or when
    the media session lasts longer.  During handovers, there should be
@@ -1083,7 +991,7 @@ C.3.  Session Continuity
 
    Requirement: REQ-CONTINUITY.
 
-C.4.  Multiple Bottlenecks
+C.3.  Multiple Bottlenecks
 
    Whereas models often show a single bottleneck, there are frequently
    two (or more) bottlenecks: the ISP network and within the subscriber
@@ -1093,26 +1001,7 @@ C.4.  Multiple Bottlenecks
 
    Requirement: REQ-MULTIPLE-BOTTLENECKS.
 
-C.5.  Metadata Scope
-
-   An operational challenge for sharing resource-quota like metadata
-   (e.g., maximum bitrate) is that the network is generally not entitled
-   to allocate quota per-application, per-flow, per-stream, etc. that
-   delivered as part of an Internet connectivity service.  However, the
-   network has a visibility about the overall network attachment (e.g.
-   inbound/outbound bandwidth discussed in
-   [I-D.ietf-opsawg-teas-attachment-circuit]).
-
-   Hints about resource-like metadata is bound by default to the overall
-   network attachment, not specific to a given application or flow.
-
-   It is out of the scope of this document to discuss setups (e.g., 3GPP
-   PDU Sessions) where network attachments with Guaranteed Bit Rate
-   (GBR) for specific flows is provided.
-
-   Requirement: REQ-SCOPED-METADATA.
-
-C.6.  Scalability
+C.4.  Scalability
 
    There may be a large number of flows handled by the server and
    wireless/access router.  Per flow information (state) at a wireless
