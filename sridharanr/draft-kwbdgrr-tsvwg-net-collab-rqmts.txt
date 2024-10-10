@@ -944,13 +944,13 @@ B.1.  Media Streaming Extended
    1.  Audio is more critical than video for many applications and
        should be prioritized differently than video.
 
-   Requirement: REQ-MEDIA-AV-SEPARATE.
+       Requirement: REQ-MEDIA-AV-SEPARATE.
 
-   1.  Video contains prediction frames and full frames, which need to
+   2.  Video contains prediction frames and full frames, which need to
        be distinguished so that full frames can be indicated to the
        network.
 
-   Requirement: REQ-MEDIA-KEYFRAME.
+       Requirement: REQ-MEDIA-KEYFRAME.
 
 Appendix C.  Extended System Considerations
 
