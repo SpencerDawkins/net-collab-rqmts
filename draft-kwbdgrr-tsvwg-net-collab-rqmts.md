@@ -732,10 +732,6 @@ provides frame boundaries, the client signals the enhanced application
 priority values in REQ-PAYLOAD-CLIENT-DECIDES.
 : This is a per-packet metadata requirement.
 
-REQ-SIGNAL-EXPOSURE-FAIRNESS:
-: Means to expose the signal independent of the application should be
-considered. An example of such exposure is OS APIs.
-
 REQ-CONTINUITY:
 : Handover from one radio or router to another should continue to
 provide same service level.
@@ -745,13 +741,6 @@ REQ-MULTIPLE-BOTTLENECKS:
 : The network must identify multiple bottlenecks, including those
 within the ISP and subscriber networks, ensuring all bottlenecks
 benefit from network/client collaboration to enhance overall performance.
-
-REQ-SCOPED-METADATA:
-: Means to characterize the scope of a shared metadata for the sake of
-better interoperability should be supported.
-: The metadata can be used by the network to prioritize traffic
-within a single 5-tuple connection and metadata cannot be leveraged
-for prioritization between different flows.
 
 REQ-SINGLE-CHANNEL:
 : The network should use a single channel for sharing metadata
@@ -776,12 +765,12 @@ Examples:
 1. Audio is more critical than video for many applications and should
 be prioritized differently than video.
 
-Requirement: REQ-MEDIA-AV-SEPARATE.
+    Requirement: REQ-MEDIA-AV-SEPARATE.
 
 2. Video contains prediction frames and full frames, which need to be
 distinguished so that full frames can be indicated to the network.
 
-Requirement: REQ-MEDIA-KEYFRAME.
+    Requirement: REQ-MEDIA-KEYFRAME.
 
 # Extended System Considerations
 
