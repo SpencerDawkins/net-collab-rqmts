@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-10T01:23:17.025336+00:00",
+  "timestamp": "2024-10-13T01:35:55.842033+00:00",
   "repo": "SpencerDawkins/net-collab-rqmts",
   "labels": [
     {
@@ -666,11 +666,19 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "If the document is focused on Host-to-Network signaling, can we remove the following from appendix, which are not focused on host-network signaling?\r\n\r\n1. NRLP\r\n2. Assited Offloading\r\n3. Redundant Functions and Classification Complications\r\n4. Metadata Scope\r\n5. Application Interface (Since we are focusing only within the same UDP 4-tuple, we don't need to mention about multiple applications).\r\n\r\nWe can also remove the corresponding requirements to keep the document more focused and shorter.\r\n\r\nThe extended use case would just contain media streaming extended (which is of the main focus areas).\r\n\r\nThoughts?",
+      "body": "If the document is focused on Host-to-Network signaling, can we remove the following from appendix, which are not focused on host-network signaling?\r\n\r\n1. NRLP\r\n2. Assited Offloading\r\n3. Redundant Functions and Classification Complications\r\n4. Metadata Scope\r\n5. Application Interface (Since we are focusing only within the same UDP 4-tuple, we don't need to mention about multiple applications).\r\n\r\nWe can also remove the corresponding requirements to keep the document more focused and shorter.\r\n\r\nThe extended use case would just contain media streaming extended (which the majority of traffic).\r\n\r\nThoughts?",
       "createdAt": "2024-10-09T22:53:06Z",
-      "updatedAt": "2024-10-09T22:53:06Z",
+      "updatedAt": "2024-10-10T05:33:26Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree. A first cut is integrated into the active PR: https://github.com/SpencerDawkins/net-collab-rqmts/pull/104/files#diff-c99ba6e278dc52e98eec3ca28e94e28e7e38efc47f03816e9cf679ce8315f591",
+          "createdAt": "2024-10-10T05:33:24Z",
+          "updatedAt": "2024-10-10T05:33:24Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6920,13 +6928,13 @@
       "labels": [],
       "body": "@boucadair - reopening the shorter version in-light of Michael's feedback. Please let me know if you want to go ahead with this now or just address his comments. I have removed the repetitions as well and fixed the nits. I can just apply those over the original document too, if that is preferred.",
       "createdAt": "2024-10-08T03:11:34Z",
-      "updatedAt": "2024-10-09T19:25:34Z",
+      "updatedAt": "2024-10-10T17:24:24Z",
       "baseRepository": "SpencerDawkins/net-collab-rqmts",
       "baseRefName": "main",
       "baseRefOid": "d5aa30ca6ec22f498b7bff59a7cc9fc9602baa94",
       "headRepository": "SpencerDawkins/net-collab-rqmts",
       "headRefName": "sridharanr",
-      "headRefOid": "345e3ecfe9992bf0e0f49322333d5b72f20fa797",
+      "headRefOid": "3a613f82ab7b20d211aa6d1008652911a7b7b3a7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
