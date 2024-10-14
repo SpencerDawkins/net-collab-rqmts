@@ -286,7 +286,7 @@ Table of Contents
    (S2N) metadata are described in Section 6.2.
 
    The client may provide information to an (access) router to drop
-   lower priority marked packets of a flow (UDP 4-tuple) temporarily
+   'lower priority'-marked packets of a flow (UDP 4-tuple) temporarily
    which can in turn allocate available bandwidth to other flows of that
    network attachment, especially during a reactive management event.
 
@@ -294,7 +294,7 @@ Table of Contents
    performancebut are unaware underlying flows belinging to the same
    user and network attachment (e.g., a subscriber connection, a 3GPP
    PDU Session).  Clients may provide information to an (access) router
-   to drop ‘lower priority’-marked packets of a flow (UDP 4-tuple)
+   to drop 'lower priority'-marked packets of a flow (UDP 4-tuple)
    temporarily during congestion, allowing bandwidth allocation to other
    flows of the same network attachment.
 
@@ -751,9 +751,9 @@ Table of Contents
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D. and C. M. Heard, "Transport Options for UDP",
               Work in Progress, Internet-Draft, draft-ietf-tsvwg-udp-
-              options-36, 22 September 2024,
+              options-37, 13 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-
-              udp-options-36>.
+              udp-options-37>.
 
    [I-D.kaippallimalil-tsvwg-media-hdr-wireless]
               Kaippallimalil, J., Gundavelli, S., and S. Dawkins, "Media
