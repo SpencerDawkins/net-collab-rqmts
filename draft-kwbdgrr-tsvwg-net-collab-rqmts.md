@@ -280,14 +280,14 @@ packet loss or delay of low priority packets. Packet priority and tolerance to d
 such cases would be provided on-path in a side channel associated with the downstream packet (B).
 The requirements for this server-to-network (S2N) metadata are described in {{server-network}}.
 
-The client may provide information to an (access) router to drop lower priority marked packets
+The client may provide information to an (access) router to drop 'lower priority'-marked packets
 of a flow (UDP 4-tuple) temporarily which can in turn allocate available bandwidth
 to other flows of that network attachment, especially during a reactive management event.
 
 Network shapers observe flows and apply policies to maximize performancebut are unaware underlying
 flows belinging to the same user and network attachment (e.g., a subscriber connection, a 3GPP PDU
 Session). Clients may provide information to an (access) router to drop
-‘lower priority’-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
+'lower priority'-marked packets of a flow (UDP 4-tuple) temporarily during congestion,
 allowing bandwidth allocation to other flows of the same network attachment.
 
 In summary, the rapid variation of wireless link quality and/or
